@@ -210,7 +210,6 @@ No party to this Agreement will bring a legal action under this
 Agreement more than one year after the cause of action arose.
 Each party waives its rights to a jury trial in any resulting
 litigation.
-
    </license>
 
    <includes
@@ -221,7 +220,8 @@ litigation.
    <includes
          id="org.eclipse.jst.webpageeditor.feature"
          version="0.0.0"
-         name="for HTML editing"/>
+         name="for HTML editing"
+         optional="true"/>
 
    <plugin
          id="com.mds.apg"
