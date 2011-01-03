@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/com.mds.phonegapForAndroid_1.1.0.201101021454.jar" id="com.mds.phonegapForAndroid" version="1.1.0.201101021454">
-      <category name="PhoneGap for Android Plug-ins"/>
+   <feature url="features/com.mds.phonegapForAndroid_1.1.0.201101030952.jar" id="com.mds.phonegapForAndroid" version="1.1.0.201101030952">
+      <category name="new_category_7"/>
    </feature>
-   <category-def name="PhoneGap for Android Plug-ins" label="PhoneGap for Android Plug-ins"/>
+   <feature url="features/com.mds.phonegap.license_1.0.0.201101030952.jar" id="com.mds.phonegap.license" version="1.0.0.201101030952">
+      <category name="new_category_7"/>
+   </feature>
+   <feature url="features/com.mds.jqm.license_1.0.0.201101030952.jar" id="com.mds.jqm.license" version="1.0.0.201101030952">
+      <category name="new_category_7"/>
+   </feature>
+   <category-def name="new_category_7" label="New Category 7"/>
 </site>

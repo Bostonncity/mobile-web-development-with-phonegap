@@ -1,0 +1,40 @@
+/* These overrides to the JQuery Mobile css file are used to
+ * allow a more reasonable styling on small screen devices. 
+ * The original values are included in comments after each property. 
+ * Attempt to change a minimum number of values to achieve desired result.
+ */
+
+.ui-header .ui-title {
+	margin-right:40px;
+	margin-left:40px;
+	white-space:normal; 
+}
+/* JQM: margin-left, margin-right: 90px
+ * A 90px left/right margin allows for only tiny title. 
+ */
+
+ .ui-footer .ui-title {
+	margin-right:20px;
+	margin-left:20px;
+	white-space:normal; 
+ }
+ /* JQM: margin-left, margin-right: 90px
+  *       white-space:nowrap
+  * A 90px left/right margin allows for only tiny footer text
+  * and it won't wrap by default.
+  */
+ 
+ .ui-grid-b .ui-block-a, .ui-grid-b .ui-block-b, .ui-grid-b .ui-block-c { width: 29%; }
+ /* JQM: width: 33.333%; 
+  * Can't be 33.333% as that leaves no space for default margins!
+  */
+  
+ .ui-grid-a .ui-block-a, .ui-grid-a .ui-block-b { width: 46%; }
+ /* JQM: width: 50%;
+  * Can't be 50% as that leaves no space for default margins!
+  */
+   
+  .ui-btn-inner { padding: .6em 5px;
+ /* JQM: padding: .6em 25px;
+  * 
+  */ 
