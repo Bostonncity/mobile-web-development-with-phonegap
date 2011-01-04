@@ -229,27 +229,31 @@ class PhonegapProjectPopulate {
             "www"  }, monitor);
         String wwwDir = Platform.getLocation().toString() + "/"
                 + pageInfo.mAndroidProject.getName() + "/" + "assets" + "/" + "www" + "/";
+        
+        // Even though there is a phonegap.js file in the directory framework/assets/www, it is WRONG!!
+        // phonegap.js must be constructed from the files in framework/assets/js
+
+        FileCopy.createPhonegapJs(pageInfo.mPhonegapDirectory + "/" + "framework" + "/" + "assets"
+                + "/" + "js", wwwDir + "phonegap.js");
 
         if (pageInfo.mUseJqmDemo) {
             bundleCopy("/resources/jqm/demo", wwwDir);
-        } else if (pageInfo.mWithJqm) {
-            bundleCopy("/resources/jqm/phonegapExample", wwwDir);
-        } else {
-            FileCopy.recursiveCopy(pageInfo.mSourceDirectory, wwwDir);
-        }
+            return;
+        } else if (pageInfo.mBundledExample) {
+            if (pageInfo.mJqmChecked) {
+                bundleCopy("/resources/jqm/phonegapExample", wwwDir);
+                return;
+            } else if (pageInfo.mSenchaChecked) {
+                bundleCopy("/resources/sencha/phonegapExample", wwwDir);
+                return;
+            }
+        } 
+        FileCopy.recursiveCopy(pageInfo.mSourceDirectory, wwwDir);
 
         if (pageInfo.mSenchaKitchenSink) {  // delete the confusing index_android.html
             File f = new File(wwwDir + "index_android.html");
             f.delete();   
         }
-
-        // Even though there is a phonegap.js file in the directory
-        // framework/assets/www, it is WRONG!!
-        // phonegap.js must be constructed from the files
-        // in framework/assets/js
-
-        FileCopy.createPhonegapJs(pageInfo.mPhonegapDirectory + "/" + "framework" + "/" + "assets"
-                + "/" + "js", wwwDir + "phonegap.js");
     }
 
     /**

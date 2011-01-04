@@ -31,14 +31,14 @@ public class PageInfo {
     protected final String mJqmDirectory;         // null if using packaged version
     protected final boolean mUseJqmDemo;          // use jQuery Mobile demo?
     protected final String mJqmVersion;
-    protected final boolean mWithJqm;
+    protected final boolean mBundledExample;
     protected final String mSenchaDirectory;      // Sencha Touch install location
     protected final boolean mSenchaChecked;       // Using Sencha
     protected final boolean mSenchaKitchenSink;   // Do Sencha Kitchen Sink app
     
     public PageInfo(String sourceDirectory, String phonegapDirectory, String destinationDirectory, 
             IProject androidProject, boolean jqmChecked, String jqmDirectory, boolean useJqmDemo,
-            String jqmVersion, boolean withJqm,
+            String jqmVersion, boolean bundledExample,
             String senchaDirectory, boolean senchaChecked, boolean senchaKitchenSink) {
         mSourceDirectory = sourceDirectory;
         mPhonegapDirectory = phonegapDirectory;
@@ -48,7 +48,7 @@ public class PageInfo {
         mJqmDirectory = jqmDirectory;
         mUseJqmDemo = useJqmDemo;
         mJqmVersion = jqmVersion;
-        mWithJqm = withJqm;
+        mBundledExample = bundledExample;
         mSenchaDirectory = senchaDirectory;
         mSenchaChecked = senchaChecked;
         mSenchaKitchenSink = senchaKitchenSink;

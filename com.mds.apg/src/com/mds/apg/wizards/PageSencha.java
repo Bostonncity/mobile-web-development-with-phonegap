@@ -88,7 +88,7 @@ public class PageSencha extends WizardSection {
                 boolean selection = mSenchaCheck.getSelection();
                 if (selection) { // disable Sencha
                     mWizardPage.mJqmDialog.mJqmCheck.setSelection(false);
-                    mWizardPage.mJqmDialog.enableJqmWidgets(false, true);
+                    mWizardPage.mJqmDialog.enableJqmWidgets(false);
                 }
                 mWizardPage.validatePageComplete();
             }
