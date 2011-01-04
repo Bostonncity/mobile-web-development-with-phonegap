@@ -20,7 +20,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 import java.io.File;
 
@@ -33,7 +33,6 @@ public final class PagePhonegapPathSet extends WizardSection {
     private static String sPhonegapPathCache = "";
     
     // widgets
-    private Label mPhonegapLabel;
     Text mPhonegapPathField;
     
     PagePhonegapPathSet(AndroidPgProjectCreationPage wizardPage, Composite parent) {
@@ -48,30 +47,18 @@ public final class PagePhonegapPathSet extends WizardSection {
      * @param parent the parent composite
      */
     protected final void createGroup(Composite parent) {
-        Composite group = new Composite(parent, SWT.NONE);
-        GridLayout layout = new GridLayout();
-        group.setLayout(layout);
-        group.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
         // Set up layout for phonegap location entry
-        {
-            Composite phonegapGroup = new Composite(group, SWT.NONE);
-            phonegapGroup.setLayout(new GridLayout(2, /* num columns */
-                false /* columns of not equal size */));
-            phonegapGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-            phonegapGroup.setFont(parent.getFont());
+        Group phonegapGroup = new Group(parent, SWT.NONE);
+        phonegapGroup.setLayout(new GridLayout(2, false /* columns of not equal size */));
+        phonegapGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+        phonegapGroup.setFont(parent.getFont());
+        phonegapGroup.setText("phonegap-android Location");
 
-            mPhonegapLabel = new Label(phonegapGroup, SWT.NONE);
-            mPhonegapLabel.setText("Enter path to phonegap-android");
-            mPhonegapLabel
-                    .setToolTipText("Should be the path to the unpacked phonegap-android installation");
-            Text forceNewLine = new Text(phonegapGroup, SWT.TRANSPARENCY_NONE); // force new line                                                                                
-            forceNewLine.setText("");
-            
-            mPhonegapPathField = new Text(phonegapGroup, SWT.BORDER);
-            mPhonegapPathField.setText(getLocationSave());
-            setupDirectoryBrowse(mPhonegapPathField, parent, phonegapGroup);
-        }
+        mPhonegapPathField = new Text(phonegapGroup, SWT.BORDER);
+        mPhonegapPathField.setText(getLocationSave());
+        mPhonegapPathField.setToolTipText("Should be the path to the unpacked phonegap-android installation");
+        setupDirectoryBrowse(mPhonegapPathField, parent, phonegapGroup);
     }
 
     // --- Internal getters & setters ------------------
@@ -122,7 +109,7 @@ public final class PagePhonegapPathSet extends WizardSection {
             }
             if ((!foundFramework) || (!foundExample)) {
                 return mWizardPage.setStatus(
-                                "The phonegap directory has been corrupted. It is missing the framework and/or example subdirectory",
+                                "Invalid phonegap-android location. It's missing the framework and/or example subdirectory",
                                 AndroidPgProjectCreationPage.MSG_ERROR);
             }
             // TODO more validation

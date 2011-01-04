@@ -71,7 +71,7 @@ public class AndroidPgProjectCreationPage extends WizardPage {
         super(MAIN_PAGE_NAME);
         setPageComplete(false);
         setTitle("Create a Phonegap for Android Project");
-        setDescription("Set location of phonegap directory and populating sources");
+        setDescription("Set location of phonegap directory, specify UI frameworks, and populating sources");
         ImageDescriptor desc = AbstractUIPlugin.imageDescriptorFromPlugin("com.mds.apg", "icons/phonegapphonelogo.png");
         setImageDescriptor(desc);
     }
@@ -154,8 +154,18 @@ public class AndroidPgProjectCreationPage extends WizardPage {
                 !mInitContentsDialog.isCreateFromExample()); // and location right state
         
         if (contentsVisible) {
+            String withString;
+            if (mJqmDialog.jqmChecked()) {
+                withString = "with jQuery Mobile";
+            } else if (mSenchaDialog.senchaChecked()) {
+                withString = "with Sencha Touch";
+            } else {
+                withString = "";
+            }
+            mInitContentsDialog.mWithLabel.setText(withString);
+            
             if (mInitContentsDialog.isCreateFromExample()) {
-                if (mInitContentsDialog.mWithJqm.getSelection()) {
+                if (!withString.equals("")) {
                     checkLocation = false;
                 } else {
                     mInitContentsDialog.update(mPhonegapDialog.getValue() + "/example");

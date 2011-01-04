@@ -27,6 +27,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+//import java.util.Hashtable;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -52,6 +53,8 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.ISetSelectionTarget;
+//import org.eclipse.wst.jsdt.core.JavaScriptCore;
+//import org.eclipse.wst.jsdt.internal.core.JavaModelManager;
 import org.eclipse.wst.jsdt.ui.actions.OpenJavaPerspectiveAction;
 
 import com.android.ide.eclipse.adt.internal.wizards.newproject.NewProjectWizard;
@@ -123,6 +126,13 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
             ((ISetSelectionTarget) part).selectReveal(selection);
         }
         
+        // Turn off the JSDT semi-colon warnings.  Hold off until a more thorough 
+        // warning analysis can be done.
+        
+//        Hashtable<String, String> h = new Hashtable<String, String>();
+//        h.put(JavaScriptCore.OPTIONAL_SEMICOLON, JavaScriptCore.IGNORE);
+//        JavaModelManager.getJavaModelManager().setOptions(h);
+       
         action.run();
         return true;
     }
@@ -142,7 +152,9 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
                     mPhonegapPage.mJqmDialog.getValue(),
                 mPhonegapPage.mJqmDialog.useJqmDemo(),
                 mPhonegapPage.mJqmDialog.mJqmVersion,
-                mPhonegapPage.mInitContentsDialog.mWithJqm.getSelection(),
+                mPhonegapPage.mInitContentsDialog.isCreateFromExample() && 
+                    (!mPhonegapPage.mSenchaDialog.useSenchaKitchenSink()) &&
+                    (mPhonegapPage.mJqmDialog.jqmChecked() || mPhonegapPage.mSenchaDialog.senchaChecked()),
                 mPhonegapPage.mSenchaDialog.getValue(),
                 mPhonegapPage.mSenchaDialog.senchaChecked(), 
                 mPhonegapPage.mSenchaDialog.useSenchaKitchenSink());

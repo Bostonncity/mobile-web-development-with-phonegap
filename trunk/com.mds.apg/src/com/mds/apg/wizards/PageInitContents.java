@@ -45,7 +45,7 @@ public final class PageInitContents extends WizardSection{
     private Button mBrowseButton;
     private Label mLocationLabel;
     private Text mLocationPathField;
-    protected Button mWithJqm;
+    Label mWithLabel;
 
     PageInitContents(AndroidPgProjectCreationPage wizardPage, Composite parent) {
         super(wizardPage);
@@ -75,23 +75,9 @@ public final class PageInitContents extends WizardSection{
         createFromExampleRadio.setText("Use phonegap example source as template for project");
         createFromExampleRadio.setSelection(initialVal);
         createFromExampleRadio.setToolTipText("Populate your project with the example shipped with your phonegap installation");
-
-        boolean jqmInit = mWizardPage.mJqmDialog.jqmChecked();
-        mWithJqm = new Button(group, SWT.CHECK);
-        mWithJqm.setText("with jQuery Mobile");
-        mWithJqm.setSelection(jqmInit);
-        mWithJqm.setVisible(jqmInit);
-        mWithJqm.setEnabled(initialVal);
-        mWithJqm.setToolTipText("Create a PhoneGap example project that uses jQuery Mobile");
         
-        SelectionListener withListener = new SelectionAdapter() {
-            @Override
-            public void widgetSelected(SelectionEvent e) {
-                super.widgetSelected(e);
-                mWizardPage.validatePageComplete();
-            }
-        };        
-        mWithJqm.addSelectionListener(withListener);  // to update directory
+        // Label for showing the example is with JQM or Sencha
+        mWithLabel = new Label(group, SWT.NONE);
         
         Button existing_project_radio = new Button(group, SWT.RADIO);
         existing_project_radio.setText("Create project from specified source directory");
@@ -105,7 +91,6 @@ public final class PageInitContents extends WizardSection{
                 boolean newVal = createFromExampleRadio.getSelection();
                 mUseFromExample = newVal;
                 doGetPreferenceStore().setValue(USE_EXAMPLE_DIR, newVal ? "true" : "");
-                mWithJqm.setEnabled(newVal);
                 mWizardPage.validatePageComplete();
             }
         };
@@ -185,24 +170,39 @@ public final class PageInitContents extends WizardSection{
     protected int validate() {
         File locationDir = new File(getValue());
         if (!locationDir.exists() || !locationDir.isDirectory()) {
-            return mWizardPage.setStatus("A valid directory name containing an index.html must be specified in the Location field.", 
+            return mWizardPage.setStatus("Location: must be a valid directory containing an index.html file", 
                 AndroidPgProjectCreationPage.MSG_ERROR);
         } else {
             String[] l = locationDir.list();
             if (l.length == 0) {
-                return mWizardPage.setStatus("The location directory is empty. It should include the source to populate the project", 
+                return mWizardPage.setStatus("Location: is empty. It should include the source to populate the project", 
                         AndroidPgProjectCreationPage.MSG_ERROR);
             }
             boolean foundIndexHtml = false;
+            boolean foundSencha = false;
+            boolean foundJqm = false;
 
             for (String s : l) {
                 if (s.equals("index.html")) {
                     foundIndexHtml = true;
-                    break;
+                } else if (s.equals("sencha")) {
+                    foundSencha = true;
+                } else if (s.equals("jquery.mobile")) {
+                    foundJqm = true;
                 }
             }
             if (!foundIndexHtml) {
-                return mWizardPage.setStatus("The location directory must include an index.html file", 
+                return mWizardPage.setStatus("Location: must include an index.html file", 
+                        AndroidPgProjectCreationPage.MSG_ERROR);
+            }
+            if (foundSencha && mWizardPage.mSenchaDialog.senchaChecked()) {
+                return mWizardPage.setStatus("Location: can not include a sencha directory." +
+                        " Uncheck \"Include Sencha ...\" if the Location directory already includes Sencha Touch", 
+                        AndroidPgProjectCreationPage.MSG_ERROR);
+            }
+            if (foundJqm && mWizardPage.mJqmDialog.jqmChecked()) {
+                return mWizardPage.setStatus("Location: can not include a jquery.mobile directory." +
+                        " Uncheck \"Include JQuery Mobile ...\" if the Location directory already includes it", 
                         AndroidPgProjectCreationPage.MSG_ERROR);
             }
             // TODO more validation

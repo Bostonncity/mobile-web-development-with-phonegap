@@ -90,7 +90,7 @@ public class PageJqm extends WizardSection {
             @Override
             public void widgetSelected(SelectionEvent e) {
                 super.widgetSelected(e);
-                enableJqmWidgets(true, true);
+                enableJqmWidgets(true);
                 boolean selection = mJqmCheck.getSelection();
                 if (selection) { // disable Sencha
                     mWizardPage.mSenchaDialog.mSenchaCheck.setSelection(false);
@@ -118,7 +118,7 @@ public class PageJqm extends WizardSection {
             @Override
             public void widgetSelected(SelectionEvent e) {
                 super.widgetSelected(e);
-                enableJqmWidgets(true, false);
+                enableJqmWidgets(true);
                 mWizardPage.validatePageComplete();
             }
         };
@@ -164,7 +164,7 @@ public class PageJqm extends WizardSection {
         };
         mJqmDemo.addSelectionListener(jqmDemoListener);
                    
-        enableJqmWidgets(false,false);  // to get the visibility and initial settings
+        enableJqmWidgets(false);  // to get the visibility and initial settings
     }
 
     /*
@@ -219,7 +219,7 @@ public class PageJqm extends WizardSection {
      * the location path is enabled when using the "existing source" mode (i.e. not new project)
      * or in new project mode with the "use default location" turned off.
      */
-    void enableJqmWidgets(boolean doUpdate, boolean resetWithJqm) {
+    void enableJqmWidgets(boolean doUpdate) {
         boolean jqmChecked = jqmChecked();
         boolean usePackaged = useFromPackaged();
         
@@ -227,10 +227,7 @@ public class PageJqm extends WizardSection {
         mUseInstalledJqmRadio.setVisible(jqmChecked);
         mJqmDemo.setVisible(jqmChecked);
         mJqmGroup.setVisible(jqmChecked && !usePackaged);
-        if (resetWithJqm) {
-            mWizardPage.mInitContentsDialog.mWithJqm.setSelection(jqmChecked);
-            mWizardPage.mInitContentsDialog.mWithJqm.setVisible(jqmChecked);
-        }
+
         if (!jqmChecked) {
             mJqmDemo.setSelection(false);  // clear demo as well
         } 
