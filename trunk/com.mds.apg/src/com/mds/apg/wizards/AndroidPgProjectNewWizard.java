@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResourceStatus;
 import org.eclipse.core.resources.IWorkspace;
@@ -38,10 +39,20 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.StructuredSelection;
 
 import org.eclipse.ui.INewWizard;
+import org.eclipse.ui.IPageLayout;
+import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.eclipse.ui.ide.IDE;
+import org.eclipse.ui.part.ISetSelectionTarget;
+import org.eclipse.wst.jsdt.ui.actions.OpenJavaPerspectiveAction;
 
 import com.android.ide.eclipse.adt.internal.wizards.newproject.NewProjectWizard;
 
@@ -90,10 +101,29 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
         if (mNewAndroidProject == null) return false;        
         if (!populatePhonegapComponents()) return false;
 
-        //   TO do - open index.html and JavaScript perspective
-        // Open the default Java Perspective
-        //                OpenJavaScriptPerspectiveAction action = new OpenJavaScriptPerspectiveAction();
-        //                action.run();
+        // Open the default JavaScript Perspective  - Despite the name, it is from JSDT!
+        OpenJavaPerspectiveAction action = new OpenJavaPerspectiveAction();
+        
+        // Open index.html to start
+        
+        IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+                .getActivePage();
+        IFile file = mNewAndroidProject.getFile("/assets/www/index.html");
+        try {
+            IDE.openEditor(activePage, file);
+        } catch (PartInitException e) {
+            // Ignore exception.  Just don't open the file
+        }
+        
+        // And open the project explorer
+        IViewReference reference = activePage.findViewReference(IPageLayout.ID_PROJECT_EXPLORER);
+        IWorkbenchPart part = reference.getPart(false);
+        if (part instanceof ISetSelectionTarget) {
+            StructuredSelection selection = new StructuredSelection(file);
+            ((ISetSelectionTarget) part).selectReveal(selection);
+        }
+        
+        action.run();
         return true;
     }
 

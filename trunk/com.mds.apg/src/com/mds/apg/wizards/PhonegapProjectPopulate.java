@@ -238,6 +238,11 @@ class PhonegapProjectPopulate {
             FileCopy.recursiveCopy(pageInfo.mSourceDirectory, wwwDir);
         }
 
+        if (pageInfo.mSenchaKitchenSink) {  // delete the confusing index_android.html
+            File f = new File(wwwDir + "index_android.html");
+            f.delete();   
+        }
+
         // Even though there is a phonegap.js file in the directory
         // framework/assets/www, it is WRONG!!
         // phonegap.js must be constructed from the files
@@ -306,7 +311,8 @@ class PhonegapProjectPopulate {
         
         String senchaDir = pageInfo.mDestinationDirectory + "/" + "assets/www/sencha/";
 
-        FileCopy.recursiveCopy(pageInfo.mSenchaDirectory + "/resources", senchaDir + "/resources");
+        // The .scss files confuse JSDT on Linux
+        FileCopy.recursiveCopySkipSuffix(pageInfo.mSenchaDirectory + "/resources", senchaDir + "resources",".scss");
 
         // Now copy the sencha-touch*.js
         FileCopy.copy(pageInfo.mSenchaDirectory + "/sencha-touch.js", senchaDir);
