@@ -76,7 +76,7 @@
       console.log(data);
       viewport.style.display = "";
       viewport.style.position = "absolute";
-      viewport.style.top = "10px";
+      viewport.style.bottom = "140px";
       viewport.style.left = "10px";
       document.getElementById("test_img").src = "data:image/jpeg;base64," + data;
     }

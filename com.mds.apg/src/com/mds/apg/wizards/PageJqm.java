@@ -146,7 +146,7 @@ public class PageJqm extends WizardSection {
         // But many of the other Sencha examples specific to tablets.
         
         mJqmDemo = new Button(group, SWT.CHECK);
-        mJqmDemo.setText("Create project with jQuery Mobile demo");
+        mJqmDemo.setText("Create project with jQuery Mobile UI demo");
         mJqmDemo.setSelection(false);
         mJqmDemo.setToolTipText("Demonstrates capabilities of jQuery mobile");
         

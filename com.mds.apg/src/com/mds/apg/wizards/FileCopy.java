@@ -11,23 +11,35 @@ import java.io.InputStream;
 public class FileCopy {
 
     public static void recursiveCopy(String fromFileName, String toFileName) throws IOException {
-        copy (fromFileName, toFileName, true, false);
+        copy (fromFileName, toFileName, true, false, null);
+    }
+    
+    public static void recursiveCopySkipSuffix(String fromFileName, String toFileName, String skip) throws IOException {
+        copy (fromFileName, toFileName, true, false, skip);
     }
 
     public static void recursiveForceCopy(String fromFileName, String toFileName) throws IOException {
-        copy (fromFileName, toFileName, true, true);
+        copy (fromFileName, toFileName, true, true, null);
     }
 
     public static void forceCopy(String fromFileName, String toFileName) throws IOException{
-        copy (fromFileName, toFileName, false, true);
+        copy (fromFileName, toFileName, false, true, null);
     }    
 
     public static void copy(String fromFileName, String toFileName) throws IOException{
-        copy (fromFileName, toFileName, false, false);
+        copy (fromFileName, toFileName, false, false, null);
     }
 
-    private static void copy(String fromFileName, String toFileName, boolean isRecursive, boolean force)
-    throws IOException {
+    private static void copy(String fromFileName, String toFileName, boolean isRecursive, 
+            boolean force, String skipSuffix)   throws IOException {
+        
+        if (skipSuffix != null) {
+            int dotSpot = fromFileName.lastIndexOf('.');
+            if (dotSpot > 0 && fromFileName.substring(dotSpot).equals(skipSuffix)) {
+                return;
+            }
+        }
+        
         File fromFile = new File(fromFileName);
         File toFile = new File(toFileName);
 
@@ -50,7 +62,7 @@ public class FileCopy {
             }                
             String fList[] = fromFile.list();
             for (String s : fList) {
-                copy(fromFileName + "/" + s, toFileName + "/" + s, true, force);
+                copy(fromFileName + "/" + s, toFileName + "/" + s, true, force, skipSuffix);
             }
             return;
         }
