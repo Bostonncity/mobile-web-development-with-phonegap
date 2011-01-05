@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/com.mds.jqm.license_1.0.0.201101041724.jar" id="com.mds.jqm.license" version="1.0.0.201101041724">
+   <feature url="features/com.mds.jqm.license_1.0.0.201101042036.jar" id="com.mds.jqm.license" version="1.0.0.201101042036">
       <category name="PhoneGap for Android"/>
    </feature>
-   <feature url="features/com.mds.phonegap.license_1.0.0.201101041724.jar" id="com.mds.phonegap.license" version="1.0.0.201101041724">
+   <feature url="features/com.mds.phonegap.license_1.0.0.201101042036.jar" id="com.mds.phonegap.license" version="1.0.0.201101042036">
       <category name="PhoneGap for Android"/>
    </feature>
-   <feature url="features/com.mds.phonegapForAndroid_1.1.0.201101041724.jar" id="com.mds.phonegapForAndroid" version="1.1.0.201101041724">
+   <feature url="features/com.mds.phonegapForAndroid_1.1.0.201101042036.jar" id="com.mds.phonegapForAndroid" version="1.1.0.201101042036">
       <category name="PhoneGap for Android"/>
    </feature>
-   <category-def name="PhoneGap for Android" label="PhoneGap for Android"/>
+   <category-def name="PhoneGap for Android" label="PhoneGap for Android">
+      <description>
+         Eclipse plugin to make to facilitate making web apps for Android
+      </description>
+   </category-def>
 </site>
