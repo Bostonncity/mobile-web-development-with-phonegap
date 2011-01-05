@@ -77,8 +77,10 @@ cfg.items = [ {
 	     	{	     		
 	     		ui : 'round',
 	     		text : 'Toggle Accelerometer',
-	     		handler: toggleAccel
+	     		handler: function() {
+	     			var togglereturn = toggleAccel();
 	     		}
+	     	}
 	     	]
 } , {
 		html: '<tr id="accel-data">' + 
@@ -91,7 +93,9 @@ cfg.items = [ {
 	{
 		ui : 'round',
 		text : 'Get location',
-		handler : getLocation		
+		handler : function() {
+ 			var locreturn = getLocation();
+		}
 	} ]
 },{
 	items : [ {
@@ -102,13 +106,17 @@ cfg.items = [ {
 	items : [ {
 		ui : 'round',
 		text : 'Beep',
-		handler : beep
+		handler : function() {
+ 			var beepreturn = beep();
+		}
 	} ]
 }, {
 	items : [ {
 		ui : 'round',
 		text : 'Vibrate',
-		handler: vibrate
+		handler: function() {
+ 			var vibreturn = vibrate();
+		}
 	} ]
 }, {
 	items : [ {
@@ -137,14 +145,16 @@ cfg.items = [ {
 					});
 			}
 			this.actions.show('pop');
-			show_pic();
+			var picreturn = show_pic();
 		}
 	} ]
 }, {
 	items : [ {
 		ui : 'round',
 		text : 'Get phone\'s contacts',
-		handler : get_contacts	
+		handler : function() {
+ 			var contactreturn = get_contacts();
+		}
 	} ]
 }  ];
 
