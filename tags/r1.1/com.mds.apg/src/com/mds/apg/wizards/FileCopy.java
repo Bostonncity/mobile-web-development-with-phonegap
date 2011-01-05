@@ -135,7 +135,7 @@ public class FileCopy {
         File toFile = new File(toFileName);
 
         if (!fromFile.exists()) {
-            throw new IOException("createPhongapJs: " + "no such source file: "
+            throw new IOException("createPhonegapJs: " + "no such source file: "
                     + fromDirName);
         }
         FileOutputStream to = new FileOutputStream(toFile);
