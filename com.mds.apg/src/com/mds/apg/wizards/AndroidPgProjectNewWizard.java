@@ -106,6 +106,7 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
 
         // Open the default JavaScript Perspective  - Despite the name, it is from JSDT!
         OpenJavaPerspectiveAction action = new OpenJavaPerspectiveAction();
+        action.run();
         
         // Open index.html to start
         
@@ -132,8 +133,7 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
 //        Hashtable<String, String> h = new Hashtable<String, String>();
 //        h.put(JavaScriptCore.OPTIONAL_SEMICOLON, JavaScriptCore.IGNORE);
 //        JavaModelManager.getJavaModelManager().setOptions(h);
-       
-        action.run();
+
         return true;
     }
 

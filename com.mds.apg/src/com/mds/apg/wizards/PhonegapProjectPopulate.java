@@ -229,6 +229,23 @@ class PhonegapProjectPopulate {
             "www"  }, monitor);
         String wwwDir = Platform.getLocation().toString() + "/"
                 + pageInfo.mAndroidProject.getName() + "/" + "assets" + "/" + "www" + "/";
+
+        boolean doCopy = true;
+        if (pageInfo.mUseJqmDemo) {
+            bundleCopy("/resources/jqm/demo", wwwDir);
+            doCopy = false;
+        } else if (pageInfo.mBundledExample) {
+            if (pageInfo.mJqmChecked) {
+                bundleCopy("/resources/jqm/phonegapExample", wwwDir);
+                doCopy = false;;
+            } else if (pageInfo.mSenchaChecked) {
+                bundleCopy("/resources/sencha/phonegapExample", wwwDir);
+                doCopy = false;;
+            }
+        } 
+        if (doCopy) {
+            FileCopy.recursiveCopy(pageInfo.mSourceDirectory, wwwDir);
+        }
         
         // Even though there is a phonegap.js file in the directory framework/assets/www, it is WRONG!!
         // phonegap.js must be constructed from the files in framework/assets/js
@@ -236,23 +253,12 @@ class PhonegapProjectPopulate {
         FileCopy.createPhonegapJs(pageInfo.mPhonegapDirectory + "/" + "framework" + "/" + "assets"
                 + "/" + "js", wwwDir + "phonegap.js");
 
-        if (pageInfo.mUseJqmDemo) {
-            bundleCopy("/resources/jqm/demo", wwwDir);
-            return;
-        } else if (pageInfo.mBundledExample) {
-            if (pageInfo.mJqmChecked) {
-                bundleCopy("/resources/jqm/phonegapExample", wwwDir);
-                return;
-            } else if (pageInfo.mSenchaChecked) {
-                bundleCopy("/resources/sencha/phonegapExample", wwwDir);
-                return;
+        if (pageInfo.mSenchaKitchenSink) { // delete the confusing index_android.html
+            try {
+                File f = new File(wwwDir + "index_android.html");
+                f.delete();
+            } catch (Exception e) { // Ignore any exceptions here
             }
-        } 
-        FileCopy.recursiveCopy(pageInfo.mSourceDirectory, wwwDir);
-
-        if (pageInfo.mSenchaKitchenSink) {  // delete the confusing index_android.html
-            File f = new File(wwwDir + "index_android.html");
-            f.delete();   
         }
     }
 
@@ -468,15 +474,18 @@ class PhonegapProjectPopulate {
     
     static private String updatePathInHtml(String fileContents, String fileName, 
             String suffix, String prepend, String indexHtmlDirectory) throws IOException {
-        String min = ".min";
-        String fullName = fileName + min + suffix;
+
+        String fullName = fileName + ".min" + suffix;
         int fileNameIndex = fileContents.indexOf(fullName);
         if (fileNameIndex <= 0) {
-            min = "";
+            fullName = fileName + "-debug" + suffix;
+            fileNameIndex = fileContents.indexOf(fullName);
+        }
+        if (fileNameIndex <= 0) {
             fullName = fileName + suffix;
             fileNameIndex = fileContents.indexOf(fullName);
         }
-        if (fileNameIndex > 0) {
+        if (fileNameIndex > 0) {   // Found it
             int startIncludeIndex = fileContents.lastIndexOf("\"", fileNameIndex);
             fileContents = fileContents.substring(0, startIncludeIndex) + prepend
                     + fileContents.substring(fileNameIndex);

@@ -37,7 +37,7 @@ public final class PageInitContents extends WizardSection{
     private final static String USE_EXAMPLE_DIR = com.mds.apg.Activator.PLUGIN_ID + ".example";
 
     /** Last user-browsed location */
-    private String mCustomLocationOsPath;  
+    private String mLocationCache;  
     private boolean mUseFromExample;
     
     // widgets
@@ -49,7 +49,7 @@ public final class PageInitContents extends WizardSection{
 
     PageInitContents(AndroidPgProjectCreationPage wizardPage, Composite parent) {
         super(wizardPage);
-        mCustomLocationOsPath = doGetPreferenceStore().getString(SOURCE_DIR);  
+        mLocationCache = doGetPreferenceStore().getString(SOURCE_DIR);  
         mUseFromExample = doGetPreferenceStore().getString(USE_EXAMPLE_DIR) != "" ; // returns false if unset
         createGroup(parent);
     }
@@ -106,7 +106,8 @@ public final class PageInitContents extends WizardSection{
 
         mLocationLabel = new Label(location_group, SWT.NONE);
         mLocationLabel.setText("Location:");
-        mLocationPathField = new Text(location_group, SWT.BORDER);       
+        mLocationPathField = new Text(location_group, SWT.BORDER);  
+        mLocationPathField.setText(getLocationSave());
         mBrowseButton = setupDirectoryBrowse(mLocationPathField, parent, location_group);
         enableLocationWidgets(!initialVal);  
     }
@@ -125,12 +126,12 @@ public final class PageInitContents extends WizardSection{
     
     @Override
     final String getLocationSave() {
-        return mCustomLocationOsPath;
+        return mLocationCache;
     }
     
     @Override
     final void setLocationSave(String s) {
-        mCustomLocationOsPath = s;
+        mLocationCache = s;
     }
 
     /** Returns the value of the "Create from Existing Sample" radio. */
@@ -181,6 +182,7 @@ public final class PageInitContents extends WizardSection{
             boolean foundIndexHtml = false;
             boolean foundSencha = false;
             boolean foundJqm = false;
+            boolean foundPhonegapJs = false;
 
             for (String s : l) {
                 if (s.equals("index.html")) {
@@ -189,6 +191,8 @@ public final class PageInitContents extends WizardSection{
                     foundSencha = true;
                 } else if (s.equals("jquery.mobile")) {
                     foundJqm = true;
+                } else if (s.equals("phonegap.js")) {
+                    foundPhonegapJs = true;
                 }
             }
             if (!foundIndexHtml) {
@@ -205,10 +209,17 @@ public final class PageInitContents extends WizardSection{
                         " Uncheck \"Include JQuery Mobile ...\" if the Location directory already includes it", 
                         AndroidPgProjectCreationPage.MSG_ERROR);
             }
+            if (foundPhonegapJs) {
+                return mWizardPage.setStatus("Location: " + getValue() +
+                        " cannot include a phonegap.js file.  It " +
+                        "will be supplied from the phonegap-android installation",
+                        AndroidPgProjectCreationPage.ERROR);
+            }
             // TODO more validation
             
             // We now have a good directory, so set example path and save value
             doGetPreferenceStore().setValue(SOURCE_DIR, getValue()); 
+            
             return AndroidPgProjectCreationPage.MSG_NONE;
         }
     }
