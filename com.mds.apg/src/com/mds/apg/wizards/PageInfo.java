@@ -25,30 +25,37 @@ import org.eclipse.core.resources.IProject;
 public class PageInfo {
     protected final String mSourceDirectory;      // The populating source
     protected final String mPhonegapDirectory;    // PhoneGap install location
+    protected final boolean mFromGitHub;          // PhoneGap install from GitHub?
+    protected final String mPhonegapJs;           // phonegap.js file name (non-github case)
+    protected final String mPhonegapJar;          // phonegap.jar file name (non-github case)
+    protected final boolean mUseExample;          // using example 
     protected final String mDestinationDirectory; // Place to put new files
     protected final IProject mAndroidProject;     // the new Android project
     protected final boolean mJqmChecked;          // Using jQueryMobile?
     protected final String mJqmDirectory;         // null if using packaged version
     protected final boolean mUseJqmDemo;          // use jQuery Mobile demo?
     protected final String mJqmVersion;
-    protected final boolean mBundledExample;
     protected final String mSenchaDirectory;      // Sencha Touch install location
     protected final boolean mSenchaChecked;       // Using Sencha
     protected final boolean mSenchaKitchenSink;   // Do Sencha Kitchen Sink app
     
-    public PageInfo(String sourceDirectory, String phonegapDirectory, String destinationDirectory, 
+    public PageInfo(String sourceDirectory, String phonegapDirectory, boolean fromGitHub,
+            String phonegapJs, String phonegapJar, boolean useExample, String destinationDirectory, 
             IProject androidProject, boolean jqmChecked, String jqmDirectory, boolean useJqmDemo,
-            String jqmVersion, boolean bundledExample,
+            String jqmVersion, 
             String senchaDirectory, boolean senchaChecked, boolean senchaKitchenSink) {
         mSourceDirectory = sourceDirectory;
         mPhonegapDirectory = phonegapDirectory;
+        mFromGitHub = fromGitHub;
+        mPhonegapJs = phonegapJs;
+        mPhonegapJar = phonegapJar;
+        mUseExample = useExample;
         mDestinationDirectory = destinationDirectory;
         mAndroidProject = androidProject;
         mJqmChecked = jqmChecked;
         mJqmDirectory = jqmDirectory;
         mUseJqmDemo = useJqmDemo;
         mJqmVersion = jqmVersion;
-        mBundledExample = bundledExample;
         mSenchaDirectory = senchaDirectory;
         mSenchaChecked = senchaChecked;
         mSenchaKitchenSink = senchaKitchenSink;
