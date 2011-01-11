@@ -160,15 +160,18 @@ public class AndroidPgProjectCreationPage extends WizardPage {
             } else if (mSenchaDialog.senchaChecked()) {
                 withString = "with Sencha Touch";
             } else {
-                withString = "";
+                // needs to be seeded with blanks so that there's space when it needs to appear (Issue 3)
+                withString = "                                 ";
             }
             mInitContentsDialog.mWithLabel.setText(withString);
             
             if (mInitContentsDialog.isCreateFromExample()) {
                 if (!withString.equals("")) {
                     checkLocation = false;
-                } else {
+                } else if (mPhonegapDialog.isfromGit()) {
                     mInitContentsDialog.update(mPhonegapDialog.getValue() + "/example");
+                } else {
+                    mInitContentsDialog.update(mPhonegapDialog.getValue() + "/Android/Sample/assets/www");
                 }
             }
         }

@@ -32,6 +32,10 @@ public final class PagePhonegapPathSet extends WizardSection {
     /** Last user-browsed location, static so that it be remembered for the whole session */ 
     private static String sPhonegapPathCache = "";
     
+    private boolean mFromGitHub;
+    private String mPhonegapJs;
+    private String mPhonegapJar;
+    
     // widgets
     Text mPhonegapPathField;
     
@@ -78,19 +82,33 @@ public final class PagePhonegapPathSet extends WizardSection {
     final void setLocationSave(String s) {
         sPhonegapPathCache = s;
     }
+    
+    final boolean isfromGit() {
+        return mFromGitHub;
+    }
 
+    final String getPhonegapJsName() {
+        return mPhonegapJs;
+    }
+    
+    final String getPhonegapJarName() {
+        return mPhonegapJar;
+    }
 
     // --- UI Callbacks ----
 
     /**
-     * Validates the phonegap path field. Make sure there is at least an example
-     * and framework sub-directory
+     * Validates the phonegap path field.   There are two phonegap directory structures
+     * 1. From github - should have an an example and framework sub-directory
+     * 2. From Download on www.phonegap.com  - should have Android subdirectory with
+     *              phonegap{version}.js phonegap{version}.jar and Samples directory
      * 
      * @return The wizard message type, one of MSG_ERROR, MSG_WARNING or
      *         MSG_NONE.
      */
     int validate() {
-        File phonegapDir = new File(getValue());
+        String phonegapDirName = getValue();
+        File phonegapDir = new File(phonegapDirName);
         if (!phonegapDir.exists() || !phonegapDir.isDirectory()) {
             return mWizardPage.setStatus("A phonegap directory name must be specified.",  AndroidPgProjectCreationPage.MSG_ERROR);
         } else {
@@ -100,17 +118,56 @@ public final class PagePhonegapPathSet extends WizardSection {
             }
             boolean foundFramework = false;
             boolean foundExample = false;
+            boolean foundAndroid = false;
 
             for (String s : l) {
-                if (s.equals("example"))
+                if (s.equals("example")) {
                     foundExample = true;
-                if (s.equals("framework"))
+                } else if (s.equals("framework")) {
                     foundFramework = true;
+                } else if (s.equals("Android")) {
+                    foundAndroid = true;
+                }
             }
-            if ((!foundFramework) || (!foundExample)) {
-                return mWizardPage.setStatus(
-                                "Invalid phonegap-android location. It's missing the framework and/or example subdirectory",
+            if (foundAndroid) {   // First the www.phonegap.com download directory structure
+                String androidDirName = phonegapDirName + "/Android";
+                File androidDir = new File(androidDirName);
+                
+                String[] al = androidDir.list();
+                if (al.length == 0) {
+                    return mWizardPage.setStatus("The phonegap directory is empty.", AndroidPgProjectCreationPage.MSG_ERROR);
+                }
+                mPhonegapJs = null;
+                mPhonegapJar = null;
+                boolean foundSample = false;
+
+                for (String s : al) {
+                    if (s.indexOf("phonegap") == 0) {
+                        if (s.substring(s.length()-3).equals(".js")) {
+                            mPhonegapJs = s;
+                        } else if (s.substring(s.length()-4).equals(".jar")) {
+                            mPhonegapJar = s;
+                        }
+                    } else if (s.equals("Sample")) {
+                        foundSample = true;
+                    }
+                }
+                if ((mPhonegapJs == null) || (mPhonegapJar == null) || (!foundSample)) {
+                    return mWizardPage.setStatus("Invalid phonegap-android location: " + androidDirName +
+                            " must include a Samples directory, phonegap{version}.js and phonegap{version}.jar",
+                            AndroidPgProjectCreationPage.MSG_ERROR);
+                }
+                mFromGitHub = false;
+                
+            } else {  // Second the github directory structure
+                if ((!foundFramework) || (!foundExample)) {
+                    return mWizardPage.setStatus(
+                                "Invalid phonegap-android location. If it's from github," +
+                                "it should have a framework and example subdirectory." +
+                                "If it's from www.phonegap.com Download, it should have an Android subdirectory",
                                 AndroidPgProjectCreationPage.MSG_ERROR);
+                }
+                mFromGitHub = true;
             }
             // TODO more validation
 
