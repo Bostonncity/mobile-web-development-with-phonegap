@@ -157,23 +157,26 @@ public class AndroidPgProjectCreationPage extends WizardPage {
             String withString;
             if (mJqmDialog.jqmChecked()) {
                 withString = "with jQuery Mobile";
+                if (mInitContentsDialog.isCreateFromExample()) {
+                    checkLocation = false;
+                }
             } else if (mSenchaDialog.senchaChecked()) {
                 withString = "with Sencha Touch";
+                if (mInitContentsDialog.isCreateFromExample()) {
+                    checkLocation = false;
+                }
             } else {
                 // needs to be seeded with blanks so that there's space when it needs to appear (Issue 3)
                 withString = "                                 ";
-            }
-            mInitContentsDialog.mWithLabel.setText(withString);
-            
-            if (mInitContentsDialog.isCreateFromExample()) {
-                if (!withString.equals("")) {
-                    checkLocation = false;
-                } else if (mPhonegapDialog.isfromGit()) {
-                    mInitContentsDialog.update(mPhonegapDialog.getValue() + "/example");
-                } else {
-                    mInitContentsDialog.update(mPhonegapDialog.getValue() + "/Android/Sample/assets/www");
+                if (mInitContentsDialog.isCreateFromExample()) {
+                    if (mPhonegapDialog.isfromGit()) {
+                        mInitContentsDialog.update(mPhonegapDialog.getValue() + "/example");
+                    } else {
+                        mInitContentsDialog.update(mPhonegapDialog.getValue() + "/Android/Sample/assets/www");
+                    }
                 }
             }
+            mInitContentsDialog.mWithLabel.setText(withString);
         }
 
         if (mPhonegapDialog.validate() != MSG_NONE)  return false;
