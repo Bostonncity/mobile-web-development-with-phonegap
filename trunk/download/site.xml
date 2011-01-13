@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/com.mds.phonegap.license_1.0.0.201101121129.jar" id="com.mds.phonegap.license" version="1.0.0.201101121129">
-      <category name="PhoneGap for Android"/>
+   <feature url="features/com.mds.phonegapForAndroid_1.1.1.201101121603.jar" id="com.mds.phonegapForAndroid" version="1.1.1.201101121603">
+      <category name="MDS PhoneGap for Android"/>
    </feature>
-   <feature url="features/com.mds.phonegapForAndroid_1.1.1.201101121129.jar" id="com.mds.phonegapForAndroid" version="1.1.1.201101121129">
-      <category name="PhoneGap for Android"/>
-   </feature>
-   <feature url="features/com.mds.jqm.license_1.0.0.201101121129.jar" id="com.mds.jqm.license" version="1.0.0.201101121129">
-      <category name="PhoneGap for Android"/>
+   <feature url="features/com.mds.jqm.license_1.0.0.201101121603.jar" id="com.mds.jqm.license" version="1.0.0.201101121603">
+      <category name="MDS PhoneGap for Android"/>
    </feature>
    <feature url="features/org.eclipse.wst.jsdt.feature_1.2.3.v201010160635-7C78FGUF9JgLWLQ1UIPrac.jar" id="org.eclipse.wst.jsdt.feature" version="1.2.3.v201010160635-7C78FGUF9JgLWLQ1UIPrac">
-      <category name="PhoneGap for Android"/>
+      <category name="MDS PhoneGap for Android"/>
+   </feature>
+   <feature url="features/com.mds.phonegap.license_1.0.0.201101121603.jar" id="com.mds.phonegap.license" version="1.0.0.201101121603">
+      <category name="MDS PhoneGap for Android"/>
    </feature>
    <feature url="features/org.eclipse.jst.webpageeditor.feature_2.3.1.v20100906-4619oB5856D8Q3324.jar" id="org.eclipse.jst.webpageeditor.feature" version="2.3.1.v20100906-4619oB5856D8Q3324">
-      <category name="PhoneGap for Android"/>
+      <category name="MDS PhoneGap for Android"/>
    </feature>
-   <category-def name="PhoneGap for Android" label="PhoneGap for Android">
+   <category-def name="MDS PhoneGap for Android" label="MDS PhoneGap for Android">
       <description>
          PhoneGap for Android feature, Eclipse JSDT(JavaScript Development Tools) feature, and Eclipse HTML file management feature
       </description>

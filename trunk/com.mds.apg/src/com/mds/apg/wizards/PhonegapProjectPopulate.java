@@ -236,7 +236,7 @@ class PhonegapProjectPopulate {
         } else if (pageInfo.mSenchaChecked) {
             if (pageInfo.mUseExample && !pageInfo.mSenchaKitchenSink) {
                 bundleCopy("/resources/sencha/phonegapExample", wwwDir);
-                doCopy = false;;
+                doCopy = false;
             }
         } 
         if (doCopy) {
@@ -254,10 +254,12 @@ class PhonegapProjectPopulate {
                     + "assets" + "/" + "js", wwwDir + "phonegap.js");
 
         } else { // www.phonegap.com/download
-            if (pageInfo.mUseExample) { // copy phonegap{version}.js to
-                                        // phonegap.js
-                FileCopy.copy(pageInfo.mPhonegapDirectory + "/Android/" + pageInfo.mPhonegapJs,
-                        wwwDir + "phonegap.js");
+            if (pageInfo.mUseExample && !pageInfo.mSenchaKitchenSink) { 
+                // copy phonegap{version}.js to phonegap.js
+                if (pageInfo.mJqmChecked || pageInfo.mSenchaChecked) {  // otherwise already there
+                    FileCopy.copy(pageInfo.mPhonegapDirectory + "/Android/" + pageInfo.mPhonegapJs,
+                            wwwDir + "phonegap.js");
+                }
             } else { // otherwise keep the name, since the user controls the
                      // index.html (and don't overwrite if user supplied the phonegap.js)
                 FileCopy.copyDontOverwrite(pageInfo.mPhonegapDirectory + "/Android/"
