@@ -156,62 +156,56 @@ class PhonegapProjectPopulate {
     }
 
     /**
-     * It turns out that phonegap.jar does not yet exist in a raw phonegap
+     * If using github install, phonegap.jar does not yet exist in a raw phonegap
      * installation It needs to be built with the Android installation. So
      * instead, we'll get the sources, so that it just gets build with our
-     * product. We also need to get /framework/libs/commons-codec-1.3.jar upon
+     * product. We also need to reference /framework/libs/commons-codec-1.3.jar upon
      * which the sources depend
+     * 
+     * For a non-github install, just point at phonegap.jar
      * 
      * @throws URISyntaxException
      */
     static private void getPhonegapJar(IProgressMonitor monitor, PageInfo pageInfo) throws CoreException,
             IOException, URISyntaxException {
+        
+        if (pageInfo.mFromGitHub) {
+            String toDir = Platform.getLocation().toString() + "/" + pageInfo.mAndroidProject.getName() + "/src";
+            FileCopy.recursiveCopy(pageInfo.mPhonegapDirectory + "/framework/src", toDir);
+            updateClasspath(monitor,
+                    pageInfo.mAndroidProject, 
+                    pageInfo.mPhonegapDirectory + "/framework/libs/commons-codec-1.3.jar",
+                    new Path(toDir));        
+        } else { // not from github
+            updateClasspath(monitor, 
+                    pageInfo.mAndroidProject, 
+                    pageInfo.mPhonegapDirectory + "/Android/" + pageInfo.mPhonegapJar,
+                    null);      
+        }
+    }
+    
+    /**
+     * Update the classpath with thanks to Larry Isaacs in  
+     * http://dev.eclipse.org/newslists/news.eclipse.webtools/msg10002.html
+     * @throws CoreException 
+     * 
+     * @throws URISyntaxException
+     */
+    
+    static private void updateClasspath(IProgressMonitor monitor, IProject androidProject, String jarFile, Path srcLoc) throws CoreException {
+        
+        IJavaProject javaProject = (IJavaProject) androidProject.getNature(JavaCore.NATURE_ID);
 
-        FileCopy.recursiveCopy(pageInfo.mPhonegapDirectory + "/" + "framework" + "/" + "src",
-                Platform.getLocation().toString() + "/" + pageInfo.mAndroidProject.getName() + "/"
-                        + "src");
-
-        final String commonCodecLoc = "commons-codec-1.3.jar";
-
-        // Point at original file in phonegap directory instead of copy
-        // FileCopy.copy(pageInfo.mPhonegapDirectory + "/" + "framework" + "/" +
-        // "libs" + "/" + commonCodecLoc,
-        // libsDir + commonCodecLoc);
-
-        // Now update classpath .classpath should end up like the following.
-        // Note that the path specifies that
-        // phonegap.jar should be included in the build. sourcepath enables the
-        // phonegap source to be found for debugging
-        // when doing creation the "output" line doesn't yet exist, so the new
-        // line goes last
-        //
-        // <?xml version="1.0" encoding="UTF-8"?>
-        // <classpath>
-        // <classpathentry kind="src" path="src"/>
-        // <classpathentry kind="src" path="gen"/>
-        // <classpathentry kind="con"
-        // path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-        // <classpathentry kind="lib" path="libs/phonegap.jar"
-        // sourcepath="/Users/paulb/phonegap-android101023/framework/src"/>
-        // <classpathentry kind="output" path="bin"/>
-        // </classpath>
-
-        IJavaProject javaProject = (IJavaProject) pageInfo.mAndroidProject
-                .getNature(JavaCore.NATURE_ID); // thanks to Larry Isaacs
-                                                // http://dev.eclipse.org/newslists/news.eclipse.webtools/msg10002.html
         IClasspathEntry[] classpathList = javaProject.readRawClasspath();
         IClasspathEntry[] newClasspaths = new IClasspathEntry[classpathList.length + 1];
         System.arraycopy(classpathList, 0, newClasspaths, 0, classpathList.length);
 
         // Create the new Classpath entry
 
-        IClasspathEntry newPath = JavaCore.newLibraryEntry(new Path(pageInfo.mPhonegapDirectory
-                + "/" + "framework" + "/" + "libs" + "/" + commonCodecLoc), new Path(
-                pageInfo.mPhonegapDirectory + "/" + "framework" + "/" + "src" + "/"), null);
-
+        IClasspathEntry newPath = JavaCore.newLibraryEntry(new Path(jarFile), srcLoc, null);
         newClasspaths[classpathList.length] = newPath;
 
-        // write it back out with
+        // write it back out 
         javaProject.setRawClasspath(newClasspaths, monitor);
     }
 
@@ -234,24 +228,44 @@ class PhonegapProjectPopulate {
         if (pageInfo.mUseJqmDemo) {
             bundleCopy("/resources/jqm/demo", wwwDir);
             doCopy = false;
-        } else if (pageInfo.mBundledExample) {
-            if (pageInfo.mJqmChecked) {
+        } else if (pageInfo.mJqmChecked) {
+            if (pageInfo.mUseExample) {
                 bundleCopy("/resources/jqm/phonegapExample", wwwDir);
-                doCopy = false;;
-            } else if (pageInfo.mSenchaChecked) {
+                doCopy = false;
+            }
+        } else if (pageInfo.mSenchaChecked) {
+            if (pageInfo.mUseExample && !pageInfo.mSenchaKitchenSink) {
                 bundleCopy("/resources/sencha/phonegapExample", wwwDir);
-                doCopy = false;;
+                doCopy = false;
             }
         } 
         if (doCopy) {
             FileCopy.recursiveCopy(pageInfo.mSourceDirectory, wwwDir);
         }
         
-        // Even though there is a phonegap.js file in the directory framework/assets/www, it is WRONG!!
-        // phonegap.js must be constructed from the files in framework/assets/js
+        if (pageInfo.mFromGitHub) {
 
-        FileCopy.createPhonegapJs(pageInfo.mPhonegapDirectory + "/" + "framework" + "/" + "assets"
-                + "/" + "js", wwwDir + "phonegap.js");
+            // Even though there is a phonegap.js file in the directory
+            // framework/assets/www, it is WRONG!!
+            // phonegap.js must be constructed from the files in
+            // framework/assets/js
+
+            FileCopy.createPhonegapJs(pageInfo.mPhonegapDirectory + "/" + "framework" + "/"
+                    + "assets" + "/" + "js", wwwDir + "phonegap.js");
+
+        } else { // www.phonegap.com/download
+            if (pageInfo.mUseExample && !pageInfo.mSenchaKitchenSink) { 
+                // copy phonegap{version}.js to phonegap.js
+                if (pageInfo.mJqmChecked || pageInfo.mSenchaChecked) {  // otherwise already there
+                    FileCopy.copy(pageInfo.mPhonegapDirectory + "/Android/" + pageInfo.mPhonegapJs,
+                            wwwDir + "phonegap.js");
+                }
+            } else { // otherwise keep the name, since the user controls the
+                     // index.html (and don't overwrite if user supplied the phonegap.js)
+                FileCopy.copyDontOverwrite(pageInfo.mPhonegapDirectory + "/Android/"
+                        + pageInfo.mPhonegapJs, wwwDir + pageInfo.mPhonegapJs);
+            }
+        }
 
         if (pageInfo.mSenchaKitchenSink) { // delete the confusing index_android.html
             try {
@@ -350,8 +364,12 @@ class PhonegapProjectPopulate {
             URISyntaxException {
 
         String destFile = pageInfo.mDestinationDirectory + "AndroidManifest.xml";
-        String sourceFile = pageInfo.mPhonegapDirectory + "/" + "framework" + "/"
-                + "AndroidManifest.xml";
+        String sourceFile;
+        if (pageInfo.mFromGitHub) {
+            sourceFile = pageInfo.mPhonegapDirectory + "/framework/AndroidManifest.xml";
+        } else {
+            sourceFile = pageInfo.mPhonegapDirectory + "/Android/Sample/AndroidManifest.xml";
+        }
         String sourceFileContents = StringIO.read(sourceFile);
         String manifestInsert = getManifestScreensAndPermissions(sourceFileContents);
         String destFileContents = StringIO.read(destFile);
@@ -408,19 +426,30 @@ class PhonegapProjectPopulate {
     static private void getResFiles(IProgressMonitor monitor, PageInfo pageInfo) throws CoreException,
             IOException, URISyntaxException {
 
-        String sourceResDir = pageInfo.mPhonegapDirectory + "/" + "framework" + "/" + "res" + "/";
+        String sourceResDir;
+        if (pageInfo.mFromGitHub) {
+            sourceResDir = pageInfo.mPhonegapDirectory + "/framework/res/";
+        } else {
+            sourceResDir = pageInfo.mPhonegapDirectory + "/Android/Sample/res/";
+        }
         String destResDir = pageInfo.mDestinationDirectory + "res" + "/";
 
         FileCopy.recursiveForceCopy(sourceResDir + "layout" + "/", destResDir + "layout" + "/");
 
-        // Copy source drawable to all of the project drawable* directories
-        String sourceDrawableDir = sourceResDir + "drawable" + "/";
-        File destFile = new File(destResDir);
-        String fList[] = destFile.list();
-        for (String s : fList) {
-            if (s.indexOf("drawable") == 0) {
-                FileCopy.recursiveForceCopy(sourceDrawableDir, destResDir + s);
+        if (pageInfo.mFromGitHub) {
+            // Copy source drawable to all of the project drawable* directories
+            String sourceDrawableDir = sourceResDir + "drawable" + "/";
+            File destFile = new File(destResDir);
+            String fList[] = destFile.list();
+            for (String s : fList) {
+                if (s.indexOf("drawable") == 0) {
+                    FileCopy.recursiveForceCopy(sourceDrawableDir, destResDir + s);
+                }
             }
+        } else { // the drawables are already in the final directories
+            FileCopy.recursiveForceCopy(sourceResDir + "drawable-hdpi", destResDir + "drawable-hdpi");
+            FileCopy.recursiveForceCopy(sourceResDir + "drawable-ldpi", destResDir + "drawable-ldpi");
+            FileCopy.recursiveForceCopy(sourceResDir + "drawable-mdpi", destResDir + "drawable-mdpi");
         }
     }
 

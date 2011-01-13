@@ -145,6 +145,10 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
         final PageInfo pageInfo = new PageInfo(
                 mPhonegapPage.mInitContentsDialog.getValue(),
                 mPhonegapPage.mPhonegapDialog.getValue(), 
+                mPhonegapPage.mPhonegapDialog.isfromGit(),
+                mPhonegapPage.mPhonegapDialog.getPhonegapJsName(),
+                mPhonegapPage.mPhonegapDialog.getPhonegapJarName(),
+                mPhonegapPage.mInitContentsDialog.isCreateFromExample(),
                 Platform.getLocation().toString() + "/"+ mNewAndroidProject.getName() + "/",
                 mNewAndroidProject,
                 mPhonegapPage.mJqmDialog.jqmChecked(),
@@ -152,9 +156,6 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
                     mPhonegapPage.mJqmDialog.getValue(),
                 mPhonegapPage.mJqmDialog.useJqmDemo(),
                 mPhonegapPage.mJqmDialog.mJqmVersion,
-                mPhonegapPage.mInitContentsDialog.isCreateFromExample() && 
-                    (!mPhonegapPage.mSenchaDialog.useSenchaKitchenSink()) &&
-                    (mPhonegapPage.mJqmDialog.jqmChecked() || mPhonegapPage.mSenchaDialog.senchaChecked()),
                 mPhonegapPage.mSenchaDialog.getValue(),
                 mPhonegapPage.mSenchaDialog.senchaChecked(), 
                 mPhonegapPage.mSenchaDialog.useSenchaKitchenSink());
