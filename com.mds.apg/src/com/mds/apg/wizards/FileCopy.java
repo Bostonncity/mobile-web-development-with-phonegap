@@ -11,27 +11,31 @@ import java.io.InputStream;
 public class FileCopy {
 
     public static void recursiveCopy(String fromFileName, String toFileName) throws IOException {
-        copy (fromFileName, toFileName, true, false, null);
+        copy (fromFileName, toFileName, true, false, null, false);
     }
     
     public static void recursiveCopySkipSuffix(String fromFileName, String toFileName, String skip) throws IOException {
-        copy (fromFileName, toFileName, true, false, skip);
+        copy (fromFileName, toFileName, true, false, skip, false);
     }
 
     public static void recursiveForceCopy(String fromFileName, String toFileName) throws IOException {
-        copy (fromFileName, toFileName, true, true, null);
+        copy (fromFileName, toFileName, true, true, null, false);
     }
 
     public static void forceCopy(String fromFileName, String toFileName) throws IOException{
-        copy (fromFileName, toFileName, false, true, null);
+        copy (fromFileName, toFileName, false, true, null, false);
     }    
 
     public static void copy(String fromFileName, String toFileName) throws IOException{
-        copy (fromFileName, toFileName, false, false, null);
+        copy (fromFileName, toFileName, false, false, null, false);
+    }
+
+    public static void copyDontOverwrite(String fromFileName, String toFileName) throws IOException{
+        copy (fromFileName, toFileName, false, false, null, true);      
     }
 
     private static void copy(String fromFileName, String toFileName, boolean isRecursive, 
-            boolean force, String skipSuffix)   throws IOException {
+            boolean force, String skipSuffix, boolean dontOverwrite)   throws IOException {
         
         if (skipSuffix != null) {
             int dotSpot = fromFileName.lastIndexOf('.');
@@ -62,7 +66,7 @@ public class FileCopy {
             }                
             String fList[] = fromFile.list();
             for (String s : fList) {
-                copy(fromFileName + "/" + s, toFileName + "/" + s, true, force, skipSuffix);
+                copy(fromFileName + "/" + s, toFileName + "/" + s, true, force, skipSuffix, dontOverwrite);
             }
             return;
         }
@@ -81,6 +85,9 @@ public class FileCopy {
             if (!toFile.canWrite())
                 throw new IOException("FileCopy: "
                         + "destination file is unwriteable: " + toFileName);
+            if (dontOverwrite) {
+                return;
+            }
             if (!force) {
                 throw new IOException("FileCopy: "
                         + "trying to overwrite an existing file" + toFileName);
