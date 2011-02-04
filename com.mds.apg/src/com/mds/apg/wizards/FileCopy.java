@@ -151,8 +151,9 @@ public class FileCopy {
             to = appendStream(new File(fromDirName + "/" + "phonegap.js.base"), to);
 
             String fList[] = fromFile.list();
-            for (String s : fList) {
-                if (!s.equals("phonegap.js.base")) {
+            for (String s : fList) {   // append the .js files
+                int i = s.lastIndexOf(".js");
+                if (i > 0 && i == s.length() - 3) {
                     to = appendStream(new File(fromDirName + "/" + s), to);
                 }
             }
