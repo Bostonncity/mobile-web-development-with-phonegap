@@ -561,6 +561,7 @@ class PhonegapProjectPopulate {
             URL url = en.nextElement();
             String pathFromBase = url.getPath().substring(dir.length()+1);
             String toFileName = destination + pathFromBase;
+            if (toFileName.indexOf("/.svn/") >= 0) continue;
             File toFile = new File(toFileName);
 
             if (pathFromBase.lastIndexOf('/') == pathFromBase.length() - 1) {
