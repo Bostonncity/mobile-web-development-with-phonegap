@@ -303,8 +303,8 @@ class PhonegapProjectPopulate {
         // Update the index.html with path to the js and css files
         
         String file = pageInfo.mDestinationDirectory + "/" + "assets/www/index.html";
-        String fileContents = StringIO.read(file);
-
+        String fileContents = FileStringReplace.replace(file, "\\{\\$jqmversion\\}", version);
+        
         fileContents = updatePathInHtml(fileContents, "jquery.mobile" + version, 
                 ".css\"", "\"jquery.mobile/", pageInfo.mSourceDirectory);
         fileContents = updatePathInHtml(fileContents, "jquery.mobile" + version, 
