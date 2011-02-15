@@ -6,11 +6,12 @@ import java.io.*;
 
 public class FileStringReplace {
 
-    public static void replace(String fileString, String fromString, String toString) throws IOException {
+    public static String replace(String fileString, String fromString, String toString) throws IOException {
 
         String oldtext = StringIO.read(fileString);
         // replace a word in a file
         String newtext = oldtext.replaceAll(fromString, toString);
         StringIO.write(fileString, newtext);
+        return newtext;
     }
 }
