@@ -14,8 +14,9 @@ import com.googlecode.jslint4java.eclipse.JSLintPlugin;
  * Set up the default preferences. By default,we enable:
  * <ul>
  * <li> {@link Option#EQEQEQ}
- * <li> {@link Option#UNDEF}
- * <li> {@link Option#WHITE}
+ * <li> {@link Option#SEMIREQ}
+ * <li> {@link Option#NEEDCURLY}
+ * <li> {@link Option#FORIN}
  * </ul>
  * <p>
  * And assign default values to:
@@ -29,7 +30,8 @@ public class PreferencesInitializer extends AbstractPreferenceInitializer {
     private static final int DEFAULT_INDENT = 4;
     private static final int DEFAULT_MAXERR = 50;
 
-    private final Set<Option> defaultEnable = EnumSet.of(Option.EQEQEQ, Option.UNDEF, Option.WHITE);
+    private final Set<Option> defaultEnable = EnumSet.of(Option.EQEQEQ, Option.SEMIREQ, 
+            Option.NEEDCURLY, Option.FORIN);
 
     @Override
     public void initializeDefaultPreferences() {
