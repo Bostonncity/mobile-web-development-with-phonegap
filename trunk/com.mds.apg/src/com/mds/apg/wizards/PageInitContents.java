@@ -34,7 +34,7 @@ public final class PageInitContents extends WizardSection{
     // Set up storage for persistent initializers
 
     private final static String SOURCE_DIR = com.mds.apg.Activator.PLUGIN_ID + ".source"; 
-    private final static String USE_EXAMPLE_DIR = com.mds.apg.Activator.PLUGIN_ID + ".example";
+    private final static String USE_USERS_DIR = com.mds.apg.Activator.PLUGIN_ID + ".userdir";
 
     /** Last user-browsed location */
     private String mLocationCache;  
@@ -50,7 +50,7 @@ public final class PageInitContents extends WizardSection{
     PageInitContents(AndroidPgProjectCreationPage wizardPage, Composite parent) {
         super(wizardPage);
         mLocationCache = doGetPreferenceStore().getString(SOURCE_DIR);  
-        mUseFromExample = doGetPreferenceStore().getString(USE_EXAMPLE_DIR) != "" ; // returns false if unset
+        mUseFromExample = doGetPreferenceStore().getString(USE_USERS_DIR) == "" ; // returns true if unset for first time in workspace
         createGroup(parent);
     }
     
@@ -90,7 +90,7 @@ public final class PageInitContents extends WizardSection{
                 super.widgetSelected(e);
                 boolean newVal = createFromExampleRadio.getSelection();
                 mUseFromExample = newVal;
-                doGetPreferenceStore().setValue(USE_EXAMPLE_DIR, newVal ? "true" : "");
+                doGetPreferenceStore().setValue(USE_USERS_DIR, newVal ? "" : "true");
                 mWizardPage.validatePageComplete();
             }
         };
