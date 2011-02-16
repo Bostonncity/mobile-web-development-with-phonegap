@@ -48,14 +48,8 @@ public enum Option {
     /** If html fragments should be allowed */
     FRAGMENT("If html fragments should be allowed", Boolean.class),
 
-    /** If immediate invocations must be wrapped in parens */
-    IMMED("If immediate invocations must be wrapped in parens", Boolean.class),
-
     /** The number of spaces used for indentation (default is 4) */
     INDENT("The number of spaces used for indentation (default is 4)", Integer.class),
-
-    /** If line breaks should not be checked */
-    LAXBREAK("If line breaks should not be checked", Boolean.class),
 
     /** The maximum number of warnings reported (default is 50) */
     MAXERR("The maximum number of warnings reported (default is 50)", Integer.class),
@@ -101,6 +95,9 @@ public enum Option {
 
     /** If variables should be declared before used */
     UNDEF("If variables should be declared before used", Boolean.class),
+    
+    /** If variables should be declared before used */
+    VARSATTOP("If all variables should be declared at top of function", Boolean.class),
 
     /** If strict whitespace rules apply */
     WHITE("If strict whitespace rules apply", Boolean.class),

@@ -368,6 +368,7 @@ var JSLINT = (function () {
             devel      : true, // if logging should be allowed (console, alert, etc.)
             es5        : true, // if ES5 syntax should be allowed
             evil       : true, // if eval should be allowed
+            eqeqeq     : true, // if === should be required
             forin      : true, // if for in statements must filter
             fragment   : true, // if HTML fragments should be allowed
             newcap     : true, // if constructor names must be capitalized
@@ -383,6 +384,7 @@ var JSLINT = (function () {
             windows    : true, // if MS Windows-specigic globals should be predefined
             strict     : true, // require the "use strict"; pragma
             sub        : true, // if all forms of subscript notation are tolerated
+            varsattop  : true, // if all var declaration should be at top of functions
             white      : true, // if strict whitespace rules apply
             widget     : true  // if the Yahoo Widgets globals should be predefined
         },
@@ -2914,7 +2916,7 @@ loop:   for (;;) {
     function relation(s, eqeq) {
         var x = infix(s, 100, function (left, that) {
             check_relation(left);
-            if (eqeq) {
+            if (option.eqeqeq && eqeq) {
                 warn(bundle.expected_a_b, that, eqeq, that.id);
             }
             var right = expression(100);
@@ -4517,22 +4519,27 @@ loop:   for (;;) {
         discard();
         spaces(this, t);
         no_space();
-        if (nexttoken.id === 'var') {
+        if (option.varsattop && nexttoken.id === 'var') {
             fail(bundle.move_var);
         }
         edge();
-        if (peek(0).id === 'in') {
-            v = nexttoken;
-            switch (funct[v.value]) {
-            case 'unused':
-                funct[v.value] = 'var';
-                break;
-            case 'var':
-                break;
-            default:
-                warn(bundle.bad_in_a, v);
+        if (peek(nexttoken.id === 'var' ? 1 : 0).id === 'in') {
+            if (nexttoken.id === 'var') {
+                advance('var');
+                token.fud();
+            } else {
+                v = nexttoken;
+                switch (funct[v.value]) {
+                case 'unused':
+                    funct[v.value] = 'var';
+                    break;
+                case 'var':
+                    break;
+                default:
+                    warn(bundle.bad_in_a, v);
+                }
+                advance();
             }
-            advance();
             i = nexttoken;
             advance('in');
             i.first = v;
@@ -4547,14 +4554,19 @@ loop:   for (;;) {
             }
         } else {
             if (nexttoken.id !== ';') {
-                edge();
-                this.first = [];
-                for (;;) {
-                    this.first.push(expression(0, 'for'));
-                    if (nexttoken.id !== ',') {
-                        break;
+                if (nexttoken.id === 'var') {
+                    advance('var');
+                    token.fud();
+                } else {
+                    edge();
+                    this.first = [];
+                    for (;;) {
+                        this.first.push(expression(0, 'for'));
+                        if (nexttoken.id !== ',') {
+                            break;
+                        }
+                        comma();
                     }
-                    comma();
                 }
             }
             semicolon();
