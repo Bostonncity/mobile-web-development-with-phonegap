@@ -43,7 +43,7 @@ public enum Option {
     EVIL("If eval should be allowed", Boolean.class),
 
     /** If for in statements must filter */
-    FORIN("If for in statements must filter", Boolean.class),
+    FORIN("Tolerate unfiltered forin", Boolean.class),
 
     /** If html fragments should be allowed */
     FRAGMENT("If html fragments should be allowed", Boolean.class),
