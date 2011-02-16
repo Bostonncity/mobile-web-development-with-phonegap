@@ -8,6 +8,7 @@ import java.util.List;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.NativeJavaArray;
+import org.mozilla.javascript.NativeObject;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.Undefined;
 import org.mozilla.javascript.UniqueTag;
@@ -117,7 +118,10 @@ final class Util {
         int count = intValue("length", ary);
         List<T> list = new ArrayList<T>(count);
         for (int i = 0; i < count; i++) {
-            list.add(c.convert(ary.get(i, ary)));
+        	Object o = ary.get(i, ary);
+            if (!(o instanceof NativeObject)) {
+                list.add(c.convert(o));
+            }
         }
         return list;
     }
