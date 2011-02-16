@@ -371,6 +371,7 @@ var JSLINT = (function () {
             eqeqeq     : true, // if === should be required
             forin      : true, // if for in statements must filter
             fragment   : true, // if HTML fragments should be allowed
+            needcurly  : true, // if block is required with for and while statements
             newcap     : true, // if constructor names must be capitalized
             nomen      : true, // if names should be checked
             on         : true, // if HTML event handlers should be allowed
@@ -382,6 +383,7 @@ var JSLINT = (function () {
             undef      : true, // if variables should be declared before used
             safe       : true, // if use of some browser features should be restricted
             windows    : true, // if MS Windows-specigic globals should be predefined
+            semireq    : true, // if semicolons are required
             strict     : true, // require the "use strict"; pragma
             sub        : true, // if all forms of subscript notation are tolerated
             varsattop  : true, // if all var declaration should be at top of functions
@@ -2587,7 +2589,9 @@ loop:   for (;;) {
 
     function semicolon() {
         if (nexttoken.id !== ';') {
-            warn(bundle.expected_a_b, nexttoken, ';', nexttoken.value);
+            if (option.semireq) {
+                warn(bundle.expected_a_b, nexttoken, ';', nexttoken.value);
+            }
         } else {
             if (option.white) {
                 no_space_only();
@@ -3238,7 +3242,9 @@ loop:   for (;;) {
         } else if (!ordinary) {
             fail(bundle.expected_a_b, nexttoken, '{', nexttoken.value);
         } else {
-            warn(bundle.expected_a_b, nexttoken, '{', nexttoken.value);
+            if (option.needcurly) {
+                warn(bundle.expected_a_b, nexttoken, '{', nexttoken.value);
+            }
             array = [statement()];
             array.disrupt = array[0].disrupt;
         }

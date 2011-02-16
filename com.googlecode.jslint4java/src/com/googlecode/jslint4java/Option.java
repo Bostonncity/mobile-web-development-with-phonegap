@@ -56,6 +56,9 @@ public enum Option {
 
     /** Maximum line length */
     MAXLEN("Maximum line length", Integer.class),
+    
+    /** If block is required with for and while statements */
+    NEEDCURLY("If block { ... } is required with for and while statements", Boolean.class),
 
     /** If constructor names must be capitalized */
     NEWCAP("If constructor names must be capitalized", Boolean.class),
@@ -87,6 +90,9 @@ public enum Option {
     /** If use of some browser features should be restricted */
     SAFE("If use of some browser features should be restricted", Boolean.class),
 
+    /** if semicolons are required */
+    SEMIREQ("If semicolons are required", Boolean.class),
+
     /** Require the "use strict"; pragma */
     STRICT("Require the \"use strict\"; pragma", Boolean.class),
 
@@ -97,7 +103,7 @@ public enum Option {
     UNDEF("If variables should be declared before used", Boolean.class),
     
     /** If variables should be declared before used */
-    VARSATTOP("If all variables should be declared at top of function", Boolean.class),
+    VARSATTOP("Disallow var declarations in for statements", Boolean.class),
 
     /** If strict whitespace rules apply */
     WHITE("If strict whitespace rules apply", Boolean.class),
@@ -106,7 +112,7 @@ public enum Option {
     WIDGET("If the yahoo widgets globals should be predefined", Boolean.class),
 
     /** If ms windows-specigic globals should be predefined */
-    WINDOWS("If ms windows-specigic globals should be predefined", Boolean.class),
+    WINDOWS("If ms windows-specific globals should be predefined", Boolean.class),
 
     // END-OPTIONS
     ;
