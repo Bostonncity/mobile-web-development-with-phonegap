@@ -24,6 +24,9 @@ public enum Option {
     /** If upper case html should be allowed */
     CAP("If upper case html should be allowed", Boolean.class),
 
+    /** If continue should be tolerated */
+    CONTINUE("If continue should be tolerated", Boolean.class),
+    
     /** If css workarounds should be tolerated */
     CSS("If css workarounds should be tolerated", Boolean.class),
 
