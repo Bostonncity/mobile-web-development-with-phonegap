@@ -18,9 +18,12 @@ import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.preferences.IPreferencesService;
 
 import com.googlecode.jslint4java.Issue;
 import com.googlecode.jslint4java.JSLint;
+import com.googlecode.jslint4java.Option;
 import com.googlecode.jslint4java.JSLintResult;
 import com.googlecode.jslint4java.eclipse.JSLintLog;
 import com.googlecode.jslint4java.eclipse.JSLintPlugin;
@@ -128,7 +131,7 @@ public class JSLintBuilder extends IncrementalProjectBuilder {
         }
 
         IFile file = (IFile) resource;
-        if (!shoudLint(file)) {
+        if (!shouldLint(file)) {
             return;
         }
 
@@ -154,9 +157,23 @@ public class JSLintBuilder extends IncrementalProjectBuilder {
             close(reader);
         }
     }
+    
+    /** Check if the file is a JavaScript file.  Then check if it is not in
+     * an excluded directory.  
+     */
 
-    private boolean shoudLint(IFile file) {
-        return file.getName().endsWith(".js");
+    private boolean shouldLint(IFile file) {
+        if (!file.getName().endsWith(".js")) return false;
+        String path = file.getFullPath().toString();        
+        IPreferencesService prefs = Platform.getPreferencesService();    
+        for (String s : Option.getExcludeDirectoryOptions()) {
+            Boolean value = prefs.getBoolean(JSLintPlugin.PLUGIN_ID, s, false, null);
+            if (value && path.indexOf("/" + s + "/") >= 0) {
+                deleteMarkers(file); 
+                return false;
+            }
+        }
+        return true;    
     }
 
     private void close(Closeable close) {

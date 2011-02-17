@@ -30,8 +30,10 @@ public class PreferencesInitializer extends AbstractPreferenceInitializer {
     private static final int DEFAULT_INDENT = 4;
     private static final int DEFAULT_MAXERR = 50;
 
+    // Set the initial defaults so the included JSLint matches standard JSLint
+    
     private final Set<Option> defaultEnable = EnumSet.of(Option.EQEQEQ, Option.SEMIREQ, 
-            Option.NEEDCURLY, Option.FORIN);
+            Option.NEEDCURLY);
 
     @Override
     public void initializeDefaultPreferences() {
@@ -42,6 +44,10 @@ public class PreferencesInitializer extends AbstractPreferenceInitializer {
         // Hand code these.
         node.putInt(Option.INDENT.getLowerName(), DEFAULT_INDENT);
         node.putInt(Option.MAXERR.getLowerName(), DEFAULT_MAXERR);
+        
+        // All possible excluded directories are initially excluded
+        for (String s : Option.getExcludeDirectoryOptions()) {
+            node.putBoolean(s, true);
+        }
     }
-
 }
