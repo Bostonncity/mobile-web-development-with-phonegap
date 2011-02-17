@@ -39,13 +39,17 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
 
     private static final String PAGE_TITLE = "jslint4java";
 
-    private CheckboxTableViewer checkboxViewer;
+    private CheckboxTableViewer checkboxViewerStricter;
+    private CheckboxTableViewer checkboxViewerLaxer;
+    private CheckboxTableViewer checkboxViewerDir;
 
     private final List<FieldEditor> fieldEditors = new ArrayList<FieldEditor>();
     private final List<Option> booleanOptions = booleanOptions();
+    private final List<String> directoryOptions = directoryOptions();
 
     public OptionsPreferencePage() {
         super(PAGE_TITLE);
+        Option.setExcludeDirectoryOptions(directoryOptions);
         setPreferenceStore(JSLintUIPlugin.getDefault().getPreferenceStore());
     }
 
@@ -76,8 +80,17 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
         }
         return options;
     }
+    
+    /** Create Directory Options whose type is {@link Boolean}. */
+    private List<String> directoryOptions() {
+        List<String> dirOptions = new ArrayList<String>();
+        dirOptions.add("phonegap");
+        dirOptions.add("jquery.mobile");
+        dirOptions.add("sencha");
+        return dirOptions;
+    }
 
-    private void createBooleansArea(Composite main) {
+    private CheckboxTableViewer createBooleansArea(Composite main, String title) {
         Font mainFont = main.getFont();
         Composite booleansParent = new Composite(main, SWT.NONE);
         booleansParent.setLayoutData(new GridData(GridData.FILL_BOTH));
@@ -88,20 +101,25 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
         booleansParent.setFont(mainFont);
 
         Label decoratorsLabel = new Label(booleansParent, SWT.NONE);
-        decoratorsLabel.setText("Toggleable options:");
+        decoratorsLabel.setText(title);
         decoratorsLabel.setFont(mainFont);
 
-        checkboxViewer = CheckboxTableViewer.newCheckList(booleansParent, SWT.SINGLE | SWT.TOP
+        CheckboxTableViewer checkboxViewer = CheckboxTableViewer.newCheckList(booleansParent, SWT.SINGLE | SWT.TOP
                 | SWT.BORDER);
         checkboxViewer.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
         checkboxViewer.getTable().setFont(booleansParent.getFont());
+        checkboxViewer.getTable().setFont(mainFont);
+        return checkboxViewer;
+    }
+    
+    private void createBooleanProviders(CheckboxTableViewer checkboxViewer) {
+      
         checkboxViewer.setLabelProvider(new LabelProvider() {
             @Override
             public String getText(Object element) {
                 return labelForOption((Option) element);
             }
         });
-        checkboxViewer.getTable().setFont(mainFont);
 
         checkboxViewer.setContentProvider(new IStructuredContentProvider() {
             public void dispose() {
@@ -118,7 +136,32 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
             public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
             }
         });
+    }
+    
+    private void createDirectoryProviders(CheckboxTableViewer checkboxViewer) {
+        
+        checkboxViewer.setLabelProvider(new LabelProvider() {
+            @Override
+            public String getText(Object element) {
+                return (String)element;
+            }
+        });
 
+        checkboxViewer.setContentProvider(new IStructuredContentProvider() {
+            public void dispose() {
+                // Nothing to do on dispose
+            }
+
+            // Make an entry for each option
+            public Object[] getElements(Object inputElement) {
+                @SuppressWarnings("unchecked")
+                List<String> elements = (List<String>) inputElement;
+                return elements.toArray();
+            }
+
+            public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+            }
+        });
     }
 
     @Override
@@ -128,16 +171,22 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
         Composite main = new Composite(parent, SWT.NULL);
         main.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
         GridLayout layout = new GridLayout();
-        layout.numColumns = 1;
+        layout.numColumns = 2;
         layout.marginHeight = 0;
         layout.marginWidth = 0;
         main.setLayout(layout);
         main.setFont(font);
 
-        createBooleansArea(main);
+        checkboxViewerStricter = createBooleansArea(main, "Make JSLint STRICTER:");
+        createBooleanProviders(checkboxViewerStricter);
+        checkboxViewerLaxer = createBooleansArea(main, "Make JSLint LAXER:");
+        createBooleanProviders(checkboxViewerLaxer);
         createOtherPrefsArea(main);
+        checkboxViewerDir = createBooleansArea(main, "Exclude directories from JSLint:");
+        createDirectoryProviders(checkboxViewerDir);
         populateBooleansArea();
         populateOtherPrefsArea();
+        populateExcludeDirectoryArea();
 
         return main;
     }
@@ -165,6 +214,11 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
     private boolean loadBooleanPref(Option option) {
         return getPreferenceStore().getBoolean(nameOfPref(option));
     }
+    
+    /** Read the value of a boolean pref. */
+    private boolean loadDirectoryPref(String option) {
+        return getPreferenceStore().getBoolean(option);
+    }
 
     /** The preference name an option should use. */
     private String nameOfPref(Option option) {
@@ -175,7 +229,18 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
     private void performBooleanDefaults() {
         for (Option o : booleanOptions) {
             boolean enabled = getPreferenceStore().getDefaultBoolean(nameOfPref(o));
-            checkboxViewer.setChecked(o, enabled);
+            if (o.isStricter()) {
+                checkboxViewerStricter.setChecked(o, enabled);
+            } else {
+                checkboxViewerLaxer.setChecked(o, enabled);
+            }
+        }
+    }
+    /** Set each checkbox to its default value. */
+    private void performDirectoryDefaults() {
+        for (String o : directoryOptions) {
+            boolean enabled = getPreferenceStore().getDefaultBoolean(o);
+            checkboxViewerDir.setChecked(o, enabled);
         }
     }
 
@@ -184,6 +249,7 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
         super.performDefaults();
         performBooleanDefaults();
         performOtherDefaults();
+        performDirectoryDefaults();
     }
 
     @Override
@@ -191,6 +257,7 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
         if (super.performOk()) {
             storeBooleanPrefs();
             storeOtherPrefs();
+            storeDirectoryPrefs();
             return true;
         } else {
             return false;
@@ -206,9 +273,31 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
 
     /** Update checkboxes according to the values in the preference store. */
     private void populateBooleansArea() {
-        checkboxViewer.setInput(booleanOptions);
+        List<Option> strictOptions = new ArrayList<Option>();;
+        List<Option> laxOptions = new ArrayList<Option>();;
         for (Option option : booleanOptions) {
-            checkboxViewer.setChecked(option, loadBooleanPref(option));
+            if (option.isStricter()) {
+                strictOptions.add(option);
+            } else {
+                laxOptions.add(option);
+            }
+        }
+        checkboxViewerStricter.setInput(strictOptions);
+        checkboxViewerLaxer.setInput(laxOptions);
+        for (Option option : booleanOptions) {
+            if (option.isStricter()) {
+                checkboxViewerStricter.setChecked(option, loadBooleanPref(option));
+            } else {
+                checkboxViewerLaxer.setChecked(option, loadBooleanPref(option));
+            }
+        }
+    }
+    
+    /** Update checkboxes according to the values in the preference store. */
+    private void populateExcludeDirectoryArea() {
+        checkboxViewerDir.setInput(directoryOptions);
+        for (String option : directoryOptions) {
+            checkboxViewerDir.setChecked(option, loadDirectoryPref(option));
         }
     }
 
@@ -227,7 +316,18 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
     /** Store the values of each checkbox in the preferences store. */
     private void storeBooleanPrefs() {
         for (Option option : booleanOptions) {
-            storeBooleanPref(option, checkboxViewer.getChecked(option));
+            if (option.isStricter()) {
+                storeBooleanPref(option, checkboxViewerStricter.getChecked(option));
+            } else {
+                storeBooleanPref(option, checkboxViewerLaxer.getChecked(option));
+            }
+        }
+    }
+    
+    /** Store the values of each checkbox in the preferences store. */
+    private void storeDirectoryPrefs() {
+        for (String s : directoryOptions) {
+            getPreferenceStore().setValue(s, checkboxViewerDir.getChecked(s));
         }
     }
 
