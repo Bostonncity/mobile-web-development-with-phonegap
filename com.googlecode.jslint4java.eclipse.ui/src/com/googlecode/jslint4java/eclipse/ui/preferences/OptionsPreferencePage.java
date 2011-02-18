@@ -45,7 +45,6 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
 
     private final List<FieldEditor> fieldEditors = new ArrayList<FieldEditor>();
     private final List<Option> booleanOptions = booleanOptions();
-    private final List<String> directoryOptions = Option.getExcludeDirectoryOptions();
 
     public OptionsPreferencePage() {
         super(PAGE_TITLE);
@@ -228,7 +227,7 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
     }
     /** Set each checkbox to its default value. */
     private void performDirectoryDefaults() {
-        for (String o : directoryOptions) {
+        for (String o : Option.getExcludeDirectoryOptions()) {
             boolean enabled = getPreferenceStore().getDefaultBoolean(o);
             checkboxViewerDir.setChecked(o, enabled);
         }
@@ -285,8 +284,8 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
     
     /** Update checkboxes according to the values in the preference store. */
     private void populateExcludeDirectoryArea() {
-        checkboxViewerDir.setInput(directoryOptions);
-        for (String option : directoryOptions) {
+        checkboxViewerDir.setInput(Option.getExcludeDirectoryOptions());
+        for (String option : Option.getExcludeDirectoryOptions()) {
             checkboxViewerDir.setChecked(option, loadDirectoryPref(option));
         }
     }
@@ -316,7 +315,7 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
     
     /** Store the values of each checkbox in the preferences store. */
     private void storeDirectoryPrefs() {
-        for (String s : directoryOptions) {
+        for (String s : Option.getExcludeDirectoryOptions()) {
             getPreferenceStore().setValue(s, checkboxViewerDir.getChecked(s));
         }
     }
@@ -327,5 +326,4 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
             fieldEditor.store();
         }
     }
-
 }
