@@ -1,6 +1,8 @@
 package com.googlecode.jslint4java.eclipse.preferences;
 
+import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
@@ -30,7 +32,8 @@ public class PreferencesInitializer extends AbstractPreferenceInitializer {
     private static final int DEFAULT_INDENT = 4;
     private static final int DEFAULT_MAXERR = 50;
 
-    // Set the initial defaults so the included JSLint matches standard JSLint
+    // Set the initial defaults so the included JSLint matches standard JSLint except
+    // for forcing vars out of for statements
     
     private final Set<Option> defaultEnable = EnumSet.of(Option.EQEQEQ, Option.SEMIREQ, 
             Option.NEEDCURLY);
@@ -45,9 +48,19 @@ public class PreferencesInitializer extends AbstractPreferenceInitializer {
         node.putInt(Option.INDENT.getLowerName(), DEFAULT_INDENT);
         node.putInt(Option.MAXERR.getLowerName(), DEFAULT_MAXERR);
         
+        Option.setExcludeDirectoryOptions(createExcludeDirectoryOptions());
+              
         // All possible excluded directories are initially excluded
         for (String s : Option.getExcludeDirectoryOptions()) {
             node.putBoolean(s, true);
         }
+    }
+    /** Create Directory Options whose type is {@link Boolean}. */
+    private List<String> createExcludeDirectoryOptions() {
+        List<String> dirOptions = new ArrayList<String>();
+        dirOptions.add("phonegap");
+        dirOptions.add("jquery.mobile");
+        dirOptions.add("sencha");
+        return dirOptions;
     }
 }
