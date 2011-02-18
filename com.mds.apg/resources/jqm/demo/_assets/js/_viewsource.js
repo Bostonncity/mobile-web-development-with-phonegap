@@ -3,7 +3,7 @@ $.fn.addSourceLink = function(style){
 
 	return $(this).each(function(){
 		var link = $('<a href="#" data-inline="true">View Source</a>'),
-			src = src = $('<div></div>').append( $(this).clone() ).html(),
+			src = $('<div></div>').append( $(this).clone() ).html(),
 			page = $( "<div data-role='dialog' data-theme='a'>" +
 					"<div data-role='header' data-theme='b'>" +
 						"<a href='#' class='ui-btn-left' data-icon='delete' data-iconpos='notext'>Close</a>"+
