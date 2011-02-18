@@ -69,6 +69,9 @@ public enum Option {
 
     /** If names should be checked */
     NOMEN("If names should be checked", Boolean.class, true),
+    
+    /** if using `new` for side-effects should be disallowed */
+    NONEW("if using `new` for side-effects should be disallowed", Boolean.class, true),
 
     /** If html event handlers should be allowed */
     ON("If html event handlers should be allowed", Boolean.class, false),

@@ -374,6 +374,7 @@ var JSLINT = (function () {
             needcurly  : true, // if block is required with for and while statements
             newcap     : true, // if constructor names must be capitalized
             nomen      : true, // if names should be checked
+            nonew      : true, // if using `new` for side-effects should be disallowed
             on         : true, // if HTML event handlers should be allowed
             onevar     : true, // if only one var statement per function should be allowed
             passfail   : true, // if the scan should stop on first error
@@ -3105,7 +3106,7 @@ loop:   for (;;) {
 // assignment or invocation or delete.
 
                 if (the_statement.id === '(') {
-                    if (the_statement.first.id === 'new') {
+                    if (option.nonew && the_statement.first.id === 'new') {
                         warn(bundle.bad_new);
                     }
                 } else if (!the_statement.assign &&
