@@ -141,6 +141,7 @@ public class JSLintBuilder extends IncrementalProjectBuilder {
         BufferedReader reader = null;
         try {
             JSLint lint = lintProvider.getJsLint();
+            if (checkFilter(file)) return;
             // TODO: this should react to changes in the prefs pane instead.
             reader = new BufferedReader(new InputStreamReader(file
                     .getContents(), file.getCharset()));
@@ -157,23 +158,30 @@ public class JSLintBuilder extends IncrementalProjectBuilder {
             close(reader);
         }
     }
-    
-    /** Check if the file is a JavaScript file.  Then check if it is not in
-     * an excluded directory.  
+
+    /**
+     * Check if the file is a JavaScript file.
      */
 
     private boolean shouldLint(IFile file) {
-        if (!file.getName().endsWith(".js")) return false;
-        String path = file.getFullPath().toString();        
-        IPreferencesService prefs = Platform.getPreferencesService();    
+        return file.getName().endsWith(".js");
+    }
+
+    /**
+     * Check if the file is a JavaScript file. Then check if it is not in an
+     * excluded directory.
+     */
+
+    private boolean checkFilter(IFile file) {
+        String path = file.getFullPath().toString();
+        IPreferencesService prefs = Platform.getPreferencesService();
         for (String s : Option.getExcludeDirectoryOptions()) {
-            Boolean value = prefs.getBoolean(JSLintPlugin.PLUGIN_ID, s, false, null);
+            boolean value = prefs.getBoolean(JSLintPlugin.PLUGIN_ID, s, false, null);
             if (value && path.indexOf("/" + s + "/") >= 0) {
-                deleteMarkers(file); 
-                return false;
+                return true;
             }
         }
-        return true;    
+        return false;
     }
 
     private void close(Closeable close) {
