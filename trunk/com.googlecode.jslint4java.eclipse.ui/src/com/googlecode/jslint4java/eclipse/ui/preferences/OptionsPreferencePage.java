@@ -45,11 +45,10 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
 
     private final List<FieldEditor> fieldEditors = new ArrayList<FieldEditor>();
     private final List<Option> booleanOptions = booleanOptions();
-    private final List<String> directoryOptions = directoryOptions();
+    private final List<String> directoryOptions = Option.getExcludeDirectoryOptions();
 
     public OptionsPreferencePage() {
         super(PAGE_TITLE);
-        Option.setExcludeDirectoryOptions(directoryOptions);
         setPreferenceStore(JSLintUIPlugin.getDefault().getPreferenceStore());
     }
 
@@ -79,15 +78,6 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
             }
         }
         return options;
-    }
-    
-    /** Create Directory Options whose type is {@link Boolean}. */
-    private List<String> directoryOptions() {
-        List<String> dirOptions = new ArrayList<String>();
-        dirOptions.add("phonegap");
-        dirOptions.add("jquery.mobile");
-        dirOptions.add("sencha");
-        return dirOptions;
     }
 
     private CheckboxTableViewer createBooleansArea(Composite main, String title) {
