@@ -1,0 +1,921 @@
+Manifest-Version: 1.0
+Bundle-Vendor: %Bundle-Vendor.0
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.4
+Bundle-Name: %Bundle-Name.0
+Bundle-SymbolicName: org.eclipse.wst.jsdt.support.ie;singleton:=true
+Eclipse-SourceReferences: scm:cvs:pserver:dev.eclipse.org:/cvsroot/web
+ tools:org.eclipse.jsdt/plugins/org.eclipse.wst.jsdt.support.ie;tag=v2
+ 01004150600
+Require-Bundle: org.eclipse.wst.jsdt.core;bundle-version="[1.1.0,2.0.0
+ )",org.eclipse.wst.jsdt.ui;bundle-version="[1.1.0,2.0.0)",org.eclipse
+ .core.runtime;bundle-version="[3.5.0,4.0.0)",org.eclipse.ui;bundle-ve
+ rsion="[3.5.0,4.0.0)",org.eclipse.core.resources;bundle-version="[3.5
+ .0,4.0.0)"
+Bundle-Version: 1.0.300.v201004150600
+Bundle-ManifestVersion: 2
+
+Name: libraries/IE_ondragleave.js
+SHA1-Digest: hEkAa6wvmFK3zIf7Sen77hLayG4=
+
+Name: libraries/JScriptObjects.js
+SHA1-Digest: RXWxStpKDd15ci5b46Cb5FqSopc=
+
+Name: libraries/IE_dialog.js
+SHA1-Digest: 3/CKH07jji1tdz8HujtIADCt3io=
+
+Name: org/eclipse/wst/jsdt/jsdoc/msdn/MsdnElement.class
+SHA1-Digest: HHbpaBmgMcz3GsuG2pMfsM2rxgk=
+
+Name: libraries/IE_clipboarddata.js
+SHA1-Digest: bff9G1QywFqbHB8s/7McriJIf7w=
+
+Name: libraries/IE_controlrange.js
+SHA1-Digest: x6j4TzeZKRhsWa9kjBvV24ya6BE=
+
+Name: libraries/IE_applets.js
+SHA1-Digest: Zl9YKLMgk2UCChzfv8ekqNdCM8E=
+
+Name: libraries/IE_onselect.js
+SHA1-Digest: t8mgXE1LINK4VwMAyL5IG1tTgvI=
+
+Name: libraries/IE_textarea.js
+SHA1-Digest: hPWJ0ZqLHUwM/jezv6XbleLbVuM=
+
+Name: libraries/IE_onmovestart.js
+SHA1-Digest: eTjgvJBhyF4Zu02SR7OF9IImWck=
+
+Name: libraries/IE_attributes.js
+SHA1-Digest: y944NuxVsAiiBxnHxTtb23qAeM8=
+
+Name: org/eclipse/wst/jsdt/jsdoc/GenerateJsDoc.class
+SHA1-Digest: oQZ2mtsqPv26TFxHGcGLrToKrRs=
+
+Name: libraries/IE_onmouseleave.js
+SHA1-Digest: VeXCLO83CWCAXho3cNPtyzR1yX0=
+
+Name: libraries/IE_onmove.js
+SHA1-Digest: p8MGnaIKUtkPaRONLX1u7Pt5TTA=
+
+Name: libraries/IE_page.js
+SHA1-Digest: NgjOV74JCQLc4QLeBtMorm61PZs=
+
+Name: libraries/IE_wbr.js
+SHA1-Digest: 9LrQALAH3K2QppZd/8AE96O1Lx8=
+
+Name: libraries/IE_srcurn.js
+SHA1-Digest: IPWH8izGcfy3Ul0lMN1OncLx79U=
+
+Name: libraries/IE_onafterupdate.js
+SHA1-Digest: UmC4VgvwGb/w+E3CYREoPDBzlDM=
+
+Name: libraries/IE_textrectangle.js
+SHA1-Digest: uWi0k5fa0kEf0A0QzENWs15n/hQ=
+
+Name: libraries/IE_em.js
+SHA1-Digest: LSfyYhzXdd9VG/8QZyJavNCqCZs=
+
+Name: libraries/IE_b.js
+SHA1-Digest: FQ+y9xTXiKrcAKip6MSbYKz9ob4=
+
+Name: libraries/IE_ondataavailable.js
+SHA1-Digest: IlbI59ASSmP1pVxVbqH8WULFxA0=
+
+Name: libraries/IE_onselectionchange.js
+SHA1-Digest: ufZEPK7UkRX+QpVTGE+oz2z21Us=
+
+Name: org/eclipse/wst/jsdt/jsdoc/ElementInfo.class
+SHA1-Digest: GT10x6ZAbwhoNMwwP8nlXfRrU5Q=
+
+Name: libraries/IE_abstract.js
+SHA1-Digest: et7n6m6TqWgQ3OSHbS1n+2tUdaw=
+
+Name: libraries/IE_body.js
+SHA1-Digest: 3gVxebTH207qj1Pb5fppT/Yxujk=
+
+Name: libraries/IE_filters.js
+SHA1-Digest: /iM96wTQEeENNCrTA2A7dpg718w=
+
+Name: libraries/IE_propertyname.js
+SHA1-Digest: JaBslXwgffQa/rC195v9039863M=
+
+Name: libraries/IE_colgroup.js
+SHA1-Digest: LDJQQJUt85I1Hu4LD8SGDIP5/Dg=
+
+Name: libraries/IE_fromelement.js
+SHA1-Digest: 4IQpCS4bb9LtFGOXLAYfty94ZPI=
+
+Name: libraries/IE_onmoveend.js
+SHA1-Digest: zD5yQNpnovjCa5MX3kqOriDRckQ=
+
+Name: libraries/IE_nextid.js
+SHA1-Digest: H2L6XvM0v+3Q6nCwqjUfHmwZhM8=
+
+Name: libraries/IE_ondrop.js
+SHA1-Digest: VYN1fN1O+KVoLNQVg8X+XZ+I2T4=
+
+Name: libraries/IE_noscript.js
+SHA1-Digest: Pn/7pRxXnScmbsgx9BQMpeR6hlw=
+
+Name: libraries/IE_ondragenter.js
+SHA1-Digest: 5vXmVcyCWNDwWG/C3LBANlh7WkM=
+
+Name: libraries/IE_dl.js
+SHA1-Digest: OhFr1unPSq+0++Zxjfsoh8JcnRQ=
+
+Name: libraries/IE_sub.js
+SHA1-Digest: my32Pziq5s826OtkH7JiF6/A76I=
+
+Name: libraries/IE_rt.js
+SHA1-Digest: npn/YlxtrgYzKzVOLgnOTCKntYI=
+
+Name: libraries/IE_nextpage.js
+SHA1-Digest: +I8s0E0ahY+k8257UQ/ILpGX47c=
+
+Name: libraries/IE_onstop.js
+SHA1-Digest: lDJPc+exkafny260ZHKeH0w+ymY=
+
+Name: libraries/IE_x.js
+SHA1-Digest: /FHBpX4ZBWbE7zMKKZX93KtWrVs=
+
+Name: libraries/IE_tbodies.js
+SHA1-Digest: 8exd2YZzqTRaI1tQFDtMS+hm278=
+
+Name: libraries/IE_strong.js
+SHA1-Digest: NE8TlSmdXBQqMxv0MHRtqoh4iTo=
+
+Name: libraries/IE_div.js
+SHA1-Digest: jiDAYyscFAXEYfVrK46nK4lYpys=
+
+Name: libraries/IE_cells.js
+SHA1-Digest: LA/1AUmuH3aWqTysIMgE0G2EQok=
+
+Name: libraries/IE_cite.js
+SHA1-Digest: 970to0voy2jBE9bcTxmfDNCtb0k=
+
+Name: libraries/IE_datatransfer.js
+SHA1-Digest: WzauN6o1wCP4FEVwr88wwm5Kz5o=
+
+Name: libraries/IE_onfocusout.js
+SHA1-Digest: eqcZi0SVvxA21qxIlGE/CimIDxg=
+
+Name: libraries/IE_implementation.js
+SHA1-Digest: d3xAWz9JfNfNZ0++wCJBahQFRdg=
+
+Name: libraries/IE_onmouseenter.js
+SHA1-Digest: pEkKOsVUIQzNEvGuCl5QFamj+eE=
+
+Name: org/eclipse/wst/jsdt/core/compiler/libraries/ie_logo2.JPG
+SHA1-Digest: N3r3WG/FB9+8QumDMU01UlWponA=
+
+Name: libraries/IE_window.js
+SHA1-Digest: rqa3/XlMGiA00wAdQJull/jQhAQ=
+
+Name: libraries/IE_font.js
+SHA1-Digest: fv75nrcZSbyQ0o3ubuPy3Jv/8rA=
+
+Name: libraries/IE_blockquote.js
+SHA1-Digest: SSviVImpxdZQMOm911LV6f0HhhI=
+
+Name: libraries/IE_onclick.js
+SHA1-Digest: rOowPUcTYkvSy0AQAKk348rxvQU=
+
+Name: org/eclipse/wst/jsdt/core/compiler/libraries/ie_logo2.gif
+SHA1-Digest: K3ef7G0kx3g8mK5c+/eyR5HMCKQ=
+
+Name: libraries/IE_screen.js
+SHA1-Digest: RvAzh9VBUYVPDwCCuiGlvfsY8kU=
+
+Name: libraries/IE_optgroup.js
+SHA1-Digest: ElKmgTTXwn+yNJtU8cE6IeWraY0=
+
+Name: libraries/IE_caption.js
+SHA1-Digest: DaDP9/F+79NsMPDNxh3MH0/PiXg=
+
+Name: libraries/IE_oncut.js
+SHA1-Digest: cJWPJwcT93BTe13tZWqtMFQoOfQ=
+
+Name: libraries/IE_onmouseout.js
+SHA1-Digest: UpjuBmLb/TM8ohG4pgxBEMBZ5RE=
+
+Name: libraries/IE_plugins.js
+SHA1-Digest: R2JUWAuI/AHuEDpk6SmXGqLkc/w=
+
+Name: libraries/IE_event.js
+SHA1-Digest: JA8DYnXMcM3m6M4Ud1c1ecJ7MhA=
+
+Name: libraries/IE_wheeldelta.js
+SHA1-Digest: tnCEcJBYFGo20t4K8+U+f9Myzw0=
+
+Name: libraries/IE_thead.js
+SHA1-Digest: BbrNwOs24oku77V4ME9Z1mGY3Zw=
+
+Name: libraries/IE_s.js
+SHA1-Digest: 7pcAToDFdnf5JviDRyUfTKVZXyc=
+
+Name: libraries/IE_altkey.js
+SHA1-Digest: 2Vl25gelJ88qf/FB8R0AupgusX4=
+
+Name: libraries/IE_ondragstart.js
+SHA1-Digest: BtN4dSA5WlJEFx4CeeOdWtwUX+c=
+
+Name: libraries/IE_textnode.js
+SHA1-Digest: kwVpMf3Us4d9Axx/nCmlzJ8Xydg=
+
+Name: org/eclipse/wst/jsdt/internal/ui/wizards/IEMessages.properties
+SHA1-Digest: 9tZHSBhVT1tAUTKNxHOMbqx0/PM=
+
+Name: libraries/IE_hr.js
+SHA1-Digest: XO6WDMYwaaBCfTKKWlOZdp3XiO4=
+
+Name: libraries/IE_noframes.js
+SHA1-Digest: 9yqVXkk+eGulrj7QHpF3Zz6jT9k=
+
+Name: libraries/IE_ondragover.js
+SHA1-Digest: 9NjVpPF5TSEW62/v3DaVLvUDUbI=
+
+Name: libraries/IE_import.js
+SHA1-Digest: yVtip2F6DKfik6t6XJ526cyQeVM=
+
+Name: libraries/IE_xmp.js
+SHA1-Digest: hXdynr4ogiqeSe/NtmvWDImGWx8=
+
+Name: libraries/IE_tr.js
+SHA1-Digest: 1cs+tkuieGTG1ghT2L/NI3f6C/o=
+
+Name: libraries/IE_rule.js
+SHA1-Digest: YsdSp/TrJqyA36j9SHyl/4voMcg=
+
+Name: libraries/IE_document.js
+SHA1-Digest: CHQfzj93Gko3LUmJNcsofMgsUu8=
+
+Name: libraries/IE_rows.js
+SHA1-Digest: 0gfBfDRa80py9omUiXqTgK7oQ9I=
+
+Name: libraries/IE_ondatasetcomplete.js
+SHA1-Digest: 1B6uUekL7fyDnXLysrFDyy+LZ4Q=
+
+Name: libraries/IE_textrange.js
+SHA1-Digest: +OUnTObUp9deylqtLPkiNPdQX/8=
+
+Name: libraries/IE_onbeforeprint.js
+SHA1-Digest: LcS41F5iS+0N8JbFhu2X2QnPNNk=
+
+Name: libraries/IE_onbeforecopy.js
+SHA1-Digest: Z06lgdQI3gAMSCjsHdQXI6snm8M=
+
+Name: libraries/IE_del.js
+SHA1-Digest: qBNZQwSA7gnkzhALBtRxiaGloIc=
+
+Name: libraries/IE_base.js
+SHA1-Digest: DOObuymQGV5MeBEQlJNihd23X8o=
+
+Name: libraries/IE_onafterprint.js
+SHA1-Digest: snQhyOVCoesHygQ5oiwJTiW69L8=
+
+Name: libraries/IE_shiftleft.js
+SHA1-Digest: sRAJXfhbD4I+ncewu+oJI0lE5u4=
+
+Name: libraries/IE_onscroll.js
+SHA1-Digest: HQv3N6ecqZOn4ZZ6gRWJleSeGbw=
+
+Name: libraries/IE_marquee.js
+SHA1-Digest: hAZJtqvMLXV5XrvZjOa468+CTJg=
+
+Name: META-INF/eclipse.inf
+SHA1-Digest: KyT9FF7C7t86NoBoa2kZT3ZJBfw=
+
+Name: libraries/IE_options.js
+SHA1-Digest: l0SU5tdagXHPOlte1fNhxri4syA=
+
+Name: libraries/IE_onpropertychange.js
+SHA1-Digest: wMipBkwnkdvL/DHnKyYtUmJnUvc=
+
+Name: libraries/IE_attribute.js
+SHA1-Digest: 0IEjPubanZi7ith3zNTUfwGSUK8=
+
+Name: libraries/IE_onhelp.js
+SHA1-Digest: YYNZcqJcnj+6w5EfQcV8xOf0bFA=
+
+Name: libraries/IE_y.js
+SHA1-Digest: oSKVl6uRb59nto+bxdE+Rh1QHKw=
+
+Name: libraries/IE_object.js
+SHA1-Digest: fXGNW744e+d+GpTD7X2LBmglKMQ=
+
+Name: libraries/IE_oncontentsave.js
+SHA1-Digest: ydTaLIohJNm+HY4AwDXOueIdjZ8=
+
+Name: libraries/IE_ondblclick.js
+SHA1-Digest: svIOHOTUVwmee8ktQxDlDMnj8pQ=
+
+Name: libraries/IE_recordset.js
+SHA1-Digest: dtEyt4gwWAnXo1gKLwAxJYDunH4=
+
+Name: libraries/IE_forms.js
+SHA1-Digest: 7UoPXLKQFBEcNEX7uPPJOuuoMl4=
+
+Name: libraries/IE_table.js
+SHA1-Digest: UbG+obTqWPmtdonvXQsl/dSLKtI=
+
+Name: libraries/IE_frame.js
+SHA1-Digest: r3vcVed3bHBJ/vMxz1wX7hiG8cg=
+
+Name: libraries/IE_xmlhttprequest.js
+SHA1-Digest: /OBI3iJAoYYvG7S6Yb9/lz9b0Sk=
+
+Name: libraries/IE_i.js
+SHA1-Digest: nQpMdwrkfigslKE0gVPbbmdhWZc=
+
+Name: libraries/IE_onmousedown.js
+SHA1-Digest: c9IWfZhl34/Q2dL1XskXWa37qck=
+
+Name: libraries/IE_timechildren.js
+SHA1-Digest: gI0p5fCtlGYWax9DXbtCR4nMovQ=
+
+Name: libraries/IE_fonts.js
+SHA1-Digest: upZu1ByzFDL7K3Cv0Fwj1uZqD+0=
+
+Name: libraries/IE_onkeydown.js
+SHA1-Digest: D+P4UpMGMi+rjh4Nyv24ViW0DpU=
+
+Name: libraries/IE_cancelbubble.js
+SHA1-Digest: OKaPCB9Pw55pmb2UmbeITtV7wAc=
+
+Name: libraries/IE_onfocusin.js
+SHA1-Digest: 3tLD95DUL0oix3fbbeX6EyzR4d4=
+
+Name: org/eclipse/wst/jsdt/core/compiler/libraries/InternetExplorerLib
+ Initializer.class
+SHA1-Digest: 1eCKSN/KRjXjwlf+iimnkqUsfGo=
+
+Name: libraries/IE_ol.js
+SHA1-Digest: b8SrLfQuZY5CyYG5XdmgiWS00qs=
+
+Name: libraries/IE_onreadystatechange.js
+SHA1-Digest: ZiI08MG1Y/c+s/AejDLuV76FD+E=
+
+Name: plugin.properties
+SHA1-Digest: 6zXWWoL0gyK6SeILjLia2btRNzk=
+
+Name: libraries/IE_repeat.js
+SHA1-Digest: 1I1JMFSnENrTsJxTuPjBRQaLaMY=
+
+Name: libraries/IE_link.js
+SHA1-Digest: 8tobUtJ29Ec62xg3qzs3qtlPstI=
+
+Name: libraries/IE_images.js
+SHA1-Digest: 5uZ63L3TIaEJhlu9v9iDA3e0GEY=
+
+Name: libraries/IE_altleft.js
+SHA1-Digest: h9FP/nOvsZXOZ62Lv6KHIRSGbC8=
+
+Name: libraries/IE_th.js
+SHA1-Digest: xYyADECALGJ4ITEOIiXwrPEKet0=
+
+Name: libraries/IE_dir.js
+SHA1-Digest: QMx3E0WarnHTzVJoofic+d4/MLA=
+
+Name: libraries/IE_clientx.js
+SHA1-Digest: 1LS3NkAVqkNg4sxHW+OvcuO7D3U=
+
+Name: libraries/IE_dfn.js
+SHA1-Digest: KgLOLEbruBhaHxQi58DQ10lQAEQ=
+
+Name: libraries/IE_onchange.js
+SHA1-Digest: M+tAGywK4j0QOdHNxuwjg4uAJEo=
+
+Name: plugin.xml
+SHA1-Digest: Z7dDPKmCrGFc6ZWtxpcsTVfwO0c=
+
+Name: org/eclipse/wst/jsdt/core/compiler/libraries/InternetExplorerUIL
+ ibInitializer.class
+SHA1-Digest: CI2w6Bd+zEKvEDkCsB3lq2G7PIg=
+
+Name: libraries/IE_small.js
+SHA1-Digest: 10lkawzoSXcjq8xNMY9iOXnrBEk=
+
+Name: libraries/IE_meta.js
+SHA1-Digest: sUGlHrdBAvLHCWkQPAEBjxVNqNk=
+
+Name: libraries/IE_onload.js
+SHA1-Digest: b6lQe7RLwPoh9AvyZRZrnpXn/zY=
+
+Name: libraries/IE_anchors.js
+SHA1-Digest: ZjLfgPzSnb+OOFjf7KcYsqR4Avc=
+
+Name: libraries/IE_srcfilter.js
+SHA1-Digest: eGyoA/SXBl7joBDnUUsFYoYPShw=
+
+Name: libraries/IE_basefont.js
+SHA1-Digest: xW0EQ4/iMaPXV646UjlLnNLqN7Y=
+
+Name: libraries/IE_links.js
+SHA1-Digest: TXm/fT63RqTUP5W8hwiprutYcPc=
+
+Name: libraries/IE_onrowexit.js
+SHA1-Digest: V2GahJO7dZiVix8fi1dinsh7tHY=
+
+Name: libraries/IE_rules.js
+SHA1-Digest: HJrL8ehkYySMPD/XiS1oQ9Hq4ok=
+
+Name: libraries/IE_onbeforepaste.js
+SHA1-Digest: VgjtjWLLkcTPb+9DuurgiOm9KdE=
+
+Name: libraries/IE_ruby.js
+SHA1-Digest: SuUrgiBuhx5x6u5fFkTcKlEW3aA=
+
+Name: libraries/IE_history.js
+SHA1-Digest: 93fF8RSrt9nk0zUIEVHC/r5u4xQ=
+
+Name: libraries/IE_onmousewheel.js
+SHA1-Digest: eUs0Y4XTkJdwoGjStPQOqORx2Pw=
+
+Name: libraries/IE_onresizestart.js
+SHA1-Digest: 1s5q8/nlNwvSzND/xe9kBM/AGe0=
+
+Name: libraries/IE_bdo.js
+SHA1-Digest: plkKnHdwvjq53YR1rZ5+TLCqoNQ=
+
+Name: libraries/IE_screenx.js
+SHA1-Digest: Y56K19lF95U8f/CDF76viYALV8Y=
+
+Name: libraries/IE_samp.js
+SHA1-Digest: y9AvXCNZYIv/7sJGXOgk4zicZtc=
+
+Name: libraries/IE_pages.js
+SHA1-Digest: 0/lDjRhjwiHduXyny+LTIpQuDNQ=
+
+Name: libraries/IE_listing.js
+SHA1-Digest: Kx3FKyaBd6ee6vyWeoAL3C58Ukg=
+
+Name: libraries/IE_pre.js
+SHA1-Digest: hqspU+cLkXLyPGzSSy28IAkW3WA=
+
+Name: libraries/IE_toelement.js
+SHA1-Digest: wdpSKCJ4CTytHOE7QPpHfdYBAsY=
+
+Name: libraries/IE_onbounce.js
+SHA1-Digest: R8LIpRUBz95fY+F4wy48k4ydW2Q=
+
+Name: libraries/IE_hn.js
+SHA1-Digest: 7QV1tfXupSnvH8LR4soNfLtIs9s=
+
+Name: libraries/IE_col.js
+SHA1-Digest: dZNF8Hbg7fF0y4hfWvGiwuIdCgE=
+
+Name: libraries/IE_onfocus.js
+SHA1-Digest: W0fP2EhoUMQ4Yu/BY1OWvA/oXLY=
+
+Name: libraries/IE_xml.js
+SHA1-Digest: WLGz2EOwBBxKgt28kOvVc9ugwmM=
+
+Name: libraries/IE_navigator.js
+SHA1-Digest: NK2pet7zErOfaOfqjJ21b5gYCzA=
+
+Name: libraries/IE_datafld.js
+SHA1-Digest: AUbMIBWlSp86qKz3fcvkHhEsLao=
+
+Name: libraries/IE_onbeforeeditfocus.js
+SHA1-Digest: yK6ixtqXsUZLkuRXcwuRfmfE7JI=
+
+Name: libraries/IE_behaviorurns.js
+SHA1-Digest: spZFbFTkdQg5suZT6cTHzhPXapA=
+
+Name: org/eclipse/wst/jsdt/jsdoc/MappingException.class
+SHA1-Digest: tdEvH9GgkB5tYFzse6ORtnga0Mo=
+
+Name: libraries/IE_popup.js
+SHA1-Digest: tjSbcrVla3aSNpDpzxl+ecxU724=
+
+Name: libraries/IE_onfinish.js
+SHA1-Digest: gmwqtKQxU0BKFB33NPG04fRsr9g=
+
+Name: libraries/IE_isindex.js
+SHA1-Digest: hnMQTE0QbLqk1/Fyr9yVEIag4Oo=
+
+Name: libraries/IE_legend.js
+SHA1-Digest: ybVp/HsGDeu00zkSQ1fpLzyPnRo=
+
+Name: libraries/IE_tfoot.js
+SHA1-Digest: V8TmyhmshTbbTbFPsfGMLTDJI+s=
+
+Name: libraries/IE_iframe.js
+SHA1-Digest: 2we2DmPawGRm5lLNEYVIRD5E2/4=
+
+Name: libraries/IE_moreinfo.js
+SHA1-Digest: dk83rpRtGwmYQ7e8gyEzD8AU45M=
+
+Name: libraries/IE_head.js
+SHA1-Digest: KqruwnuZ7IGUmajjNBmTrdRGMKQ=
+
+Name: libraries/IE_children.js
+SHA1-Digest: gUh0Iihuk9O9Rvz8+If4eJ+SIpo=
+
+Name: libraries/IE_onunload.js
+SHA1-Digest: E0GB4/T0BDmjXaai/f426AEqMiE=
+
+Name: libraries/IE_li.js
+SHA1-Digest: Uqz/F4B9RA5DFhrP5vZpJ3h9nL0=
+
+Name: libraries/IE_onmousemove.js
+SHA1-Digest: dnENDIt2Zk09Fv6YqnTBK/39dYo=
+
+Name: libraries/IE_u.js
+SHA1-Digest: pte1COQxLoMpzAfyG27+vrCOyyE=
+
+Name: libraries/IE_srcelement.js
+SHA1-Digest: b/YeZOBNabYMwMxXR/th08I62+k=
+
+Name: libraries/IE_elements.js
+SHA1-Digest: aHdUr0Az9+Ew/4urgHRttBz3SOQ=
+
+Name: libraries/IE_onreset.js
+SHA1-Digest: HHxINJc890os8j5tFOUGu4COdbc=
+
+Name: libraries/IE_clienty.js
+SHA1-Digest: ROrh3bfwbMrS/u26Cl9HklnhPI0=
+
+Name: org/eclipse/wst/jsdt/jsdoc/Util.class
+SHA1-Digest: zWXqlS+CZg+g0AWIKsv/jVbEHQA=
+
+Name: libraries/IE_custom.js
+SHA1-Digest: dZJbrc9dQQAewmMgnT2B/d/a0Us=
+
+Name: libraries/IE_abbr.js
+SHA1-Digest: JtYfHOgQ0QrpAaYw0QcMwpwARHQ=
+
+Name: libraries/IE_input.js
+SHA1-Digest: 2UISJmQ5XIkVunutwZgCSb836x4=
+
+Name: libraries/IE_dt.js
+SHA1-Digest: ywNJ1N5eodyill9SB5DWe0yyHbI=
+
+Name: libraries/IE_onselectstart.js
+SHA1-Digest: k3W/39ZS9Y16UvCJYl0mwsCKQKk=
+
+Name: libraries/IE_onstart.js
+SHA1-Digest: iWhTvDZgFT8gRVDDpe95esdNzI8=
+
+Name: libraries/IE_all.js
+SHA1-Digest: S2CU+X//eUPj1GyJeH2yFuka97c=
+
+Name: libraries/IE_comment.js
+SHA1-Digest: 2Rp6oQ8Ggg9ENgXumrbDChjaIKE=
+
+Name: libraries/IE_userprofile.js
+SHA1-Digest: bk6Q6UBQ1E4tJb1uJmwQrs/rMDY=
+
+Name: libraries/IE_onrowsdelete.js
+SHA1-Digest: rFsPJadpXlqRX1tIz+Wcch5Uor4=
+
+Name: libraries/IE_onlayoutcomplete.js
+SHA1-Digest: PgFaE5DcigCIUXkxzdX2lpTPh1U=
+
+Name: libraries/IE_tt.js
+SHA1-Digest: fZfQQf31OJWicbd8I6m9hboD2wI=
+
+Name: libraries/IE_dd.js
+SHA1-Digest: hbT9i7vChm1TEH6igDaU+8W/PgM=
+
+Name: libraries/IE_onmouseover.js
+SHA1-Digest: fj/rHikEi4eczr31PyEUSXVpYFI=
+
+Name: libraries/IE_menu.js
+SHA1-Digest: Yv9GcOIVgHessicMngg+vNfNK38=
+
+Name: org/eclipse/wst/jsdt/core/compiler/libraries/Thumbs.db
+SHA1-Digest: +hgd8FmvT1daT/yCgMU/RsnX2G8=
+
+Name: libraries/IE_embeds.js
+SHA1-Digest: YPuoBptrucRr8jxmpDJuHiXy9Mw=
+
+Name: libraries/IE_namespaces.js
+SHA1-Digest: 2fgMd/KVs/s0qnRIeBvqH3GY830=
+
+Name: libraries/IE_p.js
+SHA1-Digest: dhg31vOm1Wv+4Ri3Xm1HSpUsffA=
+
+Name: libraries/IE_screeny.js
+SHA1-Digest: CCP3jf1C1dx7U8LTwAvRDmWLjSs=
+
+Name: libraries/IE_onresize.js
+SHA1-Digest: i/kNUWscxEA3db+s/r6pcb7kWKM=
+
+Name: libraries/IE_strike.js
+SHA1-Digest: ZEtzSBo7T9sqn2kCkL4NkJlaGQQ=
+
+Name: libraries/IE_ctrlleft.js
+SHA1-Digest: 20uggPicQ2giWqJlPgAIwSib0fc=
+
+Name: libraries/IE_td.js
+SHA1-Digest: 3rGwg1Xr7ZvH0rv7Y3aNzfskuSA=
+
+Name: libraries/IE_ondragend.js
+SHA1-Digest: EHal7NEQZD4Amol0iVWx2UzJXsQ=
+
+Name: libraries/IE_area.js
+SHA1-Digest: ve0VqCvhG/HfCrV8JF/b6Plzrnw=
+
+Name: libraries/IE_acronym.js
+SHA1-Digest: uwZIhco0uZaWRFUv1O1Ba91GA2w=
+
+Name: libraries/IE_fieldset.js
+SHA1-Digest: MkFy5nhedqaEvyrjEwBuFiCarzE=
+
+Name: libraries/IE_onfilterchange.js
+SHA1-Digest: WG3K6wyvbywU24pTNokHwPaGG3Q=
+
+Name: libraries/IE_onkeyup.js
+SHA1-Digest: fy59pxstAx7k1BtJC7TjAgjecwQ=
+
+Name: about.html
+SHA1-Digest: ejOZra0kypGLQQ2bJtGTX+LI8tU=
+
+Name: libraries/IE_plaintext.js
+SHA1-Digest: qtYc2+Wo6/aNz6MYxg2Mw3rkFjg=
+
+Name: libraries/IE_tbody.js
+SHA1-Digest: s3kd1cNjyYCC2ScL7WWq0+Dlspc=
+
+Name: libraries/IE_ctrlkey.js
+SHA1-Digest: dt4GTKz/aFZYJATvh8PCymzvarU=
+
+Name: libraries/IE_onpaste.js
+SHA1-Digest: ewaILSPZTyqLIOkMHlFa0WqZIO4=
+
+Name: libraries/IE_onerrorupdate.js
+SHA1-Digest: v6BWoEv++KXwppFI8acgSz4MZrs=
+
+Name: libraries/IE_onsubmit.js
+SHA1-Digest: 4nxwBUKkyXirdvlS7u2GP7FpHtc=
+
+Name: libraries/IE_sup.js
+SHA1-Digest: J3getRHk1kTeOjSqd373t29LI90=
+
+Name: libraries/IE_kbd.js
+SHA1-Digest: 2W7olR0bVpZMFaRT4FwwnLgpptc=
+
+Name: libraries/IE_onbeforedeactivate.js
+SHA1-Digest: iNv/+y/a6/Cc/hdS5Dcq5G6pNqk=
+
+Name: libraries/IE_br.js
+SHA1-Digest: fFzFYONWD4QukdC9fy2Rq+2UL08=
+
+Name: libraries/IE_blockformats.js
+SHA1-Digest: qltan1tgIVZZf/nI0kWNg1KaNZ4=
+
+Name: org/eclipse/wst/jsdt/core/compiler/libraries/ie_small.gif
+SHA1-Digest: EDEAiaRPds9lzBTXQmqtLtZEyGI=
+
+Name: libraries/IE_stylesheets.js
+SHA1-Digest: uvQ+55JZ+MHQpvxTwsqFm5kxBFo=
+
+Name: libraries/IE_html.js
+SHA1-Digest: InhQ/Yh3mwgfP0O+/V7FqPAd7GM=
+
+Name: libraries/IE_span.js
+SHA1-Digest: J9f8RiI7iCwOOzqO+DaJ0Yt2E7M=
+
+Name: libraries/IE_onbeforeupdate.js
+SHA1-Digest: /pMT74zOOAGvx5N7irooffbvSQQ=
+
+Name: libraries/IE_big.js
+SHA1-Digest: ZWtI6SZYF3g/SKbb7mTsxHPVJjM=
+
+Name: libraries/IE_reason.js
+SHA1-Digest: K7aapu7p/i3dnl9N9un9cxzoyiI=
+
+Name: libraries/IE_namespace.js
+SHA1-Digest: Hrsgw5l3nfUMcpXmuSdB/t3rnmY=
+
+Name: org/eclipse/wst/jsdt/jsdoc/XmlBasedSource.class
+SHA1-Digest: 9R70GN7cEVI1x8RkhCFLYtIskGQ=
+
+Name: libraries/IE_onbeforeunload.js
+SHA1-Digest: xSYWrBPIryf3z/whFgny5GiRhqw=
+
+Name: libraries/IE_onrowenter.js
+SHA1-Digest: LR5GFNKAuTQ5sM4G3GNGbZCSxQg=
+
+Name: libraries/IE_type.js
+SHA1-Digest: gpeRIW/uMvw84pr5hTpl+GST1ws=
+
+Name: libraries/IE_address.js
+SHA1-Digest: XdytfgcnnrfeEoZ3+LCPZvYAbBc=
+
+Name: libraries/IE_frameset.js
+SHA1-Digest: 6XoSlff/s0j4fcB5o5czNbrhduc=
+
+Name: libraries/IE_childnodes.js
+SHA1-Digest: zEoSOWZ+vQr+vcRNgA8vC6/PKQc=
+
+Name: libraries/IE_oncontextmenu.js
+SHA1-Digest: B0ieYXwYqrvaqeG0davCQjavkNM=
+
+Name: libraries/IE_param.js
+SHA1-Digest: rEx430CtqLtxqqu7h9lQg6+tW8o=
+
+Name: libraries/IE_ondeactivate.js
+SHA1-Digest: rVDFd5J9BDycfH7Sbv3rkMdzLss=
+
+Name: libraries/IE_nobr.js
+SHA1-Digest: Tl64R62/Oyut0u7RR3UNuiUb9So=
+
+Name: libraries/IE_banner.js
+SHA1-Digest: gz83lpiBu8mJ0NtOQvq4J8zxl5s=
+
+Name: libraries/IE_script.js
+SHA1-Digest: ZF/K9NbWhpY9dh4boExqqRipo98=
+
+Name: libraries/IE_offsetx.js
+SHA1-Digest: L1Jz/CTvtyXB4eo2RGg9HuPFCgc=
+
+Name: libraries/IE_onbeforecut.js
+SHA1-Digest: /oOFASa9FWDDCg+w0da/ayEpjb4=
+
+Name: libraries/IE_returnvalue.js
+SHA1-Digest: gBL2tI6pb2A1FNTjVfjhboE7lMI=
+
+Name: libraries/IE_clientinformation.js
+SHA1-Digest: 07pRKw1+31F9UHjoZ271vi33wto=
+
+Name: libraries/IE_bookmarks.js
+SHA1-Digest: xGK0L3TotGGnSOE0EnPn9uMcAeI=
+
+Name: libraries/IE_ontimeerror.js
+SHA1-Digest: eW3lgHtkdm3jl0+AoXLDLdAesNE=
+
+Name: libraries/IE_map.js
+SHA1-Digest: vNReNrcATzkXtXGc3CYO1yBGUfA=
+
+Name: libraries/IE_contentoverflow.js
+SHA1-Digest: oV+WNtVfbDz/i6/cWMscZjn+NX8=
+
+Name: libraries/IE_oncontrolselect.js
+SHA1-Digest: 9fCz0l0egzaU+PNbovijQ18lQTg=
+
+Name: org/eclipse/wst/jsdt/internal/ui/wizards/buildpaths/InternetExpl
+ orerLibraryWizardPage.class
+SHA1-Digest: eDQBln/A1DI4TQcKvQs6kyBDRHE=
+
+Name: libraries/IE_boundelements.js
+SHA1-Digest: /Csd7MQWTrrP22Fe1uO7Q/ydtPo=
+
+Name: libraries/IE_applet.js
+SHA1-Digest: sv5tYWLQvGzPSph3N2+mTJxjm30=
+
+Name: libraries/IE_onlosecapture.js
+SHA1-Digest: X0wsQfdZTw/z52xK9rhSnnIgvGQ=
+
+Name: libraries/IE_q.js
+SHA1-Digest: 0Y0nzRqly28Mo9sQo0wouXY73yI=
+
+Name: libraries/IE_onabort.js
+SHA1-Digest: Y8hpyTevvgDh50egZ2mdSYNs0ns=
+
+Name: libraries/IE_option.js
+SHA1-Digest: JqeCZcLdnV+wYighpX6H+798SuI=
+
+Name: libraries/IE_location.js
+SHA1-Digest: YNFcGHJ2n/nI6ONXTZd/+asPG/s=
+
+Name: libraries/IE_selection.js
+SHA1-Digest: 8J1HvoWd1qUYzrGT/kySARBqAhM=
+
+Name: libraries/IE_keycode.js
+SHA1-Digest: nen2PWmYkKZzNKiB31kTXSzDEc0=
+
+Name: libraries/IE_onactivate.js
+SHA1-Digest: XWKb0UaB7BNmXLRFfNxzpHezoZE=
+
+Name: libraries/IE_oncellchange.js
+SHA1-Digest: PzX7Qw/4D4LZYVrPxiY6aUruOdM=
+
+Name: libraries/IE_stylesheet.js
+SHA1-Digest: +Z/AfO9ca6FgQY5BxYI50dBZnMU=
+
+Name: libraries/IE_a.js
+SHA1-Digest: K7PvdEc9Lhwmba4g5I8Moln0v14=
+
+Name: libraries/IE_onblur.js
+SHA1-Digest: 43ZL/HhHjK2BwuF3lB9xz0MMuyI=
+
+Name: libraries/IE_form.js
+SHA1-Digest: QcR1e0RldTvth5htTdHFRFWYaVo=
+
+Name: libraries/IE_onkeypress.js
+SHA1-Digest: 4IsHBm0yDLqwJbQOT4yaXz6TaJw=
+
+Name: libraries/IE_embed.js
+SHA1-Digest: x0MZwi60QmLwr9ibysjVM7155aU=
+
+Name: libraries/IE_shiftkey.js
+SHA1-Digest: ArroAimM63NO7yFTFYq2C+naBdU=
+
+Name: libraries/IE_select.js
+SHA1-Digest: FhSB8E2qkARD9tjfQYpUAijxMoM=
+
+Name: libraries/IE_ondatasetchanged.js
+SHA1-Digest: B4rlbShMsHLkGX+mn6Pb2Q4/rs4=
+
+Name: libraries/IE_timeall.js
+SHA1-Digest: KBzD+0TzWnt+apd6AZOnCGHJA54=
+
+Name: libraries/IE_label.js
+SHA1-Digest: GYWAuT7Io8IY1t0KQ2NWBYo/uuE=
+
+Name: org/eclipse/wst/jsdt/jsdoc/msdn/IeFromMsdn.class
+SHA1-Digest: TQk9pn4j1v0Iwk1I4Q4oFZwfPEs=
+
+Name: libraries/IE_ul.js
+SHA1-Digest: XBH8HDrIlTFx3Nu0EaCGDPP+LBs=
+
+Name: libraries/IE_center.js
+SHA1-Digest: cVY8zRf7xIP7wOxzAYCuup2NZXI=
+
+Name: libraries/IE_ins.js
+SHA1-Digest: NdY4m2pZpUs1QyFh6aaX7qpHJaw=
+
+Name: libraries/IE_imports.js
+SHA1-Digest: 1a6pL053ggPIXKfr3OI2HleMOJ4=
+
+Name: org/eclipse/wst/jsdt/jsdoc/XSLTMap.class
+SHA1-Digest: jnfrvu0apdkFFWt6dKF0fHJ0AXM=
+
+Name: libraries/IE_ondrag.js
+SHA1-Digest: +IVo3iUZV1rkk3uvtg3qHiPXDo0=
+
+Name: libraries/IE_button.js
+SHA1-Digest: EkQIs17tAUqioPdw7M5Ii9Qpf3w=
+
+Name: libraries/IE_onbeforeactivate.js
+SHA1-Digest: iWg3GkPZHSJINgwNr8a4wMbgNJ0=
+
+Name: libraries/IE_qualifier.js
+SHA1-Digest: wsvE+WDVop67jUrvz1qV+QnKHcQ=
+
+Name: libraries/IE_bgsound.js
+SHA1-Digest: PZmhCEGoij4jz3WtaEAqW0r8Q6E=
+
+Name: libraries/IE_onerror.js
+SHA1-Digest: 1VUTy5V2emZ0vuBAwHiOdtQvojY=
+
+Name: libraries/IE_onresizeend.js
+SHA1-Digest: DxHu+JN8tNz7c0hVNehSMPCovgQ=
+
+Name: libraries/IE_external.js
+SHA1-Digest: 3zPxcsJ7qYZ9YL14ToKaXVGGBaU=
+
+Name: libraries/IE_img.js
+SHA1-Digest: OajMMdFasXp7VFz3Q7gwovMEgGg=
+
+Name: org/eclipse/wst/jsdt/core/compiler/libraries/InternetExplorerLib
+ Initializer$IeLibLocation.class
+SHA1-Digest: CxLEPHa+hI2RWuhJs6SWBv/VkQY=
+
+Name: libraries/IE_onmouseup.js
+SHA1-Digest: lS9t9CNVsVzaIab4fUHVLc9a7qA=
+
+Name: libraries/IE_frames.js
+SHA1-Digest: igGZFOW/SDRSlt0bbtbshMK1yP4=
+
+Name: libraries/IE_title.js
+SHA1-Digest: zj2UtiOveuYGLGbH20t2T3Vx3YQ=
+
+Name: org/eclipse/wst/jsdt/internal/ui/wizards/IEMessages.class
+SHA1-Digest: 3gRxjEPOvo7I8PpimAwewPpfpss=
+
+Name: libraries/IE_style.js
+SHA1-Digest: 6X6PTksgU5Olyrb3hXjc5zejEjs=
+
+Name: libraries/IE_savetype.js
+SHA1-Digest: +bj4eqOiMybJpV0TJGEpbX3/xyE=
+
+Name: libraries/IE_oncopy.js
+SHA1-Digest: awv5Ul05ne281YNsGXpUBDc6rAg=
+
+Name: org/eclipse/wst/jsdt/jsdoc/IJsDocSource.class
+SHA1-Digest: qdScE3M6oY86mQfpKmOOoUxGx14=
+
+Name: libraries/IE_defaults.js
+SHA1-Digest: aCFdQOhMe+wF1NIGVPVkz3B4dII=
+
+Name: libraries/IE_onrowsinserted.js
+SHA1-Digest: 4hWtcZaK3pHd8WOK8mITLkS5AR8=
+
+Name: libraries/IE_scripts.js
+SHA1-Digest: vWdNnFFYpCBwdQnaZQAxPNmPliw=
+
+Name: libraries/IE_var.js
+SHA1-Digest: 1mGdIQ1Za5dneXqSBBVrwopV+lU=
+
+Name: libraries/IE_code.js
+SHA1-Digest: nYKufY527BA9fkcXXjKJNIWB5Jw=
+
+Name: libraries/IE_areas.js
+SHA1-Digest: ZQTkud0gdiXe3AOkjPTbO5V3b0k=
+
+Name: libraries/IE_offsety.js
+SHA1-Digest: YgQ1mrI69h3TBuX78f62uOxnKIE=
+
