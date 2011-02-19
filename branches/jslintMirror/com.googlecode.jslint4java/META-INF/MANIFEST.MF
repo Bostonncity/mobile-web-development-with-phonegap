@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Jslint4java
+Bundle-SymbolicName: com.googlecode.jslint4java
+Bundle-Version: 1.0.0.qualifier
+Export-Package: com.googlecode.jslint4java,
+ com.googlecode.jslint4java.cli,
+ com.googlecode.jslint4java.formatter
+Require-Bundle: org.mozilla.javascript;bundle-version="1.7.2"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
