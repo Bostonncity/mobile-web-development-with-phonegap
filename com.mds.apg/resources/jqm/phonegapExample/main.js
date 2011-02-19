@@ -42,13 +42,10 @@ function updateAcceleration(a) {
 var toggleAccel = function() {
     if (accelerationWatch) {
         navigator.accelerometer.clearWatch(accelerationWatch);
-        updateAcceleration({
-            x : "",
-            y : "",
-            z : ""
-        });
+        $('.ui-grid-b').hide();
         accelerationWatch = false;
     } else {
+        $('.ui-grid-b').show();
         accelerationWatch = true;
         var options = {};
         options.frequency = 1000;
@@ -117,4 +114,6 @@ function init() {
     //the next line makes it impossible to see Contacts on the HTC Evo since it doesn't have a scroll button
     //		document.addEventListener("touchmove", preventBehavior, false);  
     document.addEventListener("deviceready", deviceInfo, true);
+    // start with xyz hidden
+    $('.ui-grid-b').hide();
 }

@@ -26,14 +26,13 @@
         <p>Width: <b><span id="width"> &nbsp;</span></b>, Ht: <b><span id="height">&nbsp;</span></b>, Color Depth: <b><span id="colorDepth"></span></b></p>
      </div>
 
-    <div data-role="collapsible" data-collapsed="true" data-theme="e">
-    	<h1><div onclick="toggleAccel();">Toggle Accelerometer</div></h1>
+    <div data-role="button" onclick="toggleAccel();" data-collapsed="true" data-theme="e"> Toggle Accelerometer </div>
 		<div class="ui-grid-b">
      	 	<div class="ui-block-a">X: <b id="x">&nbsp;</b></div>
      	 	<div class="ui-block-b">Y: <b id="y">&nbsp;</b></div> 
      	 	<div class="ui-block-c">Z: <b id="z">&nbsp;</b></div>
     	</div>
-    </div>   
+   
     <div data-role="button" onclick="getLocation();">Get Location</div>
 	<a href="tel://411" data-role="button">Call 411</a>
     <div data-role="button" onclick="beep();">Beep</div>
