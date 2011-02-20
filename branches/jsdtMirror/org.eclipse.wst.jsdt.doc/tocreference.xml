@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+<!--
+    Copyright (c) 2005, 2010 IBM Corporation and others.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+   
+    Contributors:
+        IBM Corporation - initial API and implementation
+ -->
+
+<toc label="Reference" link_to="toc.xml"> 
+	<topic label="API Reference" href="reference/api/overview-summary.html">
+    <topic href="reference/api/org/eclipse/wst/jsdt/core/package-summary.html" label="org.eclipse.wst.jsdt.core">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/core/ast/package-summary.html" label="org.eclipse.wst.jsdt.core.ast">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/core/compiler/package-summary.html" label="org.eclipse.wst.jsdt.core.compiler">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/core/compiler/libraries/package-summary.html" label="org.eclipse.wst.jsdt.core.compiler.libraries">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/core/dom/package-summary.html" label="org.eclipse.wst.jsdt.core.dom">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/core/dom/rewrite/package-summary.html" label="org.eclipse.wst.jsdt.core.dom.rewrite">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/core/eval/package-summary.html" label="org.eclipse.wst.jsdt.core.eval">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/core/formatter/package-summary.html" label="org.eclipse.wst.jsdt.core.formatter">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/core/infer/package-summary.html" label="org.eclipse.wst.jsdt.core.infer">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/core/manipulation/package-summary.html" label="org.eclipse.wst.jsdt.core.manipulation">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/core/refactoring/package-summary.html" label="org.eclipse.wst.jsdt.core.refactoring">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/core/refactoring/descriptors/package-summary.html" label="org.eclipse.wst.jsdt.core.refactoring.descriptors">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/core/search/package-summary.html" label="org.eclipse.wst.jsdt.core.search">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/core/util/package-summary.html" label="org.eclipse.wst.jsdt.core.util">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/debug/core/breakpoints/package-summary.html" label="org.eclipse.wst.jsdt.debug.core.breakpoints">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/debug/core/jsdi/package-summary.html" label="org.eclipse.wst.jsdt.debug.core.jsdi">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/debug/core/jsdi/connect/package-summary.html" label="org.eclipse.wst.jsdt.debug.core.jsdi.connect">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/debug/core/jsdi/event/package-summary.html" label="org.eclipse.wst.jsdt.debug.core.jsdi.event">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/debug/core/jsdi/request/package-summary.html" label="org.eclipse.wst.jsdt.debug.core.jsdi.request">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/debug/core/model/package-summary.html" label="org.eclipse.wst.jsdt.debug.core.model">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/debug/rhino/debugger/package-summary.html" label="org.eclipse.wst.jsdt.debug.rhino.debugger">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/debug/rhino/debugger/shell/package-summary.html" label="org.eclipse.wst.jsdt.debug.rhino.debugger.shell">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/jsdoc/package-summary.html" label="org.eclipse.wst.jsdt.jsdoc">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/jsdoc/msdn/package-summary.html" label="org.eclipse.wst.jsdt.jsdoc.msdn">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/launching/package-summary.html" label="org.eclipse.wst.jsdt.launching">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/libraries/package-summary.html" label="org.eclipse.wst.jsdt.libraries">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/ui/package-summary.html" label="org.eclipse.wst.jsdt.ui">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/ui/actions/package-summary.html" label="org.eclipse.wst.jsdt.ui.actions">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/ui/dialogs/package-summary.html" label="org.eclipse.wst.jsdt.ui.dialogs">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/ui/project/package-summary.html" label="org.eclipse.wst.jsdt.ui.project">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/ui/refactoring/package-summary.html" label="org.eclipse.wst.jsdt.ui.refactoring">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/ui/search/package-summary.html" label="org.eclipse.wst.jsdt.ui.search">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/ui/text/package-summary.html" label="org.eclipse.wst.jsdt.ui.text">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/ui/text/folding/package-summary.html" label="org.eclipse.wst.jsdt.ui.text.folding">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/ui/text/java/package-summary.html" label="org.eclipse.wst.jsdt.ui.text.java">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/ui/text/java/hover/package-summary.html" label="org.eclipse.wst.jsdt.ui.text.java.hover">
+    </topic>
+    <topic href="reference/api/org/eclipse/wst/jsdt/ui/wizards/package-summary.html" label="org.eclipse.wst.jsdt.ui.wizards">
+    </topic>
+	</topic>
+ <topic href="reference/extension-points/index.html" label="Extension Points Reference">
+    <topic href="reference/extension-points/org_eclipse_wst_jsdt_core_codeFormatter.html" label="org.eclipse.wst.jsdt.core.codeFormatter">
+    </topic>
+    <topic href="reference/extension-points/org_eclipse_wst_jsdt_core_inferrenceSupport.html" label="org.eclipse.wst.jsdt.core.inferrenceSupport">
+    </topic>
+    <topic href="reference/extension-points/org_eclipse_wst_jsdt_core_JsGlobalScopeContainerInitializer.html" label="org.eclipse.wst.jsdt.core.JsGlobalScopeContainerInitializer">
+    </topic>
+    <topic href="reference/extension-points/org_eclipse_wst_jsdt_core_JsGlobalScopeVariableInitializer.html" label="org.eclipse.wst.jsdt.core.JsGlobalScopeVariableInitializer">
+    </topic>
+    <topic href="reference/extension-points/org_eclipse_wst_jsdt_core_sourcePathProvider.html" label="org.eclipse.wst.jsdt.core.sourcePathProvider">
+    </topic>
+    <topic href="reference/extension-points/org_eclipse_wst_jsdt_core_validationParticipant.html" label="org.eclipse.wst.jsdt.core.validationParticipant">
+    </topic>
+    <topic href="reference/extension-points/org_eclipse_wst_jsdt_debug_core_breakpointParticipants.html" label="org.eclipse.wst.jsdt.debug.core.breakpointParticipants">
+    </topic>
+    <topic href="reference/extension-points/org_eclipse_wst_jsdt_debug_core_launchingConnectors.html" label="org.eclipse.wst.jsdt.debug.core.launchingConnectors">
+    </topic>
+    <topic href="reference/extension-points/org_eclipse_wst_jsdt_ui_classpathAttributeConfiguration.html" label="org.eclipse.wst.jsdt.ui.classpathAttributeConfiguration">
+    </topic>
+    <topic href="reference/extension-points/org_eclipse_wst_jsdt_ui_documentationProvider.html" label="org.eclipse.wst.jsdt.ui.documentationProvider">
+    </topic>
+    <topic href="reference/extension-points/org_eclipse_wst_jsdt_ui_foldingStructureProviders.html" label="org.eclipse.wst.jsdt.ui.foldingStructureProviders">
+    </topic>
+    <topic href="reference/extension-points/org_eclipse_wst_jsdt_ui_javaCompletionProposalComputer.html" label="org.eclipse.wst.jsdt.ui.javaCompletionProposalComputer">
+    </topic>
+    <topic href="reference/extension-points/org_eclipse_wst_jsdt_ui_javaCompletionProposalSorters.html" label="org.eclipse.wst.jsdt.ui.javaCompletionProposalSorters">
+    </topic>
+    <topic href="reference/extension-points/org_eclipse_wst_jsdt_ui_javadocCompletionProcessor.html" label="org.eclipse.wst.jsdt.ui.javadocCompletionProcessor">
+    </topic>
+    <topic href="reference/extension-points/org_eclipse_wst_jsdt_ui_javaEditorTextHovers.html" label="org.eclipse.wst.jsdt.ui.javaEditorTextHovers">
+    </topic>
+    <topic href="reference/extension-points/org_eclipse_wst_jsdt_ui_javaElementFilters.html" label="org.eclipse.wst.jsdt.ui.javaElementFilters">
+    </topic>
+    <topic href="reference/extension-points/org_eclipse_wst_jsdt_ui_JsGlobalScopeContainerPage.html" label="org.eclipse.wst.jsdt.ui.JsGlobalScopeContainerPage">
+    </topic>
+    <topic href="reference/extension-points/org_eclipse_wst_jsdt_ui_JsGlobalScopeUIInitializer.html" label="org.eclipse.wst.jsdt.ui.JsGlobalScopeUIInitializer">
+    </topic>
+    <topic href="reference/extension-points/org_eclipse_wst_jsdt_ui_queryParticipants.html" label="org.eclipse.wst.jsdt.ui.queryParticipants">
+    </topic>
+    <topic href="reference/extension-points/org_eclipse_wst_jsdt_ui_quickAssistProcessors.html" label="org.eclipse.wst.jsdt.ui.quickAssistProcessors">
+    </topic>
+    <topic href="reference/extension-points/org_eclipse_wst_jsdt_ui_quickFixProcessors.html" label="org.eclipse.wst.jsdt.ui.quickFixProcessors">
+    </topic>
+ </topic>
+	<!--
+	<topic label="Extension Points Reference" href="html/extpts_reference/index.html">
+		<link toc="topics_ExtPoint_Reference.xml" />
+	</topic>
+	
+	-->
+</toc>
