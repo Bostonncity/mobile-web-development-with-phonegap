@@ -1,0 +1,483 @@
+Manifest-Version: 1.0
+Bundle-Vendor: %vendor.name
+Bundle-ActivationPolicy: lazy;exclude:=org.eclipse.wst.jsdt.debug.inte
+ rnal.ui.filters
+Bundle-RequiredExecutionEnvironment: J2SE-1.4
+Bundle-Name: %bundleName.name
+Bundle-SymbolicName: org.eclipse.wst.jsdt.debug.ui;singleton:=true
+Eclipse-SourceReferences: scm:cvs:pserver:dev.eclipse.org:/cvsroot/web
+ tools:org.eclipse.jsdt/plugins/org.eclipse.wst.jsdt.debug.ui;tag=v201
+ 011040143
+Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.de
+ bug.ui,org.eclipse.wst.jsdt.debug.core,org.eclipse.wst.jsdt.core,org.
+ eclipse.ui.ide,org.eclipse.core.filesystem,org.eclipse.jface.text,org
+ .eclipse.ui.workbench.texteditor,org.eclipse.wst.jsdt.ui,org.eclipse.
+ ui.editors,org.eclipse.core.expressions
+Bundle-Activator: org.eclipse.wst.jsdt.debug.internal.ui.JavaScriptDeb
+ ugUIPlugin
+Export-Package: org.eclipse.wst.jsdt.debug.internal.ui;x-internal:=tru
+ e,org.eclipse.wst.jsdt.debug.internal.ui.actions;x-internal:=true,org
+ .eclipse.wst.jsdt.debug.internal.ui.adapters;x-internal:=true,org.ecl
+ ipse.wst.jsdt.debug.internal.ui.breakpoints;x-internal:=true,org.ecli
+ pse.wst.jsdt.debug.internal.ui.breakpoints.details;x-internal:=true,o
+ rg.eclipse.wst.jsdt.debug.internal.ui.breakpoints.editors;x-internal:
+ =true,org.eclipse.wst.jsdt.debug.internal.ui.dialogs;x-internal:=true
+ ,org.eclipse.wst.jsdt.debug.internal.ui.display;x-internal:=true,org.
+ eclipse.wst.jsdt.debug.internal.ui.filters;x-internal:=true,org.eclip
+ se.wst.jsdt.debug.internal.ui.launching;x-internal:=true,org.eclipse.
+ wst.jsdt.debug.internal.ui.source;x-internal:=true,org.eclipse.wst.js
+ dt.debug.internal.ui.source.contentassist;x-internal:=true
+Bundle-Version: 1.0.3.v201011040143
+Bundle-ManifestVersion: 2
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/ImageDescriptorRegistry.c
+ lass
+SHA1-Digest: aZ+0tmP1exFiWL2Bo34q2vadnsY=
+
+Name: icons/ovr16/scoped_ovr_disabled.gif
+SHA1-Digest: 6L7p8eDh8aUAfAQcuKmRk4mDiDE=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/ToggleBreakpo
+ intAdapter$1.class
+SHA1-Digest: Si2th7MpQ7CF+d50PsHV+8of6Cs=
+
+Name: icons/ovr16/scoped_ovr.gif
+SHA1-Digest: lMQdICi6h4MxNxyWaOeSpc8Wyxk=
+
+Name: icons/elcl16/sethitcount_co.gif
+SHA1-Digest: JqKKq3SPtTSCIrn7BHI8IrpgZlM=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/actions/BreakpointHitCoun
+ tAction$HitCountDialog.class
+SHA1-Digest: f/bIA3EWYbqDJzL5/OiKrk6+0MY=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/editors/JavaS
+ criptBreakpointConditionEditor.class
+SHA1-Digest: v/Sd2ytOA+vrJ8NS2SbW9Vm56dM=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/Messages.clas
+ s
+SHA1-Digest: 0eKyBhFAZEoV50kpmqteUufll2U=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/JavaScriptImageDescriptor
+ .class
+SHA1-Digest: MyaysGPCrO8m+teX8Eq7yS6f4ig=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/editors/JavaS
+ criptBreakpointConditionEditor$1.class
+SHA1-Digest: jM0T59AosipovI4eLGgZ3MBW2HY=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/editors/JavaS
+ criptBreakpointConditionEditor$5.class
+SHA1-Digest: 9TqXZvVev6r9KwXwl6+tDL51DyA=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/actions/AddScriptLoadBrea
+ kpointAction.class
+SHA1-Digest: R8pdABSQDlbg3nr9QOHAQF9NaZ0=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/ToggleBreakpo
+ intEnablementEditorDelegate.class
+SHA1-Digest: 38kV4QE5/fCHFdxUExJeW9zhxBQ=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/actions/EntryToggleAction
+ .class
+SHA1-Digest: 5vD16v+u8alXmqPXXiOAwrUFoA4=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/editors/Stand
+ ardJavaScriptBreakpointEditor$3.class
+SHA1-Digest: T95dtMN/81d/9pA1EV1DKFaGeVM=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/actions/BreakpointHitCoun
+ tAction.class
+SHA1-Digest: 3u8nP4raD3Pha6z4AdPdCrNahrg=
+
+Name: icons/ovr16/conditional_ovr_disabled.gif
+SHA1-Digest: ffGqbM5CtQfZmlhHnEftnyLPAB8=
+
+Name: icons/ovr16/exit_ovr_disabled.gif
+SHA1-Digest: P0PJblbO1Gkj1EQdvMdsuaayO+Q=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/ToggleBreakpo
+ intAdapter.class
+SHA1-Digest: IYeEcZJPstBD2IQo9ynJNnAUYCc=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/messages.prop
+ erties
+SHA1-Digest: nyMa8jqVaKf2ToVZ1gx620zoFtg=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/actions/SuspendOnAllScrip
+ tLoadsAction.class
+SHA1-Digest: Eyxv9sujm7m9714tifBI00/nTfA=
+
+Name: icons/elcl16/connect.gif
+SHA1-Digest: 47UWEsUMkBMePm5Wn3YRFTMsvIY=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/dialogs/ScriptSelectionDi
+ alog$ScriptFilter.class
+SHA1-Digest: XooPF5DJ8O+rmuuHIhyB5TaeupQ=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/ISharedImages.class
+SHA1-Digest: fJ1v2w1SGV7brLjk+7x4CObciwk=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/launching/JavaScriptLaunc
+ hShortcut.class
+SHA1-Digest: o8cwmLIdLMK3Hf7FnGm//aR4nV4=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/actions/ShowLoadedScripts
+ Action.class
+SHA1-Digest: 5nQZDzSdSKirsEk61iYhTIz+tkI=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/adapters/JavaScriptThread
+ Handler.class
+SHA1-Digest: O5QDUDbnlqK2p5IEXG1kVaSwsxY=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/ToggleBreakpo
+ intAdapter$2.class
+SHA1-Digest: q8Dv8KNpNKHbSIyRGeYNNSIDVyE=
+
+Name: icons/elcl16/script.gif
+SHA1-Digest: Ksx9NWNAe0tZtCZXs1bQV99QqTE=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/actions/BreakpointToggleA
+ ction.class
+SHA1-Digest: rSP9xOJ1oRDMWyRluP3O2DVuxlk=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/editors/Compo
+ siteBreakpointEditor.class
+SHA1-Digest: ZETThPvMm+aflUsLS45evVFjyCM=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/DebugWCManager.class
+SHA1-Digest: fQkwMM+b4+rXrXDvirqJMNBRnnE=
+
+Name: icons/elcl16/suspend_co.gif
+SHA1-Digest: yM50mlbVGQLacDNklQol2+C/3t0=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/adapters/JavaScriptAdapte
+ rFactory.class
+SHA1-Digest: GSSxfsmYApOroP4VAOjhYs40yDs=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/ImageDescriptorRegistry$1
+ .class
+SHA1-Digest: OYF6X8bRQQ9NQ2A5TUY3TqMAg00=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/details/Abstr
+ actDetailPane.class
+SHA1-Digest: 3mDnnP97MFAqZszcsIdsLUKQoZM=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/display/JavaScriptDebugVi
+ ewerConfiguration$1.class
+SHA1-Digest: zrkxC4Q1KlpIdyjmhIUevZJAD3o=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/BreakpointLoc
+ ationFinder.class
+SHA1-Digest: q5ClDFIf6M7Ids9+9JLLYVG0Iik=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/source/contentassist/Java
+ ScriptContentAssistProcessor.class
+SHA1-Digest: 9kGaj2SnFmHEe8AzQ+RWT1QYXDs=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/adapters/JavaScriptDebugT
+ argetEventHandler.class
+SHA1-Digest: pDIlUWwiCPgpPJdZxLoFzrcN7MA=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/details/Funct
+ ionBreakpointDetailPane.class
+SHA1-Digest: gLBdM4nMcBtiRSxOhqfkk+H1bW4=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/editors/JavaS
+ criptBreakpointConditionEditor$2.class
+SHA1-Digest: qcpffr6nNkCvBADaGH9UPg5eKBI=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/editors/JavaS
+ criptBreakpointConditionEditor$6.class
+SHA1-Digest: BOEj4WwNyKrYDr3QjhUl3amRxyk=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/actions/ViewFilterAction.
+ class
+SHA1-Digest: jbVWM/bs1CkDvVWDyYTBTKwlfS0=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/editors/Stand
+ ardJavaScriptBreakpointEditor$4.class
+SHA1-Digest: ck+wy0lDv+RH/SLLybLPYPs5mPc=
+
+Name: icons/elcl16/script_grp.gif
+SHA1-Digest: B8vZZ171Og7DDCom4LiigyLaf2A=
+
+Name: about.html
+SHA1-Digest: 0oYanwyg+o6FteoZOAiFfmyUBnM=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/actions/AddScriptLoadBrea
+ kpointAction$1.class
+SHA1-Digest: QPQC7qd+v/JSDF4DTyubC2UkR3w=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/actions/ExitToggleAction.
+ class
+SHA1-Digest: 1MZ9o0J6mU9gDVYRexSn5f4H7X8=
+
+Name: icons/elcl16/localvariable.gif
+SHA1-Digest: o65EsJ8m+1pZjUsR7UMxV9VGRU8=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/actions/BreakpointHitCoun
+ tAction$1.class
+SHA1-Digest: GTzG/BgUSzGzNBOJnBiVtbcvq04=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/dialogs/ScriptSelectionDi
+ alog.class
+SHA1-Digest: EaiYMuOpuAhrc3g/77x7Ll4fpWI=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/adapters/JavaScriptAsyncC
+ ontentProvider.class
+SHA1-Digest: yY8s03hrVL5yy9MIDz8xIsgdb0M=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/details/Break
+ pointDetailPaneFactory.class
+SHA1-Digest: rrj4IIrk5J2bNV/l3SVfsoN9lc8=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/launching/JavaScriptConne
+ ctTab$1.class
+SHA1-Digest: Zvc4bBZ4o4C684WSnfkG6upJ5Oo=
+
+Name: icons/ovr16/entry_ovr.gif
+SHA1-Digest: IgAq/HdtWsBQf2ArVYTbBD5C5Rk=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/ToggleBreakpo
+ intAdapter$3.class
+SHA1-Digest: NojirvrLrafeV4HNDOpSOX8jAiE=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/display/JavaScriptDebugVi
+ ewerConfiguration.class
+SHA1-Digest: bEraDPA0Lt3WWGuHOxTz1pTouf4=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/Messages.class
+SHA1-Digest: VqM3YPWSKei8xidG+b19Dtzk2FE=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/BreakpointHel
+ per.class
+SHA1-Digest: IF9bpwiIPPO/Jr12gkrs1ccTlRQ=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/editors/Funct
+ ionBreakpointEditor.class
+SHA1-Digest: q7Aoy32rahx/0Kr38mo2nZKEIWM=
+
+Name: icons/ovr16/installed_ovr.gif
+SHA1-Digest: 8MDO4MJMvYcHFgQD6Bdz2Xjjqbg=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/ImageDescriptorRegistry$2
+ .class
+SHA1-Digest: o93a9VIJ0apYmGFwkx0eNke65tE=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/JavaScriptModelPresentati
+ on.class
+SHA1-Digest: nFwmOlV0qvR3eHF2we/8Ufxxgj0=
+
+Name: icons/elcl16/scriptbp.gif
+SHA1-Digest: Xnwnm35jOHEOBQg0KYOYRMo4C70=
+
+Name: icons/ovr16/conditional_ovr.gif
+SHA1-Digest: CQCjrcG0ervcGeyBfOeFrYYEj4M=
+
+Name: icons/ovr16/exit_ovr.gif
+SHA1-Digest: 5f10bAAcc9te9EQQTKotNicPfoY=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/BreakpointPro
+ pertiesEditorActionDelegate.class
+SHA1-Digest: dIcbrBhnVGkYDTwQjrFp9Ol4380=
+
+Name: icons/ovr16/caught_ovr_disabled.gif
+SHA1-Digest: YfFdM9Fssc9OFtzmKIusU5p/A/o=
+
+Name: icons/elcl16/source.gif
+SHA1-Digest: TelrJBaGXPhf8Ch0N0LFJuO8nHQ=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/JavaScriptBre
+ akpointPropertyPage$1.class
+SHA1-Digest: QWV8gAkYtNY4VV7RkXAKH8en9h8=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/editors/Stand
+ ardJavaScriptBreakpointEditor.class
+SHA1-Digest: Y2PZAeSJFQyM7UJ8KjCgHxJIHYo=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/adapters/JavaScriptDebugT
+ argetProxy.class
+SHA1-Digest: Gr4eLcicMyYeE/ocqiJDx0c33Hg=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/editors/JavaS
+ criptBreakpointConditionEditor$3.class
+SHA1-Digest: +Fbz9QMndZz2EvxTUuIGIYhTonE=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/details/Abstr
+ actDetailPane$1.class
+SHA1-Digest: oDCl5clZv9SIf4/fwH5hOzrgZic=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/editors/JavaS
+ criptBreakpointConditionEditor$7.class
+SHA1-Digest: F24vvCs2WLiF9+ESzcvmIj+U76s=
+
+Name: META-INF/eclipse.inf
+SHA1-Digest: KyT9FF7C7t86NoBoa2kZT3ZJBfw=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/messages.properties
+SHA1-Digest: 0Ip8Igq7WieW1CneCA/kPYwgb20=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/JavaScriptImageRegistry.c
+ lass
+SHA1-Digest: hUFHVkXy8NtZQIuMQ15VILUJuDg=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/actions/ViewFilterAction$
+ Updater.class
+SHA1-Digest: RAxjUtCtVzUwOTx3W0KMlBQYFF4=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/editors/Stand
+ ardJavaScriptBreakpointEditor$1.class
+SHA1-Digest: 1gGoPmzUCZVSPQJrix1/R5PFfDQ=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/JavaScriptDebugUIPlugin.c
+ lass
+SHA1-Digest: 9PpnivhAFv4ANhoJI2K3vWnEQhE=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/actions/BreakpointPropert
+ iesAction.class
+SHA1-Digest: yi+wp4b17prK8zDiNScyfoqobv0=
+
+Name: icons/elcl16/brkp_obj.gif
+SHA1-Digest: hHogrKP5Bmj/1YP1pe+Tb2sot7E=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/adapters/JavaScriptModelP
+ roxyFactory.class
+SHA1-Digest: yqKgy4vo47Zb8PjBUkpp3qL3F2o=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/editors/Stand
+ ardJavaScriptBreakpointEditor$5.class
+SHA1-Digest: DaaO125wnUzhGSQNaReSjGh0QPc=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/filters/ExternalSourcePro
+ jectFilter.class
+SHA1-Digest: DGKcOrPswAF6YWMoXnFoqI6SNCg=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/launching/JavascriptTabGr
+ oup.class
+SHA1-Digest: i/A2tDIkteSCDlU+22EFWiYnUmk=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/BreakpointPro
+ pertiesRulerAction.class
+SHA1-Digest: fsR0P3nrLXRYE0ufiOAjkLcMYp8=
+
+Name: icons/dlcl16/brkpd_obj.gif
+SHA1-Digest: GhDn3pHOAkculeQC6sc8yygPyQI=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/source/contentassist/Scri
+ ptContext.class
+SHA1-Digest: huSceNfoyue8mQ1q+PfHaluI5bw=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/actions/BreakpointHitCoun
+ tAction$2.class
+SHA1-Digest: rU7j7NrNYMldGlBo+mIftGG1ZDw=
+
+Name: icons/ovr16/installed_ovr_disabled.gif
+SHA1-Digest: CaDnMMCqu/lD/NfTHM0IcL0ywZM=
+
+Name: icons/elcl16/this_var.gif
+SHA1-Digest: /7Dfxu3TApYuV0jK7Fszug5lQ0I=
+
+Name: icons/ovr16/entry_ovr_disabled.gif
+SHA1-Digest: Y3U+IWvsYQhrmLLwuP4ntHeMXA0=
+
+Name: OSGI-INF/l10n/bundle.properties
+SHA1-Digest: TIk0WMvrOJQrNMikiBtBzyDSMdc=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/JavaScriptBre
+ akpointPropertyPage.class
+SHA1-Digest: Snbz5fxjtKgW1X89F2ax2pA7SUI=
+
+Name: icons/ovr16/uncaught_ovr.gif
+SHA1-Digest: +w6Q2AlTkFWMl/Pr2CzDCrOOd00=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/actions/BreakpointSuspend
+ PolicyToggleAction.class
+SHA1-Digest: TQW0YfjEahXA8LZa2vy28tDrVzk=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/PreferencesManager.class
+SHA1-Digest: BP2Q0Cpu7ZUXIyKDz/KVcBDBoJ4=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/ToggleBreakpo
+ intEnablementRulerAction.class
+SHA1-Digest: K44z2qYpH/7v7Y3TFSYC+j9lUPg=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/SWTFactory.class
+SHA1-Digest: ZE937tdhAEt8MNy9vCogtujPuok=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/JavaScriptBre
+ akpointPropertyPage$2.class
+SHA1-Digest: bCfk6pNBwvVGp4AmyvSI7Vasv3Q=
+
+Name: icons/ovr16/uncaught_ovr_disabled.gif
+SHA1-Digest: xnj4UJaoh8EBWyeHpnww9UEMYsg=
+
+Name: plugin.xml
+SHA1-Digest: v979D5DYSdDMBUp/SJWd+shyNq4=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/actions/SuspendOnExceptio
+ nsAction.class
+SHA1-Digest: rptnBTBoPhmWYS3YH2Hr4wmVuG8=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/adapters/JavaScriptAdapte
+ rFactory$WorkbenchAdapter.class
+SHA1-Digest: q30FvLcZ1roktawYgRffyYwYJes=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/editors/JavaS
+ criptBreakpointConditionEditor$4.class
+SHA1-Digest: ZbSAh8qy/ozwP7YNMR+bVzmsFV4=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/ToggleFunctio
+ nBreakpointActionDelegate.class
+SHA1-Digest: aO7UJaqhZVGen7VlvlC0jCwsDi0=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/editors/JavaS
+ criptBreakpointConditionEditor$8.class
+SHA1-Digest: 0nuH+G3zIPBBJtXRCsi80D4+bF8=
+
+Name: icons/elcl16/proto_var.gif
+SHA1-Digest: j7hqoKpNrZ+/K3/sEH9DBdBQxEo=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/source/JavaScriptSourceVi
+ ewer.class
+SHA1-Digest: pP4ILEd1tAvuvCez0d7mbaCzXtA=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/editors/Stand
+ ardJavaScriptBreakpointEditor$2.class
+SHA1-Digest: pWLNs3I88+H5b365mIFIk2xC5T0=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/actions/OpenSourceAction.
+ class
+SHA1-Digest: 2qmY15WbZJd1MXPJb4wjIYfdIR8=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/editors/Stand
+ ardJavaScriptBreakpointEditor$6.class
+SHA1-Digest: Vbz96nZXAIvmUMolitJjdsiipl4=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/IHelpContextIds.class
+SHA1-Digest: ntgB7hf0fCuZ+sdyQ2V54FHjrlg=
+
+Name: icons/ovr16/caught_ovr.gif
+SHA1-Digest: /9ihxsKjYLLmC1VWPXthBC2GeKc=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/launching/JavaScriptConne
+ ctTab.class
+SHA1-Digest: Chj/pZxuz0mJ7Z2dpCJZAKeZG+M=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/filters/FilterMessages.cl
+ ass
+SHA1-Digest: Udpksw4FTTnLaHG7NaQb4FKIrvk=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/details/LineB
+ reakpointDetailPane.class
+SHA1-Digest: arYXAjHsfDwL6jqHyHXaQCghJpY=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/details/Stand
+ ardBreakpointDetailPane.class
+SHA1-Digest: 4WDzCy0l4b3cwwBx24dH8+csvGs=
+
+Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/editors/Abstr
+ actJavaScriptBreakpointEditor.class
+SHA1-Digest: zGojgTTAl4oM5C+XLC/vSyT6WuA=
+

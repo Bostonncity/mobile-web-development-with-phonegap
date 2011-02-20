@@ -1,0 +1,484 @@
+Manifest-Version: 1.0
+Bundle-RequiredExecutionEnvironment: J2SE-1.4
+Bundle-SymbolicName: org.eclipse.wst.jsdt.debug.core;singleton:=true
+Eclipse-SourceReferences: scm:cvs:pserver:dev.eclipse.org:/cvsroot/web
+ tools:org.eclipse.jsdt/plugins/org.eclipse.wst.jsdt.debug.core;tag=v2
+ 01011040143
+Bundle-Activator: org.eclipse.wst.jsdt.debug.internal.core.JavaScriptD
+ ebugPlugin
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.debug.core
+Export-Package: org.eclipse.wst.jsdt.debug.core.breakpoints,org.eclips
+ e.wst.jsdt.debug.core.jsdi,org.eclipse.wst.jsdt.debug.core.jsdi.conne
+ ct,org.eclipse.wst.jsdt.debug.core.jsdi.event,org.eclipse.wst.jsdt.de
+ bug.core.jsdi.request,org.eclipse.wst.jsdt.debug.core.model,org.eclip
+ se.wst.jsdt.debug.internal.core;x-friends:="org.eclipse.wst.jsdt.debu
+ g.ui",org.eclipse.wst.jsdt.debug.internal.core.breakpoints;x-internal
+ :=true,org.eclipse.wst.jsdt.debug.internal.core.launching;x-friends:=
+ "org.eclipse.wst.jsdt.debug.ui",org.eclipse.wst.jsdt.debug.internal.c
+ ore.model;x-friends:="org.eclipse.wst.jsdt.debug.ui"
+Bundle-Version: 1.0.3.v201011040143
+Bundle-Vendor: %bundleVendor.name
+Bundle-ActivationPolicy: lazy
+Bundle-Name: %bundleName.name
+Import-Package: org.eclipse.wst.jsdt.core
+Bundle-ManifestVersion: 2
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/model/Script.class
+SHA1-Digest: g4QeWlEA01e8R25VZVPNlH2WkuU=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/model/BreakpointPartici
+ pantManager.class
+SHA1-Digest: qGa0XAnNaFNphuBx0J5KN11RZiI=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/model/JavaScriptValue.c
+ lass
+SHA1-Digest: aZZATv/chIUMYRR4UUVGlrbaDhI=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/Value.class
+SHA1-Digest: RmwsijVkQzHS5hp5vNf0Uisth4Y=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/event/ThreadEnterEvent.clas
+ s
+SHA1-Digest: 4qIGzJ2P9d8qnydPnbFFLWSNN9U=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/event/BreakpointEvent.class
+SHA1-Digest: ikzPEmWybBsevwhKiT+dvp0qJvU=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/TextUtils.class
+SHA1-Digest: DB9L+bozsKkgNi1dvVap4rbNizA=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/launching/ConnectorsMan
+ ager.class
+SHA1-Digest: tRglu8BQJ2UKzX7/PaAC6lbFK1A=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/request/VMDisconnectRequest
+ .class
+SHA1-Digest: kQwe13ZLEFevy1FBWac/yp0AbsU=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/model/JavaScriptValue$2
+ .class
+SHA1-Digest: sX7PTcQq3JmhRLaCNQNGXhXcfSw=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/ArrayReference.class
+SHA1-Digest: G9OHrksu/2WaKbf6/MrEGoAKpbM=
+
+Name: org/eclipse/wst/jsdt/debug/core/model/IJavaScriptThread.class
+SHA1-Digest: 5zQHEZfzBd6sIyhHpDwPsJQ+A4I=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/event/EventSet.class
+SHA1-Digest: 4ZEb+K8UhfmYneDSRyRAbW9eFb8=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/Mirror.class
+SHA1-Digest: oaluheGwnoCN3obq2QOWGLZm+LU=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/request/ExceptionRequest.cl
+ ass
+SHA1-Digest: wfbpmQm2Z7O5bGr9SFWJrFTyC+Q=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/event/DebuggerStatementEven
+ t.class
+SHA1-Digest: eIkcjDX5Y1d1jxCRHqisRT7h2o8=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/model/JavaScriptStackFr
+ ame.class
+SHA1-Digest: LefkZBFlTS6ML0NwBGhMz2Ss8ug=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/StackFrame.class
+SHA1-Digest: rG3rWKyDQa5pE4QQExyQmiqkJOU=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/breakpoints/JavaScriptE
+ xceptionBreakpoint.class
+SHA1-Digest: a9Kcky9ABR6YM/e1c5ROVAcnJDY=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/model/JavaScriptThread.
+ class
+SHA1-Digest: R7dKKFWkXGp4v2o8H1upKiB7gR8=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/request/BreakpointRequest.c
+ lass
+SHA1-Digest: TvLyaRV+nOFRKZWvxiSh57QHxBk=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/ThreadReference.class
+SHA1-Digest: KhXPeXM1JsF+v7z1XzckYhYzPOA=
+
+Name: org/eclipse/wst/jsdt/debug/core/model/IJavaScriptValue.class
+SHA1-Digest: PzqIQ48OKiKE7GlYZwygsxhJxis=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/event/Event.class
+SHA1-Digest: G395zLVd/kMU2kszpPZN0Rajtb8=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/request/EventRequest.class
+SHA1-Digest: ZulXA2n+59J2nFDJcHvXddvM4JY=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/request/ThreadExitRequest.c
+ lass
+SHA1-Digest: LLz86duY/bbwJKBs7y2RL245rV8=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/connect/Connector.class
+SHA1-Digest: Qe0kMr5nXUMqeSoxPKmC1BbrLdM=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/model/JavaScriptThread$
+ 1.class
+SHA1-Digest: c5JZiDTlwILoYvYY3LMs+cSf1b0=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/model/EventDispatcher.c
+ lass
+SHA1-Digest: PGruUpOroRSJP6PAYSulvcEOzt0=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/breakpoints/JavaScriptF
+ unctionBreakpoint$1.class
+SHA1-Digest: BpcOrzRq4MGQt9EXlAB4ZpKH2XM=
+
+Name: org/eclipse/wst/jsdt/debug/core/breakpoints/IJavaScriptLoadBreak
+ point.class
+SHA1-Digest: 3ircjwz+hd2kPaqs1a5DSZEynYk=
+
+Name: org/eclipse/wst/jsdt/debug/core/model/IScriptGroup.class
+SHA1-Digest: 4AGzm0ty8pKmWIRpGLKiw1PDEGY=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/launching/JavaScriptSou
+ rceDirector.class
+SHA1-Digest: 2jNkk5qN9jcm05T2a296vY6VVJ8=
+
+Name: org/eclipse/wst/jsdt/debug/core/model/IJavaScriptDebugTarget.cla
+ ss
+SHA1-Digest: /49Msz4U5fa7T0ta3+QKq0nLxp4=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/model/JavaScriptThread$
+ StepHandler.class
+SHA1-Digest: nkBZ0zY4wA9M10KwNUcPHwUPWBU=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/breakpoints/JavaScriptB
+ reakpoint$1.class
+SHA1-Digest: YLHj0Q8iOqnx32Ntkbd414V4yHw=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/model/JavaScriptDebugEl
+ ement.class
+SHA1-Digest: VLgl+4dVu/oYi9bosft2Xk1oAP4=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/BooleanValue.class
+SHA1-Digest: iRZGRlXDZ7gegXrkt5Srq4suyjY=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/event/ThreadExitEvent.class
+SHA1-Digest: wSWaXygGTR7vjiYNE+DAKgctIrQ=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/connect/Connector$IntegerAr
+ gument.class
+SHA1-Digest: joaYJKYYYJ6V8Ne330ewxhmLmZs=
+
+Name: org/eclipse/wst/jsdt/debug/core/breakpoints/IJavaScriptLineBreak
+ point.class
+SHA1-Digest: JFuWKIxoQ3QAHeTyEiGRvSrUBGM=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/ScriptReference.class
+SHA1-Digest: AR+PZQpshTkP7XAdbuCt2vZFjsE=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/request/VMDeathRequest.clas
+ s
+SHA1-Digest: B/KvCs0HpgT4ICVSayRcfP9M9N8=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/Location.class
+SHA1-Digest: yLlY5yEOjo2M8XUb4m0esZOPrkM=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/breakpoints/JavaScriptL
+ ineBreakpoint$1.class
+SHA1-Digest: NdvOALaIQUVvaRIQ1C0AVUa+g/8=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/ObjectReference.class
+SHA1-Digest: TAizP7uq8znqazggCGt1bufK5gM=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/JavaScriptDebugPlugin.c
+ lass
+SHA1-Digest: Wsy7xfusKOUzkYw85asMsZ33GkA=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/Locatable.class
+SHA1-Digest: PRuSIhyyL3uFhUgmi2PwIwwFhWE=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/VirtualMachine.class
+SHA1-Digest: yF2JAeNJIbU0Q/JSVXVFpgZOSz0=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/JavaScriptWatchExpressi
+ onDelegate.class
+SHA1-Digest: jof9NL4pzhX9mTm1Gys6IYCd4nk=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/IncompatibleThreadStateExce
+ ption.class
+SHA1-Digest: nzkjiMqDLBS9Z96zzMNT9+IFzJY=
+
+Name: about.html
+SHA1-Digest: 0oYanwyg+o6FteoZOAiFfmyUBnM=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/launching/messages.prop
+ erties
+SHA1-Digest: EHKSL3E+S2NKK85AxavR7HP+Yy8=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/JavaScriptDebugPreferen
+ ceInitializer.class
+SHA1-Digest: P7DKuYlOaAiRMdFAE8PVikMQHs0=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/request/StepRequest.class
+SHA1-Digest: 3ItUgN7LUr086l+XD5Xd5QwZPuU=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/model/JavaScriptStackFr
+ ame$1.class
+SHA1-Digest: qCOLVJegd3w/cEW7kfBiyStdKWs=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/event/VMDeathEvent.class
+SHA1-Digest: RPZq8RSQ3amiQGo6nYWIu5k/Xic=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/connect/Connector$SelectedA
+ rgument.class
+SHA1-Digest: ZD057RS+Id0039bTBavNTUjrbtg=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/model/JavaScriptPropert
+ y.class
+SHA1-Digest: cMA9aUAbA9YCdfAuSyJXpZSqwto=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/Property.class
+SHA1-Digest: OkthmXWPPjb+1PqOirOJJhZBwpU=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/launching/RemoteJavaScr
+ iptLaunchDelegate.class
+SHA1-Digest: fXce+d7/+pazcyaTK3q2YsR6VI8=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/NullValue.class
+SHA1-Digest: CQM+hX7UzqT6TdIu/XhXx8h2hjo=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/launching/ILaunchConsta
+ nts.class
+SHA1-Digest: 96P9vol0B1MZiZ1cHN4Gx1ziE10=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/event/ExceptionEvent.class
+SHA1-Digest: 6b3Zt9cFkHqc4ZeU9QmsIaGjFoE=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/request/DebuggerStatementRe
+ quest.class
+SHA1-Digest: 4ZnzVPYnTK+OYiAXmfVZzj6rWlc=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/breakpoints/JavaScriptB
+ reakpoint$2.class
+SHA1-Digest: GWwuIhZowuU1Jhqwn3PawOoro/o=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/event/EventQueue.class
+SHA1-Digest: rubplzY6Pr8//vQ4yf0kCJB9M2s=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/IncompatibleVmStateExceptio
+ n.class
+SHA1-Digest: NfYQDKUnv0adrKlW7VphPXHUwQ4=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/breakpoints/DefaultJava
+ ScriptBreakpointParticipant.class
+SHA1-Digest: YQ+MYTrEEWR5je8yZbxbxpFd0Mc=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/model/ScriptGroup.class
+SHA1-Digest: EMr3CdcJyWpqehzSkiZ6HuMKNgE=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/Constants.class
+SHA1-Digest: +XIfGDWwmy9NS0BoGM62rtAKGQw=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/request/SuspendRequest.clas
+ s
+SHA1-Digest: Pe/CxyCfucDAMNlXSATipH/Ij8U=
+
+Name: org/eclipse/wst/jsdt/debug/core/model/IJavaScriptStackFrame.clas
+ s
+SHA1-Digest: qUgk2qCMiXMzhxrefWus2P94CAQ=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/model/modelmessages.pro
+ perties
+SHA1-Digest: NPNCcBEfyozh5UdTO8goBlO78eA=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/launching/ConnectorsMan
+ ager$1.class
+SHA1-Digest: FWKI9ngsjS1kDUD+iBBYLvlYBu4=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/Messages.class
+SHA1-Digest: lXcc9yr/H0SnMlwPrrlmj38MlBg=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/event/VMDisconnectEvent.cla
+ ss
+SHA1-Digest: +ywmuEkTuMARJ+P8U/zTv+Lomrk=
+
+Name: META-INF/eclipse.inf
+SHA1-Digest: KyT9FF7C7t86NoBoa2kZT3ZJBfw=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/request/ThreadEnterRequest.
+ class
+SHA1-Digest: lU6beIIzkHurUmHNUEYw2kSO3Sw=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/event/ScriptLoadEvent.class
+SHA1-Digest: O+x8UGCc2z+rfx/eg94ZwKg39/8=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/breakpoints/Messages.cl
+ ass
+SHA1-Digest: xu33hA2KqZ2BQuzRUMjmo+4dpHw=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/connect/Connector$StringArg
+ ument.class
+SHA1-Digest: MZa+1islH/MaMWlaN7jG26xKsE8=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/model/IJavaScriptEventL
+ istener.class
+SHA1-Digest: aIVcOVycQP69loTiTD6ad3VqV1Y=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/messages.properties
+SHA1-Digest: NOZBul+OeecmSoENdShIS4Gvxyg=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/model/BreakpointPartici
+ pantManager$Participant.class
+SHA1-Digest: yGPjmjSmG2DJBmTw2X0NHyeXhFM=
+
+Name: org/eclipse/wst/jsdt/debug/core/model/IScript.class
+SHA1-Digest: 8d7I7AwjVmfSYP+6yxE4Tl52r4M=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/breakpoints/JavaScriptF
+ unctionBreakpoint.class
+SHA1-Digest: V6K/qH9WGM/mq0rUFrznwhjbcBY=
+
+Name: org/eclipse/wst/jsdt/debug/core/breakpoints/IJavaScriptFunctionB
+ reakpoint.class
+SHA1-Digest: tSUtBovetP2KbmW5PMJgpo0G+1M=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/launching/JavaScriptSou
+ rceLookupParticipant.class
+SHA1-Digest: TebIY4G1KUNW+Fa74FxJ1E25Aa8=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/NumberValue.class
+SHA1-Digest: pNYdGMZUGln/3i3Qn0/3VsbCsAE=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/connect/Connector$BooleanAr
+ gument.class
+SHA1-Digest: fd9r14wqH79u8UCXT0Hy1eer6kI=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/breakpoints/JavaScriptB
+ reakpoint.class
+SHA1-Digest: Elf5IKX1Xq3loC2WG/INZH+LXOQ=
+
+Name: org/eclipse/wst/jsdt/debug/core/breakpoints/IJavaScriptBreakpoin
+ t.class
+SHA1-Digest: 4+/3YGj1FrUPpowbzCEQLUbn2kU=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/breakpoints/JavaScriptL
+ oadBreakpoint.class
+SHA1-Digest: tYQ3wyx+2tPqCBUGXJ8jISupbxM=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/breakpoints/messages.pr
+ operties
+SHA1-Digest: 4PsyJveT+Hmo/zTMr02ceJCIzr0=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/event/LocatableEvent.class
+SHA1-Digest: fRU/lptRhf8j3u+edqiovUNm7Hk=
+
+Name: OSGI-INF/l10n/bundle.properties
+SHA1-Digest: XjhQEotKHhvI4BIjVN3vzx0X25I=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/event/StepEvent.class
+SHA1-Digest: vMf3XjP3R7jyB40Ot2XcMl003pM=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/breakpoints/JavaScriptL
+ oadBreakpoint$1.class
+SHA1-Digest: UaDGkino5r9c20zp8GXRTPrlKb8=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/model/JavaScriptValue$1
+ .class
+SHA1-Digest: dB+Tu/SAPWnChhrwa+opz3BobNM=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/request/ScriptLoadRequest.c
+ lass
+SHA1-Digest: /rQE0ObInxQl8Lzo4ZIxSOvye1w=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/breakpoints/JavaScriptL
+ ineBreakpoint.class
+SHA1-Digest: zz5f97wiRMEdZyuo/F3wI5n7GIY=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/JavaScriptPreferencesMa
+ nager.class
+SHA1-Digest: yNshw/CdDvU10wm/kznleVNxhkk=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/model/JavaScriptDebugTa
+ rget.class
+SHA1-Digest: br92PwOhV+4yR25tVx2Ahw7/aII=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/launching/Messages.clas
+ s
+SHA1-Digest: Z0xcalVsf30d5Uj2dpbESMdVtSc=
+
+Name: plugin.xml
+SHA1-Digest: +wCmejE6cXkqh9mSrtGXtmD0e5U=
+
+Name: org/eclipse/wst/jsdt/debug/core/model/IJavaScriptPrimitiveValue.
+ class
+SHA1-Digest: XHoX2CpCPz+EJCMhrCf+p8tpJQI=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/model/JavaScriptVariabl
+ e.class
+SHA1-Digest: t8BRb/8R4amJ/OOPN8xjds+fqfY=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/Variable.class
+SHA1-Digest: DsTp847nqEc7chUbhdm4wxP5Uys=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/model/JavaScriptDebugTa
+ rget$1.class
+SHA1-Digest: rNnitNI5BUXsGb8qyTx6zrh9a9Y=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/UndefinedValue.class
+SHA1-Digest: 0J7SzsIqrDnftDTSDCJsqDPXgfY=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/FunctionReference.class
+SHA1-Digest: AahG/A9CSRkV0SD1CdB/oMrP3cg=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/connect/LaunchingConnector.
+ class
+SHA1-Digest: UsF6so0PYGDwlE2FfPNkoKEucFU=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/request/EventRequestManager
+ .class
+SHA1-Digest: viJGX4pJUIlpv5UHNxrXNhwVyO4=
+
+Name: org/eclipse/wst/jsdt/debug/core/breakpoints/IJavaScriptBreakpoin
+ tParticipant.class
+SHA1-Digest: NzZHfeCBQxw5Ot33PD7CQ6SNBOA=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/JavaScriptWatchExpressi
+ onDelegate$WatchResult.class
+SHA1-Digest: lt38Y0Al66/ob4OHq17boqoKU5c=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/model/JavaScriptPrimiti
+ veValue.class
+SHA1-Digest: KVWyKAHSQ0gVn/lQJFWhJjMiFmY=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/PrimitiveValue.class
+SHA1-Digest: O5s5iSI2p816H7Rbi+F3N+WLKEs=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/StringValue.class
+SHA1-Digest: MxhMgNPxTMeClYGG+HFz3tQVgK4=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/model/ModelMessages.cla
+ ss
+SHA1-Digest: HZnRvSALnkg/SlAqCaqjanifW3Q=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/event/SuspendEvent.class
+SHA1-Digest: vDFmD61/9eadHgYND7d/A6zatgI=
+
+Name: org/eclipse/wst/jsdt/debug/internal/core/breakpoints/JavaScriptE
+ xceptionBreakpoint$1.class
+SHA1-Digest: mxWoViFjrug/UG8DPjmJmoWK8O8=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/connect/AttachingConnector.
+ class
+SHA1-Digest: v2MFMub40g75znosIX3Rr5dE7fc=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/connect/ListeningConnector.
+ class
+SHA1-Digest: sDTBJobpop5nWZeallAG2q9rjaI=
+
+Name: org/eclipse/wst/jsdt/debug/core/model/JavaScriptDebugModel.class
+SHA1-Digest: oPcrotoA3Uq/9ikyzz80qtRNsB8=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/connect/Connector$Argument.
+ class
+SHA1-Digest: vQtoOH/aDMlk6VTDIYdeuoKcNmM=
+
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/connect/SocketUtil.class
+SHA1-Digest: 2KKbh+Flx05KnP6Razu3sGLv1Ck=
+

@@ -1,0 +1,250 @@
+Manifest-Version: 1.0
+Bundle-RequiredExecutionEnvironment: J2SE-1.4
+Bundle-SymbolicName: org.eclipse.wst.jsdt.debug.rhino;singleton:=true
+Eclipse-SourceReferences: scm:cvs:pserver:dev.eclipse.org:/cvsroot/web
+ tools:org.eclipse.jsdt/plugins/org.eclipse.wst.jsdt.debug.rhino;tag=v
+ 201008170101
+Bundle-Activator: org.eclipse.wst.jsdt.debug.internal.rhino.RhinoDebug
+ Plugin
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.6.0"
+Export-Package: org.eclipse.wst.jsdt.debug.internal.rhino.jsdi;x-inter
+ nal:=true,org.eclipse.wst.jsdt.debug.internal.rhino.jsdi.connect;x-in
+ ternal:=true,org.eclipse.wst.jsdt.debug.internal.rhino.jsdi.event;x-i
+ nternal:=true,org.eclipse.wst.jsdt.debug.internal.rhino.jsdi.request;
+ x-internal:=true
+Bundle-Version: 1.0.1.v201008170101
+Bundle-Vendor: %Bundle-Vendor
+Bundle-ActivationPolicy: lazy
+Bundle-Name: %Bundle-Name
+Import-Package: org.eclipse.debug.core.model,org.eclipse.wst.jsdt.debu
+ g.core.breakpoints,org.eclipse.wst.jsdt.debug.core.jsdi,org.eclipse.w
+ st.jsdt.debug.core.jsdi.connect,org.eclipse.wst.jsdt.debug.core.jsdi.
+ event,org.eclipse.wst.jsdt.debug.core.jsdi.request,org.eclipse.wst.js
+ dt.debug.core.model,org.eclipse.wst.jsdt.debug.internal.rhino.transpo
+ rt
+Bundle-ManifestVersion: 2
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/RhinoDebugPlugin.class
+SHA1-Digest: HZvj0lX6/KpZmYAGRmdZ4o1Sf+A=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/FunctionReference
+ Impl.class
+SHA1-Digest: Xt7xI74s5dRMAPNq/0Q3R+mR65E=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/event/ThreadEnter
+ EventImpl.class
+SHA1-Digest: F3WM5Hu0/dpZWZkRTym5XI0u3rg=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/event/LocatableEv
+ entImpl.class
+SHA1-Digest: xv/UopAS0qjcatYvHCmme0u6i1c=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/connect/PortArgum
+ ent.class
+SHA1-Digest: U89TxW6a/dEz20R0bkYwvtqqtXc=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/ThreadReferenceIm
+ pl.class
+SHA1-Digest: itMvbpoUg6//E/lC5OOwvR/tjUE=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/BooleanValueImpl.
+ class
+SHA1-Digest: sYyS49U+Bi9O0AsQcmD7bc5AfA8=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/event/EventImpl.c
+ lass
+SHA1-Digest: r2G+5H0YT9IftZdBnyCdhyXTMUs=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/Constants.class
+SHA1-Digest: awi+MY/WZDp65zx5Vf9qXDkacMc=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/NumberValueImpl.c
+ lass
+SHA1-Digest: JA67+C9iBKlrZrVPDcPVueme7xk=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/NullValueImpl.cla
+ ss
+SHA1-Digest: pt3ff9UUr6D0TFjVilAn4v3jXBc=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/ArrayReferenceImp
+ l.class
+SHA1-Digest: kOxyV0zOdOGLL1Us/P0W3VFMDzI=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/request/SuspendRe
+ questImpl.class
+SHA1-Digest: y74j6H+yNkHR3pHwUq/IoJeWIvg=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/LocationImpl.clas
+ s
+SHA1-Digest: FQx/UHuMJEn8Ek0LYTCO5Fn3wcw=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/RhinoPreferenceInitial
+ izer.class
+SHA1-Digest: QWPseR/YwJoBVNwhnrHZfez72As=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/VariableImpl.clas
+ s
+SHA1-Digest: SbxBC70RkWIq9CXswmpweTdt0P4=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/event/BreakpointE
+ ventImpl.class
+SHA1-Digest: Jpj1Zsw0GqGY0DS4BkIqvl5Ccos=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/event/EventSetImp
+ l.class
+SHA1-Digest: IdoVKwicmwpWmov8/HmqdYNP18s=
+
+Name: META-INF/eclipse.inf
+SHA1-Digest: KyT9FF7C7t86NoBoa2kZT3ZJBfw=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/MirrorImpl.class
+SHA1-Digest: 8Vj8moj4//yiEpWLifAnLbgnkBA=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/request/ThreadEnt
+ erRequestImpl.class
+SHA1-Digest: WddTMIHYiUmgGzfYNiZgXmJ4Ucs=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/event/StepEventIm
+ pl.class
+SHA1-Digest: L6RtWoJwK7JePxcDqp3K+KQE8qQ=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/breakpoints/RhinoBreak
+ pointParticipant.class
+SHA1-Digest: ivfrgCA8i9jk1rZea6xGPt+JJB8=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/StackFrameImpl.cl
+ ass
+SHA1-Digest: C1u2rHa+XM1yz2rSjF+7ziRkK8A=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/connect/RhinoAtta
+ chingConnector.class
+SHA1-Digest: ke7M3EqnyW1G1ZOuVNpnrHEe9lo=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/ScriptReferenceIm
+ pl.class
+SHA1-Digest: D7Qi4on2c7/5LldpDaPpLQOk/XU=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/RhinoPreferencesManage
+ r.class
+SHA1-Digest: EVQTR7APxRu5xAeX53TIbWTd3F8=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/Messages.class
+SHA1-Digest: KJyYHIzde7maZf3GW0lPU0zZDPs=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/connect/messages.
+ properties
+SHA1-Digest: SSkc5tLrWyxLhWKPzi6QaOedMu0=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/ObjectReferenceIm
+ pl.class
+SHA1-Digest: GgaEv84m/OTtZyYHxdJNfvTS9Sk=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/PropertyImpl.clas
+ s
+SHA1-Digest: xqKI5UnoWiWoJz5Lfws4aNTiyFQ=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/event/ScriptLoadE
+ ventImpl.class
+SHA1-Digest: h2HLkv8k7pi1pmJm24knAsKv05g=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/request/EventRequ
+ estManagerImpl.class
+SHA1-Digest: 7EDHt+ANUxFoSxmYyfjCfuQ+Gcw=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/event/ExceptionEv
+ entImpl.class
+SHA1-Digest: G9dfg+klojAm/aAJocy+NTEc0/E=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/request/DebuggerS
+ tatementRequestImpl.class
+SHA1-Digest: 84jsdfFymwINuPy9t6/tITUhgSo=
+
+Name: OSGI-INF/l10n/bundle.properties
+SHA1-Digest: qXGd1bxCSA2tkD/WNyLpmhxTvV4=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/LocationImpl$Loca
+ tionComparator.class
+SHA1-Digest: 5AGkd/L6pQPryrTMzZocJ+8YGTA=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/request/Breakpoin
+ tRequestImpl.class
+SHA1-Digest: wpmdcWPnyfsY3Pnk8VEjIbO8HYc=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/StringValueImpl.c
+ lass
+SHA1-Digest: nza2Txs+M06bmVhLHYeope8jLuo=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/request/StepReque
+ stImpl.class
+SHA1-Digest: 7LWqClSeK84gkQ6R01e72oXze4I=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/event/EventQueueI
+ mpl.class
+SHA1-Digest: mhrVkw01M6SkpRuTrRDRLfJDh20=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/request/ThreadExi
+ tRequestImpl.class
+SHA1-Digest: Nxoig71vcALLEo3qv6YnoYrapfQ=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/request/VMDeathRe
+ questImpl.class
+SHA1-Digest: HdmPDS6VgJo6PYRo44Ko2zjScjE=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/messages.properti
+ es
+SHA1-Digest: /CGqtPi7Zg2c3zIhFbZUqU7yl+s=
+
+Name: plugin.xml
+SHA1-Digest: 10ZOfT5bS+CWaT6L4C9KxOAfPhE=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/VirtualMachineImp
+ l.class
+SHA1-Digest: 36LzMOkK5N8gWWBh3TYhs+G4V0w=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/request/Exception
+ RequestImpl.class
+SHA1-Digest: lIL1FQyORRdmsuSaJcTLpejCho4=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/UndefinedValueImp
+ l.class
+SHA1-Digest: e2IhyS0JjlhREmvk+rNwZXVfJoc=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/event/DebuggerSta
+ tementEventImpl.class
+SHA1-Digest: ahDp7j4biXoNueo7vxhEqPugFeU=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/request/VMDisconn
+ ectRequestImpl.class
+SHA1-Digest: usmBQ1+wT9Zxl/l78rBwvUiWTyc=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/event/ThreadExitE
+ ventImpl.class
+SHA1-Digest: PxIzLJAIyf2KCD/UTvbT/QHQbzc=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/request/ScriptLoa
+ dRequestImpl.class
+SHA1-Digest: UH9aZZN98ZPljyH6nQVrpFCYUJM=
+
+Name: about.html
+SHA1-Digest: 0oYanwyg+o6FteoZOAiFfmyUBnM=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/connect/HostArgum
+ ent.class
+SHA1-Digest: H0eCCl2P9iEAxCME3ILDkueW5cg=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/connect/Messages.
+ class
+SHA1-Digest: o9/gVA2VR81qBSFvuvviWVdvc5s=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/event/VMDeathEven
+ tImpl.class
+SHA1-Digest: 7cnsncnmrXZhfj755jUdCq/Q2bI=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/event/SuspendEven
+ tImpl.class
+SHA1-Digest: 6P4gIf+SQ0VXSKx9k54wcC4JM/0=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/jsdi/request/EventRequ
+ estImpl.class
+SHA1-Digest: lsEGTj/Hefw6ooeqrrJlb8bQjWQ=
+
