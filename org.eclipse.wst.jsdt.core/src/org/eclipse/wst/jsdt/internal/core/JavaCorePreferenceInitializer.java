@@ -104,7 +104,7 @@ public class JavaCorePreferenceInitializer extends AbstractPreferenceInitializer
 		/* END -------------------------------- Bug 203292 Type/Method/Filed resolution error configuration --------------------- */
 		/* START -------------------------------- Bug 197884 Loosly defined var (for statement) and optional semi-colon --------------------- */
 		defaultOptionsMap.put(JavaScriptCore.LOOSE_VAR_DECL, JavaScriptCore.WARNING);
-		defaultOptionsMap.put(JavaScriptCore.OPTIONAL_SEMICOLON, JavaScriptCore.WARNING);
+		defaultOptionsMap.put(JavaScriptCore.OPTIONAL_SEMICOLON, JavaScriptCore.IGNORE);  // see https://bugs.eclipse.org/bugs/show_bug.cgi?id=335265
 		defaultOptionsMap.put(JavaScriptCore.COMPILER_PB_DUPLICATE_LOCAL_VARIABLES, JavaScriptCore.WARNING);
 		defaultOptionsMap.put(JavaScriptCore.COMPILER_PB_UNINITIALIZED_LOCAL_VARIABLE, JavaScriptCore.WARNING);
 		/* END   -------------------------------- Bug 197884 Loosly defined var (for statement) and optional semi-colon --------------------- */
