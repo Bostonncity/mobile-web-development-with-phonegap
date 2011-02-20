@@ -122,7 +122,7 @@ Export-Package: org.eclipse.wst.jsdt.internal.corext;x-friends:="org.e
  .text,org.eclipse.wst.jsdt.ui.text.folding,org.eclipse.wst.jsdt.ui.te
  xt.java,org.eclipse.wst.jsdt.ui.text.java.hover,org.eclipse.wst.jsdt.
  ui.wizards
-Bundle-Version: 1.1.4.v201102160540
+Bundle-Version: 1.1.4.vqualifier
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-Name: %pluginName

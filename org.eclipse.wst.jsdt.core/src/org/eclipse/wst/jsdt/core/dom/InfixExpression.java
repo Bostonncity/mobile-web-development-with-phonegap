@@ -125,6 +125,7 @@ public class InfixExpression extends Expression {
 		public static final Operator CONDITIONAL_AND = new Operator("&&");//$NON-NLS-1$
 
 		public static final Operator INSTANCEOF = new Operator("instanceof");//$NON-NLS-1$
+		public static final Operator IN = new Operator("in");//$NON-NLS-1$
 		public static final Operator EQUAL_EQUAL_EQUAL = new Operator("===");//$NON-NLS-1$
 		public static final Operator NOT_EQUAL_EQUAL = new Operator("!==");//$NON-NLS-1$
 

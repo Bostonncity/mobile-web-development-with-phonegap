@@ -869,6 +869,9 @@ class ASTConverter {
 			case org.eclipse.wst.jsdt.internal.compiler.ast.OperatorIds.INSTANCEOF :
 				infixExpression.setOperator(InfixExpression.Operator.INSTANCEOF);
 				break;
+			case org.eclipse.wst.jsdt.internal.compiler.ast.OperatorIds.IN :
+				infixExpression.setOperator(InfixExpression.Operator.IN);
+				break;
 			case org.eclipse.wst.jsdt.internal.compiler.ast.OperatorIds.EQUAL_EQUAL_EQUAL :
 				infixExpression.setOperator(InfixExpression.Operator.EQUAL_EQUAL_EQUAL);
 				break;
@@ -2886,6 +2889,8 @@ class ASTConverter {
 				return InfixExpression.Operator.LESS;
 			case org.eclipse.wst.jsdt.internal.compiler.ast.OperatorIds.INSTANCEOF :
 				return InfixExpression.Operator.INSTANCEOF;
+			case org.eclipse.wst.jsdt.internal.compiler.ast.OperatorIds.IN :
+				return InfixExpression.Operator.IN;
 			case org.eclipse.wst.jsdt.internal.compiler.ast.OperatorIds.EQUAL_EQUAL_EQUAL :
 				return InfixExpression.Operator.EQUAL_EQUAL_EQUAL;
 			case org.eclipse.wst.jsdt.internal.compiler.ast.OperatorIds.NOT_EQUAL_EQUAL :

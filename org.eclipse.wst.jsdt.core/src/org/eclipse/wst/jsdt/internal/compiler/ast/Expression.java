@@ -650,6 +650,7 @@ public void markAsNonNull() {
 		case IASTNode.STRING_LITERAL:
 		case IASTNode.CHAR_LITERAL:
 		case IASTNode.ARRAY_REFERENCE:
+		case IASTNode.FUNCTION_CALL:
 			
 			break;
 
