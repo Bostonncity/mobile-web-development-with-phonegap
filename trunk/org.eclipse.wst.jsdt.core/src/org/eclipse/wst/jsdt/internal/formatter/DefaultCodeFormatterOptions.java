@@ -2209,7 +2209,7 @@ public class DefaultCodeFormatterOptions {
 
 	public void setEclipseDefaultSettings() {
 		setJavaConventionsSettings();
-		this.tab_char = TAB;
+		this.tab_char = SPACE;
 		this.tab_size = 4;
 	}
 
