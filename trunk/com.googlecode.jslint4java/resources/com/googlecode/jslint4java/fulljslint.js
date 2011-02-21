@@ -1,5 +1,5 @@
 // jslint.js
-// 2011-02-15
+// 2011-02-20
 
 /*
 Copyright (c) 2002 Douglas Crockford  (www.JSLint.com)
@@ -3769,11 +3769,7 @@ loop:   for (;;) {
     });
 
     infix('(', 160, function (left, that) {
-        if (indent && indent.statement) {
-            no_space_only(prevtoken, token);
-        } else {
-            no_space(prevtoken, token);
-        }
+        no_space_only(prevtoken, token);
         if (!left.immed && left.id === 'function') {
             warn(bundle.wrap_immediate);
         }
@@ -3812,7 +3808,7 @@ loop:   for (;;) {
             }
         }
         no_space();
-        step_out(')', this);
+        step_out(')', that);
         if (typeof left === 'object') {
             if (left.value === 'parseInt' && p.length === 1) {
                 warn(bundle.radix, left);
@@ -6450,7 +6446,7 @@ loop:   for (;;) {
     };
     itself.jslint = itself;
 
-    itself.edition = '2011-02-15';
+    itself.edition = '2011-02-20';
 
     return itself;
 
