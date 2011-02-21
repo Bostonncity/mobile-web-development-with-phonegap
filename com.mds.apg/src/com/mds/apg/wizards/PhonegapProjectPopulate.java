@@ -169,7 +169,16 @@ class PhonegapProjectPopulate {
     static private void getPhonegapJar(IProgressMonitor monitor, PageInfo pageInfo) throws CoreException,
             IOException, URISyntaxException {
         
-        if (pageInfo.mFromGitHub) {
+        if (pageInfo.mPackagedPhonegap) {
+            addDefaultDirectories(pageInfo.mAndroidProject, "", new String[] { "libs"  }, monitor);
+            String libsDir = Platform.getLocation().toString() + "/" + pageInfo.mAndroidProject.getName() + "/libs/";
+            bundleCopy("/resources/phonegap/jar", libsDir);
+            updateClasspath(monitor,
+                    pageInfo.mAndroidProject, 
+                    libsDir + "/phonegap.jar",
+                    null); 
+            
+        } else if (pageInfo.mFromGitHub) {  // TODO - make phonegap.jar come from a separate project in user's install
             String toDir = Platform.getLocation().toString() + "/" + pageInfo.mAndroidProject.getName() + "/src";
             FileCopy.recursiveCopy(pageInfo.mPhonegapDirectory + "/framework/src", toDir);
             updateClasspath(monitor,
@@ -239,6 +248,13 @@ class PhonegapProjectPopulate {
                 doCopy = false;
             }
         } 
+        if (pageInfo.mPackagedPhonegap) {
+            bundleCopy("resources/phonegap/js", wwwDir);
+            if (pageInfo.mUseExample && !pageInfo.mSenchaKitchenSink) {
+                doCopy = false;
+                bundleCopy("resources/phonegap/Sample", wwwDir);
+            }
+        }
         if (doCopy) {
             FileCopy.recursiveCopy(pageInfo.mSourceDirectory, wwwDir);
         }
@@ -253,7 +269,7 @@ class PhonegapProjectPopulate {
             FileCopy.createPhonegapJs(pageInfo.mPhonegapDirectory + "/" + "framework" + "/"
                     + "assets" + "/" + "js", wwwDir + "phonegap.js");
 
-        } else { // www.phonegap.com/download
+        } else if (!pageInfo.mPackagedPhonegap) { // www.phonegap.com/download
             if (pageInfo.mUseExample && !pageInfo.mSenchaKitchenSink) { 
                 // copy phonegap{version}.js to phonegap.js
                 if (pageInfo.mJqmChecked || pageInfo.mSenchaChecked) {  // otherwise already there

@@ -141,9 +141,9 @@ public class PageJqm extends WizardSection {
         mJqmPathField.setText(getLocationSave());
         setupDirectoryBrowse(mJqmPathField, parent, mJqmGroup);
         
-        // Check box to seed project with Sencha Kitchen Sink app.
+        // Check box to seed project with jQuery Mobile UI demo
         // This should eventually be a scroll box like the Android sample seeder, 
-        // But many of the other Sencha examples specific to tablets.
+        // to enable other samples
         
         mJqmDemo = new Button(group, SWT.CHECK);
         mJqmDemo.setText("Create project with jQuery Mobile UI demo");
@@ -151,8 +151,8 @@ public class PageJqm extends WizardSection {
         mJqmDemo.setToolTipText("Demonstrates capabilities of jQuery mobile");
         
         /**
-         * Enables the Contents section based on the Kitchen Sink checkbox
-         * Contents isn't needed if we're making a Sencha Kitchen Sink
+         * Enables the Contents section based on the jQuery Mobile UI demo checkbox
+         * Contents isn't needed if we're making a jQuery Mobile UI demo
          */
 
         SelectionListener jqmDemoListener = new SelectionAdapter() {
@@ -215,9 +215,7 @@ public class PageJqm extends WizardSection {
     
     
     /**
-     * Enables or disable the Jqm widgets depending on the user selection:
-     * the location path is enabled when using the "existing source" mode (i.e. not new project)
-     * or in new project mode with the "use default location" turned off.
+     * Enables or disable the Jqm widgets depending on the user selection
      */
     void enableJqmWidgets(boolean doUpdate) {
         boolean jqmChecked = jqmChecked();

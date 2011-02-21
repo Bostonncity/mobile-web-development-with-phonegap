@@ -17,8 +17,12 @@
 package com.mds.apg.wizards;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
@@ -28,6 +32,7 @@ public final class PagePhonegapPathSet extends WizardSection {
 
     // Set up storage for persistent initializers
     private final static String PHONEGAP_DIR = com.mds.apg.Activator.PLUGIN_ID + ".phonegap"; 
+    private final static String PG_USE_PACKAGED = com.mds.apg.Activator.PLUGIN_ID + ".pgusepackaged";
     
     /** Last user-browsed location, static so that it be remembered for the whole session */ 
     private static String sPhonegapPathCache = "";
@@ -38,6 +43,8 @@ public final class PagePhonegapPathSet extends WizardSection {
     
     // widgets
     Text mPhonegapPathField;
+    private Button mUsePackagedPgRadio;
+    private Composite mPgGroup;
     
     PagePhonegapPathSet(AndroidPgProjectCreationPage wizardPage, Composite parent) {
         super(wizardPage);
@@ -54,15 +61,49 @@ public final class PagePhonegapPathSet extends WizardSection {
 
         // Set up layout for phonegap location entry
         Group phonegapGroup = new Group(parent, SWT.NONE);
-        phonegapGroup.setLayout(new GridLayout(2, false /* columns of not equal size */));
+        phonegapGroup.setLayout(new GridLayout());
         phonegapGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
         phonegapGroup.setFont(parent.getFont());
-        phonegapGroup.setText("phonegap-android Location");
+        phonegapGroup.setText("PhoneGap Configuration");
+        
+        // Choose whether to use packaged PhoneGap or installed version
+        
+        boolean initialVal = doGetPreferenceStore().getString(PG_USE_PACKAGED) != ""; 
+        mUsePackagedPgRadio = new Button(phonegapGroup, SWT.RADIO);
+        mUsePackagedPgRadio.setText("Use Built-in PhoneGap - version 0.9.4");
+        mUsePackagedPgRadio.setSelection(initialVal);
+        mUsePackagedPgRadio.setToolTipText("Use the PhoneGap installation included with this Eclipse plug-in"); 
+        
+        Button useInstalledPgRadio = new Button(phonegapGroup, SWT.RADIO);
+        useInstalledPgRadio.setText("Enter path to installed PhoneGap");
+        useInstalledPgRadio.setToolTipText("Specify directory that includes a downloaded version of PhoneGap"); 
+        useInstalledPgRadio.setSelection(!initialVal);
+        
+        SelectionListener location_listener = new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                super.widgetSelected(e);
+                enablePgWidgets(true);
+                mWizardPage.validatePageComplete();
+            }
+        };
+        mUsePackagedPgRadio.addSelectionListener(location_listener);
+        useInstalledPgRadio.addSelectionListener(location_listener);
+        
+        // Hideable directory chooser for local PhoneGap installation
 
-        mPhonegapPathField = new Text(phonegapGroup, SWT.BORDER);
+        mPgGroup = new Composite(phonegapGroup, SWT.NONE);
+        mPgGroup.setLayout(new GridLayout(3, /* num columns */
+            false /* columns of not equal size */));
+            mPgGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+            mPgGroup.setFont(parent.getFont());
+
+        mPhonegapPathField = new Text(mPgGroup, SWT.BORDER);
         mPhonegapPathField.setText(getLocationSave());
         mPhonegapPathField.setToolTipText("Should be the path to the unpacked phonegap-android installation");
-        setupDirectoryBrowse(mPhonegapPathField, parent, phonegapGroup);
+        setupDirectoryBrowse(mPhonegapPathField, parent, mPgGroup);
+        
+        enablePgWidgets(false);  // to get the visibility and initial settings
     }
 
     // --- Internal getters & setters ------------------
@@ -94,6 +135,25 @@ public final class PagePhonegapPathSet extends WizardSection {
     final String getPhonegapJarName() {
         return mPhonegapJar;
     }
+    
+    final boolean useFromPackaged() {
+        return mUsePackagedPgRadio.getSelection();
+    }
+    
+    /**
+     * Enables or disable the PhoneGap location widgets depending on the user selection:
+     * the location path is enabled/disabled based on the radio selection 
+     */
+    
+    void enablePgWidgets(boolean doUpdate) {
+        boolean usePackaged = useFromPackaged();
+        
+        mPgGroup.setVisible(!usePackaged);
+        if (doUpdate) {  
+            update(null);
+            doGetPreferenceStore().setValue(PG_USE_PACKAGED, usePackaged ? "true" : "");
+        }
+    }    
 
     // --- UI Callbacks ----
 
@@ -107,6 +167,9 @@ public final class PagePhonegapPathSet extends WizardSection {
      *         MSG_NONE.
      */
     int validate() {
+        if (useFromPackaged()) {  // no validation necessary
+            return AndroidPgProjectCreationPage.MSG_NONE;
+        }
         String phonegapDirName = getValue();
         File phonegapDir = new File(phonegapDirName);
         if (!phonegapDir.exists() || !phonegapDir.isDirectory()) {
