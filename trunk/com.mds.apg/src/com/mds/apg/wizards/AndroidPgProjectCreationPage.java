@@ -148,27 +148,26 @@ public class AndroidPgProjectCreationPage extends WizardPage {
         // First handle cross-section logic updates that need to happen regardless of validation 
         
         boolean checkLocation = true;
+        boolean createFromExample = mInitContentsDialog.isCreateFromExample();
         boolean contentsVisible = !(mJqmDialog.useJqmDemo() || mSenchaDialog.useSenchaKitchenSink());
         mContentsSection.setVisible(contentsVisible); // and make sure Contents is visible
-        mInitContentsDialog.enableLocationWidgets(contentsVisible && 
-                !mInitContentsDialog.isCreateFromExample()); // and location right state
-        
+        mInitContentsDialog.enableLocationWidgets(contentsVisible && !createFromExample); // and location right state
         if (contentsVisible) {
             String withString;
             if (mJqmDialog.jqmChecked()) {
                 withString = "with jQuery Mobile";
-                if (mInitContentsDialog.isCreateFromExample()) {
+                if (createFromExample) {
                     checkLocation = false;
                 }
             } else if (mSenchaDialog.senchaChecked()) {
                 withString = "with Sencha Touch";
-                if (mInitContentsDialog.isCreateFromExample()) {
+                if (createFromExample) {
                     checkLocation = false;
                 }
             } else {
                 // needs to be seeded with blanks so that there's space when it needs to appear (Issue 3)
                 withString = "                                 ";
-                if (mInitContentsDialog.isCreateFromExample()) {
+                if (createFromExample && !mPhonegapDialog.useFromPackaged()) {
                     if (mPhonegapDialog.isfromGit()) {
                         mInitContentsDialog.update(mPhonegapDialog.getValue() + "/example");
                     } else {
@@ -192,6 +191,10 @@ public class AndroidPgProjectCreationPage extends WizardPage {
             mInitContentsDialog.update(mSenchaDialog.getValue() + "/examples/kitchensink");
         }
 
+        if (checkLocation) { 
+            if (mPhonegapDialog.useFromPackaged()) checkLocation = !createFromExample;
+        }      
+            
         mInitContentsDialog.locationVisibility(checkLocation);
         if (checkLocation) {
             if (mInitContentsDialog.validate() != MSG_NONE) return false;

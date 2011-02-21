@@ -27,7 +27,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-//import java.util.Hashtable;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -53,8 +52,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.ISetSelectionTarget;
-//import org.eclipse.wst.jsdt.core.JavaScriptCore;
-//import org.eclipse.wst.jsdt.internal.core.JavaModelManager;
+import org.eclipse.wst.jsdt.ui.JavaScriptUI;
 import org.eclipse.wst.jsdt.ui.actions.OpenJavaPerspectiveAction;
 
 import com.android.ide.eclipse.adt.internal.wizards.newproject.NewProjectWizard;
@@ -121,18 +119,14 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
         
         // And open the project explorer
         IViewReference reference = activePage.findViewReference(IPageLayout.ID_PROJECT_EXPLORER);
-        IWorkbenchPart part = reference.getPart(false);
-        if (part instanceof ISetSelectionTarget) {
-            StructuredSelection selection = new StructuredSelection(file);
-            ((ISetSelectionTarget) part).selectReveal(selection);
+        if (reference == null) reference = activePage.findViewReference(JavaScriptUI.ID_PACKAGES);
+        if (reference != null) {  // Either Project Explorer or the JSDT Script Explorer is open
+            IWorkbenchPart part = reference.getPart(false);
+            if (part instanceof ISetSelectionTarget) {
+                StructuredSelection selection = new StructuredSelection(file);
+                ((ISetSelectionTarget) part).selectReveal(selection);
+            }
         }
-        
-        // Turn off the JSDT semi-colon warnings.  Hold off until a more thorough 
-        // warning analysis can be done.
-        
-//        Hashtable<String, String> h = new Hashtable<String, String>();
-//        h.put(JavaScriptCore.OPTIONAL_SEMICOLON, JavaScriptCore.IGNORE);
-//        JavaModelManager.getJavaModelManager().setOptions(h);
 
         return true;
     }
@@ -146,6 +140,7 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
                 mPhonegapPage.mInitContentsDialog.getValue(),
                 mPhonegapPage.mPhonegapDialog.getValue(), 
                 mPhonegapPage.mPhonegapDialog.isfromGit(),
+                mPhonegapPage.mPhonegapDialog.useFromPackaged(),
                 mPhonegapPage.mPhonegapDialog.getPhonegapJsName(),
                 mPhonegapPage.mPhonegapDialog.getPhonegapJarName(),
                 mPhonegapPage.mInitContentsDialog.isCreateFromExample(),

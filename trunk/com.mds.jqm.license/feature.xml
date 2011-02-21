@@ -2,21 +2,20 @@
 <feature
       id="com.mds.jqm.license"
       label="jQuery Mobile License"
-      version="1.0.0.qualifier"
+      version="1.2.0.qualifier"
       provider-name="MDS">
 
-   <description url="http://www.example.com/description">
-      [Enter Feature Description here.]
+   <description url="http://jquerymobile.com/">
+      jQuery mobile license agreement
    </description>
 
-   <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
+   <copyright>
+      Copyright (c) 2010 John Resig, http://jquery.com/
    </copyright>
 
    <license url="https://github.com/jquery/jquery/blob/master/MIT-LICENSE.txt">
-         jQuery Mobile's MIT license
-
-Copyright (c) 2010 John Resig, http://jquery.com/
+      jQuery Mobile&apos;s MIT license
+Copyright (c) 2011 John Resig, http://jquery.com/
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
