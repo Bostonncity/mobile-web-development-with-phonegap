@@ -24,6 +24,7 @@ package com.mds.apg.wizards;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -171,7 +172,7 @@ class PhonegapProjectPopulate {
         
         if (pageInfo.mPackagedPhonegap) {
             addDefaultDirectories(pageInfo.mAndroidProject, "", new String[] { "libs"  }, monitor);
-            String libsDir = Platform.getLocation().toString() + "/" + pageInfo.mAndroidProject.getName() + "/libs/";
+            String libsDir = pageInfo.mDestinationDirectory + "/libs/";
             bundleCopy("/resources/phonegap/jar", libsDir);
             updateClasspath(monitor,
                     pageInfo.mAndroidProject, 
@@ -179,7 +180,7 @@ class PhonegapProjectPopulate {
                     null); 
             
         } else if (pageInfo.mFromGitHub) {  // TODO - make phonegap.jar come from a separate project in user's install
-            String toDir = Platform.getLocation().toString() + "/" + pageInfo.mAndroidProject.getName() + "/src";
+            String toDir = pageInfo.mDestinationDirectory + "/src";
             FileCopy.recursiveCopy(pageInfo.mPhonegapDirectory + "/framework/src", toDir);
             updateClasspath(monitor,
                     pageInfo.mAndroidProject, 
@@ -248,18 +249,19 @@ class PhonegapProjectPopulate {
                 doCopy = false;
             }
         } 
-        if (pageInfo.mPackagedPhonegap) {
-            bundleCopy("resources/phonegap/js", wwwDir);
-            if (pageInfo.mUseExample && !pageInfo.mSenchaKitchenSink) {
-                doCopy = false;
+        
+        if (doCopy) {
+            if (pageInfo.mPackagedPhonegap && !pageInfo.mSenchaKitchenSink) {
                 bundleCopy("resources/phonegap/Sample", wwwDir);
+            } else {
+                FileCopy.recursiveCopy(pageInfo.mSourceDirectory, wwwDir);
             }
         }
-        if (doCopy) {
-            FileCopy.recursiveCopy(pageInfo.mSourceDirectory, wwwDir);
-        }
         
-        if (pageInfo.mFromGitHub) {
+        if (pageInfo.mPackagedPhonegap) {
+            bundleCopy("resources/phonegap/js", wwwDir);
+            
+        } else if (pageInfo.mFromGitHub) {
 
             // Even though there is a phonegap.js file in the directory
             // framework/assets/www, it is WRONG!!
@@ -269,7 +271,7 @@ class PhonegapProjectPopulate {
             FileCopy.createPhonegapJs(pageInfo.mPhonegapDirectory + "/" + "framework" + "/"
                     + "assets" + "/" + "js", wwwDir + "phonegap.js");
 
-        } else if (!pageInfo.mPackagedPhonegap) { // www.phonegap.com/download
+        } else { // www.phonegap.com/download
             if (pageInfo.mUseExample && !pageInfo.mSenchaKitchenSink) { 
                 // copy phonegap{version}.js to phonegap.js
                 if (pageInfo.mJqmChecked || pageInfo.mSenchaChecked) {  // otherwise already there
@@ -376,17 +378,22 @@ class PhonegapProjectPopulate {
      * 
      * @throws URISyntaxException
      */
-    static private void phonegapizeAndroidManifest(PageInfo pageInfo) throws CoreException, IOException,
-            URISyntaxException {
+    static private void phonegapizeAndroidManifest(PageInfo pageInfo) throws CoreException,
+            IOException, URISyntaxException {
 
         String destFile = pageInfo.mDestinationDirectory + "AndroidManifest.xml";
-        String sourceFile;
-        if (pageInfo.mFromGitHub) {
-            sourceFile = pageInfo.mPhonegapDirectory + "/framework/AndroidManifest.xml";
+        String sourceFileContents;
+        if (pageInfo.mPackagedPhonegap) {
+            sourceFileContents = bundleGetFileAsString("/resources/phonegap/AndroidManifest.xml");
         } else {
-            sourceFile = pageInfo.mPhonegapDirectory + "/Android/Sample/AndroidManifest.xml";
+            String sourceFile;
+            if (pageInfo.mFromGitHub) {
+                sourceFile = pageInfo.mPhonegapDirectory + "/framework/AndroidManifest.xml";
+            } else {
+                sourceFile = pageInfo.mPhonegapDirectory + "/Android/Sample/AndroidManifest.xml";
+            }
+            sourceFileContents = StringIO.read(sourceFile);
         }
-        String sourceFileContents = StringIO.read(sourceFile);
         String manifestInsert = getManifestScreensAndPermissions(sourceFileContents);
         String destFileContents = StringIO.read(destFile);
 
@@ -441,14 +448,28 @@ class PhonegapProjectPopulate {
      */
     static private void getResFiles(IProgressMonitor monitor, PageInfo pageInfo) throws CoreException,
             IOException, URISyntaxException {
+        String destResDir = pageInfo.mDestinationDirectory + "res" + "/";
 
+        if (pageInfo.mPackagedPhonegap) {
+            bundleCopy("/resources/phonegap/layout", pageInfo.mDestinationDirectory + "/res/layout/");
+
+            // Copy resource drawable to all of the project drawable* directories
+            File destFile = new File(destResDir);
+            String fList[] = destFile.list();
+            for (String s : fList) {
+                if (s.indexOf("drawable") == 0) {
+                    InputStream sourceDrawable = bundleGetFileAsStream("/resources/phonegap/icons/mdspgicon.png");
+                    FileCopy.coreStreamCopy(sourceDrawable, new File(destResDir + s + "/icon.png"));
+                }
+            }
+            return;
+        }
         String sourceResDir;
         if (pageInfo.mFromGitHub) {
             sourceResDir = pageInfo.mPhonegapDirectory + "/framework/res/";
         } else {
             sourceResDir = pageInfo.mPhonegapDirectory + "/Android/Sample/res/";
         }
-        String destResDir = pageInfo.mDestinationDirectory + "res" + "/";
 
         FileCopy.recursiveForceCopy(sourceResDir + "layout" + "/", destResDir + "layout" + "/");
 
@@ -587,8 +608,23 @@ class PhonegapProjectPopulate {
                 }
             } else {
                 // This is a file - copy it
-                FileCopy.coreStreamCopy(url.openStream(), toFile);
+                FileCopy.coreStreamCopy(url.openStream(), toFile);      
             }        
         }
     }
+    
+    static private InputStream bundleGetFileAsStream(String fileName) throws IOException,
+            URISyntaxException {
+
+        Bundle bundle = com.mds.apg.Activator.getDefault().getBundle();
+        URL url = bundle.getEntry(fileName);
+        return url.openStream();
+    }
+    
+    static private String bundleGetFileAsString(String fileName) throws IOException,
+            URISyntaxException {
+
+        return StringIO.convertStreamToString(bundleGetFileAsStream(fileName));
+    }
+    
 }
