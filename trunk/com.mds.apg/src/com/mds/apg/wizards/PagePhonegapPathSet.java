@@ -206,9 +206,9 @@ public final class PagePhonegapPathSet extends WizardSection {
 
                 for (String s : al) {
                     if (s.indexOf("phonegap") == 0) {
-                        if (s.substring(s.length()-3).equals(".js")) {
+                        if (s.endsWith(".js")) {
                             mPhonegapJs = s;
-                        } else if (s.substring(s.length()-4).equals(".jar")) {
+                        } else if (s.endsWith(".jar")) {
                             mPhonegapJar = s;
                         }
                     } else if (s.equals("Sample")) {

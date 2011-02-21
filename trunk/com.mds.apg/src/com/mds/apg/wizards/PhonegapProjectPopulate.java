@@ -23,6 +23,7 @@
 package com.mds.apg.wizards;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -37,7 +38,6 @@ import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
@@ -231,8 +231,7 @@ class PhonegapProjectPopulate {
 
         addDefaultDirectories(pageInfo.mAndroidProject, "assets/", new String[] {
             "www"  }, monitor);
-        String wwwDir = Platform.getLocation().toString() + "/"
-                + pageInfo.mAndroidProject.getName() + "/" + "assets" + "/" + "www" + "/";
+        String wwwDir = pageInfo.mDestinationDirectory + "/assets/www/";
 
         boolean doCopy = true;
         if (pageInfo.mUseJqmDemo) {
@@ -258,8 +257,17 @@ class PhonegapProjectPopulate {
             }
         }
         
+        String phonegapJsFileName;
+        
+        class isPhoneGapFile implements FileFilter {
+            public boolean accept(File f) {
+                return f.getName().indexOf("phonegap") >= 0;
+            }
+        }
+        
         if (pageInfo.mPackagedPhonegap) {
             bundleCopy("resources/phonegap/js", wwwDir);
+            phonegapJsFileName = (new File(wwwDir)).listFiles(new isPhoneGapFile())[0].getName();
             
         } else if (pageInfo.mFromGitHub) {
 
@@ -268,15 +276,17 @@ class PhonegapProjectPopulate {
             // phonegap.js must be constructed from the files in
             // framework/assets/js
 
-            FileCopy.createPhonegapJs(pageInfo.mPhonegapDirectory + "/" + "framework" + "/"
-                    + "assets" + "/" + "js", wwwDir + "phonegap.js");
+            FileCopy.createPhonegapJs(pageInfo.mPhonegapDirectory + "/framework/"
+                    + "assets/js", wwwDir + "phonegap.js");
+            phonegapJsFileName = "phonegap.js";
 
         } else { // www.phonegap.com/download
+            phonegapJsFileName = pageInfo.mPhonegapJs;
             if (pageInfo.mUseExample && !pageInfo.mSenchaKitchenSink) { 
                 // copy phonegap{version}.js to phonegap.js
                 if (pageInfo.mJqmChecked || pageInfo.mSenchaChecked) {  // otherwise already there
                     FileCopy.copy(pageInfo.mPhonegapDirectory + "/Android/" + pageInfo.mPhonegapJs,
-                            wwwDir + "phonegap.js");
+                            wwwDir + pageInfo.mPhonegapJs);
                 }
             } else { // otherwise keep the name, since the user controls the
                      // index.html (and don't overwrite if user supplied the phonegap.js)
@@ -284,6 +294,12 @@ class PhonegapProjectPopulate {
                         + pageInfo.mPhonegapJs, wwwDir + pageInfo.mPhonegapJs);
             }
         }
+        
+        // Make sure index.html has the right phonegap.js
+        String indexHtmlContents = StringIO.read(wwwDir + "index.html");
+        indexHtmlContents = indexHtmlContents.replaceFirst("src=\"phonegap[a-zA-Z-.0-9]*js\"",
+                "src=\"" + phonegapJsFileName + "\"");    
+        StringIO.write(wwwDir + "index.html", indexHtmlContents);
 
         if (pageInfo.mSenchaKitchenSink) { // delete the confusing index_android.html
             try {
@@ -625,6 +641,5 @@ class PhonegapProjectPopulate {
             URISyntaxException {
 
         return StringIO.convertStreamToString(bundleGetFileAsStream(fileName));
-    }
-    
+    }   
 }
