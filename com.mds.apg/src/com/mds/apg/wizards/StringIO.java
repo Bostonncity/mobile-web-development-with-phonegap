@@ -28,4 +28,25 @@ public class StringIO {
         writer.write(output);
         writer.close();
     } 
+    
+    /**
+     * Reads and returns the content of an Input Stream 
+     * @param in InputStream
+     * @return string version of InputStream
+     * @throws IOException 
+     */
+    
+    public static String convertStreamToString(InputStream is) throws IOException {
+        final char[] buffer = new char[0x10000];
+        StringBuilder out = new StringBuilder();
+        Reader in = new InputStreamReader(is, "UTF-8");
+        int read;
+        do {
+          read = in.read(buffer, 0, buffer.length);
+          if (read > 0) {
+            out.append(buffer, 0, read);
+          }
+        } while (read >= 0);
+        return out.toString();
+    }
 }
