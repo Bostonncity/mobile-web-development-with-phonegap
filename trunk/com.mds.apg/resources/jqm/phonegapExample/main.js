@@ -8,13 +8,65 @@ var deviceInfo = function() {
     document.getElementById("colorDepth").innerHTML = screen.colorDepth;
 };
 
-var getLocation = function() {
+var locationWatch = false;
+
+var toggleLocation = function() {
     var suc = function(p) {
-        alert(p.coords.latitude + " " + p.coords.longitude);
+        jQuery("#loctext").empty();
+        var text = "<div class=\"locdata\">Latitude: " + p.coords.latitude
+                + "<br/>" + "Longitude: " + p.coords.longitude + "<br/>"
+                + "Accuracy: " + p.coords.accuracy + "m<br/>" + "</div>";
+        jQuery("#locdata").append(text);
+
+        var image_url = "http://maps.google.com/maps/api/staticmap?sensor=false&center="
+                + p.coords.latitude
+                + ","
+                + p.coords.longitude
+                + "&zoom=14&size=280x175&markers=color:blue|"
+                + p.coords.latitude + ',' + p.coords.longitude;
+
+        jQuery("#map").remove();
+        jQuery("#loccontainer").append(
+                jQuery(document.createElement("img")).attr("src", image_url)
+                        .attr('id', 'map'));
     };
-    var locFail = function() {
+    var fail = function(error) {
+        jQuery("#loctext").empty();
+        switch (error.code) {
+        case error.PERMISSION_DENIED:
+            alert("User did not share geolocation data.");
+            break;
+
+        case error.POSITION_UNAVAILABLE:
+            alert("Could not detect current position.");
+            break;
+
+        case error.TIMEOUT:
+            alert("Retrieving position timed out.");
+            break;
+
+        default:
+            alert("Unknown error.");
+            break;
+        }
     };
-    navigator.geolocation.getCurrentPosition(suc, locFail);
+
+    if (locationWatch) {
+        locationWatch = false;
+        jQuery("#loctext").empty();
+        jQuery("#locdata").empty();
+        jQuery("#map").remove();
+    } else {
+        if (navigator.geolocation) {
+            jQuery("#loctext").append("Getting geolocation . . .");
+            navigator.geolocation.getCurrentPosition(suc, fail);
+        } else {
+            jQuery("#loctext").empty();
+            jQuery("#loctext").append("Unable to get location.");
+            alert("Device or browser can not get location.");
+        }
+        locationWatch = true;
+    }
 };
 
 var beep = function() {
@@ -31,7 +83,7 @@ function roundNumber(num) {
     return result;
 }
 
-var accelerationWatch = false;
+var accelerationWatch = null;
 
 function updateAcceleration(a) {
     document.getElementById('x').innerHTML = roundNumber(a.x);
@@ -39,23 +91,24 @@ function updateAcceleration(a) {
     document.getElementById('z').innerHTML = roundNumber(a.z);
 }
 
-var toggleAccel = function() {
-    if (accelerationWatch) {
+function toggleAccel() {
+    if (accelerationWatch !== null) {
         navigator.accelerometer.clearWatch(accelerationWatch);
-        $('.ui-grid-b').hide();
-        accelerationWatch = false;
+        updateAcceleration({
+            x : "",
+            y : "",
+            z : ""
+        });
+        accelerationWatch = null;
     } else {
-        $('.ui-grid-b').show();
-        accelerationWatch = true;
         var options = {};
         options.frequency = 1000;
         accelerationWatch = navigator.accelerometer.watchAcceleration(
                 updateAcceleration, function(ex) {
-                    navigator.accelerometer.clearWatch(accel_watch_id);
                     alert("accel fail (" + ex.name + ": " + ex.message + ")");
                 }, options);
     }
-};
+}
 
 var preventBehavior = function(e) {
     e.preventDefault();
@@ -66,7 +119,7 @@ function dump_pic(data) {
     console.log(data);
     viewport.style.display = "";
     viewport.style.position = "absolute";
-    viewport.style.bottom = "140px";
+    viewport.style.bottom = "160px";
     viewport.style.left = "10px";
     document.getElementById("test_img").src = "data:image/jpeg;base64," + data;
 }
@@ -76,9 +129,9 @@ function fail(msg) {
 }
 
 function show_pic() {
-    var viewport = document.getElementById('viewport');
-    viewport.style.display = "";
-    navigator.camera.getPicture(dump_pic, fail, { quality : 50 });
+    navigator.camera.getPicture(dump_pic, fail, {
+        quality : 50
+    });
 }
 
 function close() {
@@ -93,12 +146,15 @@ function readFile() {
 }
 
 function writeFile() {
-    navigator.file.write('foo.txt', "This is a test of writing to a file", fail, fail);
+    navigator.file.write('foo.txt', "This is a test of writing to a file",
+            fail, fail);
 }
 
 function contacts_success(contacts) {
-    alert(contacts.length + ' contacts returned.' + (contacts[2] ? 
-            (' Third contact is ' + contacts[2].displayName)  : ''));
+    alert(contacts.length
+            + ' contacts returned.'
+            + (contacts[2] ? (' Third contact is ' + contacts[2].displayName)
+                    : ''));
 }
 
 function get_contacts() {
@@ -107,13 +163,43 @@ function get_contacts() {
     obj.multiple = true;
     obj.limit = 5;
     navigator.service.contacts.find(
-            [ "displayName", "phoneNumbers", "emails" ], contacts_success, fail, obj);
+            [ "displayName", "phoneNumbers", "emails" ], contacts_success,
+            fail, obj);
 }
 
+var networkReachableCallback = function(reachability) {
+    // There is no consistency on the format of reachability
+    var networkState = reachability.code || reachability;
+
+    var currentState = {};
+    currentState[NetworkStatus.NOT_REACHABLE] = 'No network connection';
+    currentState[NetworkStatus.REACHABLE_VIA_CARRIER_DATA_NETWORK] = 'Carrier data connection';
+    currentState[NetworkStatus.REACHABLE_VIA_WIFI_NETWORK] = 'WiFi connection';
+
+    confirm("Connection type:\n" + currentState[networkState]);
+};
+
+var check_network = function() {
+    navigator.network.isReachable("www.mobiledevelopersolutions.com",
+            networkReachableCallback, {});
+};
+
 function init() {
-    //the next line makes it impossible to see Contacts on the HTC Evo since it doesn't have a scroll button
-    //		document.addEventListener("touchmove", preventBehavior, false);  
+    // the next line makes it impossible to see Contacts on the HTC Evo since it
+    // doesn't have a scroll button
+    // document.addEventListener("touchmove", preventBehavior, false);
     document.addEventListener("deviceready", deviceInfo, true);
-    // start with xyz hidden
-    $('.ui-grid-b').hide();
+
+    $("#accelmenu").live('expand', function() {
+        toggleAccel();
+    }).live('collapse', function() {
+        toggleAccel();
+    });
+
+    $("#locationmenu").live('expand', function() {
+        toggleLocation();
+    }).live('collapse', function() {
+        toggleLocation();
+    });
+
 }

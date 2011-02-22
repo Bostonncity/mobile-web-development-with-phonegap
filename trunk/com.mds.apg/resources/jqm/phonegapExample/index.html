@@ -21,25 +21,34 @@
     <div data-role="content">
     <div data-role="collapsible" data-collapsed="true" data-theme="e">
     	<h1>System Info</h1>
-        <p>Platform: <b><span id="platform"> &nbsp;</span></b>, Version: <b><span id="version">&nbsp;</span></b></p>
-        <p>UUID: <b><span id="uuid"> &nbsp;</span></b>, Name: <b><span id="name">&nbsp;</span></b></p>
-        <p>Width: <b><span id="width"> &nbsp;</span></b>, Ht: <b><span id="height">&nbsp;</span></b>, Color Depth: <b><span id="colorDepth"></span></b></p>
+        <div>Platform: <b><span id="platform"> &nbsp;</span></b>, Version: <b><span id="version">&nbsp;</span></b><br/>
+        UUID: <b><span id="uuid"> &nbsp;</span></b>, Name: <b><span id="name">&nbsp;</span></b><br/>
+        Width: <b><span id="width"> &nbsp;</span></b>, Ht: <b><span id="height">&nbsp;</span></b>, Color Depth: <b><span id="colorDepth"></span></b>
+        </div>
      </div>
 
-    <div data-role="button" onclick="toggleAccel();" data-collapsed="true" data-theme="e"> Toggle Accelerometer </div>
+    <div data-role="collapsible" data-collapsed="true" data-theme="e" id="accelmenu">
+    	<h1><div>Toggle Accelerometer</div></h1>
 		<div class="ui-grid-b">
      	 	<div class="ui-block-a">X: <b id="x">&nbsp;</b></div>
      	 	<div class="ui-block-b">Y: <b id="y">&nbsp;</b></div> 
      	 	<div class="ui-block-c">Z: <b id="z">&nbsp;</b></div>
     	</div>
-   
-    <div data-role="button" onclick="getLocation();">Get Location</div>
-	<a href="tel://411" data-role="button">Call 411</a>
+    </div>   
+    <div data-role="collapsible" data-collapsed="true" data-theme="e" id="locationmenu">   
+    	<h1><div>Toggle Location</div></h1>
+    	<div id="loccontainer" >
+    		<div id="loctext" ></div>
+    		<div id="locdata" ></div>
+    	</div>
+    </div>
+    <a href="tel://411" data-role="button">Call 411</a>
     <div data-role="button" onclick="beep();">Beep</div>
     <div data-role="button" onclick="vibrate();">Vibrate</div>
     <div data-role="button" onclick="show_pic();">Get a Picture</div>
-    <div data-role="button" onclick="get_contacts();">Get phone's contacts</div>    
-    <div id="viewport" class="viewport" style="display: none;">       
+    <div data-role="button" onclick="get_contacts();">Get Phone's Contacts</div>
+    <div data-role="button" onclick="check_network();">Check Network</div>    
+    <div id="viewport" class="viewport" style="display:none;">       
       <img style="width:60px;height:60px" id="test_img" src="" />
     </div> 
     </div><!-- end jqm content -->

@@ -84,7 +84,7 @@ cfg.items = [
                 ui : 'round',
                 text : 'Toggle Accelerometer',
                 handler : function() {
-                    var togglereturn = toggleAccel();
+                    toggleAccel();
                 }
             } ]
         },
@@ -100,7 +100,35 @@ cfg.items = [
                 ui : 'round',
                 text : 'Get location',
                 handler : function() {
-                    var locreturn = getLocation();
+                    if (!this.actions) {
+                        this.actions = new Ext.ActionSheet(
+                                {
+                                    floating : true,
+                                    modal : true,
+                                    centered : true,
+                                    height : 320,
+                                    width : 280,
+                                    padding : '15',
+                                    html : '<div style="color:white;font-size:16px;">'
+                                            + '<span id="loclat"></span>'
+                                            + '<br/><span id="loclong"></span>'
+                                            + '<br/><span id="locaccur"></span>'
+                                            + '<div id="mapview" style="display:none;">'
+                                            + '<img style="width:220px;height:180px;" id="mapcanvas" src="" alt="Map of your location" /></div></div>',
+                                    dockedItems : [ {
+                                        dock : 'bottom',
+                                        text : 'Close',
+                                        ui : 'confirm',
+                                        scope : this,
+                                        handler : function() {
+                                            closeLocation();
+                                            this.actions.hide();
+                                        }
+                                    } ]
+                                });
+                    }
+                    this.actions.show('pop');
+                    getLocation();
                 }
             } ]
         },
@@ -115,7 +143,7 @@ cfg.items = [
                 ui : 'round',
                 text : 'Beep',
                 handler : function() {
-                    var beepreturn = beep();
+                    beep();
                 }
             } ]
         },
@@ -124,7 +152,7 @@ cfg.items = [
                 ui : 'round',
                 text : 'Vibrate',
                 handler : function() {
-                    var vibreturn = vibrate();
+                    vibrate();
                 }
             } ]
         },
@@ -150,21 +178,56 @@ cfg.items = [
                                         ui : 'confirm',
                                         scope : this,
                                         handler : function() {
+                                            closeviewport();
                                             this.actions.hide();
                                         }
                                     } ]
                                 });
                     }
                     this.actions.show('pop');
-                    var picreturn = show_pic();
+                    show_pic();
                 }
             } ]
-        }, {
+        },
+        {
             items : [ {
                 ui : 'round',
                 text : 'Get phone\'s contacts',
                 handler : function() {
-                    var contactreturn = get_contacts();
+                    get_contacts();
+                }
+            } ]
+        },
+        {
+            items : [ {
+                ui : 'round',
+                text : 'Check Network',
+                handler : function() {
+                    if (!this.actions) {
+                        this.actions = new Ext.ActionSheet(
+                                {
+                                    floating : true,
+                                    modal : true,
+                                    centered : true,
+                                    height : 140,
+                                    width : 180,
+                                    padding : '15',
+                                    html : '<div style="color:white;font-size:19px;">'
+                                            + '<span id="networktext">Getting network type . . .</span>'
+                                            + '</div>',
+                                    dockedItems : [ {
+                                        dock : 'bottom',
+                                        text : 'Close',
+                                        ui : 'confirm',
+                                        scope : this,
+                                        handler : function() {
+                                            this.actions.hide();
+                                        }
+                                    } ]
+                                });
+                    }
+                    this.actions.show();
+                    check_network();
                 }
             } ]
         } ];

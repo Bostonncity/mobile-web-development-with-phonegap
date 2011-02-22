@@ -250,7 +250,7 @@ class PhonegapProjectPopulate {
         } 
         
         if (doCopy) {
-            if (pageInfo.mPackagedPhonegap && !pageInfo.mSenchaKitchenSink) {
+            if (pageInfo.mPackagedPhonegap && pageInfo.mUseExample && !pageInfo.mSenchaKitchenSink) {
                 bundleCopy("resources/phonegap/Sample", wwwDir);
             } else {
                 FileCopy.recursiveCopy(pageInfo.mSourceDirectory, wwwDir);
@@ -298,7 +298,12 @@ class PhonegapProjectPopulate {
         // Make sure index.html has the right phonegap.js
         String indexHtmlContents = StringIO.read(wwwDir + "index.html");
         indexHtmlContents = indexHtmlContents.replaceFirst("src=\"phonegap[a-zA-Z-.0-9]*js\"",
-                "src=\"" + phonegapJsFileName + "\"");    
+                "src=\"" + phonegapJsFileName + "\"");  
+        if (indexHtmlContents.indexOf("src=\"phonegap") < 0) {   // no phonegap*.js in file
+            indexHtmlContents = indexHtmlContents.replaceFirst("<script ", 
+                    "<!-- Uncomment following line to access PhoneGap APIs (not necessary to use PhoneGap to package web app) -->\n" + 
+                    "\t<!-- <script type=\"text/javascript\" charset=\"utf-8\" src=\"" + phonegapJsFileName + "\"></script>-->\n\t<script ");
+        }
         StringIO.write(wwwDir + "index.html", indexHtmlContents);
 
         if (pageInfo.mSenchaKitchenSink) { // delete the confusing index_android.html
