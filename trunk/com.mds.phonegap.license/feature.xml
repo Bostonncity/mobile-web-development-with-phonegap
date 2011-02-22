@@ -2,7 +2,7 @@
 <feature
       id="com.mds.phonegap.license"
       label="PhoneGap License"
-      version="1.0.0.qualifier"
+      version="1.2.0.qualifier"
       provider-name="MDS">
 
    <description url="http://www.phonegap.com/">
