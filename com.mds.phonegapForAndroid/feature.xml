@@ -212,13 +212,6 @@ Each party waives its rights to a jury trial in any resulting
 litigation.
    </license>
 
-   <includes
-         id="org.eclipse.jst.webpageeditor.feature"
-         version="0.0.0"
-         name="HTML editing feature"
-         optional="true"
-         search-location="self"/>
-
    <plugin
          id="com.mds.apg"
          download-size="0"

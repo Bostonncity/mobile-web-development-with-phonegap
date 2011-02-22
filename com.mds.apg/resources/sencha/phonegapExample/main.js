@@ -1,10 +1,62 @@
 var getLocation = function() {
     var suc = function(p) {
-        alert(p.coords.latitude + " " + p.coords.longitude);
+        document.getElementById("loclat").innerHTML = 'Latitude: '
+                + p.coords.latitude;
+        document.getElementById("loclong").innerHTML = 'Longitude: '
+                + p.coords.longitude;
+        document.getElementById("locaccur").innerHTML = 'Accuracy: '
+                + p.coords.accuracy + 'm';
+
+        var mapview = document.getElementById('mapview');
+
+        var image_url = "http://maps.google.com/maps/api/staticmap?sensor=false&center="
+                + p.coords.latitude
+                + ","
+                + p.coords.longitude
+                + "&zoom=14&size=220x180&markers=color:blue|"
+                + p.coords.latitude + ',' + p.coords.longitude;
+
+        mapview.style.display = "";
+        mapview.style.position = "absolute";
+        mapview.style.bottom = "7px";
+        mapview.style.left = "14px";
+        document.getElementById("mapcanvas").src = image_url;
     };
-    var locFail = function() {
+    var fail = function(error) {
+        document.getElementById("loclong").innerHTML = '<span style="color:red;">Failed to get location</span>';
+        switch (error.code) {
+        case error.PERMISSION_DENIED:
+            alert("User did not share geolocation data.");
+            break;
+
+        case error.POSITION_UNAVAILABLE:
+            alert("Could not detect current position.");
+            break;
+
+        case error.TIMEOUT:
+            alert("Retrieving position timed out.");
+            break;
+
+        default:
+            alert("Unknown error.");
+            break;
+        }
     };
-    navigator.geolocation.getCurrentPosition(suc, locFail);
+
+    if (navigator.geolocation) {
+        document.getElementById("loclong").innerHTML = "Getting geolocation . . .";
+        navigator.geolocation.getCurrentPosition(suc, fail);
+    } else {
+        document.getElementById("loclong").innerHTML = '<span style="color:red;">Device or browser can not get location</span>';
+    }
+};
+
+var closeLocation = function() {
+    document.getElementById("loclat").innerHTML = "";
+    document.getElementById("loclong").innerHTML = "";
+    document.getElementById("locaccur").innerHTML = "";
+    document.getElementById("mapcanvas").src = "";
+    document.getElementById("mapview").style.display = "none";
 };
 
 var beep = function() {
@@ -21,7 +73,7 @@ function roundNumber(num) {
     return result;
 }
 
-var accelerationWatch = false;
+var accelerationWatch = null;
 
 function updateAcceleration(a) {
     document.getElementById('x').innerHTML = roundNumber(a.x);
@@ -29,26 +81,24 @@ function updateAcceleration(a) {
     document.getElementById('z').innerHTML = roundNumber(a.z);
 }
 
-var toggleAccel = function() {
-    if (accelerationWatch) {
+function toggleAccel() {
+    if (accelerationWatch !== null) {
         navigator.accelerometer.clearWatch(accelerationWatch);
         updateAcceleration({
             x : "",
             y : "",
             z : ""
         });
-        accelerationWatch = false;
+        accelerationWatch = null;
     } else {
-        accelerationWatch = true;
         var options = {};
         options.frequency = 1000;
         accelerationWatch = navigator.accelerometer.watchAcceleration(
                 updateAcceleration, function(ex) {
-                    navigator.accelerometer.clearWatch(accel_watch_id);
                     alert("accel fail (" + ex.name + ": " + ex.message + ")");
                 }, options);
     }
-};
+}
 
 var preventBehavior = function(e) {
     e.preventDefault();
@@ -58,8 +108,8 @@ function dump_pic(data) {
     var viewport = document.getElementById('viewport');
     console.log(data);
     viewport.style.display = "";
-    viewport.style.position = "absolute";
-    viewport.style.bottom = "140px";
+    viewport.style.position = "relative";
+    viewport.style.top = "10px";
     viewport.style.left = "20px";
     document.getElementById("test_img").src = "data:image/jpeg;base64," + data;
 }
@@ -69,17 +119,15 @@ function fail(msg) {
 }
 
 function show_pic() {
-    var viewport = document.getElementById('viewport');
-    viewport.style.display = "";
-    navigator.camera.getPicture(dump_pic, fail, { 
+    navigator.camera.getPicture(dump_pic, fail, {
         quality : 50
     });
 }
 
-function close() {
+function closeviewport() {
     var viewport = document.getElementById('viewport');
-    viewport.style.position = "relative";
     viewport.style.display = "none";
+    document.getElementById("test_img").src = "";
 }
 
 // This is just to do this.
@@ -108,3 +156,21 @@ function get_contacts() {
             [ "displayName", "phoneNumbers", "emails" ], contacts_success,
             fail, obj);
 }
+
+var networkReachableCallback = function(reachability) {
+    // There is no consistency on the format of reachability
+    var networkState = reachability.code || reachability;
+
+    var currentState = {};
+    currentState[NetworkStatus.NOT_REACHABLE] = 'No network connection';
+    currentState[NetworkStatus.REACHABLE_VIA_CARRIER_DATA_NETWORK] = 'Carrier data connection';
+    currentState[NetworkStatus.REACHABLE_VIA_WIFI_NETWORK] = 'WiFi connection';
+
+    document.getElementById("networktext").innerHTML = "<span>Connection type:<br/>"
+            + currentState[networkState] + "</span>";
+};
+
+var check_network = function() {
+    navigator.network.isReachable("www.mobiledevelopersolutions.com",
+            networkReachableCallback, {});
+};
