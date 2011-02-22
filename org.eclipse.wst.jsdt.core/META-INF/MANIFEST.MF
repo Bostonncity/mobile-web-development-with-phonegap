@@ -55,7 +55,7 @@ Export-Package: org.eclipse.wst.jsdt.core,org.eclipse.wst.jsdt.core.as
  rue,org.eclipse.wst.jsdt.internal.formatter.comment;x-internal:=true,
  org.eclipse.wst.jsdt.internal.oaametadata,org.eclipse.wst.jsdt.launch
  ing,org.eclipse.wst.jsdt.libraries
-Bundle-Version: 1.1.4.vqualifier
+Bundle-Version: 1.1.4.v201104309990
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-Name: %pluginName

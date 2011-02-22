@@ -40,7 +40,7 @@ public class PageJqm extends WizardSection {
     // Set up storage for persistent initializers
     private final static String JQM_DIR = com.mds.apg.Activator.PLUGIN_ID + ".jqmdir";    
     private final static String JQM_CHECK = com.mds.apg.Activator.PLUGIN_ID + ".jqmcheck";
-    private final static String JQM_USE_PACKAGED = com.mds.apg.Activator.PLUGIN_ID + ".jqmusepackaged";
+    private final static String JQM_USE_INSTALLED = com.mds.apg.Activator.PLUGIN_ID + ".jqmuseinstalled";
 
     /** state variables */
     private String mJqmPathCache;
@@ -103,16 +103,16 @@ public class PageJqm extends WizardSection {
         
         // Choose whether to use packaged jqm or installed version
         
-        boolean initialVal = doGetPreferenceStore().getString(JQM_USE_PACKAGED) != ""; 
+        boolean initialVal = doGetPreferenceStore().getString(JQM_USE_INSTALLED) != ""; 
         mUsePackagedJqmRadio = new Button(group, SWT.RADIO);
         mUsePackagedJqmRadio.setText("Use Built-in jQuery Mobile - version 1.0a2");
-        mUsePackagedJqmRadio.setSelection(initialVal);
+        mUsePackagedJqmRadio.setSelection(!initialVal);
         mUsePackagedJqmRadio.setToolTipText("Use the jQuery Mobile included with this Eclipse plug-in"); 
         
         mUseInstalledJqmRadio = new Button(group, SWT.RADIO);
         mUseInstalledJqmRadio.setText("Use separately installed version of jQuery Mobile");
         mUseInstalledJqmRadio.setToolTipText("Specify directory that includes a downloaded version of jQuery Mobile"); 
-        mUseInstalledJqmRadio.setSelection(!initialVal);
+        mUseInstalledJqmRadio.setSelection(initialVal);
         
         SelectionListener location_listener = new SelectionAdapter() {
             @Override
@@ -233,7 +233,7 @@ public class PageJqm extends WizardSection {
 
         if (doUpdate) {  
             update(null);
-            doGetPreferenceStore().setValue(JQM_USE_PACKAGED, usePackaged ? "true" : "");
+            doGetPreferenceStore().setValue(JQM_USE_INSTALLED, usePackaged ? "" : "true");
         }
     }
 

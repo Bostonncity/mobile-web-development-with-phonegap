@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.wst.jsdt.feature"
       label="%featureName"
-      version="1.2.3.vqualifier"
+      version="1.2.3.v201104309990"
       provider-name="%providerName"
       plugin="org.eclipse.wst.jsdt.ui">
 

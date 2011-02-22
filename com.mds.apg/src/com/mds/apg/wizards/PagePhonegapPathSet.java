@@ -32,7 +32,7 @@ public final class PagePhonegapPathSet extends WizardSection {
 
     // Set up storage for persistent initializers
     private final static String PHONEGAP_DIR = com.mds.apg.Activator.PLUGIN_ID + ".phonegap"; 
-    private final static String PG_USE_PACKAGED = com.mds.apg.Activator.PLUGIN_ID + ".pgusepackaged";
+    private final static String PG_USE_INSTALLED = com.mds.apg.Activator.PLUGIN_ID + ".pguseinstalled";
     
     /** Last user-browsed location, static so that it be remembered for the whole session */ 
     private static String sPhonegapPathCache = "";
@@ -68,16 +68,16 @@ public final class PagePhonegapPathSet extends WizardSection {
         
         // Choose whether to use packaged PhoneGap or installed version
         
-        boolean initialVal = doGetPreferenceStore().getString(PG_USE_PACKAGED) != ""; 
+        boolean initialVal = doGetPreferenceStore().getString(PG_USE_INSTALLED) != ""; 
         mUsePackagedPgRadio = new Button(phonegapGroup, SWT.RADIO);
         mUsePackagedPgRadio.setText("Use Built-in PhoneGap - version 0.9.4");
-        mUsePackagedPgRadio.setSelection(initialVal);
+        mUsePackagedPgRadio.setSelection(!initialVal);
         mUsePackagedPgRadio.setToolTipText("Use the PhoneGap installation included with this Eclipse plug-in"); 
         
         Button useInstalledPgRadio = new Button(phonegapGroup, SWT.RADIO);
         useInstalledPgRadio.setText("Enter path to installed PhoneGap");
         useInstalledPgRadio.setToolTipText("Specify directory that includes a downloaded version of PhoneGap"); 
-        useInstalledPgRadio.setSelection(!initialVal);
+        useInstalledPgRadio.setSelection(initialVal);
         
         SelectionListener location_listener = new SelectionAdapter() {
             @Override
@@ -151,7 +151,7 @@ public final class PagePhonegapPathSet extends WizardSection {
         mPgGroup.setVisible(!usePackaged);
         if (doUpdate) {  
             update(null);
-            doGetPreferenceStore().setValue(PG_USE_PACKAGED, usePackaged ? "true" : "");
+            doGetPreferenceStore().setValue(PG_USE_INSTALLED, usePackaged ? "" : "true");
         }
     }    
 
