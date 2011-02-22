@@ -47,20 +47,18 @@ public class PreferencesInitializer extends AbstractPreferenceInitializer {
         // Hand code these.
         node.putInt(Option.INDENT.getLowerName(), DEFAULT_INDENT);
         node.putInt(Option.MAXERR.getLowerName(), DEFAULT_MAXERR);
-        
-        Option.setExcludeDirectoryOptions(createExcludeDirectoryOptions());
-              
-        // All possible excluded directories are initially excluded
-        for (String s : Option.getExcludeDirectoryOptions()) {
-            node.putBoolean(s, true);
-        }
+       
+        List<String> l = createExcludeDirectoryOptions();
+        Option.setExcludeDirectoryOptions(l);
+        String printString = l.toString(); // then chop off the surrounding []
+        node.put("Exclude", printString.substring(1, printString.length() - 1));
     }
     /** Create Directory Options whose type is {@link Boolean}. */
     private List<String> createExcludeDirectoryOptions() {
         List<String> dirOptions = new ArrayList<String>();
         dirOptions.add("phonegap");
-        dirOptions.add("jquery.mobile");
-        dirOptions.add("sencha");
+        dirOptions.add("/jquery.mobile/");
+        dirOptions.add("/sencha/");
         return dirOptions;
     }
 }

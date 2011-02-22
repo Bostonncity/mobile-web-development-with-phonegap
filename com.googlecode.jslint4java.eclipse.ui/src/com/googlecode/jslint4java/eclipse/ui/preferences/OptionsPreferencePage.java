@@ -41,7 +41,6 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
 
     private CheckboxTableViewer checkboxViewerStricter;
     private CheckboxTableViewer checkboxViewerLaxer;
-    private CheckboxTableViewer checkboxViewerDir;
 
     private final List<FieldEditor> fieldEditors = new ArrayList<FieldEditor>();
     private final List<Option> booleanOptions = booleanOptions();
@@ -65,7 +64,12 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
 
     /** Create and add a {@link StringFieldEditor}. */
     private void addStringFieldEditor(Composite parent, Option o) {
-        addFieldEditor(new StringFieldEditor(nameOfPref(o), o.getDescription(), parent));
+        addFieldEditor(new StringFieldEditor(nameOfPref(o), o.getDescription(), StringFieldEditor.UNLIMITED, parent));
+    }
+    
+    /** Create and add a {@link ExcludeFieldEditor}. */
+    private void addExcludeFieldEditor(Composite parent) {
+        addFieldEditor(new StringFieldEditor("Exclude", "", parent));
     }
 
     /** Return a list of Options whose type is {@link Boolean}. */
@@ -127,32 +131,6 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
         });
     }
     
-    private void createDirectoryProviders(CheckboxTableViewer checkboxViewer) {
-        
-        checkboxViewer.setLabelProvider(new LabelProvider() {
-            @Override
-            public String getText(Object element) {
-                return (String)element;
-            }
-        });
-
-        checkboxViewer.setContentProvider(new IStructuredContentProvider() {
-            public void dispose() {
-                // Nothing to do on dispose
-            }
-
-            // Make an entry for each option
-            public Object[] getElements(Object inputElement) {
-                @SuppressWarnings("unchecked")
-                List<String> elements = (List<String>) inputElement;
-                return elements.toArray();
-            }
-
-            public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-            }
-        });
-    }
-
     @Override
     protected Control createContents(Composite parent) {
         Font font = parent.getFont();
@@ -171,12 +149,22 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
         checkboxViewerLaxer = createBooleansArea(main, "Make JSLint LAXER:");
         createBooleanProviders(checkboxViewerLaxer);
         createOtherPrefsArea(main);
-        checkboxViewerDir = createBooleansArea(main, "Exclude directories from JSLint:");
-        createDirectoryProviders(checkboxViewerDir);
+        
+        Composite excludeGroup = new Composite(main, SWT.NULL);
+        excludeGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+        GridLayout layout2 = new GridLayout();
+        layout2.numColumns = 1;
+        layout2.marginHeight = 0;
+        layout2.marginWidth = 0;
+        excludeGroup.setLayout(layout2);
+        excludeGroup.setFont(font);
+        Label label = new Label(excludeGroup, SWT.NONE);
+        label.setText("Exclude files that match these patterns from JSLint:");
+        label.setToolTipText("Enter expressions to exclude matching files from being JSLint'ed\n");
+        createExcludeArea(excludeGroup);
+        
         populateBooleansArea();
         populateOtherPrefsArea();
-        populateExcludeDirectoryArea();
-
         return main;
     }
 
@@ -190,6 +178,14 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
         addIntegerFieldEditor(parent, Option.MAXLEN);
         addStringFieldEditor(parent, Option.PREDEF);
     }
+    
+    private void createExcludeArea(Composite main) {
+        Composite parent = new Composite(main, SWT.NONE);
+        parent.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+        parent.setLayout(new GridLayout());
+
+        addExcludeFieldEditor(parent);
+    }
 
     public void init(IWorkbench workbench) {
     }
@@ -202,11 +198,6 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
     /** Read the value of a boolean pref. */
     private boolean loadBooleanPref(Option option) {
         return getPreferenceStore().getBoolean(nameOfPref(option));
-    }
-    
-    /** Read the value of a boolean pref. */
-    private boolean loadDirectoryPref(String option) {
-        return getPreferenceStore().getBoolean(option);
     }
 
     /** The preference name an option should use. */
@@ -225,20 +216,13 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
             }
         }
     }
-    /** Set each checkbox to its default value. */
-    private void performDirectoryDefaults() {
-        for (String o : Option.getExcludeDirectoryOptions()) {
-            boolean enabled = getPreferenceStore().getDefaultBoolean(o);
-            checkboxViewerDir.setChecked(o, enabled);
-        }
-    }
+
 
     @Override
     protected void performDefaults() {
         super.performDefaults();
         performBooleanDefaults();
         performOtherDefaults();
-        performDirectoryDefaults();
     }
 
     @Override
@@ -246,7 +230,6 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
         if (super.performOk()) {
             storeBooleanPrefs();
             storeOtherPrefs();
-            storeDirectoryPrefs();
             return true;
         } else {
             return false;
@@ -282,13 +265,6 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
         }
     }
     
-    /** Update checkboxes according to the values in the preference store. */
-    private void populateExcludeDirectoryArea() {
-        checkboxViewerDir.setInput(Option.getExcludeDirectoryOptions());
-        for (String option : Option.getExcludeDirectoryOptions()) {
-            checkboxViewerDir.setChecked(option, loadDirectoryPref(option));
-        }
-    }
 
     /** Fill in the values of the non-boolean preferences from the preferences store. */
     private void populateOtherPrefsArea() {
@@ -310,13 +286,6 @@ public class OptionsPreferencePage extends PreferencePage implements IWorkbenchP
             } else {
                 storeBooleanPref(option, checkboxViewerLaxer.getChecked(option));
             }
-        }
-    }
-    
-    /** Store the values of each checkbox in the preferences store. */
-    private void storeDirectoryPrefs() {
-        for (String s : Option.getExcludeDirectoryOptions()) {
-            getPreferenceStore().setValue(s, checkboxViewerDir.getChecked(s));
         }
     }
 

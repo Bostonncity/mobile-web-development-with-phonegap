@@ -23,7 +23,6 @@ import org.eclipse.core.runtime.preferences.IPreferencesService;
 
 import com.googlecode.jslint4java.Issue;
 import com.googlecode.jslint4java.JSLint;
-import com.googlecode.jslint4java.Option;
 import com.googlecode.jslint4java.JSLintResult;
 import com.googlecode.jslint4java.eclipse.JSLintLog;
 import com.googlecode.jslint4java.eclipse.JSLintPlugin;
@@ -168,16 +167,16 @@ public class JSLintBuilder extends IncrementalProjectBuilder {
     }
 
     /**
-     * Check if the file is a JavaScript file. Then check if it is not in an
-     * excluded directory.
+     * Check if file matches preference-specified exclude string
      */
 
     private boolean checkFilter(IFile file) {
         String path = file.getFullPath().toString();
         IPreferencesService prefs = Platform.getPreferencesService();
-        for (String s : Option.getExcludeDirectoryOptions()) {
-            boolean value = prefs.getBoolean(JSLintPlugin.PLUGIN_ID, s, false, null);
-            if (value && path.indexOf("/" + s + "/") >= 0) {
+        String excludes = prefs.getString(JSLintPlugin.PLUGIN_ID, "Exclude", null, null);
+        String[] tokens = excludes.split("[ ,]+");
+        for (String s : tokens) {
+            if (path.indexOf(s) >= 0) {
                 return true;
             }
         }
