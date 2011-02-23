@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Breakpoint Participants</title>
+<style type="text/css">@import url("../../book.css");</style>
+<style type="text/css">@import url("../../schema.css");</style>
+</HEAD>
+<BODY>
+<H1 style="text-align:center">Breakpoint Participants</H1>
+<p></p>
+<h6 class="CaptionFigColumn SchemaHeader">Identifier: </h6>org.eclipse.wst.jsdt.debug.core.breakpointParticipants<p></p>
+<h6 class="CaptionFigColumn SchemaHeader">Since: </h6>1.0
+<p></p>
+
+<h6 class="CaptionFigColumn SchemaHeader">Description: </h6>This extension point allows consumers to provide a breakpoint participant that will be consulted during the decision to suspend the kind of breakpoint the participant applies to.<p></p>
+<h6 class="CaptionFigColumn SchemaHeader">Configuration Markup:</h6>
+<p></p>
+<p class="code SchemaDtd">&lt;!ELEMENT <a name="e.extension">extension</a> (<a href="#e.participant">participant</a>)+&gt;</p>
+<p class="code SchemaDtd">&lt;!ATTLIST extension</p>
+<p class="code SchemaDtdAttlist">point&nbsp;CDATA #REQUIRED</p><p class="code SchemaDtdAttlist">id&nbsp;&nbsp;&nbsp;&nbsp;CDATA #IMPLIED</p><p class="code SchemaDtdAttlist">name&nbsp;&nbsp;CDATA #IMPLIED</p>&gt;</p>
+<p></p>
+<ul class="ConfigMarkupAttlistDesc">
+</ul>
+<br><p class="code SchemaDtd">&lt;!ELEMENT <a name="e.participant">participant</a> EMPTY&gt;</p>
+<p class="code SchemaDtd">&lt;!ATTLIST participant</p>
+<p class="code SchemaDtdAttlist">class&nbsp;CDATA #REQUIRED</p><p class="code SchemaDtdAttlist">kind&nbsp;&nbsp;(function|line|script|*) </p>&gt;</p>
+<p></p>
+<p class="ConfigMarkupElementDesc">
+The breakpoint participant</p>
+<br>
+<ul class="ConfigMarkupAttlistDesc">
+<li><b>class</b> - The class attribute is required and must implement <code>org.eclipse.wst.jsdt.debug.core.breakpoints.IJavaScriptBreakpointParticipant</code></li>
+<li><b>kind</b> - This attribute specifies the kind of breakpoint this participant should apply to the value <em>*</em> means it applies to all breakpoint kinds. The value must be one of <em>function</em>, <em>line</em>, <em>script</em> or <em>*</em>.</li>
+</ul>
+<br><h6 class="CaptionFigColumn SchemaHeader">Examples: </h6>The following example is the real life definition of the Mozilla Rhino participant for line breakpoints.
+<pre class="Example"><span class="code SchemaTag">
+&lt;extension point=</span><span class="code SchemaCstring">&quot;org.eclipse.wst.jsdt.debug.core.breakpointParticipants&quot;</span><span class="code SchemaTag">&gt;
+  &lt;participant
+     class=</span><span class="code SchemaCstring">&quot;org.eclipse.wst.jsdt.debug.internal.rhino.breakpoints.RhinoBreakpointParticipant&quot;</span><span class="code SchemaTag">
+     kind=</span><span class="code SchemaCstring">&quot;*&quot;</span><span class="code SchemaTag">&gt;
+  &lt;/participant&gt;
+&lt;/extension&gt;
+</span></pre>
+<p></p>
+
+<h6 class="CaptionFigColumn SchemaHeader">API Information: </h6>The class attribute is required and must implement <code>org.eclipse.wst.jsdt.debug.core.breakpoints.IJavaScriptBreakpointParticipant</code>
+<p></p>
+
+<h6 class="CaptionFigColumn SchemaHeader">Supplied Implementation: </h6>[Enter information about supplied implementation of this extension point.]
+<p></p>
+
+<br>
+<p class="note SchemaCopyright">
+Copyright (c) 2010 IBM Corporation and others.<br>
+All rights reserved. This program and the accompanying materials are made 
+available under the terms of the Eclipse Public License v1.0 which 
+accompanies this distribution, and is available at 
+<a href="http://www.eclipse.org/legal/epl-v10.html">http://www.eclipse.org/legal/epl-v10.html</a>
+
+</p>
+</BODY>
+</HTML>

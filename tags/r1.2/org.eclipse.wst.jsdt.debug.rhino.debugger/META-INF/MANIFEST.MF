@@ -1,0 +1,168 @@
+Manifest-Version: 1.0
+Bundle-Vendor: %Bundle-Vendor
+Bundle-RequiredExecutionEnvironment: J2SE-1.4
+Bundle-Name: %Bundle-Name
+Bundle-SymbolicName: org.eclipse.wst.jsdt.debug.rhino.debugger
+Eclipse-SourceReferences: scm:cvs:pserver:dev.eclipse.org:/cvsroot/web
+ tools:org.eclipse.jsdt/plugins/org.eclipse.wst.jsdt.debug.rhino.debug
+ ger;tag=v201008170101
+Export-Package: org.eclipse.wst.jsdt.debug.internal.rhino.debugger;x-i
+ nternal:=true,org.eclipse.wst.jsdt.debug.internal.rhino.transport;x-f
+ riends:="org.eclipse.wst.jsdt.debug.rhino",org.eclipse.wst.jsdt.debug
+ .rhino.debugger,org.eclipse.wst.jsdt.debug.rhino.debugger.shell
+Bundle-Version: 1.0.1.v201008170101
+Bundle-ManifestVersion: 2
+Import-Package: org.mozilla.javascript;resolution:=optional,org.mozill
+ a.javascript.debug;resolution:=optional,org.mozilla.javascript.tools.
+ shell;resolution:=optional
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/transport/PipedTranspo
+ rtService.class
+SHA1-Digest: gTG8oGOLsbq8/PBqjUCxF4cd+bc=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/transport/TimeoutExcep
+ tion.class
+SHA1-Digest: Or0LVFJ7XkyHiy4WSN7T2eJoNQ8=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/transport/SocketConnec
+ tion.class
+SHA1-Digest: Ki7JUbXpfgiw6UDjCQWfYUmmoEM=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/debugger/FunctionSourc
+ e.class
+SHA1-Digest: QgZRSAEKENRvJ1b9gZvuAVrxxdU=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/transport/JSONConstant
+ s.class
+SHA1-Digest: /O6+hMaYi0yj60GnqhBnisgMYEs=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/debugger/ThreadData.cl
+ ass
+SHA1-Digest: RjZ7fbifQuBHsBlz6Y288QtcZBo=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/transport/PacketReceiv
+ eManager.class
+SHA1-Digest: 1bDuiDAPaigqNRB04CAyzFM0gYk=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/transport/SocketTransp
+ ortService$SocketListenerKey.class
+SHA1-Digest: qXEKDsqgzx9TmTKBG3jNmEvUdLY=
+
+Name: OSGI-INF/l10n/bundle.properties
+SHA1-Digest: DBGJi1jQNTwfSF9TYJEHgxwM43g=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/transport/messages.pro
+ perties
+SHA1-Digest: MMeG9Tn1/9H/d/3cpnc8qwpgMTo=
+
+Name: org/eclipse/wst/jsdt/debug/rhino/debugger/shell/DebugShell.class
+SHA1-Digest: O6VM+1nGRQuxJaE5K6ens1A9iE8=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/transport/PipedConnect
+ ion.class
+SHA1-Digest: lAxfnCZ65mZu6nyiuZaRqpwELAk=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/transport/Response.cla
+ ss
+SHA1-Digest: umfjM1bhnL/MRc9SxWuC4KY34oc=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/transport/DebugSession
+ .class
+SHA1-Digest: u+toe67IB6bmmEX6g8W7mvu/AsE=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/transport/Packet.class
+SHA1-Digest: IPjVrhopmns20+GHyXLv0GJTYNQ=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/transport/TransportSer
+ vice.class
+SHA1-Digest: whkXFi30QI6eLXvLiHkQBky0qgg=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/transport/EventPacket.
+ class
+SHA1-Digest: AODgO3VgGOKWNn+gnRyZ/dx5npg=
+
+Name: META-INF/eclipse.inf
+SHA1-Digest: KyT9FF7C7t86NoBoa2kZT3ZJBfw=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/debugger/Breakpoint.cl
+ ass
+SHA1-Digest: CQeiSyldurDCOfCJlbwpg5tTxDM=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/transport/PacketManage
+ r.class
+SHA1-Digest: zkmJ48dMxeG7Sezdb7PBmnF/u7o=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/transport/TransportSer
+ vice$ListenerKey.class
+SHA1-Digest: 3aUx15oWcGHroW/DWcnuCmbDgcg=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/debugger/DebugSessionM
+ anager.class
+SHA1-Digest: 3fQKe2ZV7GmtBurxsMM790WOoBQ=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/transport/PipedTranspo
+ rtService$PipedListenerKey.class
+SHA1-Digest: zCwzky1Sa9Uuf5ReNwMBOpZvYSM=
+
+Name: about.html
+SHA1-Digest: 0oYanwyg+o6FteoZOAiFfmyUBnM=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/transport/Request.clas
+ s
+SHA1-Digest: b4yt6uEJo2n2yk/fGCj9jks7nak=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/debugger/RequestHandle
+ r.class
+SHA1-Digest: m2w7QpULflG5xRf7uSpZ1BSwDtc=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/transport/Constants.cl
+ ass
+SHA1-Digest: 9+KgH71zQOIGhz85ZaCTqDeTQws=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/debugger/LineData.clas
+ s
+SHA1-Digest: Yt9ZatpIZ318BdIbUYsBFTspU38=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/transport/Connection.c
+ lass
+SHA1-Digest: aF50VWqcoon7XEXtdtqCYI4JXRk=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/transport/Disconnected
+ Exception.class
+SHA1-Digest: JMkPxpnEip24rXhHrPzLkkCJx8k=
+
+Name: org/eclipse/wst/jsdt/debug/rhino/debugger/RhinoDebugger.class
+SHA1-Digest: F+0gXfJn1e5P/7umeni4S7410Jg=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/transport/SocketTransp
+ ortService.class
+SHA1-Digest: AYojTkxpYk7KtStx6VGQgkYumO8=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/debugger/RhinoDebugger
+ Impl.class
+SHA1-Digest: qEydPOk9OXbfZFbblONyuj7L8FM=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/debugger/StackFrame.cl
+ ass
+SHA1-Digest: nI5idLK7oX/SJHUquXlGh4KpK54=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/debugger/ScriptSource.
+ class
+SHA1-Digest: XAjqjW/tU6KAIL9C/OG4kIuK9I0=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/debugger/DebugSessionM
+ anager$DebugSessionThread.class
+SHA1-Digest: 2SHTuA4ang8544rDKwSs/bloLc0=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/debugger/ContextData.c
+ lass
+SHA1-Digest: F6PKIsNQtGF9nL8IQ8mDs1Pt6WI=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/transport/PacketSendMa
+ nager.class
+SHA1-Digest: Yu3/bPtRESM6x8DMzlfm180qoXI=
+
+Name: org/eclipse/wst/jsdt/debug/internal/rhino/transport/JSONUtil.cla
+ ss
+SHA1-Digest: fdvU1vy+knsWyWPXtYy1+5RB4W0=
+
