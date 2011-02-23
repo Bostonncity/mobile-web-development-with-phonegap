@@ -15,7 +15,7 @@
    <feature url="features/org.eclipse.wst.jsdt.feature_1.2.3.v201104309990.jar" id="org.eclipse.wst.jsdt.feature" version="1.2.3.v201104309990">
       <category name="PhoneGap for Android with JSLint"/>
    </feature>
-   <feature url="features/com.mds.phonegapForAndroid_1.2.0.201102221440.jar" id="com.mds.phonegapForAndroid" version="1.2.0.201102221440">
+   <feature url="features/com.mds.phonegapForAndroid_1.2.0.201102221645.jar" id="com.mds.phonegapForAndroid" version="1.2.0.201102221645">
       <category name="PhoneGap for Android with JSLint"/>
    </feature>
    <category-def name="PhoneGap for Android with JSLint" label="PhoneGap for Android with JSLint">
