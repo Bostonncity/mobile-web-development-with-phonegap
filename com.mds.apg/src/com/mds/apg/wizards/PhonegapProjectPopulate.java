@@ -261,7 +261,8 @@ class PhonegapProjectPopulate {
         
         class isPhoneGapFile implements FileFilter {
             public boolean accept(File f) {
-                return f.getName().indexOf("phonegap") >= 0;
+                String name = f.getName();
+                return name.indexOf("phonegap") >= 0 && name.indexOf("phonegapdemo") < 0;
             }
         }
         
