@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+    Copyright (c) 2005, 2010 IBM Corporation and others.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+   
+    Contributors:
+        IBM Corporation - initial API and implementation
+ -->
+
+<toc label="Book">
+  	<topic label="Embedded JavaScript">
+		<topic href="started/htmlProject.html" label="Creating a HTML Project"/>
+		<topic href="started/newjsFile.html" label="Adding a JavaScript file"/>
+		<topic href="started/newhtmlFile.html" label="Adding a HTML file"/>
+	</topic>
+	<topic label="Pure JavaScript">
+		<topic href="started/standaloneProject.html" label="Creating a JavaScript Project"/>
+		<topic href="started/newjsFile.html" label="Adding a JavaScript file"/>
+	</topic>
+ <topic href="tasks/add-lib-global-scope.html" label="Add a Library to the Global Scope">
+ </topic>
+ <topic href="tasks/configure-source.html" label="Configuring Source Folders">
+ </topic>
+ <topic href="tasks/remove-lib-global-scope.html" label="Remove a Library From the Global Scope">
+ </topic>
+</toc>

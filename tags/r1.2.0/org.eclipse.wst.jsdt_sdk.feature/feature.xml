@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.wst.jsdt_sdk.feature"
+      label="%featureName"
+      version="1.2.3.v201102160540-47A7790LCFLLfLSOuUaPYHdNf8As"
+      provider-name="%providerName">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <includes
+         id="org.eclipse.wst.jsdt.feature"
+         version="1.2.3.v201102160540-7C78FGUF9JgLWNO2UCNqfa"/>
+
+   <includes
+         id="org.eclipse.wst.jsdt.feature.source"
+         version="1.2.3.v201102160540-7C78FGUF9JgLWNO2UCNqfa"/>
+
+   <plugin
+         id="org.mozilla.javascript.source"
+         download-size="0"
+         install-size="0"
+         version="1.7.2.v201005080400"
+         unpack="false"/>
+
+</feature>
