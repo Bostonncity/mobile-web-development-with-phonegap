@@ -9,13 +9,10 @@
    <feature url="features/com.mds.phonegap.license_1.2.0.201102221418.jar" id="com.mds.phonegap.license" version="1.2.0.201102221418">
       <category name="PhoneGap for Android with JSLint"/>
    </feature>
-   <feature url="features/org.eclipse.jst.webpageeditor.feature_2.3.1.v20100906-4619oB5856D8Q3324.jar" id="org.eclipse.jst.webpageeditor.feature" version="2.3.1.v20100906-4619oB5856D8Q3324">
-      <category name="PhoneGap for Android with JSLint"/>
-   </feature>
    <feature url="features/org.eclipse.wst.jsdt.feature_1.2.3.v201104309990.jar" id="org.eclipse.wst.jsdt.feature" version="1.2.3.v201104309990">
       <category name="PhoneGap for Android with JSLint"/>
    </feature>
-   <feature url="features/com.mds.phonegapForAndroid_1.2.0.201102221645.jar" id="com.mds.phonegapForAndroid" version="1.2.0.201102221645">
+   <feature url="features/com.mds.phonegapForAndroid_1.2.1.201102241306.jar" id="com.mds.phonegapForAndroid" version="1.2.1.201102241306">
       <category name="PhoneGap for Android with JSLint"/>
    </feature>
    <category-def name="PhoneGap for Android with JSLint" label="PhoneGap for Android with JSLint">
