@@ -318,8 +318,8 @@ protected void consumeMethodHeader() {
 	super.consumeMethodHeader();
 	pushOnElementStack(K_METHOD_DELIMITER);
 }
-protected void consumeMethodInvocationPrimary() {
-	super.consumeMethodInvocationPrimary();
+protected void consumeCallExpressionWithArguments() {
+	super.consumeCallExpressionWithArguments();
 	popElement(K_SELECTOR);
 	MessageSend messageSend = (MessageSend)expressionStack[expressionPtr];
 	if (messageSend == assistNode){
@@ -1146,12 +1146,12 @@ protected ASTNode wrapWithExplicitConstructorCallIfNeeded(ASTNode ast) {
 		return ast;
 	}
 }
-protected void consumePropertyOperator() {
+protected void consumeCallExpressionWithSimpleName() {
 	int completionIndex;
 
 	/* no need to take action if not inside completed identifiers */
 	if ((completionIndex = indexOfAssistIdentifier()) < 0) {
-		 super.consumePropertyOperator();
+		 super.consumeCallExpressionWithSimpleName();
 		 return;
 	}
 
@@ -1223,7 +1223,83 @@ protected void consumePropertyOperator() {
 
 
 }
+protected void consumeMemberExpressionWithSimpleName() {
+	int completionIndex;
 
+	/* no need to take action if not inside completed identifiers */
+	if ((completionIndex = indexOfAssistIdentifier()) < 0) {
+		 super.consumeMemberExpressionWithSimpleName();
+		 return;
+	}
+
+
+	int length = identifierLengthStack[identifierLengthPtr];
+	char[][] subset = identifierSubSet(completionIndex);
+	identifierLengthPtr--;
+	identifierPtr -= length;
+
+	Expression receiver = this.expressionStack[this.expressionPtr];
+	int subsetLength=0;
+	long []subsetPositions=null;
+	if (receiver instanceof SingleNameReference) {
+		SingleNameReference snr = (SingleNameReference) receiver;
+		subsetLength=1;
+		subset=new char[][]{snr.token};
+		subsetPositions=new long[]{(((long)snr.sourceStart)<<32)+snr.sourceEnd};
+	}
+	else if (receiver instanceof ThisReference)
+	{
+		ThisReference thisReference = (ThisReference) receiver;
+
+		subsetLength=1;
+	subsetLength=1;
+	subset=new char[][]{{'t','h','i','s'}};
+	subsetPositions=new long[]{ (((long)thisReference.sourceStart)<<32)+thisReference.sourceEnd};
+
+	}
+	else
+		//TODO: implement
+		throw new org.eclipse.wst.jsdt.core.UnimplementedException();
+
+	long[] positions = new long[length+subsetLength];
+	if (subsetLength>0)
+	{
+		System.arraycopy(
+				subsetPositions,
+				0,
+				positions,
+				0,
+				subsetLength);
+
+	}
+	System.arraycopy(
+			identifierPositionStack,
+			identifierPtr + 1,
+			positions,
+			subsetLength,
+			length);
+
+
+
+	/* build specific completion on name reference */
+	NameReference reference;
+	if (completionIndex == 0 && subsetLength==0) {
+		/* completion inside first identifier */
+		reference = this.createSingleAssistNameReference(assistIdentifier(), positions[0]);
+	} else {
+		/* completion inside subsequent identifier */
+		reference = this.createQualifiedAssistNameReference(subset, assistIdentifier(), positions);
+	}
+	reference.bits &= ~ASTNode.RestrictiveFlagMASK;
+	reference.bits |= Binding.LOCAL | Binding.FIELD;
+
+	assistNode = reference;
+	lastCheckPoint = reference.sourceEnd + 1;
+	this.expressionStack[this.expressionPtr] =reference ;
+	this.isOrphanCompletionNode = true;
+
+
+}
 protected void classInstanceCreation(boolean isQualified, boolean isShort) {
 	popElement(K_SELECTOR);
 	super.classInstanceCreation(isQualified, isShort);

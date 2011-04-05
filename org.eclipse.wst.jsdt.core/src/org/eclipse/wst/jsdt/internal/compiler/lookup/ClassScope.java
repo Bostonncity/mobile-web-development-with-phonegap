@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2009 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -170,7 +170,6 @@ public class ClassScope extends Scope {
 				// check that the member does not conflict with an enclosing type
 				do {
 					if (CharOperation.equals(type.sourceName, memberContext.name)) {
-						problemReporter().typeCollidesWithEnclosingType(memberContext);
 						continue nextMember;
 					}
 					type = type.enclosingType();
@@ -178,7 +177,6 @@ public class ClassScope extends Scope {
 				// check the member type does not conflict with another sibling member type
 				for (int j = 0; j < i; j++) {
 					if (CharOperation.equals(referenceContext.memberTypes[j].name, memberContext.name)) {
-						problemReporter().duplicateNestedType(memberContext);
 						continue nextMember;
 					}
 				}
@@ -217,7 +215,6 @@ public class ClassScope extends Scope {
 				// check that the member does not conflict with an enclosing type
 				do {
 					if (CharOperation.equals(type.sourceName, memberContext.name)) {
-						problemReporter().typeCollidesWithEnclosingType(memberContext);
 						continue nextMember;
 					}
 					type = type.enclosingType();
@@ -225,7 +222,6 @@ public class ClassScope extends Scope {
 				// check that the member type does not conflict with another sibling member type
 				for (int j = 0; j < i; j++) {
 					if (CharOperation.equals(referenceContext.memberTypes[j].name, memberContext.name)) {
-						problemReporter().duplicateNestedType(memberContext);
 						continue nextMember;
 					}
 				}
@@ -295,9 +291,6 @@ public class ClassScope extends Scope {
 			className[className.length - 1] =
 				CharOperation.concat(className[className.length - 1], referenceContext.name, '$');
 			ReferenceBinding existingType = packageBinding.getType0(className[className.length - 1]);
-			if (existingType != null)
-				// report the error against the parent - its still safe to answer the member type
-				this.parent.problemReporter().duplicateNestedType(referenceContext);
 			referenceContext.binding = new MemberTypeBinding(className, this, enclosingType);
 		}
 
@@ -312,8 +305,6 @@ public class ClassScope extends Scope {
 	private void checkAndSetModifiers() {
 		SourceTypeBinding sourceType = getReferenceBinding();
 		int modifiers = sourceType.modifiers;
-		if ((modifiers & ExtraCompilerModifiers.AccAlternateModifierProblem) != 0)
-			problemReporter().duplicateModifierForType(sourceType);
 		ReferenceBinding enclosingType = sourceType.enclosingType();
 		boolean isMemberType = sourceType.isMemberType();
 		if (isMemberType) {
@@ -369,31 +360,11 @@ public class ClassScope extends Scope {
 		// after this point, tests on the 16 bits reserved.
 		int realModifiers = modifiers & ExtraCompilerModifiers.AccJustFlag;
 
-		// detect abnormal cases for classes
-		if (isMemberType) { // includes member types defined inside local types
-			final int UNEXPECTED_MODIFIERS = ~(ClassFileConstants.AccPublic | ClassFileConstants.AccPrivate | ClassFileConstants.AccProtected | ClassFileConstants.AccStatic | ClassFileConstants.AccAbstract | ClassFileConstants.AccFinal | ClassFileConstants.AccStrictfp);
-			if ((realModifiers & UNEXPECTED_MODIFIERS) != 0)
-				problemReporter().illegalModifierForMemberClass(sourceType);
-		} else if (sourceType.isLocalType()) {
-			final int UNEXPECTED_MODIFIERS = ~(ClassFileConstants.AccAbstract | ClassFileConstants.AccFinal | ClassFileConstants.AccStrictfp);
-			if ((realModifiers & UNEXPECTED_MODIFIERS) != 0)
-				problemReporter().illegalModifierForLocalClass(sourceType);
-		} else {
-			final int UNEXPECTED_MODIFIERS = ~(ClassFileConstants.AccPublic | ClassFileConstants.AccAbstract | ClassFileConstants.AccFinal | ClassFileConstants.AccStrictfp);
-			if ((realModifiers & UNEXPECTED_MODIFIERS) != 0)
-				problemReporter().illegalModifierForClass(sourceType);
-		}
-
-		// check that Final and Abstract are not set together
-		if ((realModifiers & (ClassFileConstants.AccFinal | ClassFileConstants.AccAbstract)) == (ClassFileConstants.AccFinal | ClassFileConstants.AccAbstract))
-			problemReporter().illegalModifierCombinationFinalAbstractForClass(sourceType);
-		
 		if (isMemberType) {
 			// test visibility modifiers inconsistency, isolate the accessors bits
 			
 			int accessorBits = realModifiers & (ClassFileConstants.AccPublic | ClassFileConstants.AccProtected | ClassFileConstants.AccPrivate);
 			if ((accessorBits & (accessorBits - 1)) > 1) {
-				problemReporter().illegalVisibilityModifierCombinationForMemberType(sourceType);
 
 				// need to keep the less restrictive so disable Protected/Private as necessary
 				if ((accessorBits & ClassFileConstants.AccPublic) != 0) {
@@ -404,12 +375,6 @@ public class ClassScope extends Scope {
 				} else if ((accessorBits & ClassFileConstants.AccProtected) != 0 && (accessorBits & ClassFileConstants.AccPrivate) != 0) {
 					modifiers &= ~ClassFileConstants.AccPrivate;
 				}
-			}
-			
-			// static modifier test
-			if (!enclosingType.isStatic()) {
-				// error the enclosing type of a static field must be static or a top-level type
-				problemReporter().illegalStaticModifierForMemberType(sourceType);
 			}
 		}
 
@@ -426,20 +391,12 @@ public class ClassScope extends Scope {
 	private void checkAndSetModifiersForField(FieldBinding fieldBinding, FieldDeclaration fieldDecl) {
 		int modifiers = fieldBinding.modifiers;
 		final ReferenceBinding declaringClass = fieldBinding.declaringClass;
-		if ((modifiers & ExtraCompilerModifiers.AccAlternateModifierProblem) != 0)
-			problemReporter().duplicateModifierForField(declaringClass, fieldDecl);
 
 		// after this point, tests on the 16 bits reserved.
 		int realModifiers = modifiers & ExtraCompilerModifiers.AccJustFlag;
-		final int UNEXPECTED_MODIFIERS = ~(ClassFileConstants.AccPublic | ClassFileConstants.AccPrivate | ClassFileConstants.AccProtected | ClassFileConstants.AccFinal | ClassFileConstants.AccStatic);
-		if ((realModifiers & UNEXPECTED_MODIFIERS) != 0) {
-			problemReporter().illegalModifierForField(declaringClass, fieldDecl);
-			modifiers &= ~ExtraCompilerModifiers.AccJustFlag | ~UNEXPECTED_MODIFIERS;
-		}
 
 		int accessorBits = realModifiers & (ClassFileConstants.AccPublic | ClassFileConstants.AccProtected | ClassFileConstants.AccPrivate);
 		if ((accessorBits & (accessorBits - 1)) > 1) {
-			problemReporter().illegalVisibilityModifierCombinationForField(declaringClass, fieldDecl);
 
 			// need to keep the less restrictive so disable Protected/Private as necessary
 			if ((accessorBits & ClassFileConstants.AccPublic) != 0) {
@@ -451,9 +408,6 @@ public class ClassScope extends Scope {
 				modifiers &= ~ClassFileConstants.AccPrivate;
 			}
 		}
-
-		if ((realModifiers & (ClassFileConstants.AccFinal)) == (ClassFileConstants.AccFinal))
-			problemReporter().illegalModifierCombinationFinalVolatileForField(declaringClass, fieldDecl);
 
 		if (fieldDecl.initialization == null && (modifiers & ClassFileConstants.AccFinal) != 0)
 			modifiers |= ExtraCompilerModifiers.AccBlankFinal;
@@ -508,10 +462,6 @@ public class ClassScope extends Scope {
 		SourceTypeBinding sourceType = getReferenceBinding();
 		if (sourceType.id == T_JavaLangObject) { // handle the case of redefining java.lang.Object up front
 			sourceType.superclass = null;
-			if (!sourceType.isClass())
-				problemReporter().objectMustBeClass(sourceType);
-//			if (referenceContext.superclass != null || (referenceContext.superInterfaces != null && referenceContext.superInterfaces.length > 0))
-//				problemReporter().objectCannotHaveSuperTypes(sourceType);
 			return true; // do not propagate Object's hierarchy problems down to every subtype
 		}
 		if ( (referenceContext!=null && referenceContext.superclass == null) || (inferredType!=null && inferredType.superClass==null)) {
@@ -523,33 +473,19 @@ public class ClassScope extends Scope {
 			TypeReference superclassRef = referenceContext.superclass;
 			ReferenceBinding superclass = findSupertype(superclassRef);
 			if (superclass != null) { // is null if a cycle was detected cycle or a problem
-				if (!superclass.isClass()) {
-					problemReporter().superclassMustBeAClass(sourceType, superclassRef, superclass);
-				} else {
-					// only want to reach here when no errors are reported
-					sourceType.superclass = superclass;
-					return true;
-				}
+				// only want to reach here when no errors are reported
+				sourceType.superclass = superclass;
+				return true;
 			}
 		}
 		else
 		{
 			ReferenceBinding superclass = findInferredSupertype(inferredType);
 			if (superclass != null) { // is null if a cycle was detected cycle or a problem
-				if (!superclass.isClass()) {
-					problemReporter().superclassMustBeAClass(sourceType, inferredType, superclass);
-//				} else if (superclass.isFinal()) {
-//					problemReporter().classExtendFinalClass(sourceType, superclassRef, superclass);
-//				} else if ((superclass.tagBits & TagBits.HasDirectWildcard) != 0) {
-//					problemReporter().superTypeCannotUseWildcard(sourceType, superclassRef, superclass);
-//				} else if (superclass.erasure().id == T_JavaLangEnum) {
-//					problemReporter().cannotExtendEnum(sourceType, superclassRef, superclass);
-				} else {
-					// only want to reach here when no errors are reported
-					sourceType.superclass = superclass;
-					if (superclass.isValidBinding())
-						return true;
-				}
+				// only want to reach here when no errors are reported
+				sourceType.superclass = superclass;
+				if (superclass.isValidBinding())
+					return true;
 			}
 
 		}
@@ -577,7 +513,6 @@ public class ClassScope extends Scope {
 		
 		boolean noProblems = true;
 		int length = this.inferredType.mixins.size();
-		int count = 0;
 		nextExtends : for (int i = 0; i < length; i++) {
 			char []mixinsName=(char [])this.inferredType.mixins.get(i);
 			ReferenceBinding mixinBinding = (ReferenceBinding)this.getType(mixinsName);

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2009 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -96,7 +96,6 @@ public class JavadocMessageSend extends MessageSend implements IJsDocMessageSend
 		}
 		// base type cannot receive any message
 		if (this.actualReceiverType.isBaseType()) {
-			scope.problemReporter().javadocErrorNoMethodFor(this, this.actualReceiverType, argumentTypes, scope.getDeclarationModifiers());
 			return null;
 		}
 		this.binding = scope.getMethod(this.actualReceiverType, this.selector, argumentTypes, this);
@@ -143,7 +142,6 @@ public class JavadocMessageSend extends MessageSend implements IJsDocMessageSend
 				if (this.actualReceiverType instanceof ReferenceBinding) {
 					this.binding.declaringClass = (ReferenceBinding) this.actualReceiverType;
 				} else {
-					scope.problemReporter().javadocErrorNoMethodFor(this, this.actualReceiverType, argumentTypes, scope.getDeclarationModifiers());
 					return null;
 				}
 			}

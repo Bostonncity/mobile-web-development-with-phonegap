@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.wst.jsdt_sdk.feature"
       label="%featureName"
-      version="1.2.3.v201102160540-47A7790LCFLLfLSOuUaPYHdNf8As"
+      version="1.2.4.v201103240300-47A7990LCFLLkMQOsQaRWNnBh16vAKhMXQN9e1Qk"
       provider-name="%providerName">
 
    <description>
@@ -19,11 +19,11 @@
 
    <includes
          id="org.eclipse.wst.jsdt.feature"
-         version="1.2.3.v201102160540-7C78FGUF9JgLWNO2UCNqfa"/>
+         version="1.2.4.v201103240300-7C78FGYF9JgLWPM8d0PjYd"/>
 
    <includes
          id="org.eclipse.wst.jsdt.feature.source"
-         version="1.2.3.v201102160540-7C78FGUF9JgLWNO2UCNqfa"/>
+         version="1.2.4.v201103240300-7C78FGYF9JgLWPM8d0PjYd"/>
 
    <plugin
          id="org.mozilla.javascript.source"

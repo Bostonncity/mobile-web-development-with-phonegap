@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2009 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -68,10 +68,6 @@ public class ArrayAllocationExpression extends Expression implements IArrayAlloc
 
 		// will check for null after dimensions are checked
 		this.constant = Constant.NotAConstant;
-		if (referenceType == TypeBinding.VOID) {
-			scope.problemReporter().cannotAllocateVoidArray(this);
-			referenceType = null;
-		}
 
 		// check the validity of the dimension syntax (and test for all null dimensions)
 		int explicitDimIndex = -1;
@@ -79,20 +75,8 @@ public class ArrayAllocationExpression extends Expression implements IArrayAlloc
 			if (this.dimensions[i] != null) {
 				if (explicitDimIndex < 0) explicitDimIndex = i;
 			} else if (explicitDimIndex > 0) {
-				// should not have an empty dimension before an non-empty one
-				scope.problemReporter().incorrectLocationForNonEmptyDimension(this, explicitDimIndex);
 				break loop;
 			}
-		}
-
-		// explicitDimIndex < 0 says if all dimensions are nulled
-		// when an initializer is given, no dimension must be specified
-		if (this.initializer == null) {
-			if (explicitDimIndex < 0) {
-				scope.problemReporter().mustDefineDimensionsOrInitializer(this);
-			}
-		} else if (explicitDimIndex >= 0) {
-			scope.problemReporter().cannotDefineDimensionsAndInitializer(this);
 		}
 
 		// dimensions resolution
@@ -105,9 +89,6 @@ public class ArrayAllocationExpression extends Expression implements IArrayAlloc
 
 		// building the array binding
 		if (referenceType != null) {
-			if (this.dimensions.length > 255) {
-				scope.problemReporter().tooManyDimensions(this);
-			}
 			this.resolvedType = scope.createArrayType(referenceType, this.dimensions.length);
 
 			// check the initializer

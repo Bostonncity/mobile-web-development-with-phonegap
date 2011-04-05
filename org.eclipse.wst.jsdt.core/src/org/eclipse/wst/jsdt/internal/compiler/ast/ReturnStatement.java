@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2009 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -138,24 +138,12 @@ public void resolve(BlockScope scope) {
 				: methodBinding.returnType)
 			: TypeBinding.ANY;
 	TypeBinding expressionType;
-	if (methodType == TypeBinding.VOID) {
-		// the expression should be null
-		if (this.expression == null)
-			return;
-		if ((expressionType = this.expression.resolveType(scope)) != null)
-			scope.problemReporter().attemptToReturnNonVoidExpression(this, expressionType);
-		return;
-	}
 	if (this.expression == null) {
 		if (methodType != null && !methodType.isAnyType()) scope.problemReporter().shouldReturn(methodType, this);
 		return;
 	}
 	this.expression.setExpectedType(methodType); // needed in case of generic method invocation
 	if ((expressionType = this.expression.resolveType(scope)) == null) return;
-	if (expressionType == TypeBinding.VOID) {
-		scope.problemReporter().attemptToReturnVoidValue(this);
-		return;
-	}
 	if (methodType == null)
 		return;
 

@@ -88,11 +88,13 @@ public void traverse(ASTVisitor visitor, BlockScope scope) {
 }
 
 public StringBuffer printExpression(int indent, StringBuffer output) {
+	output.append('(');
 	for (int i = 0; i < this.expressions.length; i++) {
 		if (i>0)
 			output.append(", "); //$NON-NLS-1$
 		this.expressions[i].printExpression(indent, output);
 	}
+	output.append(')');
 	return output;
 }
 public int getASTType() {
