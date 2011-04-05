@@ -462,6 +462,9 @@ public abstract class ASTNode implements TypeConstants, TypeIds, IASTNode {
 	public int sourceEnd() {
 		return this.sourceEnd;
 	}
+	public void setSourceEnd(int pos) {
+		this.sourceEnd = pos;
+	}
 	public String toString() {
 		return print(0, new StringBuffer(30)).toString();
 	}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2009 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -18,7 +18,6 @@ import org.eclipse.wst.jsdt.internal.compiler.CompilationResult;
 import org.eclipse.wst.jsdt.internal.compiler.flow.ExceptionHandlingFlowContext;
 import org.eclipse.wst.jsdt.internal.compiler.flow.FlowContext;
 import org.eclipse.wst.jsdt.internal.compiler.flow.FlowInfo;
-import org.eclipse.wst.jsdt.internal.compiler.impl.CompilerOptions;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.BlockScope;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.ExtraCompilerModifiers;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.Scope;
@@ -26,7 +25,6 @@ import org.eclipse.wst.jsdt.internal.compiler.lookup.TagBits;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.TypeBinding;
 import org.eclipse.wst.jsdt.internal.compiler.parser.Parser;
 import org.eclipse.wst.jsdt.internal.compiler.problem.AbortMethod;
-import org.eclipse.wst.jsdt.internal.compiler.problem.ProblemSeverities;
 
 public class MethodDeclaration extends AbstractMethodDeclaration implements IFunctionDeclaration {
 
@@ -137,19 +135,6 @@ public class MethodDeclaration extends AbstractMethodDeclaration implements IFun
 		// ========= abort on fatal error =============
 
 		super.resolveStatements();
-
-		final CompilerOptions compilerOptions = this.scope.compilerOptions();
-
-		// TagBits.OverridingMethodWithSupercall is set during the resolveStatements() call
-		if (compilerOptions.getSeverity(CompilerOptions.OverridingMethodWithoutSuperInvocation) != ProblemSeverities.Ignore) {
-			if (this.binding != null) {
-        		int bindingModifiers = this.binding.modifiers;
-        		if ((bindingModifiers & (ExtraCompilerModifiers.AccOverriding|ExtraCompilerModifiers.AccImplementing)) == ExtraCompilerModifiers.AccOverriding
-        				&& (this.bits & ASTNode.OverridingMethodWithSupercall) == 0) {
-        			this.scope.problemReporter().overridesMethodWithoutSuperInvocation(this.binding);
-        		}
-			}
-		}
 	}
 
 	public void traverse(

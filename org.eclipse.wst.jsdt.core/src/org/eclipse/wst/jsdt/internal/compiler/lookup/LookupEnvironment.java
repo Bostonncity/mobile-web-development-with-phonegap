@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -271,12 +271,6 @@ public BinaryTypeBinding cacheBinaryType(ISourceType binaryType, boolean needFie
 	return null; // the type already exists & can be retrieved from the cache
 }
 public MissingBinaryTypeBinding cacheMissingBinaryType(char[][] compoundName, CompilationUnitDeclaration unit) {
-	// report the missing class file first
-	problemReporter.isClassPathCorrect(
-		compoundName,
-		unit == null ? this.unitBeingCompleted : unit,
-		this.missingClassFileLocation);
-
 	PackageBinding packageBinding = computePackageFrom(compoundName);
 	if(unit == null)
 		return null;

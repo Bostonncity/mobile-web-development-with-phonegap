@@ -3,7 +3,7 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.4
 Bundle-SymbolicName: org.eclipse.wst.jsdt.debug.core;singleton:=true
 Eclipse-SourceReferences: scm:cvs:pserver:dev.eclipse.org:/cvsroot/web
  tools:org.eclipse.jsdt/plugins/org.eclipse.wst.jsdt.debug.core;tag=v2
- 01011040143
+ 01103310001
 Bundle-Activator: org.eclipse.wst.jsdt.debug.internal.core.JavaScriptD
  ebugPlugin
 Require-Bundle: org.eclipse.core.runtime,org.eclipse.debug.core
@@ -16,7 +16,7 @@ Export-Package: org.eclipse.wst.jsdt.debug.core.breakpoints,org.eclips
  :=true,org.eclipse.wst.jsdt.debug.internal.core.launching;x-friends:=
  "org.eclipse.wst.jsdt.debug.ui",org.eclipse.wst.jsdt.debug.internal.c
  ore.model;x-friends:="org.eclipse.wst.jsdt.debug.ui"
-Bundle-Version: 1.0.3.v201011040143
+Bundle-Version: 1.0.4.v201103310001
 Bundle-Vendor: %bundleVendor.name
 Bundle-ActivationPolicy: lazy
 Bundle-Name: %bundleName.name
@@ -244,12 +244,12 @@ SHA1-Digest: fXce+d7/+pazcyaTK3q2YsR6VI8=
 Name: org/eclipse/wst/jsdt/debug/core/jsdi/NullValue.class
 SHA1-Digest: CQM+hX7UzqT6TdIu/XhXx8h2hjo=
 
+Name: org/eclipse/wst/jsdt/debug/core/jsdi/event/ExceptionEvent.class
+SHA1-Digest: 6b3Zt9cFkHqc4ZeU9QmsIaGjFoE=
+
 Name: org/eclipse/wst/jsdt/debug/internal/core/launching/ILaunchConsta
  nts.class
 SHA1-Digest: 96P9vol0B1MZiZ1cHN4Gx1ziE10=
-
-Name: org/eclipse/wst/jsdt/debug/core/jsdi/event/ExceptionEvent.class
-SHA1-Digest: 6b3Zt9cFkHqc4ZeU9QmsIaGjFoE=
 
 Name: org/eclipse/wst/jsdt/debug/core/jsdi/request/DebuggerStatementRe
  quest.class
@@ -309,10 +309,6 @@ SHA1-Digest: lU6beIIzkHurUmHNUEYw2kSO3Sw=
 Name: org/eclipse/wst/jsdt/debug/core/jsdi/event/ScriptLoadEvent.class
 SHA1-Digest: O+x8UGCc2z+rfx/eg94ZwKg39/8=
 
-Name: org/eclipse/wst/jsdt/debug/internal/core/breakpoints/Messages.cl
- ass
-SHA1-Digest: xu33hA2KqZ2BQuzRUMjmo+4dpHw=
-
 Name: org/eclipse/wst/jsdt/debug/core/jsdi/connect/Connector$StringArg
  ument.class
 SHA1-Digest: MZa+1islH/MaMWlaN7jG26xKsE8=
@@ -361,10 +357,6 @@ SHA1-Digest: 4+/3YGj1FrUPpowbzCEQLUbn2kU=
 Name: org/eclipse/wst/jsdt/debug/internal/core/breakpoints/JavaScriptL
  oadBreakpoint.class
 SHA1-Digest: tYQ3wyx+2tPqCBUGXJ8jISupbxM=
-
-Name: org/eclipse/wst/jsdt/debug/internal/core/breakpoints/messages.pr
- operties
-SHA1-Digest: 4PsyJveT+Hmo/zTMr02ceJCIzr0=
 
 Name: org/eclipse/wst/jsdt/debug/core/jsdi/event/LocatableEvent.class
 SHA1-Digest: fRU/lptRhf8j3u+edqiovUNm7Hk=

@@ -4,8 +4,8 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.4
 Bundle-SymbolicName: org.eclipse.wst.jsdt.ui; singleton:=true
 Eclipse-LazyStart: true
 Eclipse-SourceReferences: scm:cvs:pserver:dev.eclipse.org:/cvsroot/web
- tools:org.eclipse.jsdt/plugins/org.eclipse.wst.jsdt.ui;tag=v201102160
- 540
+ tools:org.eclipse.jsdt/plugins/org.eclipse.wst.jsdt.ui;tag=v201103302
+ 046
 Bundle-Activator: org.eclipse.wst.jsdt.internal.ui.JavaScriptPlugin
 Require-Bundle: org.eclipse.ui;bundle-version="[3.5.0,4.0.0)",org.ecli
  pse.ui.console;bundle-version="[3.4.0,4.0.0)",org.eclipse.help;bundle
@@ -122,7 +122,7 @@ Export-Package: org.eclipse.wst.jsdt.internal.corext;x-friends:="org.e
  .text,org.eclipse.wst.jsdt.ui.text.folding,org.eclipse.wst.jsdt.ui.te
  xt.java,org.eclipse.wst.jsdt.ui.text.java.hover,org.eclipse.wst.jsdt.
  ui.wizards
-Bundle-Version: 1.1.4.v201102160540
+Bundle-Version: 1.1.5.v201103302046
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-Name: %pluginName
@@ -926,7 +926,7 @@ SHA1-Digest: ut5RSIX6gFJjeL8ONsLqQXAQlyc=
 
 Name: org/eclipse/wst/jsdt/internal/ui/text/java/hover/JavaInformation
  Provider.class
-SHA1-Digest: FD2Lf4OyJV6o1pOqgZl5fzDyyJw=
+SHA1-Digest: /yGY6+grcjBvtLo3COccs/fJYuY=
 
 Name: org/eclipse/wst/jsdt/internal/corext/refactoring/scripting/Renam
  eJavaProjectRefactoringContribution.class
@@ -2370,7 +2370,7 @@ SHA1-Digest: yNPdAZUHVrCQFS8+Wk3I8mB7KS0=
 
 Name: org/eclipse/wst/jsdt/internal/ui/text/java/AbstractJavaCompletio
  nProposal.class
-SHA1-Digest: iJzj6xXv7yfAGWXRPUIkn8Wp96M=
+SHA1-Digest: VHVAzG1jcjG3HpH6RCoZV1gOrvc=
 
 Name: org/eclipse/wst/jsdt/ui/actions/ConvertingSelectionProvider$Sele
  ctionChangedListener.class
@@ -2466,7 +2466,7 @@ SHA1-Digest: EGPTdLksIUsKfyAFLOIwfiSnEaw=
 
 Name: org/eclipse/wst/jsdt/internal/ui/javaeditor/EditorUtility$1.clas
  s
-SHA1-Digest: G7FOl3bj1EjTe6lqmaO/Z7EY55g=
+SHA1-Digest: yyab/99KuxWbTE18ZJYAaNuHcyg=
 
 Name: org/eclipse/wst/jsdt/internal/ui/refactoring/PromoteTempWizard$5
  .class
@@ -2509,7 +2509,7 @@ SHA1-Digest: 6UMhYEWD24LZtdDlnvfK9SKJzH0=
 
 Name: org/eclipse/wst/jsdt/internal/ui/text/java/hover/JavadocHover.cl
  ass
-SHA1-Digest: Dy3Tq2brtpPXU95T+5KpUc9aTUU=
+SHA1-Digest: YJWxEK1CyQdTFNo34DFR/iWKT0U=
 
 Name: org/eclipse/wst/jsdt/internal/ui/actions/SurroundWithTemplateMen
  uAction.class
@@ -2533,7 +2533,7 @@ SHA1-Digest: T05up1R05XioTPEylowIeqEVS6M=
 
 Name: org/eclipse/wst/jsdt/internal/ui/text/java/AbstractJavaCompletio
  nProposal$ExitPolicy.class
-SHA1-Digest: sd4zson8r2liHa0uQ7IO81AnBLw=
+SHA1-Digest: kGiAlun1r8/+UPJPW0FtxMOt2D0=
 
 Name: org/eclipse/wst/jsdt/internal/ui/JavaScriptPlugin$1.class
 SHA1-Digest: aCob+833gkTpawlVIgHGl8Xztoo=
@@ -2747,7 +2747,7 @@ SHA1-Digest: vG/QUj7RzwlFxozCFPlnCCb7zwQ=
 
 Name: org/eclipse/wst/jsdt/internal/ui/text/java/hover/JavaInformation
  Provider$EditorWatcher.class
-SHA1-Digest: 0Pm3g7WtzIH/qPLxlLofkPnkWAA=
+SHA1-Digest: GrBCJeenP33L9qWqivZFmsCYav8=
 
 Name: org/eclipse/wst/jsdt/internal/ui/preferences/TypeFilterInputDial
  og.class
@@ -3798,7 +3798,7 @@ SHA1-Digest: PRWB3iKvoICT5U4tvpw7wxYZ+rA=
 
 Name: org/eclipse/wst/jsdt/internal/ui/text/java/hover/JavadocHover$Pr
  esenterControlCreator.class
-SHA1-Digest: srCZqUSNTIN5Kqbkg8IiUYS3og0=
+SHA1-Digest: znb8a3g3ci+XBPtqy8aopzkM7Go=
 
 Name: org/eclipse/wst/jsdt/internal/ui/preferences/JavadocConfiguratio
  nBlock$ZipDialogValidator.class
@@ -4691,6 +4691,10 @@ SHA1-Digest: qF1z35Ch49/f5kr5lYyO/wvp93M=
 Name: org/eclipse/wst/jsdt/internal/corext/refactoring/util/CodeAnalyz
  er.class
 SHA1-Digest: hairTICVaRVOB5P8BHyPEnchMuk=
+
+Name: org/eclipse/wst/jsdt/internal/ui/text/java/hover/JavadocHover$1.
+ class
+SHA1-Digest: HM1AL614ol+q75bWTV8TdVYtliU=
 
 Name: org/eclipse/wst/jsdt/internal/ui/wizards/buildpaths/AccessRuleEn
  tryDialog$TypeRulesAdapter.class
@@ -6279,10 +6283,6 @@ Name: org/eclipse/wst/jsdt/internal/ui/refactoring/PullUpMemberPage$7.
  class
 SHA1-Digest: VRFRmvSTP97G1rnyYgACnnIYNfQ=
 
-Name: org/eclipse/wst/jsdt/internal/ui/text/java/AbstractJavaCompletio
- nProposal$ControlCreator.class
-SHA1-Digest: v5o+woAzkQjWleseAhLkDr3AfwA=
-
 Name: org/eclipse/wst/jsdt/ui/wizards/BuildPathDialogAccess$1$LibraryS
  uperTypeContentProvider.class
 SHA1-Digest: tePCBasEnUMzEOGk98m+8XVCVuM=
@@ -7242,7 +7242,7 @@ SHA1-Digest: rttgoOfl6A+baH4nc5rljNK8Nc4=
 
 Name: org/eclipse/wst/jsdt/internal/ui/text/java/hover/JavadocHover$Ho
  verControlCreator.class
-SHA1-Digest: XIIHML4Ybme9NCh9Ny3zZAhNkqg=
+SHA1-Digest: EqswJtu69Fx5HeR6SbtlEoS8Ip0=
 
 Name: org/eclipse/wst/jsdt/internal/ui/refactoring/PullUpMethodPage$4.
  class
@@ -7358,7 +7358,7 @@ Name: org/eclipse/wst/jsdt/internal/ui/wizards/dialogfields/TreeListDi
 SHA1-Digest: Q4FVFJtf2fZ9Et36mORV29ALLDU=
 
 Name: plugin.properties
-SHA1-Digest: R5fUMMt+1Qp42WjhWDJxMS//5Bk=
+SHA1-Digest: Ei49sq8ICvvl2uyF89DZ242QVA0=
 
 Name: org/eclipse/wst/jsdt/internal/ui/javaeditor/JavaEditorMessages.c
  lass
@@ -8935,7 +8935,7 @@ SHA1-Digest: aZRpaQahuF5V7jPE3qA92FB1I9o=
 
 Name: org/eclipse/wst/jsdt/internal/ui/preferences/JavadocProblemsConf
  igurationBlock.class
-SHA1-Digest: t2njMMK2aWEth7ZTEim13Vq5UQQ=
+SHA1-Digest: cgF1pAZy6dS4Y+de7ygk72HUrHI=
 
 Name: icons/full/obj16/template_obj.gif
 SHA1-Digest: GT44qN4ou5RBseN8n9r9fdc/ucU=
@@ -9503,7 +9503,7 @@ SHA1-Digest: CAMil6EZM131iRP7M9a0vVjvUyQ=
 
 Name: org/eclipse/wst/jsdt/ui/text/JavaScriptSourceViewerConfiguration
  $3.class
-SHA1-Digest: 1dxX+/EbY4128GstWQ5pxlusWp0=
+SHA1-Digest: 2rAW95prDJpCATNEC17k2jU2sWs=
 
 Name: org/eclipse/wst/jsdt/internal/ui/text/java/JavaTextMessages.clas
  s
@@ -12770,7 +12770,7 @@ SHA1-Digest: E8SDraJowOEMNxbi9p2Ah8lHPOA=
 
 Name: org/eclipse/wst/jsdt/internal/ui/preferences/ProblemSeveritiesCo
  nfigurationBlock.class
-SHA1-Digest: K6Q5lK3g8/yikzngcTr4W+OrHXc=
+SHA1-Digest: W2uZVwz66eKS2oCJTs1OptcMrik=
 
 Name: org/eclipse/wst/jsdt/internal/ui/util/BusyIndicatorRunnableConte
  xt$BusyRunnable.class
@@ -13338,7 +13338,7 @@ Name: org/eclipse/wst/jsdt/internal/ui/text/AbstractInformationControl
 SHA1-Digest: uPlYEKprPHWLXE23VN/2vJmG/gs=
 
 Name: org/eclipse/wst/jsdt/internal/ui/javaeditor/EditorUtility.class
-SHA1-Digest: XXVFIxt6No/3LTIrfhy6zAySJo4=
+SHA1-Digest: wL9+F4P+QU34kpJJbvct6JQax5Y=
 
 Name: org/eclipse/wst/jsdt/internal/ui/refactoring/reorg/PasteAction$1
  .class
@@ -14219,7 +14219,7 @@ SHA1-Digest: qPCV7b9Vpg32prrniHEYbDnl1nA=
 
 Name: org/eclipse/wst/jsdt/internal/ui/text/java/hover/JavaInformation
  Provider$ControlCreator.class
-SHA1-Digest: tl04Sj4DRpgveDWla4bClrsxl40=
+SHA1-Digest: j/N5S96+S/LaPC/34wJMa2QeQSc=
 
 Name: org/eclipse/wst/jsdt/internal/ui/packageview/PackageExplorerPart
  $5.class
@@ -14376,7 +14376,7 @@ SHA1-Digest: vBr84jJ55eLUgXPGzH8lcuo8SGU=
 
 Name: org/eclipse/wst/jsdt/internal/ui/javaeditor/CompilationUnitEdito
  r.class
-SHA1-Digest: wSiUB3ptgzZhLq1qZUHSFYKQjQ8=
+SHA1-Digest: e1DtbJ1SoWncT1GrzYK/p98t9zI=
 
 Name: org/eclipse/wst/jsdt/ui/ProblemsLabelDecorator$ProblemsLabelChan
  gedEvent.class
@@ -15184,7 +15184,7 @@ Name: icons/full/wizban/newjprj_wiz.png
 SHA1-Digest: B3+FPZ8mdN/oZ3WXOkoDwAF7PQc=
 
 Name: about.mappings
-SHA1-Digest: 41UbgPpVsILauT7Mi+GBTEh8a4U=
+SHA1-Digest: qM6xjb9Uor/dObKIsU43t1n0w3g=
 
 Name: org/eclipse/wst/jsdt/ui/actions/RefreshAction$1.class
 SHA1-Digest: +V6uKu/opvGcoTnSh6NLBuZM4PQ=
@@ -15198,7 +15198,7 @@ SHA1-Digest: d3xVSA00+D5D/KqHeALc5rXqQbY=
 
 Name: org/eclipse/wst/jsdt/internal/ui/text/java/AbstractJavaCompletio
  nProposal$1.class
-SHA1-Digest: tzvcnKpAwtiKlYyZDHtmBRGDBZk=
+SHA1-Digest: 8qtuvWZEbYI9fAktPikhqr5Wy1Y=
 
 Name: org/eclipse/wst/jsdt/internal/ui/javadocexport/CheckboxTreeAndLi
  stGroup.class
@@ -15334,7 +15334,7 @@ SHA1-Digest: yMxi0EYkjzW7pvphHKCrpfod5pY=
 
 Name: org/eclipse/wst/jsdt/internal/ui/text/java/AbstractJavaCompletio
  nProposal$ReferenceTracker.class
-SHA1-Digest: eERWCbQQ02G4qQMwAVf7PZrKYCI=
+SHA1-Digest: jvsuVfGeoHt7mpIR18EfNv9D4AI=
 
 Name: org/eclipse/wst/jsdt/internal/ui/actions/AbstractToggleLinkingAc
  tion.class
