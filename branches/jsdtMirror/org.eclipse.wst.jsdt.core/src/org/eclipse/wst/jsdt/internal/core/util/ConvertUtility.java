@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2010 IBM Corporation and others.
+ * Copyright (c) 2007, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -280,11 +280,15 @@ public class ConvertUtility {
 		IIncludePathEntry[] defaults = new IIncludePathEntry[]{JavaScriptCore.newSourceEntry(p.getFullPath())};
 		try {
 			IConfigurationElement[] configurationElements = Platform.getExtensionRegistry().getConfigurationElementsFor("org.eclipse.wst.jsdt.core.sourcePathProvider");
+			List provided = new ArrayList();
 			for (int i = 0; i < configurationElements.length; i++) {
 				DefaultSourcePathProvider provider = (DefaultSourcePathProvider) configurationElements[i].createExecutableExtension("class");
 				if (provider != null) {
-					return provider.getDefaultSourcePaths(p);
+					provided.addAll(Arrays.asList(provider.getDefaultSourcePaths(p)));
 				}
+			}
+			if (!provided.isEmpty()) {
+				return (IIncludePathEntry[]) provided.toArray(new IIncludePathEntry[provided.size()]);
 			}
 		}
 		catch (Exception e) {

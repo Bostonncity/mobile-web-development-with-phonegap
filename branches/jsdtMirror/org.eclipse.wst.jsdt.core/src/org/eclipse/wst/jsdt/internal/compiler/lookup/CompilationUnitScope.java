@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2009 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -153,13 +153,13 @@ protected CompilationUnitScope(LookupEnvironment environment)
 	}
 }
 
-public MethodScope methodScope() {
-	if(superBinding!=null && methodScope==null) {
-		methodScope = new MethodScope(classScope,referenceContext(),false);
-	}
-
-	return methodScope;
-}
+//public MethodScope methodScope() {
+//	if(superBinding!=null && methodScope==null) {
+//		methodScope = new MethodScope(classScope,referenceContext(),false);
+//	}
+//
+//	return methodScope;
+//}
 
 public ClassScope classScope() {
 	if (this.classScope!=null) return this.classScope;
@@ -684,18 +684,12 @@ void faultInImports() {
 
 			Binding importBinding = findImport(compoundName, compoundName.length);
 			if (!importBinding.isValidBinding()) {
-				problemReporter().importProblem(importReference, importBinding);
 				continue nextImport;
 			}
 			resolvedImports[index++] = new ImportBinding(compoundName, true, importBinding, importReference);
 		} else {
 			Binding importBinding = findSingleImport(compoundName);
 			if (!importBinding.isValidBinding()) {
-				problemReporter().importProblem(importReference, importBinding);
-				continue nextImport;
-			}
-			if (importBinding instanceof PackageBinding) {
-				problemReporter().cannotImportPackage(importReference);
 				continue nextImport;
 			}
 			ReferenceBinding conflictingType = null;
@@ -712,17 +706,6 @@ void faultInImports() {
 
 				ReferenceBinding existingType = typesBySimpleNames.get(compoundName[compoundName.length - 1]);
 				if (existingType != null) {
-					// duplicate test above should have caught this case, but make sure
-					if (existingType == referenceBinding)
-						continue nextImport;
-					// either the type collides with a top level type or another imported type
-					for (int j = 0, length = topLevelTypes.length; j < length; j++) {
-						if (CharOperation.equals(topLevelTypes[j].sourceName, existingType.sourceName)) {
-							problemReporter().conflictingImport(importReference);
-							continue nextImport;
-						}
-					}
-					problemReporter().duplicateImport(importReference);
 					continue nextImport;
 				}
 				typesBySimpleNames.put(compoundName[compoundName.length - 1], referenceBinding);

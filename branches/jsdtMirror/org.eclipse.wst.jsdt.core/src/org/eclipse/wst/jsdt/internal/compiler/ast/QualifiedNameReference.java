@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -16,7 +16,6 @@ import org.eclipse.wst.jsdt.internal.compiler.ASTVisitor;
 import org.eclipse.wst.jsdt.internal.compiler.classfmt.ClassFileConstants;
 import org.eclipse.wst.jsdt.internal.compiler.flow.FlowContext;
 import org.eclipse.wst.jsdt.internal.compiler.flow.FlowInfo;
-import org.eclipse.wst.jsdt.internal.compiler.impl.CompilerOptions;
 import org.eclipse.wst.jsdt.internal.compiler.impl.Constant;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.Binding;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.BlockScope;
@@ -33,7 +32,6 @@ import org.eclipse.wst.jsdt.internal.compiler.lookup.TagBits;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.TypeBinding;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.TypeIds;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.VariableBinding;
-import org.eclipse.wst.jsdt.internal.compiler.problem.ProblemSeverities;
 
 public class QualifiedNameReference extends NameReference implements IQualifiedNameReference {
 
@@ -466,10 +464,6 @@ public TypeBinding resolveType(BlockScope scope) {
 			case Binding.VARIABLE : //============only variable===========
 			case Binding.TYPE | Binding.VARIABLE :
 				if (this.binding instanceof LocalVariableBinding) {
-					if (((this.bits & ASTNode.DepthMASK) != 0))
-						scope.problemReporter().cannotReferToNonFinalOuterLocal(
-							(LocalVariableBinding) this.binding,
-							this);
 					this.bits &= ~ASTNode.RestrictiveFlagMASK; // clear bits
 					this.bits |= Binding.LOCAL;
 					return this.resolvedType = getOtherFieldBindings(scope);
@@ -484,11 +478,6 @@ public TypeBinding resolveType(BlockScope scope) {
 							&& fieldBinding.id >= methodScope.lastVisibleFieldID
 							&& (!fieldBinding.isStatic() || methodScope.isStatic)) {
 						scope.problemReporter().forwardReference(this, 0, methodScope.enclosingSourceType());
-					}
-					if (!fieldBinding.isStatic()
-							&& this.indexOfFirstFieldBinding == 1
-							&& scope.compilerOptions().getSeverity(CompilerOptions.UnqualifiedFieldAccess) != ProblemSeverities.Ignore) {
-						scope.problemReporter().unqualifiedFieldAccess(this, fieldBinding);
 					}
 					this.bits &= ~ASTNode.RestrictiveFlagMASK; // clear bits
 					this.bits |= Binding.FIELD;

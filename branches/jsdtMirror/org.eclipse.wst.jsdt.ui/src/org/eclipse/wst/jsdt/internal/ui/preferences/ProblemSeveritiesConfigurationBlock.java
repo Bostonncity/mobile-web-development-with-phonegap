@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -233,19 +233,19 @@ public class ProblemSeveritiesConfigurationBlock extends OptionsConfigurationBlo
 		ExpandableComposite excomposite;
 		Composite inner;
 		/* START -------------------------------- Bug 203292 Type/Method/Filed resolution error configuration --------------------- */
-		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_Resolution;
-		excomposite= createStyleSection(composite, label, nColumns);
-		
-		inner= new Composite(excomposite, SWT.NONE);
-		inner.setFont(composite.getFont());
-		inner.setLayout(new GridLayout(nColumns, false));
-		excomposite.setClient(inner);
-		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_UnresolvedTypes; 
-		addComboBox(inner, label, PREF_UNRESOLVED_TYPE_OPTIONAL_ERROR, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
-		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_UnresolvedFields; 
-		addComboBox(inner, label, PREF_UNRESOLVED_FIELD_OPTIONAL_ERROR, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
-		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_UnresolvedMethods; 
-		addComboBox(inner, label, PREF_UNRESOLVED_METHOD_OPTIONAL_ERROR, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
+//		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_Resolution;
+//		excomposite= createStyleSection(composite, label, nColumns);
+//		
+//		inner= new Composite(excomposite, SWT.NONE);
+//		inner.setFont(composite.getFont());
+//		inner.setLayout(new GridLayout(nColumns, false));
+//		excomposite.setClient(inner);
+//		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_UnresolvedTypes; 
+//		addComboBox(inner, label, PREF_UNRESOLVED_TYPE_OPTIONAL_ERROR, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
+//		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_UnresolvedFields; 
+//		addComboBox(inner, label, PREF_UNRESOLVED_FIELD_OPTIONAL_ERROR, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
+//		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_UnresolvedMethods; 
+//		addComboBox(inner, label, PREF_UNRESOLVED_METHOD_OPTIONAL_ERROR, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
 		/* END -------------------------------- Bug 203292 Type/Method/Filed resolution error configuration --------------------- */
 		// --- style
 		
@@ -292,8 +292,8 @@ public class ProblemSeveritiesConfigurationBlock extends OptionsConfigurationBlo
 		excomposite.setClient(inner);
 	/* START -------------------------------- Bug 197884 Loosly defined var (for statement) and optional semi-colon --------------------- */
 
-		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_LooselyDeclaredGlobalVar; 
-		addComboBox(inner, label, PREF_LOOSE_VAR, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);			
+//		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_LooselyDeclaredGlobalVar; 
+//		addComboBox(inner, label, PREF_LOOSE_VAR, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);			
 
 		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_Optionalsemicolon; 
 		addComboBox(inner, label, PREF_OPTIONAL_SEMICOLON, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);			
@@ -301,8 +301,8 @@ public class ProblemSeveritiesConfigurationBlock extends OptionsConfigurationBlo
 		/* END   -------------------------------- Bug 197884 Loosly defined var (for statement) and optional semi-colon --------------------- */
 		
 	
-		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_undefined_field_label; 
-		addComboBox(inner, label, PREF_PB_UNDEFINED_FIELD, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);			
+//		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_undefined_field_label; 
+//		addComboBox(inner, label, PREF_PB_UNDEFINED_FIELD, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);			
 		
 //		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_missing_serial_version_label; 
 //		addComboBox(inner, label, PREF_PB_MISSING_SERIAL_VERSION, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
@@ -310,8 +310,8 @@ public class ProblemSeveritiesConfigurationBlock extends OptionsConfigurationBlo
 		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_no_effect_assignment_label; 
 		addComboBox(inner, label, PREF_PB_NO_EFFECT_ASSIGNMENT, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
 
-		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_accidential_assignement_label; 
-		addComboBox(inner, label, PREF_PB_POSSIBLE_ACCIDENTAL_BOOLEAN_ASSIGNMENT, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
+//		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_accidential_assignement_label; 
+//		addComboBox(inner, label, PREF_PB_POSSIBLE_ACCIDENTAL_BOOLEAN_ASSIGNMENT, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
 
 		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_finally_block_not_completing_label; 
 		addComboBox(inner, label, PREF_PB_FINALLY_BLOCK_NOT_COMPLETING, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
@@ -322,8 +322,8 @@ public class ProblemSeveritiesConfigurationBlock extends OptionsConfigurationBlo
 //		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_char_array_in_concat_label; 
 //		addComboBox(inner, label, PREF_PB_CHAR_ARRAY_IN_CONCAT, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
 		
-		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_hidden_catchblock_label; 
-		addComboBox(inner, label, PREF_PB_HIDDEN_CATCH_BLOCK, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
+//		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_hidden_catchblock_label; 
+//		addComboBox(inner, label, PREF_PB_HIDDEN_CATCH_BLOCK, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
 
 //		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_inexact_vararg_label; 
 //		addComboBox(inner, label, PREF_15_PB_VARARGS_ARGUMENT_NEED_CAST, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
@@ -337,34 +337,34 @@ public class ProblemSeveritiesConfigurationBlock extends OptionsConfigurationBlo
 		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_fall_through_case;
 		addComboBox(inner, label, PREF_PB_FALLTHROUGH_CASE, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
 		
-		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_null_reference;
-		addComboBox(inner, label, PREF_PB_NULL_REFERENCE, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
+//		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_null_reference;
+//		addComboBox(inner, label, PREF_PB_NULL_REFERENCE, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
 		
-		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_potential_null_reference;
-		addComboBox(inner, label, PREF_PB_POTENTIAL_NULL_REFERENCE, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
+//		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_potential_null_reference;
+//		addComboBox(inner, label, PREF_PB_POTENTIAL_NULL_REFERENCE, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
 		
-		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_duplicate_local_variables;
-		addComboBox(inner, label, PREF_PB_DUPLICATE_LOCAL_VARIABLES, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
-		
+//		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_duplicate_local_variables;
+//		addComboBox(inner, label, PREF_PB_DUPLICATE_LOCAL_VARIABLES, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
+//		
 		label= PreferencesMessages.ProblemSeveritiesconfigurationBlock_pb_uninitialized_local_variable;
 		addComboBox(inner, label, PREF_PB_UNINITIALIZED_LOCAL_VARIABLE, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
 		
-		label= PreferencesMessages.ProblemSeveritiesconfigurationBlock_pb_uninitialized_global_variable;
-		addComboBox(inner, label, PREF_PB_UNINITIALIZED_GLOBAL_VARIABLE, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
+//		label= PreferencesMessages.ProblemSeveritiesconfigurationBlock_pb_uninitialized_global_variable;
+//		addComboBox(inner, label, PREF_PB_UNINITIALIZED_GLOBAL_VARIABLE, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
 		
 		// --- name_shadowing
 		
-		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_section_name_shadowing; 
-		excomposite= createStyleSection(composite, label, nColumns);
-		
-		inner= new Composite(excomposite, SWT.NONE);
-		inner.setFont(composite.getFont());
-		inner.setLayout(new GridLayout(nColumns, false));
-		excomposite.setClient(inner);
-		
-		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_field_hiding_label; 
-		addComboBox(inner, label, PREF_PB_FIELD_HIDING, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
-
+//		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_section_name_shadowing; 
+//		excomposite= createStyleSection(composite, label, nColumns);
+//		
+//		inner= new Composite(excomposite, SWT.NONE);
+//		inner.setFont(composite.getFont());
+//		inner.setLayout(new GridLayout(nColumns, false));
+//		excomposite.setClient(inner);
+//		
+//		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_field_hiding_label; 
+//		addComboBox(inner, label, PREF_PB_FIELD_HIDING, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
+//
 		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_local_variable_hiding_label; 
 		addComboBox(inner, label, PREF_PB_LOCAL_VARIABLE_HIDING, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
 
@@ -379,28 +379,28 @@ public class ProblemSeveritiesConfigurationBlock extends OptionsConfigurationBlo
 //		
 		// --- API access rules
 		
-		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_section_deprecations; 
-		excomposite= createStyleSection(composite, label, nColumns);
-		
-		inner= new Composite(excomposite, SWT.NONE);
-		inner.setFont(composite.getFont());
-		inner.setLayout(new GridLayout(nColumns, false));
-		excomposite.setClient(inner);
-		
-		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_deprecation_label; 
-		addComboBox(inner, label, PREF_PB_DEPRECATION, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
-
-		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_deprecation_in_deprecation_label; 
-		addCheckBox(inner, label, PREF_PB_DEPRECATION_IN_DEPRECATED_CODE, enabledDisabled, extraIndent);		
-	
-		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_deprecation_when_overriding_label; 
-		addCheckBox(inner, label, PREF_PB_DEPRECATION_WHEN_OVERRIDING, enabledDisabled, extraIndent);
-
-		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_forbidden_reference_label; 
-		addComboBox(inner, label, PREF_PB_FORBIDDEN_REFERENCE, errorWarningIgnore, errorWarningIgnoreLabels, 0);
-
-		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_discourraged_reference_label; 
-		addComboBox(inner, label, PREF_PB_DISCOURRAGED_REFERENCE, errorWarningIgnore, errorWarningIgnoreLabels, 0);
+//		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_section_deprecations; 
+//		excomposite= createStyleSection(composite, label, nColumns);
+//		
+//		inner= new Composite(excomposite, SWT.NONE);
+//		inner.setFont(composite.getFont());
+//		inner.setLayout(new GridLayout(nColumns, false));
+//		excomposite.setClient(inner);
+//		
+//		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_deprecation_label; 
+//		addComboBox(inner, label, PREF_PB_DEPRECATION, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
+//
+//		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_deprecation_in_deprecation_label; 
+//		addCheckBox(inner, label, PREF_PB_DEPRECATION_IN_DEPRECATED_CODE, enabledDisabled, extraIndent);		
+//	
+//		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_deprecation_when_overriding_label; 
+//		addCheckBox(inner, label, PREF_PB_DEPRECATION_WHEN_OVERRIDING, enabledDisabled, extraIndent);
+//
+//		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_forbidden_reference_label; 
+//		addComboBox(inner, label, PREF_PB_FORBIDDEN_REFERENCE, errorWarningIgnore, errorWarningIgnoreLabels, 0);
+//
+//		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_discourraged_reference_label; 
+//		addComboBox(inner, label, PREF_PB_DISCOURRAGED_REFERENCE, errorWarningIgnore, errorWarningIgnoreLabels, 0);
 
 		
 		// --- unnecessary_code
@@ -416,23 +416,23 @@ public class ProblemSeveritiesConfigurationBlock extends OptionsConfigurationBlo
 		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_unused_local_label; 
 		addComboBox(inner, label, PREF_PB_UNUSED_LOCAL, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
 
-		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_unused_parameter_label; 
-		addComboBox(inner, label, PREF_PB_UNUSED_PARAMETER, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
+//		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_unused_parameter_label; 
+//		addComboBox(inner, label, PREF_PB_UNUSED_PARAMETER, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
 		
 //		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_signal_param_in_overriding_label; 
 //		addCheckBox(inner, label, PREF_PB_SIGNAL_PARAMETER_IN_OVERRIDING, enabledDisabled, extraIndent);
 		
-		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_ignore_documented_unused_parameters; 
-		addCheckBox(inner, label, PREF_PB_UNUSED_PARAMETER_INCLUDE_DOC_COMMENT_REFERENCE, enabledDisabled, extraIndent);
+//		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_ignore_documented_unused_parameters; 
+//		addCheckBox(inner, label, PREF_PB_UNUSED_PARAMETER_INCLUDE_DOC_COMMENT_REFERENCE, enabledDisabled, extraIndent);
 				
 //		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_unused_imports_label; 
 //		addComboBox(inner, label, PREF_PB_UNUSED_IMPORT, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
 
-		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_unused_private_label; 
-		addComboBox(inner, label, PREF_PB_UNUSED_PRIVATE, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
+//		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_unused_private_label; 
+//		addComboBox(inner, label, PREF_PB_UNUSED_PRIVATE, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
 		
-		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_redundant_null_check; 
-		addComboBox(inner, label, PREF_PB_REDUNDANT_NULL_CHECK, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
+//		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_redundant_null_check; 
+//		addComboBox(inner, label, PREF_PB_REDUNDANT_NULL_CHECK, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
 		
 		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_unnecessary_else_label; 
 		addComboBox(inner, label, PREF_PB_UNNECESSARY_ELSE, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
@@ -446,8 +446,8 @@ public class ProblemSeveritiesConfigurationBlock extends OptionsConfigurationBlo
 //		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_unused_throwing_exception_when_overriding_label; 
 //		addCheckBox(inner, label, PREF_PB_UNUSED_DECLARED_THROWN_EXCEPTION_WHEN_OVERRIDING, enabledDisabled, extraIndent);
 
-		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_unused_label_label; 
-		addComboBox(inner, label, PREF_PB_UNUSED_LABEL, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
+//		label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_unused_label_label; 
+//		addComboBox(inner, label, PREF_PB_UNUSED_LABEL, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
 	
 		
 		// --- generics
@@ -543,13 +543,13 @@ public class ProblemSeveritiesConfigurationBlock extends OptionsConfigurationBlo
 		enableConfigControls(notJustParseErrors);
 		
 		if (!notJustParseErrors) {
-			boolean enableUnusedParams= !checkValue(PREF_PB_UNUSED_PARAMETER, IGNORE);
+			//boolean enableUnusedParams= !checkValue(PREF_PB_UNUSED_PARAMETER, IGNORE);
 	//		getCheckBox(PREF_PB_SIGNAL_PARAMETER_IN_OVERRIDING).setEnabled(enableUnusedParams);
-			getCheckBox(PREF_PB_UNUSED_PARAMETER_INCLUDE_DOC_COMMENT_REFERENCE).setEnabled(enableUnusedParams);
+		//	getCheckBox(PREF_PB_UNUSED_PARAMETER_INCLUDE_DOC_COMMENT_REFERENCE).setEnabled(enableUnusedParams);
 			
-			boolean enableDeprecation= !checkValue(PREF_PB_DEPRECATION, IGNORE);
-			getCheckBox(PREF_PB_DEPRECATION_IN_DEPRECATED_CODE).setEnabled(enableDeprecation);
-			getCheckBox(PREF_PB_DEPRECATION_WHEN_OVERRIDING).setEnabled(enableDeprecation);
+			//boolean enableDeprecation= !checkValue(PREF_PB_DEPRECATION, IGNORE);
+			//getCheckBox(PREF_PB_DEPRECATION_IN_DEPRECATED_CODE).setEnabled(enableDeprecation);
+			//getCheckBox(PREF_PB_DEPRECATION_WHEN_OVERRIDING).setEnabled(enableDeprecation);
 			
 	//		boolean enableThrownExceptions= !checkValue(PREF_PB_UNUSED_DECLARED_THROWN_EXCEPTION, IGNORE);
 	//		getCheckBox(PREF_PB_UNUSED_DECLARED_THROWN_EXCEPTION_WHEN_OVERRIDING).setEnabled(enableThrownExceptions);

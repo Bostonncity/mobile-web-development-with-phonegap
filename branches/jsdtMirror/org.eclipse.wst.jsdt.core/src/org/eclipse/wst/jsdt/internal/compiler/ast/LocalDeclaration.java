@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -148,40 +148,19 @@ public FlowInfo analyseCode(BlockScope currentScope, FlowContext flowContext, Fl
 		// create a binding and add it to the scope
 		TypeBinding variableType = resolveVarType(scope);
 
-		if (variableType != null) {
-			if (variableType == TypeBinding.VOID) {
-				scope.problemReporter().variableTypeCannotBeVoid(this);
-				return ;
+		
+		if (type!=null)
+			variableType=type.resolveType(scope, true /* check bounds*/);
+		else {
+			if (inferredType!=null)
+			{
+			  variableType=inferredType.resolveType(scope,this);
 			}
-			if (variableType.isArrayType() && ((ArrayBinding) variableType).leafComponentType == TypeBinding.VOID) {
-				scope.problemReporter().variableTypeCannotBeVoidArray(this);
-				return;
-			}
+			else
+				variableType=TypeBinding.UNKNOWN;
 		}
-			if (type!=null)
-				variableType=type.resolveType(scope, true /* check bounds*/);
-			else {
-				if (inferredType!=null)
-				{
-				  variableType=inferredType.resolveType(scope,this);
-				}
-				else
-					variableType=TypeBinding.UNKNOWN;
-			}
-
 
 		checkModifiers();
-		if (variableType != null) {
-			if (variableType == TypeBinding.VOID) {
-				scope.problemReporter().variableTypeCannotBeVoid(this);
-				return;
-			}
-			if (variableType.isArrayType() && ((ArrayBinding) variableType).leafComponentType == TypeBinding.VOID) {
-				scope.problemReporter().variableTypeCannotBeVoidArray(this);
-				return;
-			}
-		}
-
 
 		Binding varBinding  = null;
 		if (scope.enclosingMethodScope()==null)
@@ -292,6 +271,7 @@ public FlowInfo analyseCode(BlockScope currentScope, FlowContext flowContext, Fl
 				}
 			}
 			// check for assignment with no effect
+
 			if (this.binding == Assignment.getDirectBinding(this.initialization)) {
 				scope.problemReporter().assignmentHasNoEffect(this, this.name);
 			}

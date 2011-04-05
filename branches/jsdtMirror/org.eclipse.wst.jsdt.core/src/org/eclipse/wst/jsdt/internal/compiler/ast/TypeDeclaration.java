@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2009 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -524,7 +524,6 @@ private void internalAnalyseCode(FlowContext flowContext, FlowInfo flowInfo) {
 				// in case the initializer is not reachable, use a reinitialized flowInfo and enter a fake reachable
 				// branch, since the previous initializer already got the blame.
 				if (staticFieldInfo == FlowInfo.DEAD_END) {
-					this.staticInitializerScope.problemReporter().initializerMustCompleteNormally(field);
 					staticFieldInfo = FlowInfo.initial(this.maxFieldCount).setReachMode(FlowInfo.UNREACHABLE);
 				}
 			} else {
@@ -541,7 +540,6 @@ private void internalAnalyseCode(FlowContext flowContext, FlowInfo flowInfo) {
 				// in case the initializer is not reachable, use a reinitialized flowInfo and enter a fake reachable
 				// branch, since the previous initializer already got the blame.
 				if (nonStaticFieldInfo == FlowInfo.DEAD_END) {
-					this.initializerScope.problemReporter().initializerMustCompleteNormally(field);
 					nonStaticFieldInfo = FlowInfo.initial(this.maxFieldCount).setReachMode(FlowInfo.UNREACHABLE);
 				}
 			}
@@ -755,11 +753,6 @@ public void resolve() {
 			}
 		}
 
-		int missingAbstractMethodslength = this.missingAbstractMethods == null ? 0 : this.missingAbstractMethods.length;
-		int methodsLength = this.methods == null ? 0 : this.methods.length;
-		if ((methodsLength + missingAbstractMethodslength) > 0xFFFF) {
-			this.scope.problemReporter().tooManyMethods(this);
-		}
 		if (this.methods != null) {
 			for (int i = 0, count = this.methods.length; i < count; i++) {
 				this.methods[i].resolve(this.scope);
@@ -789,23 +782,6 @@ public void resolve(BlockScope blockScope) {
 	// need to build its scope first and proceed with binding's creation
 	if ((this.bits & ASTNode.IsAnonymousType) == 0) {
 		// check collision scenarii
-		Binding existing = blockScope.getType(this.name);
-		if (existing instanceof ReferenceBinding
-				&& existing != this.binding
-				&& existing.isValidBinding()) {
-			ReferenceBinding existingType = (ReferenceBinding) existing;
-			if (existingType instanceof LocalTypeBinding
-						&& ((LocalTypeBinding) existingType).scope.methodScope() == blockScope.methodScope()) {
-					// dup in same method
-					blockScope.problemReporter().duplicateNestedType(this);
-			} else if (blockScope.isDefinedInType(existingType)) {
-				//	collision with enclosing type
-				blockScope.problemReporter().typeCollidesWithEnclosingType(this);
-			} else if (blockScope.isDefinedInSameUnit(existingType)){ // only consider hiding inside same unit
-				// hiding sibling
-				blockScope.problemReporter().typeHiding(this, existingType);
-			}
-		}
 		blockScope.addLocalType(this);
 	}
 

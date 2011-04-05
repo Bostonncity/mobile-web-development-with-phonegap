@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -357,7 +357,6 @@ public TypeBinding resolveType(BlockScope scope) {
 			if (this.actualReceiverType==null || this.actualReceiverType instanceof ReferenceBinding) {
 				binding.declaringClass = (ReferenceBinding) this.actualReceiverType;
 			} else {
-				scope.problemReporter().errorNoMethodFor(this, this.actualReceiverType, argumentTypes);
 				return null;
 			}
 		}
@@ -405,13 +404,6 @@ public TypeBinding resolveType(BlockScope scope) {
 	}
 //	checkInvocationArguments(scope, this.receiver, actualReceiverType, binding, this.arguments, argumentTypes, argsContainCast, this);
 
-	//-------message send that are known to fail at compile time-----------
-	if (binding.isAbstract()) {
-		if (receiver.isSuper()) {
-			scope.problemReporter().cannotDireclyInvokeAbstractMethod(this, binding);
-		}
-		// abstract private methods cannot occur nor abstract static............
-	}
 	if (isMethodUseDeprecated(binding, scope, true))
 		scope.problemReporter().deprecatedMethod(binding, this);
 

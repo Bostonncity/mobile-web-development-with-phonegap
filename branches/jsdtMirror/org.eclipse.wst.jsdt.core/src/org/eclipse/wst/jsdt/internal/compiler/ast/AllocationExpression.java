@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2009 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -166,11 +166,6 @@ public TypeBinding resolveType(BlockScope scope) {
 		 
 	}
 
-	// null type denotes fake allocation for enum constant inits
-	if (this.type != null && !this.resolvedType.canBeInstantiated()) {
-		scope.problemReporter().cannotInstantiate(type, this.resolvedType);
-		return this.resolvedType;
-	}
 	if (!this.resolvedType.isValidBinding())
 		return null;
 	if (this.resolvedType instanceof ReferenceBinding )

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -73,9 +73,7 @@ public class MethodScope extends BlockScope {
 
 		int modifiers = methodBinding.modifiers;
 		final ReferenceBinding declaringClass = methodBinding.declaringClass;
-		if ((modifiers & ExtraCompilerModifiers.AccAlternateModifierProblem) != 0)
-			problemReporter().duplicateModifierForMethod(declaringClass, (AbstractMethodDeclaration) referenceContext);
-
+	
 //		if (((ConstructorDeclaration) referenceContext).isDefaultConstructor) {
 		if ((methodBinding.modifiers&ExtraCompilerModifiers.AccIsDefaultConstructor)>0) {
 			// certain flags are propagated from declaring class onto constructor
@@ -91,21 +89,10 @@ public class MethodScope extends BlockScope {
 		// after this point, tests on the 16 bits reserved.
 		int realModifiers = modifiers & ExtraCompilerModifiers.AccJustFlag;
 
-		// check for abnormal modifiers
-		final int UNEXPECTED_MODIFIERS = ~(ClassFileConstants.AccStatic | ClassFileConstants.AccPublic | ClassFileConstants.AccPrivate | ClassFileConstants.AccProtected | ClassFileConstants.AccStrictfp);
-		if ((realModifiers & UNEXPECTED_MODIFIERS) != 0) {
-			problemReporter().illegalModifierForMethod((AbstractMethodDeclaration) referenceContext);
-			modifiers &= ~ExtraCompilerModifiers.AccJustFlag | ~UNEXPECTED_MODIFIERS;
-		} else if ((((AbstractMethodDeclaration) referenceContext).modifiers & ClassFileConstants.AccStrictfp) != 0) {
-			// must check the parse node explicitly
-			problemReporter().illegalModifierForMethod((AbstractMethodDeclaration) referenceContext);
-		}
-
 		// check for incompatible modifiers in the visibility bits, isolate the visibility bits
 		int accessorBits = realModifiers & (ClassFileConstants.AccPublic | ClassFileConstants.AccProtected | ClassFileConstants.AccPrivate);
 		if ((accessorBits & (accessorBits - 1)) != 0) {
-			problemReporter().illegalVisibilityModifierCombinationForMethod(declaringClass, (AbstractMethodDeclaration) referenceContext);
-
+		
 			// need to keep the less restrictive so disable Protected/Private as necessary
 			if ((accessorBits & ClassFileConstants.AccPublic) != 0) {
 				if ((accessorBits & ClassFileConstants.AccProtected) != 0)
@@ -130,9 +117,7 @@ public class MethodScope extends BlockScope {
 
 		int modifiers = methodBinding.modifiers;
 		final ReferenceBinding declaringClass = methodBinding.declaringClass;
-		if ((modifiers & ExtraCompilerModifiers.AccAlternateModifierProblem) != 0)
-			problemReporter().duplicateModifierForMethod(declaringClass, (AbstractMethodDeclaration) referenceContext);
-
+	
 		// after this point, tests on the 16 bits reserved.
 		int realModifiers = modifiers & ExtraCompilerModifiers.AccJustFlag;
 
@@ -147,19 +132,10 @@ public class MethodScope extends BlockScope {
 //			return;
 //		}
 
-		// check for abnormal modifiers
-		final int UNEXPECTED_MODIFIERS = ~(ClassFileConstants.AccPublic | ClassFileConstants.AccPrivate | ClassFileConstants.AccProtected
-			| ClassFileConstants.AccAbstract | ClassFileConstants.AccStatic | ClassFileConstants.AccFinal | ClassFileConstants.AccNative | ClassFileConstants.AccStrictfp);
-		if ((realModifiers & UNEXPECTED_MODIFIERS) != 0) {
-			problemReporter().illegalModifierForMethod((AbstractMethodDeclaration) referenceContext);
-			modifiers &= ~ExtraCompilerModifiers.AccJustFlag | ~UNEXPECTED_MODIFIERS;
-		}
-
 		// check for incompatible modifiers in the visibility bits, isolate the visibility bits
 		int accessorBits = realModifiers & (ClassFileConstants.AccPublic | ClassFileConstants.AccProtected | ClassFileConstants.AccPrivate);
 		if ((accessorBits & (accessorBits - 1)) != 0) {
-			problemReporter().illegalVisibilityModifierCombinationForMethod(declaringClass, (AbstractMethodDeclaration) referenceContext);
-
+			
 			// need to keep the less restrictive so disable Protected/Private as necessary
 			if ((accessorBits & ClassFileConstants.AccPublic) != 0) {
 				if ((accessorBits & ClassFileConstants.AccProtected) != 0)
@@ -171,24 +147,11 @@ public class MethodScope extends BlockScope {
 			}
 		}
 
-		// check for modifiers incompatible with abstract modifier
-		if ((modifiers & ClassFileConstants.AccAbstract) != 0) {
-			int incompatibleWithAbstract = ClassFileConstants.AccPrivate | ClassFileConstants.AccStatic | ClassFileConstants.AccFinal | ClassFileConstants.AccNative | ClassFileConstants.AccStrictfp;
-			if ((modifiers & incompatibleWithAbstract) != 0)
-				problemReporter().illegalAbstractModifierCombinationForMethod(declaringClass, (AbstractMethodDeclaration) referenceContext);
-	
-			problemReporter().abstractMethodInAbstractClass((SourceTypeBinding) declaringClass, (AbstractMethodDeclaration) referenceContext);
-		}
-
 		/* DISABLED for backward compatibility with javac (if enabled should also mark private methods as final)
 		// methods from a final class are final : 8.4.3.3
 		if (methodBinding.declaringClass.isFinal())
 			modifiers |= AccFinal;
 		*/
-		// native methods cannot also be tagged as strictfp
-		if ((modifiers & ClassFileConstants.AccNative) != 0 && (modifiers & ClassFileConstants.AccStrictfp) != 0)
-			problemReporter().nativeMethodsCannotBeStrictfp(declaringClass, (AbstractMethodDeclaration) referenceContext);
-
 //		// static members are only authorized in a static member or top level type
 //		if (((realModifiers & ClassFileConstants.AccStatic) != 0) && declaringClass.isNestedType() && !declaringClass.isStatic())
 //			problemReporter().unexpectedStaticModifierForMethod(declaringClass, (AbstractMethodDeclaration) referenceContext);
@@ -263,10 +226,6 @@ public class MethodScope extends BlockScope {
 		if (argLength > 0 && compilerOptions().sourceLevel >= ClassFileConstants.JDK1_5) {
 			if (argTypes[--argLength].isVarArgs())
 				methodBinding.modifiers |= ClassFileConstants.AccVarargs;
-			while (--argLength >= 0) {
-				if (argTypes[argLength].isVarArgs())
-					problemReporter().illegalVararg(argTypes[argLength], method);
-			}
 		}
 	
 		return methodBinding;

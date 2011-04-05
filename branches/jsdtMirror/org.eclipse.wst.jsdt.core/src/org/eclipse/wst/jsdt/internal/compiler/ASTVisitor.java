@@ -34,6 +34,7 @@ import org.eclipse.wst.jsdt.internal.compiler.ast.CompoundAssignment;
 import org.eclipse.wst.jsdt.internal.compiler.ast.ConditionalExpression;
 import org.eclipse.wst.jsdt.internal.compiler.ast.ConstructorDeclaration;
 import org.eclipse.wst.jsdt.internal.compiler.ast.ContinueStatement;
+import org.eclipse.wst.jsdt.internal.compiler.ast.DebuggerStatement;
 import org.eclipse.wst.jsdt.internal.compiler.ast.DoStatement;
 import org.eclipse.wst.jsdt.internal.compiler.ast.DoubleLiteral;
 import org.eclipse.wst.jsdt.internal.compiler.ast.EmptyStatement;
@@ -71,6 +72,7 @@ import org.eclipse.wst.jsdt.internal.compiler.ast.MessageSend;
 import org.eclipse.wst.jsdt.internal.compiler.ast.MethodDeclaration;
 import org.eclipse.wst.jsdt.internal.compiler.ast.NullLiteral;
 import org.eclipse.wst.jsdt.internal.compiler.ast.OR_OR_Expression;
+import org.eclipse.wst.jsdt.internal.compiler.ast.ObjectGetterSetterField;
 import org.eclipse.wst.jsdt.internal.compiler.ast.ObjectLiteral;
 import org.eclipse.wst.jsdt.internal.compiler.ast.ObjectLiteralField;
 import org.eclipse.wst.jsdt.internal.compiler.ast.PostfixExpression;
@@ -863,5 +865,15 @@ public abstract class ASTVisitor {
 		return true; // do nothing by default, keep traversing
 	}
 	public void endVisit(ObjectLiteralField field, BlockScope scope) {
+	}
+	public boolean visit(ObjectGetterSetterField field, BlockScope scope) {
+		return true; // do nothing by default, keep traversing
+	}
+	public void endVisit(ObjectGetterSetterField field, BlockScope scope) {
+	}
+	public boolean visit(DebuggerStatement statement, BlockScope scope) {
+		return true; // do nothing by default, keep traversing
+	}
+	public void endVisit(DebuggerStatement statement, BlockScope scope) {
 	}
 }
