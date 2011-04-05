@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -96,7 +96,7 @@ public static boolean canSeeFocus(IJavaScriptElement focus, JavaProject javaProj
 			IIncludePathEntry[] entries = javaProject.getExpandedClasspath();
 			for (int i = 0, length = entries.length; i < length; i++) {
 				IIncludePathEntry entry = entries[i];
-				if (entry.getEntryKind() == IIncludePathEntry.CPE_LIBRARY && entry.getPath().equals(focusPath))
+				if ((entry.getEntryKind() == IIncludePathEntry.CPE_LIBRARY || entry.getEntryKind() == IIncludePathEntry.CPE_SOURCE) && entry.getPath().equals(focusPath))
 					return true;
 			}
 			if(focus instanceof LibraryFragmentRoot)

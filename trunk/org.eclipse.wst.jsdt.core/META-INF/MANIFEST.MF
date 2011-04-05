@@ -5,8 +5,8 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.4
 Bundle-SymbolicName: org.eclipse.wst.jsdt.core; singleton:=true
 Eclipse-LazyStart: true
 Eclipse-SourceReferences: scm:cvs:pserver:dev.eclipse.org:/cvsroot/web
- tools:org.eclipse.jsdt/plugins/org.eclipse.wst.jsdt.core;tag=v2011021
- 02045
+ tools:org.eclipse.jsdt/plugins/org.eclipse.wst.jsdt.core;tag=v2011033
+ 02046
 Bundle-Activator: org.eclipse.wst.jsdt.core.JavaScriptCore
 Require-Bundle: org.eclipse.core.resources;bundle-version="[3.5.0,4.0.
  0)",org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",org.eclip
@@ -55,7 +55,7 @@ Export-Package: org.eclipse.wst.jsdt.core,org.eclipse.wst.jsdt.core.as
  rue,org.eclipse.wst.jsdt.internal.formatter.comment;x-internal:=true,
  org.eclipse.wst.jsdt.internal.oaametadata,org.eclipse.wst.jsdt.launch
  ing,org.eclipse.wst.jsdt.libraries
-Bundle-Version: 1.1.4.v201104309990
+Bundle-Version: 1.1.5.v201103302046
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-Name: %pluginName
@@ -64,7 +64,7 @@ Bundle-ManifestVersion: 2
 
 Name: org/eclipse/wst/jsdt/internal/core/search/matching/InternalSearc
  hPattern.class
-SHA1-Digest: kMJDQi+VKO3suw+TSWv2chdiVC4=
+SHA1-Digest: bVZWtezLaSSNf7Sag6e/xc+oWzE=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/Block.class
 SHA1-Digest: TqkCRw0NqF6lMGEQvRXIvO5XawY=
@@ -78,7 +78,7 @@ SHA1-Digest: +f+vBMy20X45UsPaZ2tHJ6k89B0=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/RecoveredType.clas
  s
-SHA1-Digest: 2t+sb7YQfFM6P3GK724QxZN9RU4=
+SHA1-Digest: uXWqRnr35rYe5txScQrG0nP4IM0=
 
 Name: org/eclipse/wst/jsdt/internal/core/search/indexing/AddFolderToIn
  dex$2.class
@@ -103,14 +103,14 @@ SHA1-Digest: sHMmjZqAruPImEklCr/jLw2yZ08=
 
 Name: org/eclipse/wst/jsdt/internal/core/hierarchy/RegionBasedHierarch
  yBuilder.class
-SHA1-Digest: lItTKBT2Bf3+9Acfm16n79RyrFo=
+SHA1-Digest: 3Uzsg1JgpwmSoYDx7evYvvzSzhU=
 
 Name: org/eclipse/wst/jsdt/core/CompletionFlags.class
 SHA1-Digest: MDWhkEfHf5tfNq3OyvBr54VCXvE=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/diagnose/DiagnoseP
  arser.class
-SHA1-Digest: GsoIjsBWJFge++dDs+mZQ3xlxao=
+SHA1-Digest: OX2scr6md6LcKiQaEq6z9gGfAiI=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/env/INameEnvironment.clas
  s
@@ -151,7 +151,7 @@ Name: org/eclipse/wst/jsdt/internal/core/JavaModel.class
 SHA1-Digest: kgC+SGduMlVra53jmANP0O8qKO0=
 
 Name: org/eclipse/wst/jsdt/core/dom/JSdoc.class
-SHA1-Digest: 4nUHBA8PmZ5+K7cVJ5NuXUUGeoY=
+SHA1-Digest: ldHijyR0BxOWItet4PJ6lSpLenY=
 
 Name: org/eclipse/wst/jsdt/internal/core/search/matching/MatchLocator$
  LocalDeclarationVisitor.class
@@ -223,7 +223,7 @@ SHA1-Digest: 7V/+tc+NhJmPthQFFL3T0BR26GM=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/QualifiedThisReferenc
  e.class
-SHA1-Digest: OH67y18CFtSl644YccXMMZ/tt7k=
+SHA1-Digest: 5+UwdClpDlTHLxRk/PS4buDKt30=
 
 Name: org/eclipse/wst/jsdt/core/IJavaScriptModelStatus.class
 SHA1-Digest: QhP6ZPygqWyXyJPzrw9FjnlLY+g=
@@ -249,6 +249,9 @@ SHA1-Digest: nWSin9YeP+ZM/WMaLfa5oee4WkA=
 Name: org/eclipse/wst/jsdt/core/dom/rewrite/TargetSourceRangeComputer$
  SourceRange.class
 SHA1-Digest: lPjeZT0paRhKK/dwkIi1Z7vyuhg=
+
+Name: org/eclipse/wst/jsdt/core/ast/IDebuggerStatement.class
+SHA1-Digest: u9qdU2eOaLoN3FtlP+aaD/AXne4=
 
 Name: org/eclipse/wst/jsdt/internal/codeassist/complete/CompletionOnQu
  alifiedAllocationExpression.class
@@ -280,7 +283,7 @@ SHA1-Digest: iZz8SwGMwOQYsIQuudl/trROT6g=
 
 Name: org/eclipse/wst/jsdt/internal/core/search/matching/PossibleMatch
  Set.class
-SHA1-Digest: KmLlFZGZF6+IHIh3wg0JgwzNQoA=
+SHA1-Digest: n+H/WXv4PI3I6djDJPKzR/dNXDw=
 
 Name: org/eclipse/wst/jsdt/internal/oaametadata/Mix.class
 SHA1-Digest: UertK4xCrDxmKWfh9tfdiBe0Tfo=
@@ -410,10 +413,10 @@ Name: org/eclipse/wst/jsdt/core/search/SearchMatch.class
 SHA1-Digest: 8GqOHxwNL4ZdIvNM03Sk4QXIuCA=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/TypeReference.class
-SHA1-Digest: R6tt2/abdZn6f4QLGrdb9CS8XVY=
+SHA1-Digest: NjyFnHAvT+iMcHiTZ5zFmtfbVOo=
 
 Name: org/eclipse/wst/jsdt/launching/ListenerList.class
-SHA1-Digest: hWnT9dBbA6Iwa0uLhOmAFbwCAXo=
+SHA1-Digest: L7dKKJ+roqX+JvDZlM3bvWykxQQ=
 
 Name: org/eclipse/wst/jsdt/core/ast/IForStatement.class
 SHA1-Digest: 90robR+zi2hBOPFYcqnKvpfOQU4=
@@ -426,7 +429,7 @@ Name: org/eclipse/wst/jsdt/core/dom/ParenthesizedExpression.class
 SHA1-Digest: DutnRViam27HsXvww/rbgRAEurg=
 
 Name: org/eclipse/wst/jsdt/core/dom/ASTRecoveryPropagator.class
-SHA1-Digest: syYy4dc50hnTFyTcJpVU3R4YpWo=
+SHA1-Digest: MYeJKQy8g8M3tXcX754GSq1ckI0=
 
 Name: org/eclipse/wst/jsdt/internal/oaametadata/MetadataReader.class
 SHA1-Digest: Dafxd0SXkIz28+0V0wHk4DgJ364=
@@ -444,7 +447,7 @@ SHA1-Digest: HwQCvF4QiZpKhBVuIKVRjsWXbPE=
 
 Name: org/eclipse/wst/jsdt/internal/core/CopyPackageFragmentRootOperat
  ion.class
-SHA1-Digest: JPozDJUvMZ8Dl1GqdspOXQDMgIc=
+SHA1-Digest: /I2IvO4L5K5aafyNEjhoUk+0QiA=
 
 Name: org/eclipse/wst/jsdt/internal/core/JavaModelManager$VariablesAnd
  ContainersSaveHelper.class
@@ -476,7 +479,7 @@ Name: org/eclipse/wst/jsdt/core/dom/BlockComment.class
 SHA1-Digest: 9PYwjnlY91i85Clu2f8wRKwHhlM=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/ReturnStatement.class
-SHA1-Digest: 0+am/2Pekwmot8aYce37LlUK1/s=
+SHA1-Digest: KTtrOIicDQp76JNJJcBNinMcC98=
 
 Name: org/eclipse/wst/jsdt/internal/core/Buffer.class
 SHA1-Digest: KyeyG1UIsxLa1l5pOy+2q389HzU=
@@ -518,7 +521,7 @@ SHA1-Digest: ywng/9ixi3obPQBAx9t3oFn1i1A=
 
 Name: org/eclipse/wst/jsdt/internal/core/hierarchy/RegionBasedTypeHier
  archy.class
-SHA1-Digest: rJXt9TgMKJxY2MchrKEA1swYuQ4=
+SHA1-Digest: NRsdOMGl3XvYpFl2YgOUNTfsMNc=
 
 Name: org/eclipse/wst/jsdt/core/dom/JavaScriptUnit.class
 SHA1-Digest: o2Pdb0DQ9c69vaekdhIqSYPp74Y=
@@ -650,7 +653,7 @@ Name: org/eclipse/wst/jsdt/core/ast/IWithStatement.class
 SHA1-Digest: m8KxedObCpqvxvkfV78YGLotJ08=
 
 Name: org/eclipse/wst/jsdt/internal/formatter/Scribe.class
-SHA1-Digest: udjZuAGMN3ismPmhxD05TB19RlY=
+SHA1-Digest: GW3gogKUm3zSxdehBbpzwXPkuf8=
 
 Name: org/eclipse/wst/jsdt/core/ast/IThisReference.class
 SHA1-Digest: uav7SfSCH3M9V+rVjYlwL8S9xWA=
@@ -681,7 +684,7 @@ Name: org/eclipse/wst/jsdt/internal/compiler/lookup/ImportConflictBind
 SHA1-Digest: XJY6KKYB5p/jaE0S8qgkFgQQZ6o=
 
 Name: org/eclipse/wst/jsdt/internal/codeassist/impl/AssistParser.class
-SHA1-Digest: /uOE3iIZysSwm45gvlEnPxJ1f4Q=
+SHA1-Digest: DvENki2za8zUbxd7H3NaU9BnVBY=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/ScannerHelper.clas
  s
@@ -735,7 +738,7 @@ Name: org/eclipse/wst/jsdt/internal/compiler/ast/UndefinedLiteral.clas
 SHA1-Digest: MdaW81o6bWi31KrvMrI64Zfkz6c=
 
 Name: org/eclipse/wst/jsdt/core/dom/DocCommentParser.class
-SHA1-Digest: mlZJelATo0NWANRfsWRdGiRjqHU=
+SHA1-Digest: q5kg9FLYpvJUQHSiTleuBVAFep8=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/env/IBinaryType.class
 SHA1-Digest: kDAgPhY8LCr1VrdfYz8BrVfdXHk=
@@ -744,7 +747,7 @@ Name: org/eclipse/wst/jsdt/core/IInitializer.class
 SHA1-Digest: 8VMr/KEFgPuBfjZFos1GyRXPSp4=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/parser9.rsc
-SHA1-Digest: AczLVEmOScIEfkGj41ghoCPiNF0=
+SHA1-Digest: ahiKrh68lLLvMvaCQ51FGjyVFGA=
 
 Name: org/eclipse/wst/jsdt/internal/codeassist/MissingTypesGuesser.cla
  ss
@@ -785,7 +788,7 @@ SHA1-Digest: YjXmiTnHTQYNzVqGkEn/XIqi/eA=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/AllocationExpression.
  class
-SHA1-Digest: tQ2YBLDKWQXNyckxBgS+6N7cNC8=
+SHA1-Digest: oK5edeqZ1ia0atB6VMLArTNpZ3Y=
 
 Name: org/eclipse/wst/jsdt/internal/core/dom/rewrite/NodeInfoStore$Pla
  ceholderData.class
@@ -803,7 +806,7 @@ SHA1-Digest: IRhwJ74XoRBS+If4AEPqCpz3tXY=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/flow/FinallyFlowContext.c
  lass
-SHA1-Digest: f2pQANfmGgPrOV46ykYRGTX0ve0=
+SHA1-Digest: sCfy4WuMsR9m7QpDWauZDL/Jq9o=
 
 Name: org/eclipse/wst/jsdt/internal/core/ResolvedBinaryField.class
 SHA1-Digest: EBNUb8NPKld6t5RZptsCvo9Y3L8=
@@ -818,7 +821,7 @@ Name: org/eclipse/wst/jsdt/internal/compiler/impl/DoubleConstant.class
 SHA1-Digest: EDphB01/B9N8S3cSKhOzR51TxYw=
 
 Name: org/eclipse/wst/jsdt/internal/core/util/ConvertUtility.class
-SHA1-Digest: 5kFAxiAith4Fn5AU/FoeeyRBFiI=
+SHA1-Digest: CG7Q3ZhsqvLmHaPM0PSHoLTxJX0=
 
 Name: org/eclipse/wst/jsdt/internal/core/hierarchy/IndexBasedHierarchy
  Builder$1$PathCollector.class
@@ -913,11 +916,11 @@ SHA1-Digest: VNrRnaFHU+SaFUCqMAlLQGxWndY=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/ArrayAllocationExpres
  sion.class
-SHA1-Digest: 3XhYVOCIhZhTQdvN29TfDhw/X0M=
+SHA1-Digest: /7iagupsF/Ct/osQUySpJNMXgPE=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/flow/LoopingFlowContext.c
  lass
-SHA1-Digest: EWfQJqvDMlwzCnCUFhN1B/tjNlM=
+SHA1-Digest: zH2cxyj1S5TYPCreb+sR/yobCI0=
 
 Name: org/eclipse/wst/jsdt/internal/core/SetClasspathOperation.class
 SHA1-Digest: hv/UiIHvnN2XVw9bD0aj28nDLj4=
@@ -952,7 +955,7 @@ SHA1-Digest: umJgOSpIfQC/NIWwbMrWQ/9+2Go=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/ClassLiteralAccess.cl
  ass
-SHA1-Digest: rYVn1+iSsEn2CEFtVjDZzwfKClw=
+SHA1-Digest: v/9leQhKtIDL3U35QP8Hx1iwShY=
 
 Name: org/eclipse/wst/jsdt/internal/core/interpret/StringValue.class
 SHA1-Digest: +baLUojP9zj6ghCQu2aZDGi5H9w=
@@ -962,7 +965,7 @@ Name: org/eclipse/wst/jsdt/internal/core/search/BasicSearchEngine$2$Al
 SHA1-Digest: X6xD+g7sfAcKN+buspghtaCAdw8=
 
 Name: org/eclipse/wst/jsdt/core/dom/NumberLiteral.class
-SHA1-Digest: bx30I1KtQfKybaoMQWx5MYAPdoI=
+SHA1-Digest: ldObR74jieyxTgByh3qMdtu1d0Q=
 
 Name: org/eclipse/wst/jsdt/core/dom/IFunctionBinding.class
 SHA1-Digest: u3j8sBnVTtwFtiCLOf6L+xxrybQ=
@@ -1009,7 +1012,7 @@ Name: org/eclipse/wst/jsdt/internal/compiler/lookup/FunctionTypeBindin
 SHA1-Digest: BfvUUwEkbFiqyMvU5ezQhXH2ajI=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/lookup/MethodScope.class
-SHA1-Digest: gddwjuLqsNlOlBOISjV8fUXKWs8=
+SHA1-Digest: 9jGLsvbtJ+27xmOo34mpX2PVM7o=
 
 Name: org/eclipse/wst/jsdt/core/infer/InferredMethod.class
 SHA1-Digest: VvZJXRmW5LXAr6JOEVaPOGk4cCw=
@@ -1038,7 +1041,7 @@ Name: org/eclipse/wst/jsdt/core/search/TypeNameMatchRequestor.class
 SHA1-Digest: VvBX7bim0BBWHD2RORY9VxCEynY=
 
 Name: org/eclipse/wst/jsdt/internal/core/hierarchy/TypeHierarchy.class
-SHA1-Digest: OreTDzZeFmZugfmX27XAHKfb9jI=
+SHA1-Digest: NOkjO44B7RXUNC9dGC4xmVJTsQg=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/problem/AbortMethod.class
 SHA1-Digest: c5+5akNG6FQHNEhQ3Vxm3jL+dMs=
@@ -1049,27 +1052,27 @@ SHA1-Digest: xI1jdSfiZQ6yugSG1w2pX0XPF1g=
 
 Name: org/eclipse/wst/jsdt/internal/core/search/BasicSearchEngine.clas
  s
-SHA1-Digest: Bgaq7txvLy5YK3fCbI8sWkCD200=
+SHA1-Digest: V6dzpsGSOBamH70/3EmxyKnnROo=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/DelegateASTVisitor.class
 SHA1-Digest: 4rllKAWJWpk62ruBLGpIB9WAHbM=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/ForeachStatement.clas
  s
-SHA1-Digest: 0PyZFv1crC5QbEGQNZhXXwCfteg=
+SHA1-Digest: i2EfEMOIYY5CjtMZh+FX087Yt4I=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/parser8.rsc
-SHA1-Digest: ZMr8xklASuW4xoeMjnZqQTxsVxs=
+SHA1-Digest: W4PPNYkWE5ViGRrfk05qGIeXN9c=
 
 Name: org/eclipse/wst/jsdt/internal/core/SourceType.class
-SHA1-Digest: oOYN2mtPubu+8pLN0bwsCBaa3es=
+SHA1-Digest: vyphtAGjnyOk2I6T7OqSJ/SZWqw=
 
 Name: org/eclipse/wst/jsdt/core/compiler/libraries/SystemLibraryLocati
  on.class
 SHA1-Digest: gH4BrejruvyvVheF8znrEYMaBUo=
 
 Name: org/eclipse/wst/jsdt/core/dom/StringLiteral.class
-SHA1-Digest: F7j5Zv3TUb40leaxV8ZqHdyDO1U=
+SHA1-Digest: vAoMBRUplcJYwvDeClBSgXXSlTQ=
 
 Name: org/eclipse/wst/jsdt/core/ast/IListExpression.class
 SHA1-Digest: /qdUi8hkjyANA8ge9evfwbFX+DU=
@@ -1088,7 +1091,7 @@ Name: org/eclipse/wst/jsdt/core/ast/IOperatorExpression.class
 SHA1-Digest: kdedi4dWmke7qqz3r2xQTHmKShE=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/Scanner.class
-SHA1-Digest: 9URnIu+T1sV5WnDw1X/LGEufY0o=
+SHA1-Digest: +q05Rct1+yJmFILo14oeRLyeiVE=
 
 Name: org/eclipse/wst/jsdt/internal/core/interpret/builtin/BuiltInHelp
  er.class
@@ -1141,7 +1144,7 @@ SHA1-Digest: wVkpQfMp0KPMd6lhmHjgYwd0Tmc=
 
 Name: org/eclipse/wst/jsdt/internal/core/search/matching/JavaSearchNam
  eEnvironment.class
-SHA1-Digest: jUNELEqBnxuc/y+uQWpDLgGNfBE=
+SHA1-Digest: uJBMyXwvtv40BylVM20nKkYN/LI=
 
 Name: org/eclipse/wst/jsdt/core/dom/Type.class
 SHA1-Digest: QfC5zlXbbJk/LzxqTOIZHL5WoX4=
@@ -1151,7 +1154,7 @@ SHA1-Digest: +tSh/gcpDu83JASeE/uIYpQ9S6Y=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/problem/messages.properti
  es
-SHA1-Digest: sYWHSMXlTM4SU3+tmVKGq1b4Ri8=
+SHA1-Digest: mldxOOST/V5LLhkg9KLYH11O5cM=
 
 Name: org/eclipse/wst/jsdt/internal/core/util/WeakHashSetOfCharArray.c
  lass
@@ -1167,7 +1170,7 @@ Name: org/eclipse/wst/jsdt/core/dom/TagElement.class
 SHA1-Digest: 1hIJCmlwx6QwPxOv47MRtSnaOYg=
 
 Name: org/eclipse/wst/jsdt/internal/core/search/IndexSelector.class
-SHA1-Digest: mfvu6Aj+KDe4r27Wtkw4qKEMICA=
+SHA1-Digest: DzPC/pDfLVoYuop5KIXfft4fFn0=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/Compiler$1.class
 SHA1-Digest: iftTPnmTgo8yROKG87Ac2ylgrvY=
@@ -1204,7 +1207,7 @@ SHA1-Digest: UshaN02YjOfJVLkXEKlKkOT1xHo=
 
 Name: org/eclipse/wst/jsdt/libraries/BasicBrowserLibraryJsGlobalScopeC
  ontainerInitializer.class
-SHA1-Digest: 8dHoQwwA7gdBbA/W8IzuVZfCHK0=
+SHA1-Digest: hPwsaZ7/7AMdItL6QyjkkrSyDiQ=
 
 Name: org/eclipse/wst/jsdt/core/dom/FunctionRef.class
 SHA1-Digest: Is3vAHe5uTW2LsVdGODUE7d7CTc=
@@ -1224,7 +1227,7 @@ Name: org/eclipse/wst/jsdt/core/dom/Initializer.class
 SHA1-Digest: GR7ZFiqGCP1Qft/nmIp/EfS7Rh4=
 
 Name: org/eclipse/wst/jsdt/core/dom/InfixExpression$Operator.class
-SHA1-Digest: ysVaAkGJjtPbyDtGnP5XTHty8MM=
+SHA1-Digest: S49Zmmsr2wCl61iFjA+xvedNGQ4=
 
 Name: org/eclipse/wst/jsdt/core/dom/InstanceofExpression.class
 SHA1-Digest: e2N0krlK/bzeRoW2AtXWgMdF31s=
@@ -1255,20 +1258,20 @@ Name: org/eclipse/wst/jsdt/core/dom/ExpressionStatement.class
 SHA1-Digest: ES8SWpMoOyalw0hnqjUDxjnpNrE=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/lookup/ClassScope.class
-SHA1-Digest: +a9D7nzD7GGs9ExYuaOxKlZ1YB4=
+SHA1-Digest: Li3UV2cnV3ysTKW1rxhLTzuzGiE=
 
 Name: org/eclipse/wst/jsdt/internal/oaametadata/Ancestor.class
 SHA1-Digest: z5a5oFH/RZWv0efu8kivUfQT37s=
 
 Name: org/eclipse/wst/jsdt/internal/core/hierarchy/IndexBasedHierarchy
  Builder.class
-SHA1-Digest: 4mEIACOX3qD2BWSP8ZKEgALCcGI=
+SHA1-Digest: m38iA2aA/C1pjz++3ADsKJLnu3Y=
 
 Name: org/eclipse/wst/jsdt/internal/core/CompilationUnit$2.class
 SHA1-Digest: r9btn9aVC3N95CSA5EQRBAOblIs=
 
 Name: org/eclipse/wst/jsdt/core/dom/RegularExpressionLiteral.class
-SHA1-Digest: vrVbP0BrRu6XL6du/yJc+Di4F08=
+SHA1-Digest: nJQ/0KCgDryXvw3AA3w7n6Cl4ts=
 
 Name: org/eclipse/wst/jsdt/internal/codeassist/complete/CompletionOnJa
  vadocQualifiedTypeReference.class
@@ -1294,7 +1297,7 @@ SHA1-Digest: 08k/jdrmCm+bOmR6VzKJplWwPC4=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/AbstractCommentPar
  ser.class
-SHA1-Digest: HBNNiaLji0hINbGKgOuooFHhFzg=
+SHA1-Digest: lHZ6oFJ8n1cH1Z6xl49SrG2FuRU=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/IntLiteral.class
 SHA1-Digest: zOwGM1hoRp2HfNY6TLVH2usJ5S8=
@@ -1311,13 +1314,13 @@ Name: org/eclipse/wst/jsdt/internal/compiler/parser/diagnose/DiagnoseP
 SHA1-Digest: LstIX/15xlLIhkEuaSy3RB9WQIA=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/parser7.rsc
-SHA1-Digest: bEFPUj0uem6ZtxH9QLki/hZzRp4=
+SHA1-Digest: RljmS/1Kb5EKVqz9QLtF80EWBfU=
 
 Name: org/eclipse/wst/jsdt/internal/core/VerboseElementCache.class
 SHA1-Digest: I3tZisPkW+ak6/rulU+UHwXx0Mc=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/Javadoc.class
-SHA1-Digest: bVL3/Oj9+a9MxDpdCMqkd79T1F0=
+SHA1-Digest: 7ORRJI6WRCb0TBAeTSiFGtiDS7w=
 
 Name: org/eclipse/wst/jsdt/internal/core/search/TypeNameRequestorWrapp
  er.class
@@ -1331,7 +1334,7 @@ Name: org/eclipse/wst/jsdt/core/dom/ImportDeclaration.class
 SHA1-Digest: 2x5Ajl2mZ2BByiAz0pZC9l5xBcA=
 
 Name: org/eclipse/wst/jsdt/internal/core/SourceMapper.class
-SHA1-Digest: qN+7cbnEZ2pJO+ImO867z5GjxHs=
+SHA1-Digest: zraD3Rl02n2C1Ww9FDDVkfqEfrs=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/JavadocSingleTypeRefe
  rence.class
@@ -1341,7 +1344,7 @@ Name: org/eclipse/wst/jsdt/core/ast/IJsDocArgumentExpression.class
 SHA1-Digest: VbbcQ+BxKuNcHvJtK1BwvrhC0NU=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/ListExpression.class
-SHA1-Digest: sZlf/MYZaRAiYqeRad1BRimf3Do=
+SHA1-Digest: KvLg3kt0gxebBI+AkNN0DLHI6kw=
 
 Name: org/eclipse/wst/jsdt/launching/LaunchingMessages.class
 SHA1-Digest: vXPze+JEp5MoK8pi6CWxng7niGc=
@@ -1388,7 +1391,7 @@ Name: org/eclipse/wst/jsdt/core/dom/TypeBinding.class
 SHA1-Digest: lCgF3nvSuQ9IgCeWZLnkspvjhd4=
 
 Name: org/eclipse/wst/jsdt/internal/codeassist/SelectionEngine.class
-SHA1-Digest: 8luDRnQ33V6kgdF8oWMlOD6vQ48=
+SHA1-Digest: aIM5LFBDzqIPrqHXowCzSln+bks=
 
 Name: org/eclipse/wst/jsdt/internal/core/SimpleDelta.class
 SHA1-Digest: KQR+SbVeM5XxljUTpFChynNySWE=
@@ -1404,7 +1407,7 @@ Name: org/eclipse/wst/jsdt/launching/IVMInstallType.class
 SHA1-Digest: h54JkLon9w7R6hkRFr6VRH7fEOQ=
 
 Name: org/eclipse/wst/jsdt/core/compiler/IProblem.class
-SHA1-Digest: KPp5rZCraGS3iCjJtOu/22A2E+k=
+SHA1-Digest: LuWjkGqghY1zCNAfzj0tcr/YVyM=
 
 Name: org/eclipse/wst/jsdt/core/dom/QualifiedType.class
 SHA1-Digest: pHQSPs7q/SrKwCf81qCcq6y6oV8=
@@ -1456,7 +1459,7 @@ SHA1-Digest: Iwpi36/6K7purhmrtTuj93b3zu4=
 
 Name: org/eclipse/wst/jsdt/internal/core/builder/IncrementalImageBuild
  er.class
-SHA1-Digest: 1XpkUmvQxqAUoqHcjffRMbBMScE=
+SHA1-Digest: OVIwC6JQNYNXZ9vC23PFaCZihpQ=
 
 Name: org/eclipse/wst/jsdt/core/dom/TextElement.class
 SHA1-Digest: 4Tinsghl9DOc32GGdBEcbCZdCLI=
@@ -1476,7 +1479,7 @@ Name: org/eclipse/wst/jsdt/internal/compiler/ast/PrefixExpression.clas
 SHA1-Digest: QUwofXmjcO7raFkTAziwhmCwonc=
 
 Name: org/eclipse/wst/jsdt/core/CorrectionEngine.class
-SHA1-Digest: lw6VShWPWCEU8OBulI0JLCRMro0=
+SHA1-Digest: 7rM0n6VdO0WOx8dzwccgwJa4s6E=
 
 Name: org/eclipse/wst/jsdt/internal/core/dom/rewrite/ListRewriteEvent.
  class
@@ -1505,7 +1508,7 @@ SHA1-Digest: e5zlrBKnaq/XcBL9DoF9e3sf0FY=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/ExplicitConstructorCa
  ll.class
-SHA1-Digest: F8GtjLqjMo9DiEDQqdWK4WaTByM=
+SHA1-Digest: iSr9r7t25Ao0DwidIXrcKrB0Ras=
 
 Name: org/eclipse/wst/jsdt/internal/core/search/matching/SecondaryType
  DeclarationPattern.class
@@ -1533,13 +1536,13 @@ SHA1-Digest: b2t13Vm3zH0zPZBPWRac9+dWhIE=
 
 Name: org/eclipse/wst/jsdt/internal/codeassist/SelectionEngine$1$Visit
  or.class
-SHA1-Digest: +HtvnVZoBrfXTdpdHJqTC1Zzxnw=
+SHA1-Digest: BD2nDpjOUa1O9ehaS2KG4hPB0xs=
 
 Name: org/eclipse/wst/jsdt/core/dom/JavaScriptUnitResolver$2.class
 SHA1-Digest: TcFXXgwMmYP33njDxI1Q46mPh2s=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/parser19.rsc
-SHA1-Digest: nDoZKq4GxbJ7eykgl7f0CkGy2SY=
+SHA1-Digest: ttCLEszgQA2YyU2N+HEgz7brXFk=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/problem/DefaultProblem.cl
  ass
@@ -1580,14 +1583,14 @@ Name: org/eclipse/wst/jsdt/internal/core/NamedMember.class
 SHA1-Digest: 0J6WlKa4JilMGrIeZZQB8WUmOos=
 
 Name: org/eclipse/wst/jsdt/launching/JavaRuntime.class
-SHA1-Digest: XVE441RQnlgq0L4GuQazXRbBJhA=
+SHA1-Digest: xtXyUWKdoArwDRX1Cr97fn7OAZc=
 
 Name: org/eclipse/wst/jsdt/core/ast/IQualifiedTypeReference.class
 SHA1-Digest: bRZsZ31y4KGKTYjbw6d1i77q5w0=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/JavadocParser.clas
  s
-SHA1-Digest: 6YPWp/MwO7Q/1+6wfONMvVjgyf4=
+SHA1-Digest: 5D6EMpp1yNpiRq7EBGB85BdJYJs=
 
 Name: org/eclipse/wst/jsdt/core/infer/IInferenceFile.class
 SHA1-Digest: wIsuhpjk/g7d6C1CsM2VDK/jAyQ=
@@ -1600,7 +1603,7 @@ Name: org/eclipse/wst/jsdt/core/ast/IPostfixExpression.class
 SHA1-Digest: tNvDF/2kMCM1RNXG9YX+SMiY1t8=
 
 Name: org/eclipse/wst/jsdt/core/dom/InfixExpression.class
-SHA1-Digest: nuQduHqrJp4LMbhhVMglotH/BuE=
+SHA1-Digest: 50p4PduBtcmU0Y3Gd24AeuXZkgI=
 
 Name: org/eclipse/wst/jsdt/core/ast/IStatement.class
 SHA1-Digest: 5AM8VHMPQLfNvQuetAMb1uk/QJA=
@@ -1610,7 +1613,7 @@ Name: org/eclipse/wst/jsdt/internal/core/builder/ValidationParticipant
 SHA1-Digest: WHT5DV9eRNq0gTaVH6w0CRSfSB0=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/parser6.rsc
-SHA1-Digest: SClQE2gPTxGSUk+rkRdh2GZYqfQ=
+SHA1-Digest: EQIdbBxY3bqBfJ3UZ6lS1afTHi4=
 
 Name: org/eclipse/wst/jsdt/internal/core/util/BindingKeyParser.class
 SHA1-Digest: C+UqYdN0/PzXiDFULU6bSONIht8=
@@ -1642,7 +1645,7 @@ SHA1-Digest: JG1MNtlyiwyUhQhor1AdafOiXmA=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/MethodDeclaration.cla
  ss
-SHA1-Digest: Z/wdvYUCOIdIxKnXsv7OcAUTx/E=
+SHA1-Digest: Yr9fRPSC5NmxsFiA+oiCjJV4hA8=
 
 Name: org/eclipse/wst/jsdt/internal/core/LibraryPackageFragment.class
 SHA1-Digest: o3Dde3xQUkdlLic7MGLqhnDnaew=
@@ -1656,7 +1659,7 @@ SHA1-Digest: Jc/TlQxSRWF4ykD+ggaeHBlN9PE=
 
 Name: org/eclipse/wst/jsdt/internal/core/search/matching/MatchLocator.
  class
-SHA1-Digest: oNbGu12Bm7zN7SkQyGUy1NaEeCw=
+SHA1-Digest: Af47JljIc4PMDgZnYcYaH1N1Nkk=
 
 Name: org/eclipse/wst/jsdt/internal/core/DocumentContextFragmentRoot$R
  estrictedDocumentBinding.class
@@ -1671,7 +1674,7 @@ SHA1-Digest: E5vbRbcCrG9xDCV0kOGqixO4uN4=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/ArrayTypeReference.cl
  ass
-SHA1-Digest: 7okCpO6/U4ucrN0Qw38MmmcrYTU=
+SHA1-Digest: we4eut2kSDho/aVSaXZtbYbJjew=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/ProgramElement.class
 SHA1-Digest: zDa3Lge73psCPDfaCJ8c/ItNoKM=
@@ -1732,7 +1735,7 @@ SHA1-Digest: L0z4QNFgMrYJwKNNWqyrITDhI70=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/Parser$1$TypeVisit
  or.class
-SHA1-Digest: qmFoo+REpn31LB/si0YMNpFUsLY=
+SHA1-Digest: UpjGABH0TGcHFjViof4m1bLIVk0=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/diagnose/DiagnoseP
  arser$StateInfo.class
@@ -1740,7 +1743,7 @@ SHA1-Digest: p6apG5BdjkjDptK6olmBhNSDLiU=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/readableNames.prop
  erties
-SHA1-Digest: 6LOt5PYevzZXO1ue+UrZQfCAV+A=
+SHA1-Digest: 4oDqRunu0yyBY8GsnzwAQ3sYOHM=
 
 Name: org/eclipse/wst/jsdt/internal/core/search/matching/MatchLocator$
  WrappedCoreException.class
@@ -1807,7 +1810,7 @@ SHA1-Digest: oP8/MH9PkuiV4milfSHtEhEXdE0=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/ParserBasicInforma
  tion.class
-SHA1-Digest: VuC9C4VTGID3P6euT5etX08qmQ0=
+SHA1-Digest: aGf4CQxsO0P/4L/kPZyck6X6bCI=
 
 Name: org/eclipse/wst/jsdt/core/ast/IJsDocFieldReference.class
 SHA1-Digest: nKDPjcVc00scMCXCBenVY1nErwo=
@@ -1830,7 +1833,7 @@ Name: org/eclipse/wst/jsdt/internal/core/interpret/InterpreterEngine.c
 SHA1-Digest: xfUztV14zHgjjyOcHfxcMEvnOkY=
 
 Name: org/eclipse/wst/jsdt/internal/core/JavaModelManager.class
-SHA1-Digest: HLjd+9t+sdo3DNQEAd2nc5tJrl8=
+SHA1-Digest: GXvsVWwMOkh4HOkISggFCr8AG0k=
 
 Name: org/eclipse/wst/jsdt/core/ast/IContinueStatement.class
 SHA1-Digest: VNnY3M+DUd2YWa829x7IwozclDk=
@@ -1856,7 +1859,7 @@ Name: org/eclipse/wst/jsdt/internal/core/dom/rewrite/RewriteEventStore
 SHA1-Digest: 13V/DP9Fi5QjOB22fOndeFCiPL8=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/parser18.rsc
-SHA1-Digest: o6Vf4MZ1CZABFG2y16sQFd6vWHE=
+SHA1-Digest: Uw6Ur4Ybz0ihxp5n6n7/CL5shRw=
 
 Name: org/eclipse/wst/jsdt/internal/core/dom/rewrite/NodeInfoStore.cla
  ss
@@ -1913,7 +1916,7 @@ Name: org/eclipse/wst/jsdt/core/JsGlobalScopeContainerInitializer$1.cl
 SHA1-Digest: FGo0Kgp4rAxk2xF6+1f0XxgtgQU=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/Argument.class
-SHA1-Digest: 6ZeqDe0qsht8fKUXp7qX3nb+CU8=
+SHA1-Digest: t1CdPbZ1bwX0b6B3nzCIcLHKkEo=
 
 Name: org/eclipse/wst/jsdt/internal/codeassist/complete/CompletionOnBr
  ankStatementLabel.class
@@ -1929,7 +1932,7 @@ Name: org/eclipse/wst/jsdt/core/IRegion.class
 SHA1-Digest: cCSuaLRgQHXIz+4mcNSNlTG0B9I=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/parser5.rsc
-SHA1-Digest: MsZk7NJUUes94bADykh4CWhfYeY=
+SHA1-Digest: yy3FjU3s8xuQqn3r4o4fFJq0qko=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/lookup/Binding.class
 SHA1-Digest: wj/gzFPLFLl1sG/6F1wpwqFyESg=
@@ -1957,7 +1960,7 @@ SHA1-Digest: NEVuBpP2AiFwr5rzcPgVNX9ChBs=
 
 Name: org/eclipse/wst/jsdt/internal/core/search/matching/MatchLocatorP
  arser.class
-SHA1-Digest: omtDCC6JntbYt0QlA+zj1QBKZRs=
+SHA1-Digest: kjBsJwftptHRktrubMvjO4jOz9M=
 
 Name: org/eclipse/wst/jsdt/core/dom/InternalASTRewrite$1.class
 SHA1-Digest: 2bLk59d8c3KWahKON3zeAlQpQ0U=
@@ -1979,14 +1982,14 @@ SHA1-Digest: 7W1DbIb5pu3jb4hzpSbZtCYC1Dk=
 
 Name: org/eclipse/wst/jsdt/internal/core/search/matching/MatchLocator$
  2.class
-SHA1-Digest: QRyvXvDQb+noucBOfoX1VuSlJO0=
+SHA1-Digest: gtgOTW5O5HFGzKvJetz+sBSy4ak=
 
 Name: org/eclipse/wst/jsdt/core/ast/IBlock.class
 SHA1-Digest: co6Rv5s3e151UzDoe45RHdpl9xM=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/FieldDeclaration.clas
  s
-SHA1-Digest: gHa29ss8Q0bgkRnN2qAJD4WgOXM=
+SHA1-Digest: r2Jb0zDY6GF6xxvoF/DeIkxLFIA=
 
 Name: org/eclipse/wst/jsdt/internal/formatter/comment/CommentRegion.cl
  ass
@@ -2007,7 +2010,7 @@ Name: org/eclipse/wst/jsdt/internal/core/builder/BatchImageBuilder.cla
 SHA1-Digest: fBR497UTDmiw1fq3IALg7txuuAg=
 
 Name: org/eclipse/wst/jsdt/internal/core/CompilationUnit.class
-SHA1-Digest: 9o1w8u80OdG0uLBjoh7bvX+yZCE=
+SHA1-Digest: 6vC04YaexsrsxANIyNZI1lLNfBY=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/ThrowStatement.class
 SHA1-Digest: Hc2HCnWfpUb0MWnMck7Ds3Tp6i0=
@@ -2062,12 +2065,16 @@ Name: org/eclipse/wst/jsdt/internal/compiler/flow/SwitchFlowContext.cl
  ass
 SHA1-Digest: QQL1x6B98qukrlzltIqQ/AuZn+8=
 
+Name: org/eclipse/wst/jsdt/internal/compiler/ast/DebuggerStatement.cla
+ ss
+SHA1-Digest: i8WkRHFAcYavJDOz6aFxx+Dr0fo=
+
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/MagicLiteral.class
 SHA1-Digest: abxfhDOKakznwZrQd7mJlXfbGJ4=
 
 Name: org/eclipse/wst/jsdt/internal/core/CompilationUnitStructureReque
  stor.class
-SHA1-Digest: YRXHBoZuiQHjhWOnBWp83kNj0S0=
+SHA1-Digest: pYGVp9c8jffW6fSYCmDYltXejxQ=
 
 Name: org/eclipse/wst/jsdt/internal/core/dom/rewrite/NodeInfoStore$Str
  ingPlaceholderData.class
@@ -2089,7 +2096,7 @@ Name: org/eclipse/wst/jsdt/core/ast/IReference.class
 SHA1-Digest: PRMzzfePmK3jRlClXDwmoEGrgqI=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/parser17.rsc
-SHA1-Digest: ++/Knc+Ktu5d5OC9A+86U1KnsHw=
+SHA1-Digest: gaQdpL7HQLUanhfVb8gF1lqyfLw=
 
 Name: org/eclipse/wst/jsdt/core/infer/InferEngine$Context.class
 SHA1-Digest: YWt0wtxQeEirAaEivZdLQGIh2XU=
@@ -2166,7 +2173,7 @@ Name: org/eclipse/wst/jsdt/core/IImportContainer.class
 SHA1-Digest: bY9t+8Ib4G7V1LLuFaCO1g/0SEs=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/parser4.rsc
-SHA1-Digest: KQaEvB+3cR2MgSL7nQ/9/Bn9+Tk=
+SHA1-Digest: 22HiE9Ekhfh6lJvlxOxoQ0p8csQ=
 
 Name: org/eclipse/wst/jsdt/internal/core/PackageFragmentRootInfo.class
 SHA1-Digest: 3R6kVxvHfqnPdAwGZlLWy3jjmIc=
@@ -2201,7 +2208,7 @@ SHA1-Digest: x1aR1DTQiv6obZF2SSwLbQ/sMu0=
 
 Name: org/eclipse/wst/jsdt/internal/formatter/BinaryExpressionFragment
  Builder.class
-SHA1-Digest: s5MtXSlc+IO1nlqIIErCptR9CAo=
+SHA1-Digest: zpEIKyYYs5BNooQ62DLHHomHbEU=
 
 Name: org/eclipse/wst/jsdt/internal/core/interpret/builtin/BuiltInStri
  ng$1.class
@@ -2223,7 +2230,7 @@ Name: org/eclipse/wst/jsdt/internal/core/SearchableEnvironmentRequesto
 SHA1-Digest: 86ualbaot9UZhAhBUip7DM1gRiM=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/Initializer.class
-SHA1-Digest: 0IDn3UYDDE/0ieNGiI5DMnC17UY=
+SHA1-Digest: 9AYgz+8lWf7mP60RB/jnlIWQJP8=
 
 Name: org/eclipse/wst/jsdt/internal/core/hierarchy/HierarchyBinaryType
  .class
@@ -2245,7 +2252,7 @@ SHA1-Digest: BAuk0IDASsDfXL/bCjiVv9YaE0Q=
 
 Name: org/eclipse/wst/jsdt/internal/core/hierarchy/ChangeCollector.cla
  ss
-SHA1-Digest: qLK62lFw9KIfHjenGKEJZ/gmpqY=
+SHA1-Digest: 1JV5gNTHLRwJyQ7xoewwYxRmTyk=
 
 Name: org/eclipse/wst/jsdt/core/ast/IQualifiedAllocationExpression.cla
  ss
@@ -2290,7 +2297,7 @@ Name: org/eclipse/wst/jsdt/internal/core/search/matching/SuperTypeRefe
 SHA1-Digest: dkS7Namg62i8/qyp8d1yf3GxBWM=
 
 Name: org/eclipse/wst/jsdt/core/dom/ASTConverter.class
-SHA1-Digest: VkBe4P8pwzbiTPaZ+Vk62cWJEHs=
+SHA1-Digest: o0DOuOuET4/YSHqHWjRoDMhRI9A=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/lookup/ProblemMethodBindi
  ng.class
@@ -2308,7 +2315,7 @@ SHA1-Digest: P1unK5vqsMfgyF1MsS7BLGqzHBI=
 
 Name: org/eclipse/wst/jsdt/internal/core/CopyPackageFragmentRootOperat
  ion$1.class
-SHA1-Digest: i1LnLT5DXGmcU7336HHnZiqmI/E=
+SHA1-Digest: Dc3wNLMlXHjJy6gbQeqP5do/+jo=
 
 Name: org/eclipse/wst/jsdt/internal/core/interpret/builtin/BuiltInStri
  ng.class
@@ -2318,7 +2325,7 @@ Name: org/eclipse/wst/jsdt/core/dom/ASTVisitor.class
 SHA1-Digest: V5cKAsrpLT5GSNq4zitcaG50cWs=
 
 Name: org/eclipse/wst/jsdt/internal/core/util/HandleFactory.class
-SHA1-Digest: jLYfgtfXs7nf85AtUv7KLsM3N04=
+SHA1-Digest: UAfk04ZWraGnKGk2Iwuw8iYvpW0=
 
 Name: org/eclipse/wst/jsdt/core/dom/IfStatement.class
 SHA1-Digest: QQhUtefAPCOTQoDXT49z/ry9YkM=
@@ -2347,7 +2354,7 @@ Name: org/eclipse/wst/jsdt/internal/core/InitializerElementInfo.class
 SHA1-Digest: OHKV87Z025gq3hhJunJ+TwXjz7U=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/parser16.rsc
-SHA1-Digest: 0ThC5Ye3Vr5fOK8fXmd43OV/dDw=
+SHA1-Digest: n8uLFnlC7zNYae2Ykvi1wA/RME0=
 
 Name: org/eclipse/wst/jsdt/internal/core/SourceField.class
 SHA1-Digest: uxvyCEjqIWEpeZN7QaGJaMPtpLs=
@@ -2356,7 +2363,7 @@ Name: org/eclipse/wst/jsdt/core/infer/InferOptions.class
 SHA1-Digest: T6VCqWOE9IAZgb3A7gpFxyVF478=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ASTVisitor.class
-SHA1-Digest: KKiEaJk+uVMoznpn8ox5IMoekGw=
+SHA1-Digest: lMcdGoqfQj4p6SEf/0QuQgImq3E=
 
 Name: org/eclipse/wst/jsdt/internal/core/BatchOperation.class
 SHA1-Digest: 5Rj42K/0bPM3I4Nb3vNDTKoAqVg=
@@ -2427,7 +2434,7 @@ Name: org/eclipse/wst/jsdt/internal/core/dom/rewrite/ASTRewriteAnalyze
 SHA1-Digest: nOl96HFTcuol2Oq77cbAg69p5kA=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/parser3.rsc
-SHA1-Digest: HE/4NScMDWvo0o+udJMAlFZhww4=
+SHA1-Digest: ADc8YUFImF6XmVcJ81WSClgYU10=
 
 Name: org/eclipse/wst/jsdt/internal/core/DocumentContextFragment.class
 SHA1-Digest: qPXklDcneCAdTGKybUrkPYMqv50=
@@ -2537,12 +2544,16 @@ Name: org/eclipse/wst/jsdt/internal/codeassist/complete/CompletionOnCl
  assLiteralAccess.class
 SHA1-Digest: eWsPOxBQaFbaJj1j7jsMZwU7DtI=
 
+Name: org/eclipse/wst/jsdt/internal/compiler/ast/ObjectGetterSetterFie
+ ld.class
+SHA1-Digest: uT2g/N9qTp8dXZby3C1jwSgz+og=
+
 Name: org/eclipse/wst/jsdt/core/ast/IScriptFileDeclaration.class
 SHA1-Digest: OEFZ49niDuj0wjS7Yf1Z/2lS6X8=
 
 Name: org/eclipse/wst/jsdt/internal/core/JavaCorePreferenceInitializer
  .class
-SHA1-Digest: PuDGfJ/siVKauJjsGvf8sXeEea8=
+SHA1-Digest: 3ALRNOi0Z1gvIXbhNfeikC7ZGLQ=
 
 Name: org/eclipse/wst/jsdt/core/dom/DefaultASTVisitor.class
 SHA1-Digest: +ACUnLRVp2utz0GW9mupJmxlbUU=
@@ -2594,7 +2605,7 @@ SHA1-Digest: 9jzCEDXHfwBfhu+kqUuYwgysjas=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/SingleTypeReference.c
  lass
-SHA1-Digest: rF7IksdR+mDbystdCvWFzDQ2LOY=
+SHA1-Digest: EiP+CGUAfWAVBvj/MS+IrOvtH4c=
 
 Name: org/eclipse/wst/jsdt/internal/core/builder/ImageBuilderInternalE
  xception.class
@@ -2651,13 +2662,13 @@ Name: org/eclipse/wst/jsdt/core/dom/VariableDeclaration.class
 SHA1-Digest: htVlR6cghgUk2Saqd5NP4iAcOrs=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/DoStatement.class
-SHA1-Digest: FfdxCVI3SvfIMkxSejLrsgrFw00=
+SHA1-Digest: rtg0Rad4TnGV/pzAmcHaMNMP8yI=
 
 Name: org/eclipse/wst/jsdt/internal/core/DeltaProcessor$1.class
 SHA1-Digest: V4OkmCCf/OfogtsDahhMRIF6SKE=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/parser15.rsc
-SHA1-Digest: G8h37Ad9VXV9lx6ONK9KjNeVle8=
+SHA1-Digest: R2dIn7HRb86ifFZLWrUmyDBCcik=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/lookup/FieldBinding.class
 SHA1-Digest: TdRTE1Z03DxIv62JghPutpcEyWg=
@@ -2671,7 +2682,7 @@ SHA1-Digest: WlOKCjhlAGtkeaLCaUrDmdVvWr0=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/lookup/CompilationUnitSco
  pe.class
-SHA1-Digest: bxWfGEJ61n1xRa6rIX2ptPXvZhk=
+SHA1-Digest: LMgybW+xZwHuisKuWXZfIq6gqlU=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/ObjectLiteral.class
 SHA1-Digest: R31h8KGVQWZLLdou8kYQyBwldns=
@@ -2753,7 +2764,7 @@ Name: org/eclipse/wst/jsdt/internal/core/search/indexing/AddFolderToIn
 SHA1-Digest: sdSYEFejdweVqTYZhBpk0FR6G5g=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/parser2.rsc
-SHA1-Digest: NK8W2cJDZUTUQjpf+wR6Avuf9C8=
+SHA1-Digest: BFDolmOEBEt5nlnBGQhLon0FnMw=
 
 Name: org/eclipse/wst/jsdt/core/dom/ArrayInitializer.class
 SHA1-Digest: kKHM4g9lDeF8TvOjOaSp+cHuwYY=
@@ -2767,7 +2778,7 @@ SHA1-Digest: qOxXNZq5o02HhF+TeqJ6a3y3fA4=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/QualifiedNameReferenc
  e.class
-SHA1-Digest: 6SQxke4jUQfrQrsgfRbAUQfJmw8=
+SHA1-Digest: qdwNtjCzMfQfSpt+YskZ8C2xysI=
 
 Name: org/eclipse/wst/jsdt/internal/codeassist/complete/CompletionNode
  Found.class
@@ -2851,7 +2862,7 @@ Name: org/eclipse/wst/jsdt/internal/core/builder/ClasspathLibrary.clas
 SHA1-Digest: cEuxynXJknpTqM7jyGaZ+tG+Qcw=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/ForStatement.class
-SHA1-Digest: zxRcowJ9/iOV4DyLjM4UMTd7kCI=
+SHA1-Digest: cg3iZeZ/KxtCjjmNLD0eYamRkJM=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/RecoveredField.cla
  ss
@@ -2866,7 +2877,7 @@ Name: org/eclipse/wst/jsdt/internal/compiler/parser/RecoveredImport.cl
 SHA1-Digest: lLB+/miv3GA/bTkyEY33ezoeOYc=
 
 Name: org/eclipse/wst/jsdt/core/search/SearchPattern.class
-SHA1-Digest: X171RNqfIJvWOiBsrD75egJj5xk=
+SHA1-Digest: gYNTVmNWByp6z4OZZk8YtUAt1Bs=
 
 Name: org/eclipse/wst/jsdt/internal/core/SourceMethod.class
 SHA1-Digest: vEjOKDQQEL5Sny1saKWol+Pj2NU=
@@ -2876,7 +2887,7 @@ SHA1-Digest: noNg/xiLc+P96WHi3Sc0L3OVQRA=
 
 Name: org/eclipse/wst/jsdt/internal/codeassist/select/SelectionParser.
  class
-SHA1-Digest: FbhtS0xUAzAeLhpOD8FIISssib0=
+SHA1-Digest: Zmmq19B8Q/uV2/bIEEj3eipLYk4=
 
 Name: org/eclipse/wst/jsdt/internal/core/index/DiskIndex.class
 SHA1-Digest: f82tK0EeZisFRsXVocaPiSmgT3Y=
@@ -2952,7 +2963,7 @@ SHA1-Digest: 8hPZe21IguFgCvk6bMx7JyHBihE=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/SingleNameReference.c
  lass
-SHA1-Digest: 23tK8HFOqaooLti9ujpc7q9x37w=
+SHA1-Digest: PikGq359I+EeYqUfRD8NUIIdWcY=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/diagnose/DiagnoseP
  arser$PrimaryRepairInfo.class
@@ -2967,11 +2978,11 @@ SHA1-Digest: L1Z3rXi2U9UVxdQdWPV4zFG08lc=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/lookup/SourceTypeBinding.
  class
-SHA1-Digest: I/cXUr/3sk2q/I913dEELxD2F2s=
+SHA1-Digest: 5evD8pTHZfxZF5J+h5MOQjmv63Y=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/LocalDeclaration.clas
  s
-SHA1-Digest: zY2gPO07xX5m+2N0urnGB/pBcwI=
+SHA1-Digest: NVO/LvkSJQQoUpZJ1Vp9WNKePfQ=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/StringLiteral.class
 SHA1-Digest: ZGH21gm5Im0WQjisLW3TrURrWD8=
@@ -3012,7 +3023,7 @@ Name: org/eclipse/wst/jsdt/core/ToolFactory.class
 SHA1-Digest: 99m99JW84IZKM48vijvww8ih9SA=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/Expression.class
-SHA1-Digest: 8Ph8jW+Rv1O2BT055b8NTSEPZdA=
+SHA1-Digest: IMczDpms3kmjcXzxPsX38u8Gjj0=
 
 Name: org/eclipse/wst/jsdt/core/ast/IExpression.class
 SHA1-Digest: PkdzR6DLpLc4+W5ADqwcqR8nzwk=
@@ -3021,7 +3032,7 @@ Name: org/eclipse/wst/jsdt/core/ast/IJsDocSingleTypeReference.class
 SHA1-Digest: D26uEYkbJ72bzs3oLdtjc7qQVCA=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/parser14.rsc
-SHA1-Digest: Et1boWG+AMItamoOpw9RwO83kM4=
+SHA1-Digest: efVrU0DUdspnzWWw8heazPHGk1Y=
 
 Name: org/eclipse/wst/jsdt/internal/core/search/indexing/SaveIndex.cla
  ss
@@ -3038,7 +3049,7 @@ SHA1-Digest: DKHacmECBxEBQLKeshMU8TnpQwc=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/Parser$1$MethodVis
  itor.class
-SHA1-Digest: Svu9GvzCh0QKQ0VSRp8ef304wus=
+SHA1-Digest: UH/Q4NWgOSJJUJt13GvKfFj11gU=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/lookup/VariableBinding.cl
  ass
@@ -3046,7 +3057,7 @@ SHA1-Digest: ntpz0ebsTQChcssSOFlJSzJ5K9s=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/RecoveredMethod.cl
  ass
-SHA1-Digest: OttMsCW5lRo/pIagdC1tMxGTVeE=
+SHA1-Digest: vkYYFj1SOPQtHlAQmBU8Q85cQPg=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/AND_AND_Expression.cl
  ass
@@ -3079,10 +3090,10 @@ SHA1-Digest: Txs4sWdJSV94tTfSwmxjRhd+PTA=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/JavadocMessageSend.cl
  ass
-SHA1-Digest: DgwKKEXuvmLePtUEVe9BHAwxovM=
+SHA1-Digest: TiFWWawiuc052wtAN11rt/nkZlM=
 
 Name: org/eclipse/wst/jsdt/internal/core/CopyElementsOperation.class
-SHA1-Digest: VOrwoxLOyZc0cwqdc9mDWjk7e5s=
+SHA1-Digest: wQ7hU2U4s1BZniix7ZYYlYZWaKk=
 
 Name: org/eclipse/wst/jsdt/internal/oaametadata/Parameter.class
 SHA1-Digest: 66/Oo1qRaqOd91wIf2NZT8Mt53s=
@@ -3094,7 +3105,7 @@ Name: org/eclipse/wst/jsdt/core/dom/EmptyExpression.class
 SHA1-Digest: 7GxEAt1wkUd7XCmWbQK6qkUKlA8=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/parser1.rsc
-SHA1-Digest: 8rqJ1L5M3D28Swh9Qdpol1ba79k=
+SHA1-Digest: 30TJwqzCMgp19tHU8FpbBemfOhE=
 
 Name: org/eclipse/wst/jsdt/internal/core/SearchableEnvironment$5.class
 SHA1-Digest: SDV8dLsLc/ndcMqUHqytIX1G/VY=
@@ -3171,17 +3182,17 @@ SHA1-Digest: 9HEPfkSzGt9TFSE6CqZ3yTqm1Ho=
 
 Name: org/eclipse/wst/jsdt/internal/codeassist/complete/CompletionJava
  docParser.class
-SHA1-Digest: Uv2Sxb4x9AapjF2UY3f16ENbXqU=
+SHA1-Digest: JFV2J7f+rgZ+0rvt6mhwCtzJ0i4=
 
 Name: org/eclipse/wst/jsdt/core/dom/CharacterLiteral.class
-SHA1-Digest: AFV4HozAVrHgyEMIkIUsqNmbzGE=
+SHA1-Digest: Blb6RkxcdPDAFuYMGxpwWF0wBiE=
 
 Name: org/eclipse/wst/jsdt/internal/core/SourceType$1$TypeResolveReque
  stor.class
 SHA1-Digest: GKk5XZR7XzOVTMi8Z2lS/ZuhEpE=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/ForInStatement.class
-SHA1-Digest: nVOXCmdJGcsqzE4yxNU5J7WHRkQ=
+SHA1-Digest: OX8qbNiKuQPEolZHC+LhuW62tjM=
 
 Name: org/eclipse/wst/jsdt/internal/core/hierarchy/IndexBasedHierarchy
  Builder$2.class
@@ -3189,7 +3200,7 @@ SHA1-Digest: ti465YLlCHXId71pE5Je8uXt/3E=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/QualifiedAllocationEx
  pression.class
-SHA1-Digest: PnVYogb3Pskg66tAC+EWQ1MQnQI=
+SHA1-Digest: JF+Mj8dawQrwNAhhdNdO0rI1aeA=
 
 Name: org/eclipse/wst/jsdt/internal/core/builder/AbstractImageBuilder.
  class
@@ -3243,7 +3254,7 @@ Name: org/eclipse/wst/jsdt/internal/compiler/ast/NullLiteral.class
 SHA1-Digest: Zx1xdo/5FBsKuHEVLgzGqtrUV6I=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/parser13.rsc
-SHA1-Digest: 0duedM+SOcimWU2Br//giK4+I+4=
+SHA1-Digest: S5HV4j+zPBLiHsFeBt7Rcr0KzKM=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/flow/UnconditionalFlowInf
  o.class
@@ -3261,14 +3272,14 @@ SHA1-Digest: O0Hwo5P3b1HlP71LNqSUv06soOE=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/ArrayQualifiedTypeRef
  erence.class
-SHA1-Digest: Zy/yOux4QYThJpAk3f2eYNdQiGI=
+SHA1-Digest: Ld0jbsP7XcR4egRXQAaD+cbtOsY=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/CompilationUnitDeclar
  ation$1.class
 SHA1-Digest: 2Rl+YeJtv5i3QD2zKu5cLgh9KK0=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/lookup/ArrayBinding.class
-SHA1-Digest: E2lEBVlBIw5ae4yh5AipbCHElcE=
+SHA1-Digest: M+O1Qz/dVL7pX/+AjbKRqW6vy6U=
 
 Name: org/eclipse/wst/jsdt/core/ast/IConstructorDeclaration.class
 SHA1-Digest: Ddt+mEzhmoIfYB1PNrj0jykWJBo=
@@ -3316,10 +3327,10 @@ Name: org/eclipse/wst/jsdt/internal/codeassist/complete/CompletionOnKe
 SHA1-Digest: KcIhk+AfXpqurSdfqhGnX/E9fOw=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/TryStatement.class
-SHA1-Digest: cEZ+tjy+26oM2RWxk/N9ogfraAs=
+SHA1-Digest: ksIkDSTV0oUYdkesOqP3f3K5aI8=
 
 Name: org/eclipse/wst/jsdt/internal/core/search/JavaSearchScope.class
-SHA1-Digest: hvuJbBHLXzLMFE2ZH4SwMT9+/yw=
+SHA1-Digest: RTHaZbUlTVYhpCtk94lxkgFjT5o=
 
 Name: org/eclipse/wst/jsdt/internal/core/Openable.class
 SHA1-Digest: S5Af4TjI2I9x48PiiKXfYYc8lxQ=
@@ -3328,7 +3339,7 @@ Name: org/eclipse/wst/jsdt/core/ast/INullLiteral.class
 SHA1-Digest: 6cLglOXrNbrqLDI3I4N7D+GjysA=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/parser24.rsc
-SHA1-Digest: PVn43lWkLME/suvabeOlGT8u5WE=
+SHA1-Digest: E/jivvryLTkVldsvW7Lv12HLQaw=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/util/Util$1.class
 SHA1-Digest: nhDOFSBU9GByKLQqphHvEET0EBA=
@@ -3338,7 +3349,7 @@ SHA1-Digest: h0yiAhdSGuOzfSEUx4Opr4TGUs8=
 
 Name: org/eclipse/wst/jsdt/internal/core/InternalNamingConventions.cla
  ss
-SHA1-Digest: vKeUBT8tvVG1/g7t/523CgXXdkQ=
+SHA1-Digest: 8hueL17N4FaqJHYRLmJ74YwGijE=
 
 Name: org/eclipse/wst/jsdt/internal/core/search/BasicSearchEngine$3$Al
  lTypeDeclarationsVisitor.class
@@ -3368,7 +3379,7 @@ SHA1-Digest: E1rAW3sNfoS2CIlstY2NFhA4c9U=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/InstanceOfExpression.
  class
-SHA1-Digest: JSjKE8H+bI4DNX+QcVcXNvoU8Kc=
+SHA1-Digest: CJcIPpgoIOHuws5OyV6zqYRGh/w=
 
 Name: org/eclipse/wst/jsdt/internal/core/SourceRefElementInfo.class
 SHA1-Digest: NROe+rkYs1BzEnO0lD7wvcGYFDo=
@@ -3437,7 +3448,7 @@ Name: org/eclipse/wst/jsdt/internal/compiler/batch/ClasspathLocation.c
 SHA1-Digest: 8y+xjdNfbPntns9enNaQvM3VfgA=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/EqualExpression.class
-SHA1-Digest: GCFZGrWvm+mL77M0UnLEiQPcRgM=
+SHA1-Digest: su/r3A8A5SdnU8Bo+zsqimOSOSw=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/PostfixExpression.cla
  ss
@@ -3467,7 +3478,7 @@ SHA1-Digest: VTWzjf4w+u0JfRfAwadeKGIjdWs=
 
 Name: org/eclipse/wst/jsdt/internal/formatter/CodeFormatterVisitor.cla
  ss
-SHA1-Digest: hX0KX5OFA5N9qZvZIihuhU5pxdk=
+SHA1-Digest: i2BcrsEr/F8m5hSB0IoBiR5U3Jg=
 
 Name: org/eclipse/wst/jsdt/internal/core/dom/rewrite/ImportRewriteAnal
  yzer$PackageEntry.class
@@ -3478,7 +3489,7 @@ SHA1-Digest: y+jaGJHazEGJC/olrVoSWFRQKCs=
 
 Name: org/eclipse/wst/jsdt/internal/codeassist/complete/CompletionScan
  ner.class
-SHA1-Digest: DH4Ox9I3/gDj7xTJGSPqTI9FbFY=
+SHA1-Digest: FUglwgGtBbKIUeEbhOFxQYW5wz4=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/lookup/ProblemFieldBindin
  g.class
@@ -3587,7 +3598,7 @@ Name: org/eclipse/wst/jsdt/core/JavaScriptCore.class
 SHA1-Digest: nqQ9uXBdWOG4GJLt2uJG6DP8RwE=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/parser12.rsc
-SHA1-Digest: B8UTA6gsp/r+E7eMrV82/g1NS54=
+SHA1-Digest: VuauhZrv8/sw4b6pp91g9UI9CL4=
 
 Name: org/eclipse/wst/jsdt/internal/codeassist/complete/CompletionOnJa
  vadocSingleTypeReference.class
@@ -3602,7 +3613,7 @@ SHA1-Digest: ilNFMyxro979B9pFydAKB3V03+E=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/diagnose/LexStream
  .class
-SHA1-Digest: Z4GpjM4oK7b1MMPSI4sM7dhgN8g=
+SHA1-Digest: uMjGw/tKu0uQ5HPBhCaLOQc55GU=
 
 Name: org/eclipse/wst/jsdt/internal/core/MetadataFile.class
 SHA1-Digest: nRKg5ZsDn5JR29SWho3h6SRUMPY=
@@ -3662,7 +3673,7 @@ Name: org/eclipse/wst/jsdt/internal/core/search/AbstractSearchScope.cl
 SHA1-Digest: PyFFHmO1Y5penklgDP59kQbMSGo=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/parser23.rsc
-SHA1-Digest: bp9htMLIugXefhg15mICVYNndp8=
+SHA1-Digest: 0CRuoKNRJ6K6cZaTrdyA+ybN+h8=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/Clinit.class
 SHA1-Digest: 5vpbIcGOs58Y3KFRldj3+LRzF5I=
@@ -3715,7 +3726,7 @@ Name: org/eclipse/wst/jsdt/internal/core/util/LRUCache$1.class
 SHA1-Digest: RPmUZVPSVAcWxOy4VHqRxj1DlVE=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/SwitchStatement.class
-SHA1-Digest: mDa2UaCV52pS0qDFG9D8LHe4dPo=
+SHA1-Digest: Crm2xOOb802los7H2rBYv16D2y8=
 
 Name: org/eclipse/wst/jsdt/core/IBufferFactory.class
 SHA1-Digest: 86kIg/Xev2o4HCjMrhgHrOkMuLY=
@@ -3776,7 +3787,7 @@ Name: org/eclipse/wst/jsdt/internal/core/search/matching/MethodPattern
 SHA1-Digest: ryrmfkcQH8amjBIMHbzxpb177fE=
 
 Name: org/eclipse/wst/jsdt/internal/core/search/HierarchyScope.class
-SHA1-Digest: Knz+4svFVGRAlKdKgZR7/fDdpkc=
+SHA1-Digest: bvXBnsGVs/iqz2BzXliZFuAf+rU=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/batch/Main$Logger.class
 SHA1-Digest: +q0Q9wHNo6F2NS3Ms67uV3ukvaU=
@@ -3791,7 +3802,7 @@ SHA1-Digest: 4hLbEo8jCO6fweciX2HISxxlt+w=
 
 Name: org/eclipse/wst/jsdt/internal/codeassist/complete/CompletionPars
  er.class
-SHA1-Digest: FqliozacDP5x8Y6JtzL21MV3vGo=
+SHA1-Digest: n4Z7KXXJ/hnU4+cIfaF3HkCI15s=
 
 Name: org/eclipse/wst/jsdt/internal/core/DeltaProcessor$1$FoundRelevan
  tDeltaException.class
@@ -3803,7 +3814,7 @@ SHA1-Digest: U0VowM1FYt3lzNEVNuok3WA9BzM=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/ConditionalExpression
  .class
-SHA1-Digest: Feel/nUe2WUnrpHWOOZ31wRfm34=
+SHA1-Digest: oq6D0TRTpPmo+75Gvj1z6qrWKDA=
 
 Name: org/eclipse/wst/jsdt/internal/core/SetVariablesOperation.class
 SHA1-Digest: kqPMZm3I0xc1R7p4QBTg6S3lepk=
@@ -3842,7 +3853,7 @@ SHA1-Digest: 4S4MNJ8Gu1gybZ13nM/nnkO+AA4=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/JavadocAllocationExpr
  ession.class
-SHA1-Digest: XJxmyZYlwdkMvu5u7zIFi2y/Dw4=
+SHA1-Digest: Bc83QtCof/3rE/puNun9ar5vY5g=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/lookup/Messages.class
 SHA1-Digest: jF6OGFJFr7MWJA2bgB/1Aj0rJFc=
@@ -3881,7 +3892,7 @@ Name: org/eclipse/wst/jsdt/core/dom/IBinding.class
 SHA1-Digest: 4uDwQT8NpLNUfij7vs3GjTD/4H8=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/parser11.rsc
-SHA1-Digest: DUQMHqyrMTynBZe0Tn92OTcT5T4=
+SHA1-Digest: hHUYxzhLmCPK5moctvFnedL42Gw=
 
 Name: org/eclipse/wst/jsdt/core/IJavaScriptModelMarker.class
 SHA1-Digest: CVuLR1gcjuv5NDnxxw9x/cBuhpQ=
@@ -3926,7 +3937,7 @@ Name: org/eclipse/wst/jsdt/internal/core/search/matching/OrLocator.cla
 SHA1-Digest: piHVVtKMDUs5Fq08tfEESK7Vluw=
 
 Name: org/eclipse/wst/jsdt/core/dom/Statement.class
-SHA1-Digest: o3VFBhHpxmmeGkMOQeqU7xrEoh0=
+SHA1-Digest: /MFYOkzEDMMfmryjYiGG1rbihsA=
 
 Name: org/eclipse/wst/jsdt/core/dom/AnonymousClassDeclaration.class
 SHA1-Digest: 50bKiv5PiAfwifOGkMA9HI7LyPE=
@@ -3967,7 +3978,7 @@ Name: org/eclipse/wst/jsdt/internal/oaametadata/MetadataReader$1$Messa
 SHA1-Digest: IqzdZQNAd6VVa5YYuC79JXLJYxg=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/parser22.rsc
-SHA1-Digest: QeNLbzP3b/Kt0Jz7Y9333gVOWIE=
+SHA1-Digest: rgLv0pUlhvZJEw9NGOsFNCDbyu0=
 
 Name: org/eclipse/wst/jsdt/core/IClassFile.class
 SHA1-Digest: 1HQJZa24IImXcwpwXlANkSYuPpc=
@@ -4194,10 +4205,10 @@ Name: org/eclipse/wst/jsdt/internal/core/interpret/builtin/BuiltInStri
 SHA1-Digest: DzYaTuZIo0eir4LqPtXwuNJZkEI=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/flow/FlowContext.class
-SHA1-Digest: tdVibp+ATx+NqZMe4ykXW3XvJvE=
+SHA1-Digest: M3zvg6c1TPQ8gDiLKg1994VrzgU=
 
 Name: org/eclipse/wst/jsdt/internal/core/SourceTypeElementInfo.class
-SHA1-Digest: WX/vbGV+if3hBYZKEArkthe1v1E=
+SHA1-Digest: PPFlTRo8XwlqB0MW0adDEtxoNnU=
 
 Name: org/eclipse/wst/jsdt/internal/core/JavaProject.class
 SHA1-Digest: 9HN5n04r0ibpy3+NZ3ohA2y6A4k=
@@ -4207,7 +4218,7 @@ Name: org/eclipse/wst/jsdt/internal/compiler/util/HashtableOfType.clas
 SHA1-Digest: AW9KOAz4Ve1QC++/4uOWNz+XQUw=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/parser10.rsc
-SHA1-Digest: ioKsNjqiP23HkIftgGR/K7k5FcI=
+SHA1-Digest: yeiwJTUusP0iS1M08jDc5ILCgn8=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/env/IBinaryNestedType.cla
  ss
@@ -4240,14 +4251,14 @@ SHA1-Digest: KWFyY5JM3aRP9RN8NIKfWwe66Tg=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/ConstructorDeclaratio
  n.class
-SHA1-Digest: x1Y8lX6PiGWGmmoyuI6Mb2Ut1cM=
+SHA1-Digest: Ng/YPM+iIIe5AyqydRY5w1Ax+Vs=
 
 Name: org/eclipse/wst/jsdt/core/dom/RecoveredTypeBinding.class
 SHA1-Digest: dq3TFAb6hQjuxJqja1E1ZXlxRk4=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/TerminalTokens.cla
  ss
-SHA1-Digest: Wq6XIULv2eDZcM1VwpZ9VDSQAQo=
+SHA1-Digest: Kk2L8PzlKbQcI4DaZ0bV3saBbzg=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/IDebugRequestor.class
 SHA1-Digest: v380EGhF7D3j9g72rIbZ2E+Hj7s=
@@ -4289,10 +4300,10 @@ Name: org/eclipse/wst/jsdt/internal/codeassist/complete/CompletionOnJa
 SHA1-Digest: UxG/7yRm2F+txx1tIUZzD6qUctc=
 
 Name: org/eclipse/wst/jsdt/core/ast/IASTNode.class
-SHA1-Digest: iR5mduy4ticTTIEu+RGfnHeXn6E=
+SHA1-Digest: 5lInaeHZQYG6F2GBuhCMyL2qK1I=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/parser21.rsc
-SHA1-Digest: ycyVdMKq8rEBBRX3oucX09XZDk4=
+SHA1-Digest: BexLswEZ0AO/R/Vcvcxr8WNvkJw=
 
 Name: org/eclipse/wst/jsdt/core/compiler/libraries/LibraryLocation.cla
  ss
@@ -4358,7 +4369,7 @@ Name: org/eclipse/wst/jsdt/internal/compiler/batch/Main$1.class
 SHA1-Digest: l4Xjx/2nlR/U3fnWIvi/t4lOtKM=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/Parser.class
-SHA1-Digest: 6DKxPw0ZRM6aE2psAEOBUO72FLU=
+SHA1-Digest: ynM3Hh8yNfmZ9VvHF0pT73AuAx8=
 
 Name: org/eclipse/wst/jsdt/core/search/SearchRequestor.class
 SHA1-Digest: 90VP8xa9GYN3RUj65fN/oEnsEI8=
@@ -4410,7 +4421,7 @@ Name: org/eclipse/wst/jsdt/internal/core/BufferCache.class
 SHA1-Digest: m1XQxKMlVagQKY30fO4LayrYbrQ=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/MessageSend.class
-SHA1-Digest: /n60GL3hFNRaqwiS7IwBSCcXWJ8=
+SHA1-Digest: kjAxDEcCpQLC/Vl/op5DwlCmDpA=
 
 Name: org/eclipse/wst/jsdt/core/ast/IArrayAllocationExpression.class
 SHA1-Digest: YK+9E8SuzPmBSDOadpbwdNv+Hh0=
@@ -4438,7 +4449,7 @@ Name: org/eclipse/wst/jsdt/internal/core/JavaElementDeltaBuilder$ListI
 SHA1-Digest: UnDy0fzo2i7GhSas6Wa1YbChb4E=
 
 Name: org/eclipse/wst/jsdt/launching/LibraryLocation.class
-SHA1-Digest: +i68iGMy+MqgXJuI+dKGMWP0FU0=
+SHA1-Digest: d6CWINxHDO5WkSZplP021//PVj8=
 
 Name: org/eclipse/wst/jsdt/core/ast/IAbstractVariableDeclaration.class
 SHA1-Digest: 9tAy0it0KREHNpzhI4zuwlNgso8=
@@ -4449,7 +4460,7 @@ SHA1-Digest: wN5fq4MDqIcqYKVH2BBIZJVNRzc=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/problem/ProblemHandler.cl
  ass
-SHA1-Digest: pm+Pb2oXQTT3YWNMEreo/cAaJcA=
+SHA1-Digest: NTLyckJXO3ZMpa3vWJg/0Ot9L9w=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/part14.rsc
 SHA1-Digest: JV2QoXZUM64w+HaXdh6mzs7vw48=
@@ -4497,7 +4508,7 @@ SHA1-Digest: gveE8BD6Vy/X7kB/DfM7ZTlCgAk=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/lookup/MethodVerifier.cla
  ss
-SHA1-Digest: j4u8AXyQR5f/ZNZPrvC+UyGpN9w=
+SHA1-Digest: AwwDNuHZBvVGEnK4gVEz1LHzzuU=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/util/GenericXMLWriter$1.c
  lass
@@ -4530,7 +4541,7 @@ Name: org/eclipse/wst/jsdt/core/ast/IJsDocQualifiedTypeReference.class
 SHA1-Digest: OgVy7Ra1VdDI6cBtBSJhR6PlqR0=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/ASTNode.class
-SHA1-Digest: QzBE+CKr246UZiKOxVNSk7s7jso=
+SHA1-Digest: tIpteBxDuOZGiCb4MAhrCwnd6y0=
 
 Name: org/eclipse/wst/jsdt/internal/core/util/RecordedParsingInformati
  on.class
@@ -4564,7 +4575,7 @@ Name: org/eclipse/wst/jsdt/internal/core/SourceMapper$1.class
 SHA1-Digest: ul4v/cBFqa3ot3JQw+D/9zyGSts=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/SourceElementParser.class
-SHA1-Digest: L8T8oZLVZtvS2Lfd1ohc3x+UO2I=
+SHA1-Digest: nj5u/bT0HWmmsmllpdhXZCe/Nsc=
 
 Name: org/eclipse/wst/jsdt/core/IProblemRequestor.class
 SHA1-Digest: 8yhi3r9RS70QHdbpoh4cKaD1m4k=
@@ -4624,17 +4635,17 @@ SHA1-Digest: cl5SIIZ1ZGszMzbjyu0aS9cpDYI=
 
 Name: org/eclipse/wst/jsdt/internal/core/hierarchy/RegionBasedTypeHier
  archy$1.class
-SHA1-Digest: p5XBD6PMrg11MXJ9UDF3p+2BvG0=
+SHA1-Digest: /g1N8ECQ7635uYdLVB5kr0+wzy4=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/parser/parser20.rsc
-SHA1-Digest: ps+d/H+JHLuKR59tyZqPXVDWuXQ=
+SHA1-Digest: GiYqGhMH7jqndU6p8i/OpGNQRAU=
 
 Name: org/eclipse/wst/jsdt/internal/core/IPathRequestor.class
 SHA1-Digest: UCHIEPU1En/CVMPGRMqq9J1E3TE=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/lookup/LookupEnvironment.
  class
-SHA1-Digest: aAFsNDwU64DteWxNRcyu854T6gc=
+SHA1-Digest: Rr8m6QzsdUxbJs/ATn/DihesPlE=
 
 Name: org/eclipse/wst/jsdt/internal/core/search/matching/ClassFileMatc
  hLocator.class
@@ -4648,7 +4659,7 @@ Name: org/eclipse/wst/jsdt/internal/compiler/ast/Reference.class
 SHA1-Digest: cepgbjOqAum0Lt+yCU3drBicWls=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/WhileStatement.class
-SHA1-Digest: H26uCfm8LRfg8zSW/kkAHX3RpcY=
+SHA1-Digest: QFggEW2Bff7FfQBEGiBHn40++ok=
 
 Name: org/eclipse/wst/jsdt/internal/core/JavaModelManager$13.class
 SHA1-Digest: THjJCiAVuDNu/2puHatnF/7nRuI=
@@ -4678,17 +4689,17 @@ Name: org/eclipse/wst/jsdt/core/IJavaScriptModelStatusConstants.class
 SHA1-Digest: kmbw7tSRrH5e9UMMmzdNnmzHKOo=
 
 Name: org/eclipse/wst/jsdt/core/search/SearchParticipant.class
-SHA1-Digest: 3W6HyvJibWkWn0vK2Fc8kD9MsV8=
+SHA1-Digest: 5zEWFNGWjGyiVTiQxrCREP7HT80=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/batch/CompilationUnit.cla
  ss
 SHA1-Digest: zr3KvIKnaUebOQx9kuZvvVRyQ2c=
 
 Name: org/eclipse/wst/jsdt/launching/PropertyChangeEvent.class
-SHA1-Digest: 4M4tuP3FXgeJvkXNAtJj/+f4Mv0=
+SHA1-Digest: EMwjwxV5mevIUI0vDDrBp08Eaq0=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/ast/TypeDeclaration.class
-SHA1-Digest: WO87JwX0Ny05up8yg27DFHOOMmA=
+SHA1-Digest: cmY97GWAy6kWQRpoIcZ9gktkiFI=
 
 Name: org/eclipse/wst/jsdt/internal/core/search/PathCollector.class
 SHA1-Digest: zs3E8rIeAck4J5BbRTSeti51J5A=
@@ -4747,7 +4758,7 @@ SHA1-Digest: MAiRtOr+7871BaXFSzOidgrjUcA=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/impl/CompilerOptions.clas
  s
-SHA1-Digest: fodfgohcWsSMQtMI1X5ZmJO0j2Q=
+SHA1-Digest: wvBY0yoMDgJWqlxCAT2VZGZL2b8=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/env/IGenericMethod.class
 SHA1-Digest: vgX7LNt99U8OCPu4u7+RAYhn/LA=
@@ -4778,14 +4789,14 @@ SHA1-Digest: 3ju/mAqTd7vt5hYlxELrIDUwSlQ=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/flow/ExceptionHandlingFlo
  wContext.class
-SHA1-Digest: Bnnp/lka6/0tT0y/2kJxRwWZSd8=
+SHA1-Digest: 7dA0kWS6jEh/3+R7MlY32nDTEtY=
 
 Name: org/eclipse/wst/jsdt/internal/core/JavaModelManager$9.class
 SHA1-Digest: TXlNJNNqi13RyGoRqo+OU+0ToMY=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/problem/ProblemReporter.c
  lass
-SHA1-Digest: /tbxZaR/ouQHOIXF/4VhP2ZzNBo=
+SHA1-Digest: o9Pb7E+fFP8lJ/myj3iXT8wbQgs=
 
 Name: org/eclipse/wst/jsdt/internal/codeassist/select/SelectionOnField
  Type.class
@@ -4802,7 +4813,7 @@ Name: org/eclipse/wst/jsdt/internal/compiler/util/HashtableOfPackage.c
 SHA1-Digest: JHeBqZupxyxK99MUFOHdp+KHGPM=
 
 Name: org/eclipse/wst/jsdt/internal/compiler/lookup/BlockScope.class
-SHA1-Digest: wlQdNuB2H4cibShMdUnYGfObpB4=
+SHA1-Digest: ehdlsJNT4OBWiIphVtDNLMzHosI=
 
 Name: org/eclipse/wst/jsdt/internal/core/UserLibraryManager$1.class
 SHA1-Digest: 7YBEdSSCn2gYtmKSxAVm2OYTlJc=

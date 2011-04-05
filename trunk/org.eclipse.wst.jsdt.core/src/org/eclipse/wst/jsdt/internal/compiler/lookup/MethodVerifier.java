@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -151,24 +151,6 @@ void checkAgainstInheritedMethods(MethodBinding currentMethod, MethodBinding[] m
 		checkForBridgeMethod(currentMethod, inheritedMethod, allInheritedMethods);
 	}
 }
-void checkConcreteInheritedMethod(MethodBinding concreteMethod, MethodBinding[] abstractMethods) {
-	// Remember that interfaces can only define public instance methods
-	if (concreteMethod.isStatic())
-		// Cannot inherit a static method which is specified as an instance method by an interface
-		problemReporter().staticInheritedMethodConflicts(type, concreteMethod, abstractMethods);
-	if (!concreteMethod.isPublic()) {
-		int index = 0, length = abstractMethods.length;
-		if (concreteMethod.isProtected()) {
-			for (; index < length; index++)
-				if (abstractMethods[index].isPublic()) break;
-		} else if (concreteMethod.isDefault()) {
-			for (; index < length; index++)
-				if (!abstractMethods[index].isDefault()) break;
-		}
-		if (index < length)
-			problemReporter().inheritedMethodReducesVisibility(type, concreteMethod, abstractMethods);
-	}
-}
 void checkForBridgeMethod(MethodBinding currentMethod, MethodBinding inheritedMethod, MethodBinding[] allInheritedMethods) {
 	// no op before 1.5
 }
@@ -201,13 +183,6 @@ void checkInheritedMethods(MethodBinding[] methods, int length) {
 		
 		return;
 	}
-
-	MethodBinding[] abstractMethods = new MethodBinding[length - 1];
-	int index = 0;
-	for (int i = length; --i >= 0;)
-		if (methods[i] != concreteMethod)
-			abstractMethods[index++] = methods[i];
-	checkConcreteInheritedMethod(concreteMethod, abstractMethods);
 }
 boolean checkInheritedReturnTypes(MethodBinding[] methods, int length) {
 	MethodBinding first = methods[0];
@@ -380,14 +355,10 @@ void computeInheritedMethods(ReferenceBinding superclass, ReferenceBinding[] sup
 				}
 				nonVisibleDefaultMethods.put(inheritedMethod.selector, nonVisible);
 
-				if (inheritedMethod.isAbstract()) // non visible abstract methods cannot be overridden so the type must be defined abstract
-					problemReporter().abstractMethodCannotBeOverridden(this.type, inheritedMethod);
-
 				MethodBinding[] current = (MethodBinding[]) this.currentMethods.get(inheritedMethod.selector);
 				if (current != null) { // non visible methods cannot be overridden so a warning is issued
 					foundMatch : for (int i = 0, length = current.length; i < length; i++) {
 						if (areMethodsCompatible(current[i], inheritedMethod)) {
-							problemReporter().overridesPackageDefaultMethod(current[i], inheritedMethod);
 							break foundMatch;
 						}
 					}

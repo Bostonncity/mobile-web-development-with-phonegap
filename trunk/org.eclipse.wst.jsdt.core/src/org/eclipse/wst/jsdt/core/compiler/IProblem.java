@@ -713,4 +713,7 @@ void setSourceStart(int sourceStart);
 	// indicates an externally defined problem that has a quick-assist processor
 	// associated with it
 	int ExternalProblemFixable = 901;
+	
+	int InvalidValueForSetter = 902;
+	int InvalidValueForGetter = 903;
 }

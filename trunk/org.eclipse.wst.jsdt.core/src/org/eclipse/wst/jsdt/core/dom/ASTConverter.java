@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2009 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -869,9 +869,9 @@ class ASTConverter {
 			case org.eclipse.wst.jsdt.internal.compiler.ast.OperatorIds.INSTANCEOF :
 				infixExpression.setOperator(InfixExpression.Operator.INSTANCEOF);
 				break;
-			case org.eclipse.wst.jsdt.internal.compiler.ast.OperatorIds.IN :
-				infixExpression.setOperator(InfixExpression.Operator.IN);
-				break;
+            case org.eclipse.wst.jsdt.internal.compiler.ast.OperatorIds.IN:
+            	infixExpression.setOperator(InfixExpression.Operator.IN);
+            	break;
 			case org.eclipse.wst.jsdt.internal.compiler.ast.OperatorIds.EQUAL_EQUAL_EQUAL :
 				infixExpression.setOperator(InfixExpression.Operator.EQUAL_EQUAL_EQUAL);
 				break;
@@ -3821,9 +3821,6 @@ class ASTConverter {
 					case TerminalTokens.TokenNamevolatile:
 						modifier = createModifier(Modifier.ModifierKeyword.VOLATILE_KEYWORD);
 						break;
-					case TerminalTokens.TokenNamestrictfp:
-						modifier = createModifier(Modifier.ModifierKeyword.STRICTFP_KEYWORD);
-						break;
 					case TerminalTokens.TokenNameCOMMENT_BLOCK :
 					case TerminalTokens.TokenNameCOMMENT_LINE :
 					case TerminalTokens.TokenNameCOMMENT_JAVADOC :
@@ -3934,9 +3931,6 @@ class ASTConverter {
 							case TerminalTokens.TokenNamevolatile:
 								modifier = createModifier(Modifier.ModifierKeyword.VOLATILE_KEYWORD);
 								break;
-							case TerminalTokens.TokenNamestrictfp:
-								modifier = createModifier(Modifier.ModifierKeyword.STRICTFP_KEYWORD);
-								break;
 							case TerminalTokens.TokenNameCOMMENT_BLOCK :
 							case TerminalTokens.TokenNameCOMMENT_LINE :
 							case TerminalTokens.TokenNameCOMMENT_JAVADOC :
@@ -3995,9 +3989,6 @@ class ASTConverter {
 							break;
 						case TerminalTokens.TokenNamevolatile:
 							modifier = createModifier(Modifier.ModifierKeyword.VOLATILE_KEYWORD);
-							break;
-						case TerminalTokens.TokenNamestrictfp:
-							modifier = createModifier(Modifier.ModifierKeyword.STRICTFP_KEYWORD);
 							break;
 						case TerminalTokens.TokenNameCOMMENT_BLOCK :
 						case TerminalTokens.TokenNameCOMMENT_LINE :
@@ -4081,9 +4072,6 @@ class ASTConverter {
 							case TerminalTokens.TokenNamevolatile:
 								modifier = createModifier(Modifier.ModifierKeyword.VOLATILE_KEYWORD);
 								break;
-							case TerminalTokens.TokenNamestrictfp:
-								modifier = createModifier(Modifier.ModifierKeyword.STRICTFP_KEYWORD);
-								break;
 							case TerminalTokens.TokenNameCOMMENT_BLOCK :
 							case TerminalTokens.TokenNameCOMMENT_LINE :
 							case TerminalTokens.TokenNameCOMMENT_JAVADOC :
@@ -4148,9 +4136,6 @@ class ASTConverter {
 								break;
 							case TerminalTokens.TokenNamevolatile:
 								modifier = createModifier(Modifier.ModifierKeyword.VOLATILE_KEYWORD);
-								break;
-							case TerminalTokens.TokenNamestrictfp:
-								modifier = createModifier(Modifier.ModifierKeyword.STRICTFP_KEYWORD);
 								break;
 							case TerminalTokens.TokenNameCOMMENT_BLOCK :
 							case TerminalTokens.TokenNameCOMMENT_LINE :

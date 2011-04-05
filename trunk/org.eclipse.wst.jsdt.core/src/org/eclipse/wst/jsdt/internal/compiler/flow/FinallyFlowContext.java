@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2007 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -14,7 +14,6 @@ import org.eclipse.wst.jsdt.internal.compiler.ast.ASTNode;
 import org.eclipse.wst.jsdt.internal.compiler.ast.Expression;
 import org.eclipse.wst.jsdt.internal.compiler.ast.Reference;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.BlockScope;
-import org.eclipse.wst.jsdt.internal.compiler.lookup.FieldBinding;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.LocalVariableBinding;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.Scope;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.VariableBinding;
@@ -44,40 +43,6 @@ public class FinallyFlowContext extends FlowContext {
  * redundantly.
  */
 public void complainOnDeferredChecks(FlowInfo flowInfo, BlockScope scope) {
-
-	// check redundant final assignments
-	for (int i = 0; i < this.assignCount; i++) {
-		VariableBinding variable = this.finalVariables[i];
-		if (variable == null) continue;
-
-		boolean complained = false; // remember if have complained on this final assignment
-		if (variable instanceof FieldBinding) {
-			// final field
-			if (flowInfo.isPotentiallyAssigned((FieldBinding)variable)) {
-				complained = true;
-				scope.problemReporter().duplicateInitializationOfBlankFinalField((FieldBinding)variable, finalAssignments[i]);
-			}
-		} else {
-			// final local variable
-			if (flowInfo.isPotentiallyAssigned((LocalVariableBinding) variable)) {
-				complained = true;
-				scope.problemReporter().duplicateInitializationOfFinalLocal(
-					(LocalVariableBinding) variable,
-					this.finalAssignments[i]);
-			}
-		}
-		// any reference reported at this level is removed from the parent context
-		// where it could also be reported again
-		if (complained) {
-			FlowContext currentContext = this.parent;
-			while (currentContext != null) {
-				//if (currentContext.isSubRoutine()) {
-				currentContext.removeFinalAssignmentIfAny(this.finalAssignments[i]);
-				//}
-				currentContext = currentContext.parent;
-			}
-		}
-	}
 
 	// check inconsistent null checks
 	if (this.deferNullDiagnostic) { // within an enclosing loop, be conservative

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2009 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -107,7 +107,6 @@ public class ForeachStatement extends Statement implements IForeachStatement {
 				isContinue = false;
 			} else {
 				actionInfo = actionInfo.mergedWith(loopingContext.initsOnContinue);
-				loopingContext.complainOnDeferredFinalChecks(scope, actionInfo);
 				exitBranch.addPotentialInitializationsFrom(actionInfo);
 			}
 		} else {
@@ -179,10 +178,6 @@ public class ForeachStatement extends Statement implements IForeachStatement {
 			if (collectionType.isArrayType()) { // for(E e : E[])
 				this.kind = ARRAY;
 				this.collectionElementType = ((ArrayBinding) collectionType).elementsType();
-				if (!collectionElementType.isCompatibleWith(elementType)
-						&& !scope.isBoxingCompatibleWith(collectionElementType, elementType)) {
-					scope.problemReporter().notCompatibleTypesErrorInForeach(collection, collectionElementType, elementType);
-				}
 				// in case we need to do a conversion
 				int compileTimeTypeID = collectionElementType.id;
 				if (elementType.isBaseType()) {
@@ -236,8 +231,6 @@ public class ForeachStatement extends Statement implements IForeachStatement {
 //					scope.addLocalVariable(this.indexVariable);
 //					this.indexVariable.setConstant(Constant.NotAConstant); // not inlinable
 					break;
-				default :
-					scope.problemReporter().invalidTypeForCollection(collection);
 			}
 		}
 		if (action != null) {

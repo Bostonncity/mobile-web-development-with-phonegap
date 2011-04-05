@@ -57,9 +57,6 @@ public class ArrayQualifiedTypeReference extends QualifiedTypeReference implemen
 
 		if (this.resolvedType != null)
 			return this.resolvedType;
-		if (this.dimensions > 255) {
-			scope.problemReporter().tooManyDimensions(this);
-		}
 		LookupEnvironment env = scope.environment();
 		try {
 			env.missingClassFileLocation = this;

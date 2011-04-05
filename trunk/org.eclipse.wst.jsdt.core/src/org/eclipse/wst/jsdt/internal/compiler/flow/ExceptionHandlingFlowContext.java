@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2009 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,14 +15,13 @@ import java.util.ArrayList;
 import org.eclipse.wst.jsdt.internal.compiler.ast.ASTNode;
 import org.eclipse.wst.jsdt.internal.compiler.ast.AbstractMethodDeclaration;
 import org.eclipse.wst.jsdt.internal.compiler.ast.SubRoutineStatement;
-import org.eclipse.wst.jsdt.internal.compiler.ast.TryStatement;
-import org.eclipse.wst.jsdt.internal.compiler.util.ObjectCache;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.BlockScope;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.ExtraCompilerModifiers;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.MethodScope;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.ReferenceBinding;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.Scope;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.TypeBinding;
+import org.eclipse.wst.jsdt.internal.compiler.util.ObjectCache;
 
 /**
  * Reflects the context of code analysis, keeping track of enclosing
@@ -78,39 +77,6 @@ public void complainIfUnusedExceptionHandlers(AbstractMethodDeclaration method) 
 	if ((method.binding.modifiers & (ExtraCompilerModifiers.AccOverriding | ExtraCompilerModifiers.AccImplementing)) != 0
 	        && !scope.compilerOptions().reportUnusedDeclaredThrownExceptionWhenOverriding) {
 	    return;
-	}
-
-	// report errors for unreachable exception handlers
-	for (int i = 0, count = this.handledExceptions.length; i < count; i++) {
-		int index = this.indexes.get(this.handledExceptions[i]);
-		int cacheIndex = index / ExceptionHandlingFlowContext.BitCacheSize;
-		int bitMask = 1 << (index % ExceptionHandlingFlowContext.BitCacheSize);
-		if ((this.isReached[cacheIndex] & bitMask) == 0) {
-			scope.problemReporter().unusedDeclaredThrownException(
-				this.handledExceptions[index],
-				method,
-				null);
-		}
-	}
-}
-
-public void complainIfUnusedExceptionHandlers(BlockScope scope,TryStatement tryStatement) {
-	// report errors for unreachable exception handlers
-	for (int i = 0, count = this.handledExceptions.length; i < count; i++) {
-		int index = this.indexes.get(this.handledExceptions[i]);
-		int cacheIndex = index / ExceptionHandlingFlowContext.BitCacheSize;
-		int bitMask = 1 << (index % ExceptionHandlingFlowContext.BitCacheSize);
-		if ((this.isReached[cacheIndex] & bitMask) == 0) {
-			scope.problemReporter().unreachableCatchBlock(
-				this.handledExceptions[index],
-				tryStatement.catchArguments[index] );
-		} else {
-			if ((this.isNeeded[cacheIndex] & bitMask) == 0) {
-				scope.problemReporter().hiddenCatchBlock(
-					this.handledExceptions[index],
-					tryStatement.catchArguments[index].type);
-			}
-		}
 	}
 }
 

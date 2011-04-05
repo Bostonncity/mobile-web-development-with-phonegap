@@ -290,17 +290,17 @@ public class CompilerOptions {
 	public boolean reportSpecialParameterHidingField = false;
 
 	// check javadoc comments tags
-	public int reportInvalidJavadocTagsVisibility = ClassFileConstants.AccPublic;
+	public int reportInvalidJavadocTagsVisibility = ClassFileConstants.AccDefault;
 	public boolean reportInvalidJavadocTags = false;
 	public boolean reportInvalidJavadocTagsDeprecatedRef = false;
 	public boolean reportInvalidJavadocTagsNotVisibleRef = false;
 
 	// check missing javadoc tags
-	public int reportMissingJavadocTagsVisibility = ClassFileConstants.AccPublic;
+	public int reportMissingJavadocTagsVisibility = ClassFileConstants.AccDefault;
 	public boolean reportMissingJavadocTagsOverriding = false;
 
 	// check missing javadoc comments
-	public int reportMissingJavadocCommentsVisibility = ClassFileConstants.AccPublic;
+	public int reportMissingJavadocCommentsVisibility = ClassFileConstants.AccDefault;
 	public boolean reportMissingJavadocCommentsOverriding = false;
 
 	// JSR bytecode inlining

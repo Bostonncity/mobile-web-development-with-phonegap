@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2009 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -63,16 +63,6 @@ public FlowInfo analyseCode(MethodScope initializationScope, FlowContext flowCon
 				initializationScope.problemReporter().unusedPrivateField(this);
 			}
 		}
-	}
-	// cannot define static non-constant field inside nested class
-	if (this.binding != null
-			&& this.binding.isValidBinding()
-			&& this.binding.isStatic()
-			&& this.binding.declaringClass.isNestedType()
-			&& !this.binding.declaringClass.isStatic()) {
-		initializationScope.problemReporter().unexpectedStaticModifierForField(
-			(SourceTypeBinding) this.binding.declaringClass,
-			this);
 	}
 
 	if (this.initialization != null) {
