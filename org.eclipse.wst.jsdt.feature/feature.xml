@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.wst.jsdt.feature"
       label="%featureName"
-      version="1.2.4.v201103240300-7C78FGYF9JgLWPM8d0PjYd"
+      version="1.2.4.vqualifier"
       provider-name="%providerName"
       plugin="org.eclipse.wst.jsdt.ui">
 
@@ -23,24 +23,10 @@
    </url>
 
    <plugin
-         id="org.eclipse.wst.jsdt.core"
-         download-size="0"
-         install-size="0"
-         version="1.1.5.v201103302046"
-         unpack="false"/>
-
-   <plugin
          id="org.eclipse.wst.jsdt.manipulation"
          download-size="0"
          install-size="0"
          version="1.0.200.v201004150600"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.wst.jsdt.ui"
-         download-size="0"
-         install-size="0"
-         version="1.1.5.v201103302046"
          unpack="false"/>
 
    <plugin
@@ -97,6 +83,20 @@
          download-size="0"
          install-size="0"
          version="1.7.2.v201005080400"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.wst.jsdt.core"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.wst.jsdt.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>
