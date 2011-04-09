@@ -301,9 +301,17 @@ class PhonegapProjectPopulate {
         indexHtmlContents = indexHtmlContents.replaceFirst("src=\"phonegap[a-zA-Z-.0-9]*js\"",
                 "src=\"" + phonegapJsFileName + "\"");  
         if (indexHtmlContents.indexOf("src=\"phonegap") < 0) {   // no phonegap*.js in file
-            indexHtmlContents = indexHtmlContents.replaceFirst("<script ", 
-                    "<!-- Uncomment following line to access PhoneGap APIs (not necessary to use PhoneGap to package web app) -->\n" + 
-                    "\t<!-- <script type=\"text/javascript\" charset=\"utf-8\" src=\"" + phonegapJsFileName + "\"></script>-->\n\t<script ");
+            int index = indexHtmlContents.lastIndexOf("</head>");
+            if (index > 0) {
+                index = indexHtmlContents.lastIndexOf("</script>", index);
+                if (index > 0) {
+                    index += 9; 
+                    indexHtmlContents = indexHtmlContents.substring(0,index) + 
+                            "\n\t<!-- Uncomment following line to access PhoneGap APIs (not necessary to use PhoneGap to package web app) -->\n" + 
+                            "\t<!-- <script type=\"text/javascript\" charset=\"utf-8\" src=\"" + phonegapJsFileName + "\"></script>-->\n" +
+                            indexHtmlContents.substring(index) ;
+                }
+            }
         }
         StringIO.write(wwwDir + "index.html", indexHtmlContents);
 
@@ -577,7 +585,7 @@ class PhonegapProjectPopulate {
             int startIncludeIndex = fileContents.lastIndexOf("\"", fileNameIndex);
             fileContents = fileContents.substring(0, startIncludeIndex) + prepend
                     + fileContents.substring(fileNameIndex);
-        } else { // must add a new line
+        } else { // must add a new line.  Bug if indexOf finds stuff inside comments
             int firstJsIndex = fileContents.indexOf(suffix);
             int insertSpot;
             if (firstJsIndex > 0) {
