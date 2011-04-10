@@ -12,13 +12,22 @@
  *      
  */
 
-
  .ui-footer .ui-title {
 	margin-right:20px;
 	margin-left:20px;
 	white-space:normal; 
  }
- /* JQM: margin-left, margin-right: 90px
+/* JQM: margin-left, margin-right: 90px
  *       white-space:nowrap
  */
+ 
+ .ui-content { padding: 5px; }
+/* JQM: .ui-content { padding: 15px; }
+ *  Leave more space vertically for buttons etc
+ */ 
+ 
+ .ui-collapsible-contain { margin: .5em 7px; }
+ /* Collapsible bars touch sides w/out this.
+  */
+
  

@@ -13,6 +13,7 @@ var locationWatch = false;
 var toggleLocation = function() {
     var suc = function(p) {
         jQuery("#loctext").empty();
+                
         var text = "<div class=\"locdata\">Latitude: " + p.coords.latitude
                 + "<br/>" + "Longitude: " + p.coords.longitude + "<br/>"
                 + "Accuracy: " + p.coords.accuracy + "m<br/>" + "</div>";
@@ -22,7 +23,7 @@ var toggleLocation = function() {
                 + p.coords.latitude
                 + ","
                 + p.coords.longitude
-                + "&zoom=14&size=280x175&markers=color:blue|"
+                + "&zoom=13&size=280x175&markers=color:blue|"
                 + p.coords.latitude + ',' + p.coords.longitude;
 
         jQuery("#map").remove();
@@ -116,7 +117,7 @@ var preventBehavior = function(e) {
 
 function dump_pic(data) {
     var viewport = document.getElementById('viewport');
-    console.log(data);
+    //console.log(data);
     viewport.style.display = "";
     viewport.style.position = "absolute";
     viewport.style.bottom = "160px";
@@ -153,7 +154,8 @@ function writeFile() {
 function contacts_success(contacts) {
     alert(contacts.length
             + ' contacts returned.'
-            + (contacts[2] ? (' Third contact is ' + contacts[2].displayName)
+            + (contacts[2] && contacts[2].name &&
+               contacts[2].name.formatted ? (' Third contact is ' + contacts[2].name.formatted)
                     : ''));
 }
 
@@ -163,7 +165,7 @@ function get_contacts() {
     obj.multiple = true;
     obj.limit = 5;
     navigator.service.contacts.find(
-            [ "displayName", "phoneNumbers", "emails" ], contacts_success,
+            [ "displayName", "name" ], contacts_success,
             fail, obj);
 }
 
@@ -201,5 +203,4 @@ function init() {
     }).live('collapse', function() {
         toggleLocation();
     });
-
 }
