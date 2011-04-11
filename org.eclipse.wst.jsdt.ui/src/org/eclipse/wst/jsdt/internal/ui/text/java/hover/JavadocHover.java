@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2011 IBM Corporation and others.
+ * Copyright (c) 2000, 2010 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -13,7 +13,9 @@ package org.eclipse.wst.jsdt.internal.ui.text.java.hover;
 import java.io.Reader;
 import java.io.StringReader;
 
-import org.eclipse.jface.internal.text.html.BrowserInformationControl;
+import org.eclipse.wst.jsdt.internal.ui.text.html.BrowserInformationControl;
+import org.eclipse.wst.jsdt.internal.ui.text.html.HTMLPrinter;
+import org.eclipse.wst.jsdt.internal.ui.text.html.HTMLTextPresenter;
 import org.eclipse.jface.text.AbstractReusableInformationControlCreator;
 import org.eclipse.jface.text.DefaultInformationControl;
 import org.eclipse.jface.text.IInformationControl;
@@ -31,11 +33,8 @@ import org.eclipse.wst.jsdt.core.IPackageFragmentRoot;
 import org.eclipse.wst.jsdt.core.JavaScriptModelException;
 import org.eclipse.wst.jsdt.internal.corext.javadoc.JavaDocLocations;
 import org.eclipse.wst.jsdt.internal.ui.JavaScriptPlugin;
-import org.eclipse.wst.jsdt.internal.ui.text.html.HTMLPrinter;
-import org.eclipse.wst.jsdt.internal.ui.text.html.HTMLTextPresenter;
-import org.eclipse.wst.jsdt.ui.JSdocContentAccess;
 import org.eclipse.wst.jsdt.ui.JavaScriptElementLabels;
-import org.eclipse.wst.jsdt.ui.PreferenceConstants;
+import org.eclipse.wst.jsdt.ui.JSdocContentAccess;
 
 /**
  * Provides Javadoc as hover info for Java elements.
@@ -50,7 +49,7 @@ public class JavadocHover extends AbstractJavaEditorTextHover implements IInform
 	 * 
 	 * 
 	 */
-	public static final class PresenterControlCreator extends AbstractReusableInformationControlCreator {
+	private static final class PresenterControlCreator extends AbstractReusableInformationControlCreator {
 		/*
 		 * @see org.eclipse.wst.jsdt.internal.ui.text.java.hover.AbstractReusableInformationControlCreator#doCreateInformationControl(org.eclipse.swt.widgets.Shell)
 		 */
@@ -58,7 +57,7 @@ public class JavadocHover extends AbstractJavaEditorTextHover implements IInform
 			int shellStyle= SWT.RESIZE | SWT.TOOL;
 			int style= SWT.V_SCROLL | SWT.H_SCROLL;
 			if (BrowserInformationControl.isAvailable(parent))
-				return new BrowserInformationControl(parent, PreferenceConstants.APPEARANCE_JAVADOC_FONT, true);
+				return new BrowserInformationControl(parent, shellStyle, style);
 			else
 				return new DefaultInformationControl(parent, shellStyle, style, new HTMLTextPresenter(false));
 		}
@@ -70,28 +69,15 @@ public class JavadocHover extends AbstractJavaEditorTextHover implements IInform
 	 * 
 	 * 
 	 */
-	public static final class HoverControlCreator extends AbstractReusableInformationControlCreator {
-		private IInformationControlCreator fInformationPresenterControlCreator;
-
-		public HoverControlCreator(IInformationControlCreator informationPresenterControlCreator) {
-			fInformationPresenterControlCreator= informationPresenterControlCreator;
-		}
+	private static final class HoverControlCreator extends AbstractReusableInformationControlCreator {
 		/*
 		 * @see org.eclipse.wst.jsdt.internal.ui.text.java.hover.AbstractReusableInformationControlCreator#doCreateInformationControl(org.eclipse.swt.widgets.Shell)
 		 */
 		public IInformationControl doCreateInformationControl(Shell parent) {
-			if (BrowserInformationControl.isAvailable(parent)) {
-				BrowserInformationControl iControl = new BrowserInformationControl(parent, PreferenceConstants.APPEARANCE_JAVADOC_FONT, true) {
-					public IInformationControlCreator getInformationPresenterControlCreator() {
-						return fInformationPresenterControlCreator;
-					}
-				};
-				iControl.setStatusText(EditorsUI.getTooltipAffordanceString());
-				return iControl;
-			}
-			else {
+			if (BrowserInformationControl.isAvailable(parent))
+				return new BrowserInformationControl(parent, SWT.TOOL | SWT.NO_TRIM, SWT.NONE, EditorsUI.getTooltipAffordanceString());
+			else
 				return new DefaultInformationControl(parent, SWT.NONE, new HTMLTextPresenter(true), EditorsUI.getTooltipAffordanceString());
-			}
 		}
 
 		/*
@@ -145,7 +131,7 @@ public class JavadocHover extends AbstractJavaEditorTextHover implements IInform
 	 */
 	public IInformationControlCreator getHoverControlCreator() {
 		if (fHoverControlCreator == null)
-			fHoverControlCreator= new HoverControlCreator(new JavadocHover.PresenterControlCreator());
+			fHoverControlCreator= new HoverControlCreator();
 		return fHoverControlCreator;
 	}
 

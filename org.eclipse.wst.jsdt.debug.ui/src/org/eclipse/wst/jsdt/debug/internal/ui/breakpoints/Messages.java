@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2011 IBM Corporation and others.
+ * Copyright (c) 2010 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -30,6 +30,7 @@ public class Messages extends NLS {
 	public static String failed_to_create_function_bp;
 	public static String failed_to_create_line_bp;
 	public static String fuction;
+	public static String function_bp;
 	public static String function_breakpoint;
 	public static String function_breakpoint_settings;
 	public static String hit_count;
@@ -37,14 +38,19 @@ public class Messages extends NLS {
 	public static String line_breakpoint;
 	public static String line_breakpoint_settings;
 	public static String line_number;
+	public static String line_number_bp;
 	public static String member;
 	public static String no_valid_location;
 	public static String script_load_bp;
 	public static String script_load_breakpoint;
 	public static String script_path;
+	public static String suspend_policy;
+	public static String suspend_thread_option;
 	public static String suspend_thread;
 	public static String suspend_target;
 	public static String suspend_when_changed;
+	public static String suspend_when_entering;
+	public static String suspend_when_exiting;
 	public static String suspend_when_true;
 	public static String type_name;
 	static {

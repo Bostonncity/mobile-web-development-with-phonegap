@@ -213,18 +213,20 @@ protected void consumeAssignment() {
 	super.consumeAssignment();
 	this.patternLocator.match(this.expressionStack[this.expressionPtr], this.nodeSet);
 }
-protected void consumeCallExpressionWithSimpleName() {
-	super.consumeCallExpressionWithSimpleName();
+protected void consumeFieldAccess(boolean isSuperAccess) {
+	super.consumeFieldAccess(isSuperAccess);
 
 	// this is always a Reference
 	this.patternLocator.match((Reference) this.expressionStack[this.expressionPtr], this.nodeSet);
 }
-protected void consumeMemberExpressionWithSimpleName() {
-	super.consumeMemberExpressionWithSimpleName();
+
+protected void consumePropertyOperator() {
+	super.consumePropertyOperator();
 
 	// this is always a Reference
 	this.patternLocator.match((Reference) this.expressionStack[this.expressionPtr], this.nodeSet);
 }
+
 protected void consumeFormalParameter(boolean isVarArgs) {
 	super.consumeFormalParameter(isVarArgs);
 
@@ -237,8 +239,8 @@ protected void consumeLocalVariableDeclaration() {
 	// this is always a LocalDeclaration
 	this.patternLocator.match((LocalDeclaration) this.astStack[this.astPtr], this.nodeSet);
 }
-protected void consumeCallExpressionWithArguments() {
-	super.consumeCallExpressionWithArguments();
+protected void consumeMethodInvocationPrimary() {
+	super.consumeMethodInvocationPrimary();
 
 	// this is always a MessageSend
 	this.patternLocator.match((MessageSend) this.expressionStack[this.expressionPtr], this.nodeSet);

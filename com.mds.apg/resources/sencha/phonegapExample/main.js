@@ -1,6 +1,5 @@
 var getLocation = function() {
     var suc = function(p) {
-        
         document.getElementById("loclat").innerHTML = 'Latitude: '
                 + p.coords.latitude;
         document.getElementById("loclong").innerHTML = 'Longitude: '
@@ -14,7 +13,7 @@ var getLocation = function() {
                 + p.coords.latitude
                 + ","
                 + p.coords.longitude
-                + "&zoom=13&size=220x180&markers=color:blue|"
+                + "&zoom=14&size=220x180&markers=color:blue|"
                 + p.coords.latitude + ',' + p.coords.longitude;
 
         mapview.style.display = "";
@@ -107,7 +106,7 @@ var preventBehavior = function(e) {
 
 function dump_pic(data) {
     var viewport = document.getElementById('viewport');
-    //console.log(data);
+    console.log(data);
     viewport.style.display = "";
     viewport.style.position = "relative";
     viewport.style.top = "10px";
@@ -144,8 +143,7 @@ function writeFile() {
 function contacts_success(contacts) {
     alert(contacts.length
             + ' contacts returned.'
-            + (contacts[2] && contacts[2].name &&
-               contacts[2].name.formatted ? (' Third contact is ' + contacts[2].name.formatted)
+            + (contacts[2] ? (' Third contact is ' + contacts[2].displayName)
                     : ''));
 }
 
@@ -155,7 +153,7 @@ function get_contacts() {
     obj.multiple = true;
     obj.limit = 5;
     navigator.service.contacts.find(
-            [ "displayName", "name" ], contacts_success,
+            [ "displayName", "phoneNumbers", "emails" ], contacts_success,
             fail, obj);
 }
 

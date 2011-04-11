@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2011 IBM Corporation and others.
+ * Copyright (c) 2000, 2010 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -17,6 +17,7 @@ import org.eclipse.wst.jsdt.internal.compiler.ASTVisitor;
 import org.eclipse.wst.jsdt.internal.compiler.flow.FlowContext;
 import org.eclipse.wst.jsdt.internal.compiler.flow.FlowInfo;
 import org.eclipse.wst.jsdt.internal.compiler.impl.Constant;
+import org.eclipse.wst.jsdt.internal.compiler.lookup.ArrayBinding;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.BlockScope;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.ClassScope;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.ReferenceBinding;
@@ -130,6 +131,10 @@ public TypeBinding resolveType(BlockScope scope, boolean checkBounds) {
 		reportInvalidType(scope);
 		return null;
 	}
+	if (type.isArrayType() && ((ArrayBinding) type).leafComponentType == TypeBinding.VOID) {
+		scope.problemReporter().cannotAllocateVoidArray(this);
+		return null;
+	}
 
 	if (isTypeUseDeprecated(type, scope))
 		reportDeprecatedType(type, scope);
@@ -147,6 +152,10 @@ public TypeBinding resolveType(ClassScope scope) {
 		return null; // detected cycle while resolving hierarchy
 	if (!type.isValidBinding()) {
 		reportInvalidType(scope);
+		return null;
+	}
+	if (type.isArrayType() && ((ArrayBinding) type).leafComponentType == TypeBinding.VOID) {
+		scope.problemReporter().cannotAllocateVoidArray(this);
 		return null;
 	}
 	if (isTypeUseDeprecated(type, scope))

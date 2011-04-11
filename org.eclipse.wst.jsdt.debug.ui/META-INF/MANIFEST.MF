@@ -7,7 +7,7 @@ Bundle-Name: %bundleName.name
 Bundle-SymbolicName: org.eclipse.wst.jsdt.debug.ui;singleton:=true
 Eclipse-SourceReferences: scm:cvs:pserver:dev.eclipse.org:/cvsroot/web
  tools:org.eclipse.jsdt/plugins/org.eclipse.wst.jsdt.debug.ui;tag=v201
- 103310001
+ 011040143
 Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.de
  bug.ui,org.eclipse.wst.jsdt.debug.core,org.eclipse.wst.jsdt.core,org.
  eclipse.ui.ide,org.eclipse.core.filesystem,org.eclipse.jface.text,org
@@ -27,7 +27,7 @@ Export-Package: org.eclipse.wst.jsdt.debug.internal.ui;x-internal:=tru
  se.wst.jsdt.debug.internal.ui.launching;x-internal:=true,org.eclipse.
  wst.jsdt.debug.internal.ui.source;x-internal:=true,org.eclipse.wst.js
  dt.debug.internal.ui.source.contentassist;x-internal:=true
-Bundle-Version: 1.0.4.v201103310001
+Bundle-Version: 1.0.3.v201011040143
 Bundle-ManifestVersion: 2
 
 Name: org/eclipse/wst/jsdt/debug/internal/ui/ImageDescriptorRegistry.c
@@ -57,7 +57,7 @@ SHA1-Digest: v/Sd2ytOA+vrJ8NS2SbW9Vm56dM=
 
 Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/Messages.clas
  s
-SHA1-Digest: IVl1asD+xlei8YzeHCdN/GkbadU=
+SHA1-Digest: 0eKyBhFAZEoV50kpmqteUufll2U=
 
 Name: org/eclipse/wst/jsdt/debug/internal/ui/JavaScriptImageDescriptor
  .class
@@ -103,7 +103,7 @@ SHA1-Digest: IYeEcZJPstBD2IQo9ynJNnAUYCc=
 
 Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/messages.prop
  erties
-SHA1-Digest: T5cvEEH3QWwcwUsHzrGRmwjfwQg=
+SHA1-Digest: nyMa8jqVaKf2ToVZ1gx620zoFtg=
 
 Name: org/eclipse/wst/jsdt/debug/internal/ui/actions/SuspendOnAllScrip
  tLoadsAction.class
@@ -383,7 +383,7 @@ Name: icons/ovr16/entry_ovr_disabled.gif
 SHA1-Digest: Y3U+IWvsYQhrmLLwuP4ntHeMXA0=
 
 Name: OSGI-INF/l10n/bundle.properties
-SHA1-Digest: IMKsmZU1nQwn15O43ZkdMyLWegU=
+SHA1-Digest: TIk0WMvrOJQrNMikiBtBzyDSMdc=
 
 Name: org/eclipse/wst/jsdt/debug/internal/ui/breakpoints/JavaScriptBre
  akpointPropertyPage.class
@@ -414,7 +414,7 @@ Name: icons/ovr16/uncaught_ovr_disabled.gif
 SHA1-Digest: xnj4UJaoh8EBWyeHpnww9UEMYsg=
 
 Name: plugin.xml
-SHA1-Digest: w2ztcZgnhX4GwJNCuiuP+mAaUsw=
+SHA1-Digest: v979D5DYSdDMBUp/SJWd+shyNq4=
 
 Name: org/eclipse/wst/jsdt/debug/internal/ui/actions/SuspendOnExceptio
  nsAction.class

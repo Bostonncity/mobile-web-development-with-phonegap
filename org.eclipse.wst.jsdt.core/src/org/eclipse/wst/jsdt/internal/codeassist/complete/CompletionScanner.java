@@ -211,6 +211,8 @@ public int getNextToken() throws InvalidInputException {
 			// ---------Identify the next token-------------
 
 			switch (this.currentCharacter) {
+				case '@' :
+					return (currentToken=TokenNameAT);
 				case '(' :
 					return (currentToken=TokenNameLPAREN);
 				case ')' :

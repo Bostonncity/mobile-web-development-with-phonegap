@@ -25,7 +25,7 @@ var cfg = {
         layout : {
             type : 'hbox'
         },
-        padding : 16,
+        padding : 18,
         flex : 1,
         defaults : {
             xtype : 'button',

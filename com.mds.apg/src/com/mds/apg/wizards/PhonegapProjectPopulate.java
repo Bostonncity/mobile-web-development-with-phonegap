@@ -235,7 +235,7 @@ class PhonegapProjectPopulate {
 
         boolean doCopy = true;
         if (pageInfo.mUseJqmDemo) {
-            bundleCopy("/resources/jqm/demo2", wwwDir);
+            bundleCopy("/resources/jqm/demo", wwwDir);
             doCopy = false;
         } else if (pageInfo.mJqmChecked) {
             if (pageInfo.mUseExample) {
@@ -301,27 +301,10 @@ class PhonegapProjectPopulate {
         indexHtmlContents = indexHtmlContents.replaceFirst("src=\"phonegap[a-zA-Z-.0-9]*js\"",
                 "src=\"" + phonegapJsFileName + "\"");  
         if (indexHtmlContents.indexOf("src=\"phonegap") < 0) {   // no phonegap*.js in file
-            int index = indexHtmlContents.lastIndexOf("</head>");
-            if (index > 0) {
-                index = indexHtmlContents.lastIndexOf("</script>", index);
-                if (index > 0) {
-                    index += 9; 
-                    indexHtmlContents = indexHtmlContents.substring(0,index) + 
-                            "\n\t<!-- Uncomment following line to access PhoneGap APIs (not necessary to use PhoneGap to package web app) -->\n" + 
-                            "\t<!-- <script type=\"text/javascript\" charset=\"utf-8\" src=\"" + phonegapJsFileName + "\"></script>-->\n" +
-                            indexHtmlContents.substring(index) ;
-                }
-            }
+            indexHtmlContents = indexHtmlContents.replaceFirst("<script ", 
+                    "<!-- Uncomment following line to access PhoneGap APIs (not necessary to use PhoneGap to package web app) -->\n" + 
+                    "\t<!-- <script type=\"text/javascript\" charset=\"utf-8\" src=\"" + phonegapJsFileName + "\"></script>-->\n\t<script ");
         }
-        
-        // Add CDN comments for jQuery Mobile
-        if (pageInfo.mJqmChecked) {
-            indexHtmlContents = indexHtmlContents.replace("</head>",  "\n\t<!-- CDN Respositories: For production, replace lines above with these uncommented minified versions -->\n" +
-                        "\t<!-- <link rel=\"stylesheet\" href=\"http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css\" />-->\n" +
-                        "\t<!-- <script src=\"http://code.jquery.com/jquery-1.5.2.min.js\"></script>-->\n" +
-                        "\t<!-- <script src=\"http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js\"></script>-->\n\t</head>");
-        }
-        
         StringIO.write(wwwDir + "index.html", indexHtmlContents);
 
         if (pageInfo.mSenchaKitchenSink) { // delete the confusing index_android.html
@@ -348,7 +331,7 @@ class PhonegapProjectPopulate {
         String fromJqmDir = pageInfo.mJqmDirectory;
         String version;
         if (fromJqmDir == null) {  // get from plugin installation
-            version = "-1.0a4.1";  // TODO - do this programmatically
+            version = "-1.0a2";  // TODO - do this programmatically
             bundleCopy("/resources/jqm/jquery.mobile", jqmDir);
         } else {
             version = pageInfo.mJqmVersion;
@@ -368,7 +351,7 @@ class PhonegapProjectPopulate {
                 ".js\"", "\"jquery.mobile/", pageInfo.mSourceDirectory);
         
         // and jquery file
-        fileContents = updatePathInHtml(fileContents, "jquery-1.5.2", 
+        fileContents = updatePathInHtml(fileContents, "jquery-1.4.4", 
                 ".js\"", "\"jquery.mobile/", pageInfo.mSourceDirectory);
         
         // Write out the file
@@ -594,7 +577,7 @@ class PhonegapProjectPopulate {
             int startIncludeIndex = fileContents.lastIndexOf("\"", fileNameIndex);
             fileContents = fileContents.substring(0, startIncludeIndex) + prepend
                     + fileContents.substring(fileNameIndex);
-        } else { // must add a new line.  Bug if indexOf finds stuff inside comments
+        } else { // must add a new line
             int firstJsIndex = fileContents.indexOf(suffix);
             int insertSpot;
             if (firstJsIndex > 0) {

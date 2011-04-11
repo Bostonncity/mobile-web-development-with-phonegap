@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2011 IBM Corporation and others.
+ * Copyright (c) 2000, 2007 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,7 +11,8 @@
 package org.eclipse.wst.jsdt.internal.ui.text.java.hover;
 
 
-import org.eclipse.jface.internal.text.html.BrowserInformationControl;
+import org.eclipse.wst.jsdt.internal.ui.text.html.BrowserInformationControl;
+import org.eclipse.wst.jsdt.internal.ui.text.html.HTMLTextPresenter;
 import org.eclipse.jface.text.AbstractReusableInformationControlCreator;
 import org.eclipse.jface.text.DefaultInformationControl;
 import org.eclipse.jface.text.IInformationControl;
@@ -28,10 +29,7 @@ import org.eclipse.ui.IPerspectiveDescriptor;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.wst.jsdt.internal.ui.text.JavaWordFinder;
-import org.eclipse.wst.jsdt.internal.ui.text.html.HTMLTextPresenter;
-import org.eclipse.wst.jsdt.ui.PreferenceConstants;
 import org.eclipse.wst.jsdt.ui.text.java.hover.IJavaEditorTextHover;
 
 
@@ -50,11 +48,8 @@ public class JavaInformationProvider implements IInformationProvider, IInformati
 		public IInformationControl doCreateInformationControl(Shell parent) {
 			int shellStyle= SWT.RESIZE | SWT.TOOL;
 			int style= SWT.V_SCROLL | SWT.H_SCROLL;
-			if (BrowserInformationControl.isAvailable(parent)) {
-				BrowserInformationControl browserInformationControl = new BrowserInformationControl(parent, PreferenceConstants.APPEARANCE_JAVADOC_FONT, true);
-				browserInformationControl.setStatusText(EditorsUI.getTooltipAffordanceString());
-				return browserInformationControl;
-			}
+			if (BrowserInformationControl.isAvailable(parent))
+				return new BrowserInformationControl(parent, shellStyle, style);
 			else
 				return new DefaultInformationControl(parent, shellStyle, style, new HTMLTextPresenter(false));
 		}
