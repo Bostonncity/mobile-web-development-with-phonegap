@@ -235,7 +235,7 @@ class PhonegapProjectPopulate {
 
         boolean doCopy = true;
         if (pageInfo.mUseJqmDemo) {
-            bundleCopy("/resources/jqm/demo", wwwDir);
+            bundleCopy("/resources/jqm/demo2", wwwDir);
             doCopy = false;
         } else if (pageInfo.mJqmChecked) {
             if (pageInfo.mUseExample) {
