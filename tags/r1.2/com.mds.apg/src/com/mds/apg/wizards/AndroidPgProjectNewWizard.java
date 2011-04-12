@@ -66,7 +66,7 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
         setHelpAvailable(false); // TODO have help
         mPhonegapPage = createPhonegapPage();
         super.init(workbench, selection);
-        setWindowTitle("Add Phonegap to Android project "); 
+        setWindowTitle("MDS AppLaud - PhoneGap for Android"); 
     }
 
     @Override

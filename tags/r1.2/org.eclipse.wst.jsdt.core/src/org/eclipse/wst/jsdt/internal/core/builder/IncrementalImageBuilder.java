@@ -609,43 +609,6 @@ protected boolean findSourceFiles(IResourceDelta sourceDelta, ClasspathMultiDire
 				}
 				return true;
 			} else if (md.hasIndependentOutputFolder) {
-				if (javaBuilder.filterExtraResource(resource)) return true;
-
-				// copy all other resource deltas to the output folder
-				IPath resourcePath = resource.getFullPath().removeFirstSegments(segmentCount);
-				IResource outputFile = md.binaryFolder.getFile(resourcePath);
-				switch (sourceDelta.getKind()) {
-					case IResourceDelta.ADDED :
-						if (outputFile.exists()) {
-							if (JavaBuilder.DEBUG)
-								System.out.println("Deleting existing file " + resourcePath); //$NON-NLS-1$
-							outputFile.delete(IResource.FORCE, null);
-						}
-						if (JavaBuilder.DEBUG)
-							System.out.println("Copying added file " + resourcePath); //$NON-NLS-1$
-						return true;
-					case IResourceDelta.REMOVED :
-						if (outputFile.exists()) {
-							if (JavaBuilder.DEBUG)
-								System.out.println("Deleting removed file " + resourcePath); //$NON-NLS-1$
-							outputFile.delete(IResource.FORCE, null);
-						}
-						return true;
-					case IResourceDelta.CHANGED :
-						if ((sourceDelta.getFlags() & IResourceDelta.CONTENT) == 0
-								&& (sourceDelta.getFlags() & IResourceDelta.ENCODING) == 0)
-							return true; // skip it since it really isn't changed
-						if (outputFile.exists()) {
-							if (JavaBuilder.DEBUG)
-								System.out.println("Deleting existing file " + resourcePath); //$NON-NLS-1$
-							outputFile.delete(IResource.FORCE, null);
-						}
-						if (JavaBuilder.DEBUG)
-							System.out.println("Copying changed file " + resourcePath); //$NON-NLS-1$
-						//createFolder(resourcePath.removeLastSegments(1), md.binaryFolder); // ensure package exists in the output folder
-						//resource.copy(outputFile.getFullPath(), IResource.FORCE | IResource.DERIVED, null);
-					//	Util.setReadOnly(outputFile, false); // just in case the original was read only
-				}
 				return true;
 			}
 	}

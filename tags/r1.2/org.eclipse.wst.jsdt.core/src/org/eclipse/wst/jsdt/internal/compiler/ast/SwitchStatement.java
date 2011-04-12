@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2009 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -20,7 +20,6 @@ import org.eclipse.wst.jsdt.internal.compiler.flow.SwitchFlowContext;
 import org.eclipse.wst.jsdt.internal.compiler.impl.Constant;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.BlockScope;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.TypeBinding;
-import org.eclipse.wst.jsdt.internal.compiler.lookup.TypeIds;
 
 public class SwitchStatement extends Statement implements ISwitchStatement{
 
@@ -142,22 +141,6 @@ public class SwitchStatement extends Statement implements ISwitchStatement{
 	    try {
 //			boolean isEnumSwitch = false;
 			TypeBinding expressionType = expression.resolveType(upperScope);
-			if (expressionType != null) {
-
-				switch (expressionType.id)
-				{
-					case TypeIds.T_any:
-					case TypeIds.T_undefined:
-					case TypeIds.T_char:
-					case TypeIds.T_JavaLangString:
-					case TypeIds.T_int:
-									break;
-					default:
-						upperScope.problemReporter().incorrectSwitchType(expression, expressionType);
-					expressionType = null; // fault-tolerance: ignore type mismatch from constants from hereon
-				}
-
-			}
 			if (statements != null) {
 				scope = !JavaScriptCore.IS_ECMASCRIPT4 ? upperScope :  new BlockScope(upperScope);
 				int length;

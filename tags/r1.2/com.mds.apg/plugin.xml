@@ -12,7 +12,7 @@
             class="com.mds.apg.wizards.AndroidPgProjectNewWizard"
             finalPerspective="org.eclipse.wst.jsdt.ui.JavaPerspective"
             hasPages="true"
-            icon="icons/phonegapphonelogo3.png"
+            icon="icons/mdspgicon26x26.png"
             id="com.mds.apg.wizard.new.custom"
             name="Phonegap for Android Project"
             project="true">
@@ -39,7 +39,7 @@
             id="com.example.helloworld.actionSet">
          <action
                class="com.mds.apg.actions.PhonegapBarAction"
-               icon="icons/phonegapphonelogo3.png"
+               icon="icons/mdspgicon26x26.png"
                id="com.mds.apg.actions.PhonegapBarAction"
                label="New PhoneGap Project ..."
                style="push"

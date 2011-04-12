@@ -393,29 +393,22 @@ protected void consumeExitVariableWithoutInitialization() {
 		rememberCategories();
 	}
 }
-/*
- *
- * INTERNAL USE-ONLY
- */
-protected void consumeFieldAccess(boolean isSuperAccess) {
-	// FieldAccess ::= Primary '.' 'Identifier'
-	// FieldAccess ::= 'super' '.' 'Identifier'
-	super.consumeFieldAccess(isSuperAccess);
-	FieldReference fr = (FieldReference) expressionStack[expressionPtr];
-	if (reportReferenceInfo) {
-		requestor.acceptFieldReference(fr.token, fr.sourceStart);
-	}
-}
-protected void consumePropertyOperator()
-{
-	super.consumePropertyOperator();
+protected void consumeCallExpressionWithSimpleName() {
+	super.consumeCallExpressionWithSimpleName();
 	FieldReference fr = (FieldReference) expressionStack[expressionPtr];
 	if (reportReferenceInfo) {
 		requestor.acceptFieldReference(fr.token, fr.sourceStart);
 	}
 
 }
+protected void consumeMemberExpressionWithSimpleName() {
+	super.consumeMemberExpressionWithSimpleName();
+	FieldReference fr = (FieldReference) expressionStack[expressionPtr];
+	if (reportReferenceInfo) {
+		requestor.acceptFieldReference(fr.token, fr.sourceStart);
+	}
 
+}
 protected void consumeFormalParameter(boolean isVarArgs) {
 	super.consumeFormalParameter(isVarArgs);
 
@@ -436,12 +429,8 @@ protected void consumeMethodHeaderName(boolean isAnonymousMethod) {
 		rememberCategories();
 	}
 }
-/*
- *
- * INTERNAL USE-ONLY
- */
-protected void consumeMethodInvocationPrimary() {
-	super.consumeMethodInvocationPrimary();
+protected void consumeCallExpressionWithArguments() {
+	super.consumeCallExpressionWithArguments();
 	MessageSend messageSend = (MessageSend) expressionStack[expressionPtr];
 	Expression[] args = messageSend.arguments;
 	if (reportReferenceInfo) {

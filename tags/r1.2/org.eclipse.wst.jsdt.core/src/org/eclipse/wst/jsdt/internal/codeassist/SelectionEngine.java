@@ -504,10 +504,6 @@ public final class SelectionEngine extends Engine implements ISearchRequestor {
 							if(!checkTypeArgument(scanner))
 								return false;
 							break;
-						case TerminalTokens.TokenNameAT:
-							if(scanner.startPosition != scanner.initialPosition)
-								return false;
-							break;
 						default :
 							return false;
 					}

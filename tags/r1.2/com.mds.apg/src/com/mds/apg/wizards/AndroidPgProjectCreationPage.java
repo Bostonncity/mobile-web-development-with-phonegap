@@ -70,9 +70,9 @@ public class AndroidPgProjectCreationPage extends WizardPage {
     public AndroidPgProjectCreationPage() {
         super(MAIN_PAGE_NAME);
         setPageComplete(false);
-        setTitle("Create a Phonegap for Android Project");
+        setTitle("Create a PhoneGap for Android Project");
         setDescription("Set location of phonegap directory, specify UI frameworks, and populating sources");
-        ImageDescriptor desc = AbstractUIPlugin.imageDescriptorFromPlugin("com.mds.apg", "icons/phonegapphonelogo.png");
+        ImageDescriptor desc = AbstractUIPlugin.imageDescriptorFromPlugin("com.mds.apg", "icons/mds.png");
         setImageDescriptor(desc);
     }
 

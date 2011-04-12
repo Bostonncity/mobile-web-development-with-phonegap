@@ -509,7 +509,6 @@ class DocCommentParser extends AbstractCommentParser {
 			case TerminalTokens.TokenNamepublic:
 			case TerminalTokens.TokenNameshort:
 			case TerminalTokens.TokenNamestatic:
-			case TerminalTokens.TokenNamestrictfp:
 			case TerminalTokens.TokenNamesuper:
 			case TerminalTokens.TokenNameswitch:
 			case TerminalTokens.TokenNamesynchronized:

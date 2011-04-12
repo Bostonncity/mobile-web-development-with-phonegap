@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -545,20 +545,6 @@ public class Javadoc extends ASTNode implements IJsDoc {
 					typeReferences[maxRef++] = typeRef;
 				}
 			}
-
-			// Verify additional @throws tags
-			for (int i = 0; i < maxRef; i++) {
-				TypeReference typeRef = typeReferences[i];
-				if (typeRef != null) {
-					boolean compatible = false;
-					// thrown exceptions subclasses are accepted
-
-					//  If not compatible only complain on unchecked exception
-					if (!compatible && !typeRef.resolvedType.isUncheckedException(false)) {
-						methScope.problemReporter().javadocInvalidThrowsClassName(typeRef, md.binding.modifiers);
-					}
-				}
-			}
 		}
 	}
 
@@ -631,14 +617,6 @@ public class Javadoc extends ASTNode implements IJsDoc {
 										}
 									}
 								}
-								if (!hasValidImport) {
-									if (scopeModifiers == -1) scopeModifiers = scope.getDeclarationModifiers();
-									scope.problemReporter().javadocInvalidMemberTypeQualification(typeReference.sourceStart, typeReference.sourceEnd, scopeModifiers);
-								}
-							} else {
-								if (scopeModifiers == -1) scopeModifiers = scope.getDeclarationModifiers();
-								scope.problemReporter().javadocInvalidMemberTypeQualification(typeReference.sourceStart, typeReference.sourceEnd, scopeModifiers);
-								return;
 							}
 						}
 					}

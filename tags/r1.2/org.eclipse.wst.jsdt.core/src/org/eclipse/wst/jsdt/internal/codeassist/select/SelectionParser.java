@@ -37,7 +37,6 @@ import org.eclipse.wst.jsdt.internal.compiler.ast.MessageSend;
 import org.eclipse.wst.jsdt.internal.compiler.ast.NameReference;
 import org.eclipse.wst.jsdt.internal.compiler.ast.QualifiedAllocationExpression;
 import org.eclipse.wst.jsdt.internal.compiler.ast.Statement;
-import org.eclipse.wst.jsdt.internal.compiler.ast.SuperReference;
 import org.eclipse.wst.jsdt.internal.compiler.ast.SwitchStatement;
 import org.eclipse.wst.jsdt.internal.compiler.ast.TypeReference;
 import org.eclipse.wst.jsdt.internal.compiler.classfmt.ClassFileConstants;
@@ -266,9 +265,9 @@ protected void consumeExitVariableWithInitialization() {
 	}
 
 }
-protected void consumePropertyOperator() {
+protected void consumeCallExpressionWithSimpleName() {
 	if (this.indexOfAssistIdentifier() < 0) {
-		super.consumePropertyOperator();
+		super.consumeCallExpressionWithSimpleName();
 		return;
 	}
 	FieldReference fieldReference =
@@ -289,12 +288,9 @@ protected void consumePropertyOperator() {
 	this.isOrphanCompletionNode = true;
 
 }
-protected void consumeFieldAccess(boolean isSuperAccess) {
-	// FieldAccess ::= Primary '.' 'Identifier'
-	// FieldAccess ::= 'super' '.' 'Identifier'
-
+protected void consumeMemberExpressionWithSimpleName() {
 	if (this.indexOfAssistIdentifier() < 0) {
-		super.consumeFieldAccess(isSuperAccess);
+		super.consumeMemberExpressionWithSimpleName();
 		return;
 	}
 	FieldReference fieldReference =
@@ -302,16 +298,10 @@ protected void consumeFieldAccess(boolean isSuperAccess) {
 			identifierStack[identifierPtr],
 			identifierPositionStack[identifierPtr--]);
 	identifierLengthPtr--;
-	if (isSuperAccess) { //considerates the fieldReferenceerence beginning at the 'super' ....
-		fieldReference.sourceStart = intStack[intPtr--];
-		fieldReference.receiver = new SuperReference(fieldReference.sourceStart, endPosition);
-		pushOnExpressionStack(fieldReference);
-	} else { //optimize push/pop
 		if ((fieldReference.receiver = expressionStack[expressionPtr]).isThis()) { //fieldReferenceerence begins at the this
 			fieldReference.sourceStart = fieldReference.receiver.sourceStart;
 		}
 		expressionStack[expressionPtr] = fieldReference;
-	}
 	assistNode = fieldReference;
 	this.lastCheckPoint = fieldReference.sourceEnd + 1;
 	if (!diet){
@@ -319,6 +309,7 @@ protected void consumeFieldAccess(boolean isSuperAccess) {
 		this.lastIgnoredToken = -1;
 	}
 	this.isOrphanCompletionNode = true;
+
 }
 protected void consumeFormalParameter(boolean isVarArgs) {
 	if (this.indexOfAssistIdentifier() < 0) {
@@ -377,14 +368,6 @@ protected void consumeFormalParameter(boolean isVarArgs) {
 		listLength++;
 	}
 }
-
-
-protected void consumeFullNewSubexpressionSimpleName () {
-//	FullNewSubexpression ::=	SimpleName
-	// call super.getUnspecifiedReferenceOptimized so state isnt reset by our getUnspecifiedReferenceOptimized
-	pushOnExpressionStack(super.getUnspecifiedReferenceOptimized());
-}
-
 protected void consumeLocalVariableDeclarationStatement() {
 	super.consumeLocalVariableDeclarationStatement();
 

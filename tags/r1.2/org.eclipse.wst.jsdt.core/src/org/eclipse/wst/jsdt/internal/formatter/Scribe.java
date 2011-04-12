@@ -1286,20 +1286,12 @@ public class Scribe {
 					case TerminalTokens.TokenNamesynchronized :
 					case TerminalTokens.TokenNametransient :
 					case TerminalTokens.TokenNamevolatile :
-					case TerminalTokens.TokenNamestrictfp :
 						hasModifiers = true;
 						this.print(this.scanner.getRawTokenSource(), !isFirstModifier);
 						isFirstModifier = false;
 						currentTokenStartPosition = this.scanner.currentPosition;
 						previousToken=previousNonWSToken=this.scanner.currentToken;
 						break;
-					case TerminalTokens.TokenNameAT :
-						hasModifiers = true;
-						if (!isFirstModifier) {
-							this.space();
-						}
-						this.scanner.resetTo(this.scanner.getCurrentTokenStartPosition(), this.scannerEndPosition - 1);
-						return;
 					case TerminalTokens.TokenNameCOMMENT_BLOCK :
 						this.printBlockComment(this.scanner.getRawTokenSource(), false);
 						currentTokenStartPosition = this.scanner.currentPosition;

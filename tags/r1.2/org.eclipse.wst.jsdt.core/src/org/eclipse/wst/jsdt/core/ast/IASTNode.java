@@ -135,6 +135,7 @@ public interface IASTNode {
 	public static final int WITH_STATEMENT=114;
 	public static final int CLASS_LITERAL_ACCESS=115;
 	public static final int CL_INIT=116;
+	public static final int OBJECT_GETTER_SETTER_FIELD=117;
 	public int sourceStart() ;
 	public int sourceEnd();
 	public int getASTType();

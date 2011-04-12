@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2009 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -22,7 +22,6 @@ import org.eclipse.wst.jsdt.internal.compiler.flow.FlowContext;
 import org.eclipse.wst.jsdt.internal.compiler.flow.FlowInfo;
 import org.eclipse.wst.jsdt.internal.compiler.flow.InitializationFlowContext;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.ClassScope;
-import org.eclipse.wst.jsdt.internal.compiler.lookup.ExtraCompilerModifiers;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.FieldBinding;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.MethodBinding;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.ReferenceBinding;
@@ -69,13 +68,6 @@ public void analyseCode(ClassScope classScope, InitializationFlowContext initial
 		} else if ((this.binding.declaringClass.tagBits & (TagBits.IsAnonymousType|TagBits.IsLocalType)) != TagBits.IsLocalType) {
 			break checkUnused;
 		}
-		// complain unused
-		this.scope.problemReporter().unusedPrivateConstructor(this);
-	}
-
-	// check constructor recursion, once all constructor got resolved
-	if (isRecursive(null /*lazy initialized visited list*/)) {
-		this.scope.problemReporter().recursiveConstructorInvocation(this.constructorCall);
 	}
 
 	try {
@@ -259,9 +251,6 @@ public void resolveStatements() {
 		} else {
 			this.constructorCall.resolve(this.scope);
 		}
-	}
-	if ((this.modifiers & ExtraCompilerModifiers.AccSemicolonBody) != 0) {
-		this.scope.problemReporter().methodNeedBody(this);
 	}
 	super.resolveStatements();
 }
