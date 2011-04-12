@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2008 IBM Corporation and others.
+ * Copyright (c) 2005, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -20,19 +20,16 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.wst.jsdt.internal.ui.text.html.BrowserInformationControl;
-import org.eclipse.wst.jsdt.internal.ui.text.html.HTMLPrinter;
+import org.eclipse.jface.internal.text.html.BrowserInformationControl;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.jface.resource.JFaceResources;
-import org.eclipse.jface.text.AbstractReusableInformationControlCreator;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.BadPositionCategoryException;
 import org.eclipse.jface.text.DefaultPositionUpdater;
 import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.IInformationControl;
 import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.jface.text.IPositionUpdater;
 import org.eclipse.jface.text.IRegion;
@@ -49,10 +46,10 @@ import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.link.ILinkedModeListener;
 import org.eclipse.jface.text.link.LinkedModeModel;
 import org.eclipse.jface.text.link.LinkedModeUI;
-import org.eclipse.jface.text.link.LinkedPosition;
-import org.eclipse.jface.text.link.LinkedPositionGroup;
 import org.eclipse.jface.text.link.LinkedModeUI.ExitFlags;
 import org.eclipse.jface.text.link.LinkedModeUI.IExitPolicy;
+import org.eclipse.jface.text.link.LinkedPosition;
+import org.eclipse.jface.text.link.LinkedPositionGroup;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
@@ -71,6 +68,8 @@ import org.eclipse.wst.jsdt.core.JavaScriptCore;
 import org.eclipse.wst.jsdt.core.JavaScriptModelException;
 import org.eclipse.wst.jsdt.core.compiler.CharOperation;
 import org.eclipse.wst.jsdt.internal.ui.JavaScriptPlugin;
+import org.eclipse.wst.jsdt.internal.ui.text.html.HTMLPrinter;
+import org.eclipse.wst.jsdt.internal.ui.text.java.hover.JavadocHover;
 import org.eclipse.wst.jsdt.ui.PreferenceConstants;
 import org.eclipse.wst.jsdt.ui.text.IJavaScriptPartitions;
 import org.eclipse.wst.jsdt.ui.text.JavaScriptTextTools;
@@ -78,27 +77,7 @@ import org.eclipse.wst.jsdt.ui.text.java.IJavaCompletionProposal;
 import org.eclipse.wst.jsdt.ui.text.java.JavaContentAssistInvocationContext;
 import org.osgi.framework.Bundle;
 
-/**
- * 
- * 
- */
 public abstract class AbstractJavaCompletionProposal implements IJavaCompletionProposal, ICompletionProposalExtension, ICompletionProposalExtension2, ICompletionProposalExtension3, ICompletionProposalExtension5 {
-	
-	
-	/**
-	 * The control creator.
-	 * 
-	 * 
-	 */
-	private static final class ControlCreator extends AbstractReusableInformationControlCreator {
-		/*
-		 * @see org.eclipse.wst.jsdt.internal.ui.text.java.hover.AbstractReusableInformationControlCreator#doCreateInformationControl(org.eclipse.swt.widgets.Shell)
-		 */
-		public IInformationControl doCreateInformationControl(Shell parent) {
-			return new BrowserInformationControl(parent, SWT.NO_TRIM | SWT.TOOL, SWT.NONE, null);
-		}
-	}
-
 	
 	/**
 	 * A class to simplify tracking a reference position in a document.
@@ -933,7 +912,12 @@ public abstract class AbstractJavaCompletionProposal implements IJavaCompletionP
 			return null;
 		
 		if (fCreator == null) {
-			fCreator= new ControlCreator();
+			/*
+			 * FIXME: Take control creators (and link handling) out of JavadocHover,
+			 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=232024
+			 */
+			JavadocHover.PresenterControlCreator presenterControlCreator= new JavadocHover.PresenterControlCreator();
+			fCreator= new JavadocHover.HoverControlCreator(presenterControlCreator);
 		}
 		return fCreator;
 	}

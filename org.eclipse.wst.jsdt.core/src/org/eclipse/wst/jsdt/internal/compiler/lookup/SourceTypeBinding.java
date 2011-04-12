@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -1149,17 +1149,11 @@ public class SourceTypeBinding extends ReferenceBinding {
 					// foundArgProblem = true;
 					parameterType = TypeBinding.ANY;
 				}
-				// else
-				if (parameterType == TypeBinding.VOID) {
-					methodDecl.scope.problemReporter()
-							.argumentTypeCannotBeVoid(this, methodDecl, arg);
-					foundArgProblem = true;
-				} else {
-					TypeBinding leafType = parameterType.leafComponentType();
-					newParameters[i] = parameterType;
-					arg.binding = new LocalVariableBinding(arg, parameterType,
-							arg.modifiers, true);
-				}
+				
+				newParameters[i] = parameterType;
+				arg.binding = new LocalVariableBinding(arg, parameterType,
+						arg.modifiers, true);
+				
 			}
 			// only assign parameters if no problems are found
 			if (!foundArgProblem)
@@ -1185,12 +1179,6 @@ public class SourceTypeBinding extends ReferenceBinding {
 							.resolveType(methodDecl.scope, methodDecl)
 							: TypeBinding.UNKNOWN;
 				if (methodType == null) {
-					foundReturnTypeProblem = true;
-				} else if (methodType.isArrayType()
-						&& ((ArrayBinding) methodType).leafComponentType == TypeBinding.VOID) {
-					methodDecl.scope.problemReporter()
-							.returnTypeCannotBeVoidArray(
-									(MethodDeclaration) methodDecl);
 					foundReturnTypeProblem = true;
 				} else {
 					method.returnType = methodType;

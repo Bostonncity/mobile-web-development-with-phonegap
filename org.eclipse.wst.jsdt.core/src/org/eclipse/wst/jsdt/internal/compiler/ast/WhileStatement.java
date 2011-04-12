@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -62,8 +62,6 @@ public class WhileStatement extends Statement implements IWhileStatement {
 		FlowInfo exitBranch;
 		if (action == null
 			|| (action.isEmptyBlock() && currentScope.compilerOptions().complianceLevel <= ClassFileConstants.JDK1_3)) {
-			condLoopContext.complainOnDeferredFinalChecks(currentScope,
-					condInfo);
 			condLoopContext.complainOnDeferredNullChecks(currentScope,
 				condInfo.unconditionalInits());
 			if (isConditionTrue) {
@@ -106,12 +104,8 @@ public class WhileStatement extends Statement implements IWhileStatement {
 					FlowInfo.UNREACHABLE) != 0) {
 				exitBranch.addInitializationsFrom(condInfo.initsWhenFalse());
 			} else {
-				condLoopContext.complainOnDeferredFinalChecks(currentScope,
-						condInfo);
 				actionInfo = actionInfo.mergedWith(loopingContext.initsOnContinue.unconditionalInits());
 				condLoopContext.complainOnDeferredNullChecks(currentScope,
-						actionInfo);
-				loopingContext.complainOnDeferredFinalChecks(currentScope,
 						actionInfo);
 				loopingContext.complainOnDeferredNullChecks(currentScope,
 						actionInfo);

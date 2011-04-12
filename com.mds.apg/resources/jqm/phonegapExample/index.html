@@ -4,22 +4,20 @@
     <meta name="viewport" content="width=320; user-scalable=no" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>PhoneGap Demo With JQuery Mobile</title>
-      <link rel="stylesheet" href="jquery.mobile/jquery.mobile{$jqmversion}.min.css" type="text/css" charset="utf-8" />
-      <!-- Override default css file to allow longer header/footer titles -->
+      <link rel="stylesheet" href="jquery.mobile/jquery.mobile{$jqmversion}.css" type="text/css" charset="utf-8" />
 	  <link rel="stylesheet" href="pgandjqm-style-override.css" type="text/css" charset="utf-8" />
-	  <script src="jquery.mobile/jquery-1.4.4.min.js"></script>
-	  <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
-	  <script type="text/javascript" charset="utf-8" src="main.js"></script>  
-	  <script src="jquery.mobile/jquery.mobile{$jqmversion}.min.js"></script>
-
+	  <script type="text/javascript" src="jquery.mobile/jquery-1.5.2.js"></script>
+	  <script type="text/javascript" charset="utf-8" src="phonegap.0.9.4.js"></script>
+	  <script src="jquery.mobile/jquery.mobile{$jqmversion}.js"></script>
+	  <script type="text/javascript" charset="utf-8" src="main.js"></script>
   </head>
   <body onload="init();">
-    <div data-role="page" data-theme="e">
+    <div data-role="page" data-theme="b">
   	<div data-role="header">
     	<h1>PhoneGap with JQuery Mobile</h1> 
 	</div>
     <div data-role="content">
-    <div data-role="collapsible" data-collapsed="true" data-theme="e">
+    <div data-role="collapsible" data-collapsed="true" >
     	<h1>System Info</h1>
         <div>Platform: <b><span id="platform"> &nbsp;</span></b>, Version: <b><span id="version">&nbsp;</span></b><br/>
         UUID: <b><span id="uuid"> &nbsp;</span></b>, Name: <b><span id="name">&nbsp;</span></b><br/>
@@ -27,7 +25,7 @@
         </div>
      </div>
 
-    <div data-role="collapsible" data-collapsed="true" data-theme="e" id="accelmenu">
+    <div data-role="collapsible" data-collapsed="true"  id="accelmenu">
     	<h1><div>Toggle Accelerometer</div></h1>
 		<div class="ui-grid-b">
      	 	<div class="ui-block-a">X: <b id="x">&nbsp;</b></div>
@@ -35,7 +33,7 @@
      	 	<div class="ui-block-c">Z: <b id="z">&nbsp;</b></div>
     	</div>
     </div>   
-    <div data-role="collapsible" data-collapsed="true" data-theme="e" id="locationmenu">   
+    <div data-role="collapsible" data-collapsed="true"  id="locationmenu">   
     	<h1><div>Toggle Location</div></h1>
     	<div id="loccontainer" >
     		<div id="loctext" ></div>

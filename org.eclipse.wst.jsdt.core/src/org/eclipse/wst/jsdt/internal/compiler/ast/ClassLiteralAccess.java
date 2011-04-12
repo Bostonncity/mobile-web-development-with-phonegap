@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2009 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -16,7 +16,6 @@ import org.eclipse.wst.jsdt.internal.compiler.ASTVisitor;
 import org.eclipse.wst.jsdt.internal.compiler.flow.FlowContext;
 import org.eclipse.wst.jsdt.internal.compiler.flow.FlowInfo;
 import org.eclipse.wst.jsdt.internal.compiler.impl.Constant;
-import org.eclipse.wst.jsdt.internal.compiler.lookup.ArrayBinding;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.BlockScope;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.ReferenceBinding;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.TypeBinding;
@@ -52,11 +51,6 @@ public class ClassLiteralAccess extends Expression  {
 		if ((targetType = type.resolveType(scope, true /* check bounds*/)) == null)
 			return null;
 
-		if (targetType.isArrayType()
-			&& ((ArrayBinding) targetType).leafComponentType == TypeBinding.VOID) {
-			scope.problemReporter().cannotAllocateVoidArray(this);
-			return null;
-		}
 		ReferenceBinding classType = scope.getJavaLangClass();
 		this.resolvedType = classType;
 		

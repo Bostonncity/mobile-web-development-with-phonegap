@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2009 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -13,7 +13,6 @@ package org.eclipse.wst.jsdt.internal.compiler.ast;
 import org.eclipse.wst.jsdt.core.ast.IASTNode;
 import org.eclipse.wst.jsdt.core.ast.IArgument;
 import org.eclipse.wst.jsdt.internal.compiler.ASTVisitor;
-import org.eclipse.wst.jsdt.internal.compiler.lookup.ArrayBinding;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.Binding;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.BlockScope;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.ClassScope;
@@ -21,7 +20,6 @@ import org.eclipse.wst.jsdt.internal.compiler.lookup.LocalVariableBinding;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.MethodScope;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.ReferenceBinding;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.TypeBinding;
-import org.eclipse.wst.jsdt.internal.compiler.lookup.TypeIds;
 
 public class Argument extends LocalDeclaration implements IArgument {
 
@@ -118,16 +116,6 @@ public class Argument extends LocalDeclaration implements IArgument {
 			this.type.resolveType(scope, true /* check bounds*/) : javaLangError;
 		if (exceptionType == null) return null;
 		boolean hasError = false;
-		if (exceptionType.isArrayType() && ((ArrayBinding) exceptionType).leafComponentType == TypeBinding.VOID) {
-			scope.problemReporter().variableTypeCannotBeVoidArray(this);
-			hasError = true;
-			// fall thru to create the variable - avoids additional errors because the variable is missing
-		}
-		if ( !(exceptionType==javaLangError) && exceptionType.findSuperTypeErasingTo(TypeIds.T_JavaLangThrowable, true) == null) {
-			scope.problemReporter().cannotThrowType(this.type, exceptionType);
-			hasError = true;
-			// fall thru to create the variable - avoids additional errors because the variable is missing
-		}
 
 		Binding existingVariable = scope.getBinding(name, Binding.VARIABLE, this, false /*do not resolve hidden field*/);
 		if (existingVariable != null && existingVariable.isValidBinding()){

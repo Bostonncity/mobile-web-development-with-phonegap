@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2009 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -110,8 +110,6 @@ public class ForStatement extends Statement implements IForStatement {
 		UnconditionalFlowInfo actionInfo;
 		if (action == null
 			|| (action.isEmptyBlock() && currentScope.compilerOptions().complianceLevel <= ClassFileConstants.JDK1_3)) {
-			if (condLoopContext != null)
-				condLoopContext.complainOnDeferredFinalChecks(scope, condInfo);
 			if (isConditionTrue) {
 				if (condLoopContext != null) {
 					condLoopContext.complainOnDeferredNullChecks(currentScope,
@@ -154,13 +152,7 @@ public class ForStatement extends Statement implements IForStatement {
 				isContinue=false;
 			}
 			else {
-				if (condLoopContext != null) {
-					condLoopContext.complainOnDeferredFinalChecks(scope,
-							condInfo);
-				}
 				actionInfo = actionInfo.mergedWith(loopingContext.initsOnContinue);
-				loopingContext.complainOnDeferredFinalChecks(scope,
-						actionInfo);
 			}
 		}
 		// for increments
@@ -178,8 +170,7 @@ public class ForStatement extends Statement implements IForStatement {
 					incrementInfo = increments[i].
 						analyseCode(scope, incrementContext, incrementInfo);
 				}
-				incrementContext.complainOnDeferredFinalChecks(scope,
-						actionInfo = incrementInfo.unconditionalInits());
+				actionInfo = incrementInfo.unconditionalInits();
 			}
 			exitBranch.addPotentialInitializationsFrom(actionInfo).
 				addInitializationsFrom(condInfo.initsWhenFalse());

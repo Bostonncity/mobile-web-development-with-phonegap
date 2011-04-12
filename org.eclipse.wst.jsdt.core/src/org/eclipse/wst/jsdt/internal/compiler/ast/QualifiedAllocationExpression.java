@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2009 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -139,14 +139,6 @@ public class QualifiedAllocationExpression extends AllocationExpression implemen
 		if (this.enclosingInstance != null) {
 			if ((enclosingInstanceType = this.enclosingInstance.resolveType(scope)) == null){
 				hasError = true;
-			} else if (enclosingInstanceType.isBaseType() || enclosingInstanceType.isArrayType()) {
-				scope.problemReporter().illegalPrimitiveOrArrayTypeForEnclosingInstance(
-					enclosingInstanceType,
-					this.enclosingInstance);
-				hasError = true;
-			} else if (this.type instanceof QualifiedTypeReference) {
-				scope.problemReporter().illegalUsageOfQualifiedTypeReference((QualifiedTypeReference)this.type);
-				hasError = true;
 			} else {
 				receiverType = ((SingleTypeReference) this.type).resolveTypeEnclosing(scope, (ReferenceBinding) enclosingInstanceType);
 			}
@@ -204,11 +196,6 @@ public class QualifiedAllocationExpression extends AllocationExpression implemen
 			return this.resolvedType = receiverType;
 		}
 		if (this.anonymousType == null) {
-			// qualified allocation with no anonymous type
-			if (!receiverType.canBeInstantiated()) {
-				scope.problemReporter().cannotInstantiate(this.type, receiverType);
-				return this.resolvedType = receiverType;
-			}
 			ReferenceBinding allocationType = (ReferenceBinding) receiverType;
 			if ((this.binding = scope.getConstructor(allocationType, argumentTypes, this)).isValidBinding()) {
 				if (isMethodUseDeprecated(this.binding, scope, true)) {
@@ -253,7 +240,6 @@ public class QualifiedAllocationExpression extends AllocationExpression implemen
 		if (this.enclosingInstance != null) {
 			ReferenceBinding targetEnclosing = inheritedBinding.declaringClass.enclosingType();
 			if (targetEnclosing == null) {
-				scope.problemReporter().unnecessaryEnclosingInstanceSpecification(this.enclosingInstance, (ReferenceBinding)receiverType);
 				return this.resolvedType = this.anonymousType.binding;
 			} else if (!enclosingInstanceType.isCompatibleWith(targetEnclosing) && !scope.isBoxingCompatibleWith(enclosingInstanceType, targetEnclosing)) {
 				scope.problemReporter().typeMismatchError(enclosingInstanceType, targetEnclosing, this.enclosingInstance);

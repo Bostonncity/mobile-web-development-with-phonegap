@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -16,7 +16,6 @@ import org.eclipse.wst.jsdt.core.compiler.CharOperation;
 import org.eclipse.wst.jsdt.internal.compiler.ASTVisitor;
 import org.eclipse.wst.jsdt.internal.compiler.flow.FlowContext;
 import org.eclipse.wst.jsdt.internal.compiler.flow.FlowInfo;
-import org.eclipse.wst.jsdt.internal.compiler.impl.CompilerOptions;
 import org.eclipse.wst.jsdt.internal.compiler.impl.Constant;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.Binding;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.BlockScope;
@@ -33,7 +32,6 @@ import org.eclipse.wst.jsdt.internal.compiler.lookup.Scope;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.TagBits;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.TypeBinding;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.VariableBinding;
-import org.eclipse.wst.jsdt.internal.compiler.problem.ProblemSeverities;
 
 public class SingleNameReference extends NameReference implements ISingleNameReference, OperatorIds {
 
@@ -70,7 +68,9 @@ public class SingleNameReference extends NameReference implements ISingleNameRef
 					// check if assigning a final blank field
 					LocalVariableBinding localBinding;
 					if (!flowInfo.isDefinitelyAssigned(localBinding = (LocalVariableBinding) binding)) {
-						currentScope.problemReporter().uninitializedLocalVariable(localBinding, this);
+						if (localBinding.declaringScope instanceof MethodScope) {
+							currentScope.problemReporter().uninitializedLocalVariable(localBinding, this);
+						}
 						// we could improve error msg here telling "cannot use compound assignment on final local variable"
 					}
 					if (isReachable) {
@@ -431,11 +431,6 @@ public int nullStatus(FlowInfo flowInfo) {
 							
 
 							return this.resolvedType = fieldType;
-						}
-						// a field
-						FieldBinding field = (FieldBinding) this.binding;
-						if (!field.isStatic() && scope.compilerOptions().getSeverity(CompilerOptions.UnqualifiedFieldAccess) != ProblemSeverities.Ignore) {
-							scope.problemReporter().unqualifiedFieldAccess(this, field);
 						}
 						// perform capture conversion if read access
 						TypeBinding fieldType = checkFieldAccess(scope);

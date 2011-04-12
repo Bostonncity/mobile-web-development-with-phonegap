@@ -1,0 +1,23 @@
+/* These overrides to the JQuery Mobile css file are used to
+ * allow a more reasonable styling on small screen devices. 
+ */
+
+.ui-header .ui-title {
+	margin-right:25px;
+	margin-left:65px;
+	white-space:normal; 
+}
+/* JQM: margin-left, margin-right: 90px
+ * A 90px left/right margin allows for only tiny title. 
+ */
+
+ .ui-footer .ui-title {
+	margin-right:30px;
+	margin-left:30px;
+	white-space:normal; 
+ }
+ /* JQM: margin-left, margin-right: 90px
+  *       white-space:nowrap
+  * A 90px left/right margin allows for only tiny footer text
+  * and it won't wrap by default.
+  */

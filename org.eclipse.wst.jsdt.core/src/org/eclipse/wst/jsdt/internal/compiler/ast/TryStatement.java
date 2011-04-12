@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2008 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -96,9 +96,6 @@ public FlowInfo analyseCode(BlockScope currentScope, FlowContext flowContext, Fl
 			if ((tryInfo.tagBits & FlowInfo.UNREACHABLE) != 0)
 				this.bits |= ASTNode.IsTryBlockExiting;
 		}
-
-		// check unreachable catch blocks
-		handlingContext.complainIfUnusedExceptionHandlers(this.scope, this);
 
 		// process the catch blocks - computing the minimal exit depth amongst try/catch
 		if (this.catchArguments != null) {
@@ -207,9 +204,6 @@ public FlowInfo analyseCode(BlockScope currentScope, FlowContext flowContext, Fl
 			if ((tryInfo.tagBits & FlowInfo.UNREACHABLE) != 0)
 				this.bits |= ASTNode.IsTryBlockExiting;
 		}
-
-		// check unreachable catch blocks
-		handlingContext.complainIfUnusedExceptionHandlers(this.scope, this);
 
 		// process the catch blocks - computing the minimal exit depth amongst try/catch
 		if (this.catchArguments != null) {

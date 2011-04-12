@@ -1678,32 +1678,22 @@ protected void consumeExitVariableWithInitialization() {
 		assistNodeParent = variable;
 	}
 }
-/*
- * Copy of code from superclass with the following change:
- * If the cursor location is on the field access, then create a
- * CompletionOnMemberAccess instead.
- */
-protected void consumeFieldAccess(boolean isSuperAccess) {
-	// FieldAccess ::= Primary '.' 'Identifier'
-	// FieldAccess ::= 'super' '.' 'Identifier'
-
-	// potential receiver is being poped, so reset potential receiver
+protected void consumeCallExpressionWithSimpleName() {
 	this.invocationType = NO_RECEIVER;
 	this.qualifier = -1;
 
 	if (this.indexOfAssistIdentifier() < 0) {
-		super.consumeFieldAccess(isSuperAccess);
+		super.consumeCallExpressionWithSimpleName();
 	} else {
-		this.pushCompletionOnMemberAccessOnExpressionStack(isSuperAccess);
+		this.pushCompletionOnMemberAccessOnExpressionStack(false);
 	}
 }
-
-protected void consumePropertyOperator() {
+protected void consumeMemberExpressionWithSimpleName() {
 	this.invocationType = NO_RECEIVER;
 	this.qualifier = -1;
 
 	if (this.indexOfAssistIdentifier() < 0) {
-		super.consumePropertyOperator();
+		super.consumeMemberExpressionWithSimpleName();
 	} else {
 		this.pushCompletionOnMemberAccessOnExpressionStack(false);
 	}
@@ -1792,10 +1782,10 @@ protected void consumeInsideCastExpression() {
 
 	pushOnElementStack(K_CAST_STATEMENT);
 }
-protected void consumeMethodInvocationPrimary() {
+protected void consumeCallExpressionWithArguments() {
 	popElement(K_SELECTOR_QUALIFIER);
 	popElement(K_SELECTOR_INVOCATION_TYPE);
-	super.consumeMethodInvocationPrimary();
+	super.consumeCallExpressionWithArguments();
 }
 protected void consumeMethodHeaderName(boolean isAnnotationMethod) {
 	if(this.indexOfAssistIdentifier() < 0) {

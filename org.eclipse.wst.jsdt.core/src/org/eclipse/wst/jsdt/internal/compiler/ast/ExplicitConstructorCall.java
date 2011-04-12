@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2009 IBM Corporation and others.
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -188,7 +188,6 @@ public class ExplicitConstructorCall extends Statement implements InvocationSite
 			if (methodDeclaration == null
 					|| !methodDeclaration.isConstructor()
 					|| ((ConstructorDeclaration) methodDeclaration).constructorCall != this) {
-				scope.problemReporter().invalidExplicitConstructorCall(this);
 				// fault-tolerance
 				if (this.qualification != null) {
 					this.qualification.resolveType(scope);
@@ -215,17 +214,12 @@ public class ExplicitConstructorCall extends Statement implements InvocationSite
 			}
 			// qualification should be from the type of the enclosingType
 			if (qualification != null) {
-				scope.problemReporter().unnecessaryEnclosingInstanceSpecification(
-					qualification, receiverType);
 				
 				ReferenceBinding enclosingType = receiverType.enclosingType();
 				if (enclosingType == null) {
-					scope.problemReporter().unnecessaryEnclosingInstanceSpecification(
-						qualification,
-						receiverType);
 					this.bits |= ASTNode.DiscardEnclosingInstance;
 				} else {
-					TypeBinding qTb = qualification.resolveTypeExpecting(scope, enclosingType);
+					qualification.resolveTypeExpecting(scope, enclosingType);
 				}
 			}
 			// resolve type arguments (for generic constructor call)

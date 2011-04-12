@@ -16,26 +16,23 @@ public interface ParserBasicInformation {
 
 	int
 
+	ERROR_SYMBOL = 120,
+		MAX_NAME_LENGTH = 36,
+		NUM_STATES = 558,
 
-
-
-    ERROR_SYMBOL      = 121,
-    MAX_NAME_LENGTH   = 36,
-    NUM_STATES        = 597,
-
-    NT_OFFSET         = 121,
-    SCOPE_UBOUND      = 54,
-    SCOPE_SIZE        = 55,
-    LA_STATE_OFFSET   = 7056,
-    MAX_LA            = 1,
-    NUM_RULES         = 435,
-    NUM_TERMINALS     = 121,
-    NUM_NON_TERMINALS = 199,
-    NUM_SYMBOLS       = 320,
-    START_STATE       = 2035,
-    EOFT_SYMBOL       = 55,
-    EOLT_SYMBOL       = 55,
-    ACCEPT_ACTION     = 7055,
-    ERROR_ACTION      = 7056;
+		NT_OFFSET = 120,
+		SCOPE_UBOUND = 56,
+		SCOPE_SIZE = 57,
+		LA_STATE_OFFSET = 7569,
+		MAX_LA = 1,
+		NUM_RULES = 398,
+		NUM_TERMINALS = 120,
+		NUM_NON_TERMINALS = 180,
+		NUM_SYMBOLS = 300,
+		START_STATE = 437,
+		EOFT_SYMBOL = 70,
+		EOLT_SYMBOL = 70,
+		ACCEPT_ACTION = 7568,
+		ERROR_ACTION = 7569;
 
 }
