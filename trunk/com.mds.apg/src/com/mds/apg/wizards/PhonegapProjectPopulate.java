@@ -312,16 +312,7 @@ class PhonegapProjectPopulate {
                             indexHtmlContents.substring(index) ;
                 }
             }
-        }
-        
-        // Add CDN comments for jQuery Mobile
-        if (pageInfo.mJqmChecked) {
-            indexHtmlContents = indexHtmlContents.replace("</head>",  "\n\t<!-- CDN Respositories: For production, replace lines above with these uncommented minified versions -->\n" +
-                        "\t<!-- <link rel=\"stylesheet\" href=\"http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css\" />-->\n" +
-                        "\t<!-- <script src=\"http://code.jquery.com/jquery-1.5.2.min.js\"></script>-->\n" +
-                        "\t<!-- <script src=\"http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js\"></script>-->\n\t</head>");
-        }
-        
+        }        
         StringIO.write(wwwDir + "index.html", indexHtmlContents);
 
         if (pageInfo.mSenchaKitchenSink) { // delete the confusing index_android.html
@@ -370,6 +361,12 @@ class PhonegapProjectPopulate {
         // and jquery file
         fileContents = updatePathInHtml(fileContents, "jquery-1.5.2", 
                 ".js\"", "\"jquery.mobile/", pageInfo.mSourceDirectory);
+        
+        // Add CDN comments for jQuery Mobile
+        fileContents = fileContents.replace("</head>",  "\n\t<!-- CDN Respositories: For production, replace lines above with these uncommented minified versions -->\n" +
+                "\t<!-- <link rel=\"stylesheet\" href=\"http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css\" />-->\n" +
+                "\t<!-- <script src=\"http://code.jquery.com/jquery-1.5.2.min.js\"></script>-->\n" +
+                "\t<!-- <script src=\"http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js\"></script>-->\n\t</head>");
         
         // Write out the file
         StringIO.write(file, fileContents);
