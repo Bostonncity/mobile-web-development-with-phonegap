@@ -101,7 +101,7 @@ function writeFile() {
 function contacts_success(contacts) {
     alert(contacts.length
             + ' contacts returned.'
-            + (contacts[2] && contacts[2].name ? (' Third contact is ' + contacts[2].name.formatted)
+            + (contacts[2] ? (' Third contact is ' + contacts[2].displayName)
                     : ''));
 }
 
@@ -111,7 +111,7 @@ function get_contacts() {
     obj.multiple = true;
     obj.limit = 5;
     navigator.service.contacts.find(
-            [ "displayName", "name" ], contacts_success,
+            [ "displayName", "phoneNumbers", "emails" ], contacts_success,
             fail, obj);
 }
 

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/com.googlecode.jslint4java.eclipse_1.0.0.201105010956.jar" id="com.googlecode.jslint4java.eclipse" version="1.0.0.201105010956">
+   <feature url="features/com.googlecode.jslint4java.eclipse_1.0.0.201104111822.jar" id="com.googlecode.jslint4java.eclipse" version="1.0.0.201104111822">
       <category name="PhoneGap for Android with JSLint"/>
    </feature>
-   <feature url="features/com.mds.jqm.license_1.2.2.201105010956.jar" id="com.mds.jqm.license" version="1.2.2.201105010956">
+   <feature url="features/com.mds.jqm.license_1.2.2.201104111822.jar" id="com.mds.jqm.license" version="1.2.2.201104111822">
       <category name="PhoneGap for Android with JSLint"/>
    </feature>
-   <feature url="features/com.mds.phonegap.license_1.2.3.201105010956.jar" id="com.mds.phonegap.license" version="1.2.3.201105010956">
+   <feature url="features/com.mds.phonegap.license_1.2.0.201104111822.jar" id="com.mds.phonegap.license" version="1.2.0.201104111822">
       <category name="PhoneGap for Android with JSLint"/>
    </feature>
-   <feature url="features/com.mds.phonegapForAndroid_1.2.3.201105010956.jar" id="com.mds.phonegapForAndroid" version="1.2.3.201105010956">
+   <feature url="features/com.mds.phonegapForAndroid_1.2.2.201104111822.jar" id="com.mds.phonegapForAndroid" version="1.2.2.201104111822">
       <category name="PhoneGap for Android with JSLint"/>
    </feature>
    <feature url="features/org.eclipse.wst.jsdt.feature_1.2.4.vqualifier.jar" id="org.eclipse.wst.jsdt.feature" version="1.2.4.vqualifier">
       <category name="PhoneGap for Android with JSLint"/>
    </feature>
-   <category-def name="PhoneGap for Android with JSLint" label="MDS AppLaud">
+   <category-def name="PhoneGap for Android with JSLint" label="PhoneGap for Android with JSLint">
       <description>
          The set of features necessary to develop PhoneGap apps for Android. At least Eclipse 3.6 (Helios) is required. It is recommended to install to Eclipse Classic or Eclipse for Java. 
 To install to Eclipse JEE (or anything already with JSDT), disable the JSDT and webpageeditor install. To only add JSLint, just check java4jslint and JSDT if needed.
