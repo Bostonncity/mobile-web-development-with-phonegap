@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>JavaScript Element Filter Extensions</title>
+<style type="text/css">@import url("../../book.css");</style>
+<style type="text/css">@import url("../../schema.css");</style>
+</HEAD>
+<BODY>
+<H1 style="text-align:center">JavaScript Element Filter Extensions</H1>
+<p></p>
+<h6 class="CaptionFigColumn SchemaHeader">Identifier: </h6>org.eclipse.wst.jsdt.ui.javaElementFilters<p></p>
+<h6 class="CaptionFigColumn SchemaHeader">Description: </h6>This extension point is used to extend JavaScript UI views with filters.<p></p>
+<h6 class="CaptionFigColumn SchemaHeader">Configuration Markup:</h6>
+<p></p>
+<p class="code SchemaDtd">&lt;!ELEMENT <a name="e.extension">extension</a> (<a href="#e.filter">filter</a>+)&gt;</p>
+<p class="code SchemaDtd">&lt;!ATTLIST extension</p>
+<p class="code SchemaDtdAttlist">point&nbsp;CDATA #REQUIRED</p><p class="code SchemaDtdAttlist">id&nbsp;&nbsp;&nbsp;&nbsp;CDATA #IMPLIED</p><p class="code SchemaDtdAttlist">name&nbsp;&nbsp;CDATA #IMPLIED</p>&gt;</p>
+<p></p>
+<ul class="ConfigMarkupAttlistDesc">
+<li><b>point</b> - a fully qualified identifier of the target extension point</li>
+<li><b>id</b> - an optional identifier of the extension instance</li>
+<li><b>name</b> - an optional name of the extension instance</li>
+</ul>
+<br><p class="code SchemaDtd">&lt;!ELEMENT <a name="e.filter">filter</a> EMPTY&gt;</p>
+<p class="code SchemaDtd">&lt;!ATTLIST filter</p>
+<p class="code SchemaDtdAttlist">id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CDATA #IMPLIED</p><p class="code SchemaDtdAttlist">name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CDATA #IMPLIED</p><p class="code SchemaDtdAttlist">description&nbsp;CDATA #IMPLIED</p><p class="code SchemaDtdAttlist">targetId&nbsp;&nbsp;&nbsp;&nbsp;CDATA #IMPLIED</p><p class="code SchemaDtdAttlist">enabled&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(true | false) </p><p class="code SchemaDtdAttlist">pattern&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CDATA #IMPLIED</p><p class="code SchemaDtdAttlist">class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CDATA #IMPLIED</p>&gt;</p>
+<p></p>
+<ul class="ConfigMarkupAttlistDesc">
+<li><b>id</b> - a unique id that will be used to identify this filter</li>
+<li><b>name</b> - a unique name that allows to identify this filter in the UI. This attribute should be a translated string. Though this attribute is not required for pattern filters (i.e. those using the <samp>pattern</samp> attribute) we suggest to provide a name anyway, otherwise the pattern string itself would be used to represent the filter in the UI.</li>
+<li><b>description</b> - a short description for this filter</li>
+<li><b>targetId</b> - the id of the target where this filter is contributed.  If this attribute is missing, then the filter will
+be contributed to all views which use the <code>org.eclipse.wst.jsdt.ui.actions.customFiltersActionGroup</code>. This
+replaces the deprecated attributed "viewId".</li>
+<li><b>enabled</b> - the filter will be enabled if this attribute is "true" or if this attribute is not present. Most likely the user will be able to override this setting in the UI.</li>
+<li><b>pattern</b> - elements whose name matches this pattern will be hidden. This attribute is here for backward compatibility and should no longer be used. All views that allow to plug-in a filter also allow to add pattern filters directly via UI.</li>
+<li><b>class</b> - the name of the class used to filter the view.  The class must extend <code>org.eclipse.jface.viewers.ViewerFilter</code>. If this attribute is here
+then the pattern attribute must not provided.</li>
+</ul>
+<br><h6 class="CaptionFigColumn SchemaHeader">Examples: </h6>The following is an example of JavaScript element filter definition.  It filters out inner classes and is initially selected.
+
+<p>
+<pre class="Example"><span class="code SchemaTag">
+ &lt;extension point=</span><span class="code SchemaCstring">&quot;org.eclipse.wst.jsdt.ui.javaElementFilters&quot;</span><span class="code SchemaTag">&gt;
+  &lt;filter
+   id=</span><span class="code SchemaCstring">&quot;org.eclipse.wst.jsdt.ui.PackageExplorer.LibraryFilter&quot;</span><span class="code SchemaTag">
+   name=</span><span class="code SchemaCstring">&quot;%HideReferencedLibraries.label&quot;</span><span class="code SchemaTag">
+   description=</span><span class="code SchemaCstring">&quot;%HideReferencedLibraries.description&quot;</span><span class="code SchemaTag">
+   targetId=</span><span class="code SchemaCstring">&quot;org.eclipse.wst.jsdt.ui.PackageExplorer&quot;</span><span class="code SchemaTag">
+   class=</span><span class="code SchemaCstring">&quot;org.eclipse.wst.jsdt.internal.ui.filters.LibraryFilter&quot;</span><span class="code SchemaTag">
+   enabled=</span><span class="code SchemaCstring">&quot;false&quot;</span><span class="code SchemaTag">&gt;
+  &lt;/filter&gt;
+ &lt;/extension&gt;
+</span></pre>
+</p>
+<p></p>
+
+<br>
+<p class="note SchemaCopyright">
+Copyright (c) 2007 IBM Corporation and others.<br>
+All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at <a href="http://www.eclipse.org/legal/epl-v10.html">http://www.eclipse.org/legal/epl-v10.html</a>
+
+</p>
+</BODY>
+</HTML>
