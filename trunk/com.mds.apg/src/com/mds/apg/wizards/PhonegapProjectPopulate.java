@@ -437,14 +437,21 @@ class PhonegapProjectPopulate {
         destFileContents = destFileContents.replace("<application android:", manifestInsert
                 + "<application" + " android:debuggable=\"true\" android:");
 
-        // Add android:configChanges="orientation|keyboardHidden" to the
-        // activity
+        // Add android:configChanges="orientation|keyboardHidden" to the activity
         destFileContents = destFileContents.replace("<activity android:",
                 "<activity android:configChanges=\"orientation|keyboardHidden\" android:");
+        
+        // Copy additional activities from source to destination - especially the DroidGap activity
+        int activityIndex = sourceFileContents.indexOf("<activity");
+        int secondActivityIndex = sourceFileContents.indexOf("<activity", activityIndex + 1);
+        if (secondActivityIndex > 0) {
+            int endIndex = sourceFileContents.lastIndexOf("</activity>");
+            destFileContents = destFileContents.replace("</activity>", "</activity>\n\t\t" + 
+                    sourceFileContents.substring(secondActivityIndex, endIndex + 11));
+        }
 
         if (destFileContents.indexOf("<uses-sdk") < 0) {
-            // User did not set min SDK, so use the phonegap template manifest
-            // version
+            // User did not set min SDK, so use the phonegap template manifest version
             int startIndex = sourceFileContents.indexOf("<uses-sdk");
             int endIndex = sourceFileContents.indexOf("<", startIndex + 1);
             destFileContents = destFileContents.replace("</manifest>",
@@ -470,7 +477,10 @@ class PhonegapProjectPopulate {
         int lastIndex;
         do {
             lastIndex = index;
-            index = manifest.indexOf("<uses-permission", index + 1);
+            index = manifest.indexOf("<uses-permission", lastIndex + 1);
+            if (index < 0) {  // <uses-feature added in PhoneGap 1.0.0 manifest
+                index = manifest.indexOf("<uses-feature", lastIndex + 1);
+            }
         } while (index > 0);
         lastIndex = manifest.indexOf('<', lastIndex + 1);
         return manifest.substring(startIndex, lastIndex);
@@ -488,6 +498,7 @@ class PhonegapProjectPopulate {
 
         if (pageInfo.mPackagedPhonegap) {
             bundleCopy("/resources/phonegap/layout", pageInfo.mDestinationDirectory + "/res/layout/");
+            bundleCopy("/resources/phonegap/xml", pageInfo.mDestinationDirectory + "/res/xml/");
 
             // Copy resource drawable to all of the project drawable* directories
             File destFile = new File(destResDir);
@@ -507,7 +518,10 @@ class PhonegapProjectPopulate {
             sourceResDir = pageInfo.mPhonegapDirectory + "/Android/Sample/res/";
         }
 
-        FileCopy.recursiveForceCopy(sourceResDir + "layout" + "/", destResDir + "layout" + "/");
+        FileCopy.recursiveForceCopy(sourceResDir + "layout/", destResDir + "layout/");
+        if (FileCopy.exists(sourceResDir + "xml/")) {
+            FileCopy.recursiveCopy(sourceResDir + "xml/", destResDir + "xml/");
+        }
 
         if (pageInfo.mFromGitHub) {
             // Copy source drawable to all of the project drawable* directories

@@ -168,6 +168,11 @@ public class FileCopy {
         }
     }
     
+    public static boolean exists(String fileName) {
+        File file = new File(fileName);
+        return file.exists();
+    }
+    
     private static FileOutputStream appendStream(File fromFile, FileOutputStream to) throws IOException {
         
         FileInputStream from = null;
