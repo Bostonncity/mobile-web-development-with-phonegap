@@ -110,7 +110,7 @@ function get_contacts() {
     obj.filter = "";
     obj.multiple = true;
     obj.limit = 5;
-    navigator.contacts.find(
+    navigator.service.contacts.find(
             [ "displayName", "name" ], contacts_success,
             fail, obj);
 }

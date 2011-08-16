@@ -2,26 +2,24 @@
 <html> 
 	<head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1"> 
 	<title>jQuery Mobile Docs - Navbar</title> 
-	<link rel="stylesheet"  href="../../themes/default/" />  
-	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
-	<script src="../../js/jquery.js"></script>
-	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
-	<script src="../_assets/js/jqm-docs.js"></script>
-	<script src="../../js/"></script>
+	<link rel="stylesheet"  href="../../jquery.mobile/jquery.mobile-1.0a4.1.css" />  
+	<link rel="stylesheet" href="../assets/css/jqm-docs.css"/>
+	<script type="text/javascript" src="../../jquery.mobile/jquery-1.5.2.js"></script>
+	<script type="text/javascript" src="../../jquery.mobile/jquery.mobile-1.0a4.1.js"></script>
 </head> 
 <body> 
 
-	<div data-role="page" class="type-interior">
+<div data-role="page">
 
-		<div data-role="header" data-theme="f">
+	<div data-role="header" data-theme="b">
 		<h1>Navbar</h1>
 		<a href="../../index.html" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
-		<div class="content-primary">		
+			
 	<h2>Simple navbar</h2>
 	
 	<p>jQuery Mobile has a very basic navbar widget that is useful for providing up to 5 buttons with optional icons in a bar  , typically within a header or footer. </p>
@@ -166,7 +164,7 @@
 	<p>You can add any of the popular icon libraries like <a href="http://glyphish.com/">Glyphish</a> to achieve the iOS style tab tab that has large icons stacked on top of text labels. All that is required is a bit of custom styles to link to the icons and position them in the navbar. Here is an example using Glyphish icons and custom styles (view page source for styles) in our navbar:</p>
 	
 	
-	<style>	
+	<style type="text/css">	
 		.nav-glyphish-example .ui-btn .ui-btn-inner { padding-top: 40px !important; }
 		.nav-glyphish-example .ui-btn .ui-icon { width: 30px!important; height: 30px!important; margin-left: -15px !important; box-shadow: none!important; -moz-box-shadow: none!important; -webkit-box-shadow: none!important; -webkit-border-radius: none !important; border-radius: none !important; }
 		#chat .ui-icon { background:  url(glyphish-icons/09-chat2.png) 50% 50% no-repeat; background-size: 24px 22px; }
@@ -206,38 +204,9 @@
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
 					
-
-		</div><!--/content-primary -->		
-
-		<div class="content-secondary">
-
-			<div data-role="collapsible" data-collapsed="true" data-theme="b">
-
-					<h3>More in this section</h3>
-
-					<ul data-role="listview" data-theme="c" data-dividertheme="d">
-
-						<li data-role="list-divider">Toolbars</li>
-						<li><a href="docs-bars.html">Toolbar basics</a></li>
-						<li><a href="docs-headers.html">Header bars</a></li>
-						<li><a href="docs-footers.html">Footer bars</a></li>
-						<li data-theme="a"><a href="docs-navbar.html">Navbars</a></li>
-						<li><a href="bars-fixed.html">Fixed positioning</a></li>
-						<li><a href="bars-fullscreen.html">Fullscreen positioning</a></li>
-						<li><a href="footer-persist-a.html">Persistent footer nav bar</a></li>
-						<li><a href="bars-themes.html">Theming toolbars</a></li>
-
-					</ul>
-			</div>
-		</div>		
-
+		
 	</div><!-- /content -->
+</div><!-- /page -->
 
-	<div data-role="footer" class="footer-docs" data-theme="c">
-			<p>&copy; 2011 The jQuery Project</p>
-	</div>
-
-	</div><!-- /page -->
-
-	</body>
-	</html>
+</body>
+</html>

@@ -339,7 +339,7 @@ class PhonegapProjectPopulate {
         String fromJqmDir = pageInfo.mJqmDirectory;
         String version;
         if (fromJqmDir == null) {  // get from plugin installation
-            version = "-1.0b2";  // TODO - do this programmatically
+            version = "-1.0a4.1";  // TODO - do this programmatically
             bundleCopy("/resources/jqm/jquery.mobile", jqmDir);
         } else {
             version = pageInfo.mJqmVersion;
@@ -359,14 +359,14 @@ class PhonegapProjectPopulate {
                 ".js\"", "\"jquery.mobile/", pageInfo.mSourceDirectory);
         
         // and jquery file
-        fileContents = updatePathInHtml(fileContents, "jquery-1.6.2", 
+        fileContents = updatePathInHtml(fileContents, "jquery-1.5.2", 
                 ".js\"", "\"jquery.mobile/", pageInfo.mSourceDirectory);
         
         // Add CDN comments for jQuery Mobile
         fileContents = fileContents.replace("</head>",  "\n\t<!-- CDN Respositories: For production, replace lines above with these uncommented minified versions -->\n" +
-                "\t<!-- <link rel=\"stylesheet\" href=\"http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.css\" />-->\n" +
-                "\t<!-- <script src=\"http://code.jquery.com/jquery-1.6.2.min.js\"></script>-->\n" +
-                "\t<!-- <script src=\"http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.js\"></script>-->\n\t</head>");
+                "\t<!-- <link rel=\"stylesheet\" href=\"http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css\" />-->\n" +
+                "\t<!-- <script src=\"http://code.jquery.com/jquery-1.5.2.min.js\"></script>-->\n" +
+                "\t<!-- <script src=\"http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js\"></script>-->\n\t</head>");
         
         // Write out the file
         StringIO.write(file, fileContents);
@@ -437,21 +437,14 @@ class PhonegapProjectPopulate {
         destFileContents = destFileContents.replace("<application android:", manifestInsert
                 + "<application" + " android:debuggable=\"true\" android:");
 
-        // Add android:configChanges="orientation|keyboardHidden" to the activity
+        // Add android:configChanges="orientation|keyboardHidden" to the
+        // activity
         destFileContents = destFileContents.replace("<activity android:",
                 "<activity android:configChanges=\"orientation|keyboardHidden\" android:");
-        
-        // Copy additional activities from source to destination - especially the DroidGap activity
-        int activityIndex = sourceFileContents.indexOf("<activity");
-        int secondActivityIndex = sourceFileContents.indexOf("<activity", activityIndex + 1);
-        if (secondActivityIndex > 0) {
-            int endIndex = sourceFileContents.lastIndexOf("</activity>");
-            destFileContents = destFileContents.replace("</activity>", "</activity>\n\t\t" + 
-                    sourceFileContents.substring(secondActivityIndex, endIndex + 11));
-        }
 
         if (destFileContents.indexOf("<uses-sdk") < 0) {
-            // User did not set min SDK, so use the phonegap template manifest version
+            // User did not set min SDK, so use the phonegap template manifest
+            // version
             int startIndex = sourceFileContents.indexOf("<uses-sdk");
             int endIndex = sourceFileContents.indexOf("<", startIndex + 1);
             destFileContents = destFileContents.replace("</manifest>",
@@ -477,10 +470,7 @@ class PhonegapProjectPopulate {
         int lastIndex;
         do {
             lastIndex = index;
-            index = manifest.indexOf("<uses-permission", lastIndex + 1);
-            if (index < 0) {  // <uses-feature added in PhoneGap 1.0.0 manifest
-                index = manifest.indexOf("<uses-feature", lastIndex + 1);
-            }
+            index = manifest.indexOf("<uses-permission", index + 1);
         } while (index > 0);
         lastIndex = manifest.indexOf('<', lastIndex + 1);
         return manifest.substring(startIndex, lastIndex);
@@ -498,7 +488,6 @@ class PhonegapProjectPopulate {
 
         if (pageInfo.mPackagedPhonegap) {
             bundleCopy("/resources/phonegap/layout", pageInfo.mDestinationDirectory + "/res/layout/");
-            bundleCopy("/resources/phonegap/res", pageInfo.mDestinationDirectory + "/res/");  // xml directory
 
             // Copy resource drawable to all of the project drawable* directories
             File destFile = new File(destResDir);
@@ -518,10 +507,7 @@ class PhonegapProjectPopulate {
             sourceResDir = pageInfo.mPhonegapDirectory + "/Android/Sample/res/";
         }
 
-        FileCopy.recursiveForceCopy(sourceResDir + "layout/", destResDir + "layout/");
-        if (FileCopy.exists(sourceResDir + "xml/")) {
-            FileCopy.recursiveCopy(sourceResDir + "xml/", destResDir + "xml/");
-        }
+        FileCopy.recursiveForceCopy(sourceResDir + "layout" + "/", destResDir + "layout" + "/");
 
         if (pageInfo.mFromGitHub) {
             // Copy source drawable to all of the project drawable* directories
@@ -591,12 +577,8 @@ class PhonegapProjectPopulate {
     static private String updatePathInHtml(String fileContents, String fileName, 
             String suffix, String prepend, String indexHtmlDirectory) throws IOException {
 
-        String fullName = fileName + ".min"+ suffix;  
+        String fullName = fileName + ".min" + suffix;
         int fileNameIndex = fileContents.indexOf(fullName);
-        if (fileNameIndex <= 0) {
-            fullName = fileName + ".min"; // No .js ok for min to get around eclipse issues with min files
-            fileNameIndex = fileContents.indexOf(fullName);
-        }
         if (fileNameIndex <= 0) {
             fullName = fileName + "-debug" + suffix;
             fileNameIndex = fileContents.indexOf(fullName);
@@ -641,6 +623,8 @@ class PhonegapProjectPopulate {
         return fileContents;
     }
     
+   
+    @SuppressWarnings("unchecked")
     static private void bundleCopy(String dir, String destination) 
         throws IOException, URISyntaxException {
         
