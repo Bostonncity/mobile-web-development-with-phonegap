@@ -339,7 +339,7 @@ class PhonegapProjectPopulate {
         String fromJqmDir = pageInfo.mJqmDirectory;
         String version;
         if (fromJqmDir == null) {  // get from plugin installation
-            version = "-1.0a4.1";  // TODO - do this programmatically
+            version = "-1.0b2";  // TODO - do this programmatically
             bundleCopy("/resources/jqm/jquery.mobile", jqmDir);
         } else {
             version = pageInfo.mJqmVersion;
@@ -359,14 +359,14 @@ class PhonegapProjectPopulate {
                 ".js\"", "\"jquery.mobile/", pageInfo.mSourceDirectory);
         
         // and jquery file
-        fileContents = updatePathInHtml(fileContents, "jquery-1.5.2", 
+        fileContents = updatePathInHtml(fileContents, "jquery-1.6.2", 
                 ".js\"", "\"jquery.mobile/", pageInfo.mSourceDirectory);
         
         // Add CDN comments for jQuery Mobile
         fileContents = fileContents.replace("</head>",  "\n\t<!-- CDN Respositories: For production, replace lines above with these uncommented minified versions -->\n" +
-                "\t<!-- <link rel=\"stylesheet\" href=\"http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css\" />-->\n" +
-                "\t<!-- <script src=\"http://code.jquery.com/jquery-1.5.2.min.js\"></script>-->\n" +
-                "\t<!-- <script src=\"http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js\"></script>-->\n\t</head>");
+                "\t<!-- <link rel=\"stylesheet\" href=\"http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.css\" />-->\n" +
+                "\t<!-- <script src=\"http://code.jquery.com/jquery-1.6.2.min.js\"></script>-->\n" +
+                "\t<!-- <script src=\"http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.js\"></script>-->\n\t</head>");
         
         // Write out the file
         StringIO.write(file, fileContents);
@@ -591,8 +591,12 @@ class PhonegapProjectPopulate {
     static private String updatePathInHtml(String fileContents, String fileName, 
             String suffix, String prepend, String indexHtmlDirectory) throws IOException {
 
-        String fullName = fileName + ".min" + suffix;
+        String fullName = fileName + ".min"+ suffix;  
         int fileNameIndex = fileContents.indexOf(fullName);
+        if (fileNameIndex <= 0) {
+            fullName = fileName + ".min"; // No .js ok for min to get around eclipse issues with min files
+            fileNameIndex = fileContents.indexOf(fullName);
+        }
         if (fileNameIndex <= 0) {
             fullName = fileName + "-debug" + suffix;
             fileNameIndex = fileContents.indexOf(fullName);
