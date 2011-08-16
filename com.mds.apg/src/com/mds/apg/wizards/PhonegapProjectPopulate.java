@@ -498,7 +498,7 @@ class PhonegapProjectPopulate {
 
         if (pageInfo.mPackagedPhonegap) {
             bundleCopy("/resources/phonegap/layout", pageInfo.mDestinationDirectory + "/res/layout/");
-            bundleCopy("/resources/phonegap/xml", pageInfo.mDestinationDirectory + "/res/xml/");
+            bundleCopy("/resources/phonegap/res", pageInfo.mDestinationDirectory + "/res/");  // xml directory
 
             // Copy resource drawable to all of the project drawable* directories
             File destFile = new File(destResDir);
@@ -637,8 +637,6 @@ class PhonegapProjectPopulate {
         return fileContents;
     }
     
-   
-    @SuppressWarnings("unchecked")
     static private void bundleCopy(String dir, String destination) 
         throws IOException, URISyntaxException {
         
