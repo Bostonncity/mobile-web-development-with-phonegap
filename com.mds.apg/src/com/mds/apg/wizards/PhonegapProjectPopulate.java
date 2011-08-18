@@ -354,13 +354,13 @@ class PhonegapProjectPopulate {
         String fileContents = FileStringReplace.replace(file, "\\{\\$jqmversion\\}", version);
         
         fileContents = updatePathInHtml(fileContents, "jquery.mobile" + version, 
-                ".css\"", "\"jquery.mobile/", pageInfo.mSourceDirectory);
+                ".css\"", "\"jquery.mobile/", pageInfo.mSourceDirectory, null);
         fileContents = updatePathInHtml(fileContents, "jquery.mobile" + version, 
-                ".js\"", "\"jquery.mobile/", pageInfo.mSourceDirectory);
+                ".js\"", "\"jquery.mobile/", pageInfo.mSourceDirectory, null);
         
         // and jquery file
         fileContents = updatePathInHtml(fileContents, "jquery-1.6.2", 
-                ".js\"", "\"jquery.mobile/", pageInfo.mSourceDirectory);
+                ".js\"", "\"jquery.mobile/", pageInfo.mSourceDirectory, ".min\"");
         
         // Add CDN comments for jQuery Mobile
         fileContents = fileContents.replace("</head>",  "\n\t<!-- CDN Respositories: For production, replace lines above with these uncommented minified versions -->\n" +
@@ -401,8 +401,8 @@ class PhonegapProjectPopulate {
         String file = pageInfo.mDestinationDirectory + "/" + "assets/www/index.html";
         String fileContents = StringIO.read(file);
 
-        fileContents = updatePathInHtml(fileContents, "sencha-touch", ".css\"", "\"sencha/resources/css/", pageInfo.mSourceDirectory);
-        fileContents = updatePathInHtml(fileContents, "sencha-touch", ".js\"", "\"sencha/", pageInfo.mSourceDirectory);
+        fileContents = updatePathInHtml(fileContents, "sencha-touch", ".css\"", "\"sencha/resources/css/", pageInfo.mSourceDirectory, null);
+        fileContents = updatePathInHtml(fileContents, "sencha-touch", ".js\"", "\"sencha/", pageInfo.mSourceDirectory, null);
 
         // Write out the file
         StringIO.write(file, fileContents);
@@ -589,7 +589,7 @@ class PhonegapProjectPopulate {
     }
     
     static private String updatePathInHtml(String fileContents, String fileName, 
-            String suffix, String prepend, String indexHtmlDirectory) throws IOException {
+            String suffix, String prepend, String indexHtmlDirectory, String suffixOverride) throws IOException {
 
         String fullName = fileName + ".min"+ suffix;  
         int fileNameIndex = fileContents.indexOf(fullName);
@@ -628,7 +628,8 @@ class PhonegapProjectPopulate {
             if (suffix.equals(".js\"")) {
                 fileContents = fileContents.substring(0, insertSpot)
                     + "\n      <script type=\"text/javascript\" src=" + prepend + 
-                    fullName + "></script>"  + fileContents.substring(insertSpot);
+                    (suffixOverride != null ? (fileName + suffixOverride) : fullName) + "></script>"  + 
+                    fileContents.substring(insertSpot);
             } else if (suffix.equals(".css\"")) {
                 fileContents = fileContents.substring(0, insertSpot)
                     + "\n      <link rel=\"stylesheet\" href=" + prepend + 
