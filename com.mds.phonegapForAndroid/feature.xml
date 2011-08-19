@@ -2,7 +2,7 @@
 <feature
       id="com.mds.phonegapForAndroid"
       label="PhonegapForAndroid"
-      version="1.2.3.qualifier"
+      version="1.2.4.qualifier"
       provider-name="Mobile Developer Solutions">
 
    <description url="http://www.mobiledevelopersolutions.com">
@@ -211,13 +211,6 @@ Agreement more than one year after the cause of action arose.
 Each party waives its rights to a jury trial in any resulting
 litigation.
    </license>
-
-   <includes
-         id="org.eclipse.jst.webpageeditor.feature"
-         version="0.0.0"
-         name="HTML editing"
-         optional="true"
-         search-location="self"/>
 
    <plugin
          id="com.mds.apg"

@@ -2,26 +2,32 @@
 <html> 
 	<head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>jQuery Mobile Docs - Events</title> 
-	<link rel="stylesheet"  href="../../jquery.mobile/jquery.mobile-1.0a4.1.css" /> 
-	<link rel="stylesheet" href="../assets/css/jqm-docs.css"/>
-	<script type="text/javascript" src="../../jquery.mobile/jquery-1.5.2.js"></script>
-	<script type="text/javascript" src="../../jquery.mobile/jquery.mobile-1.0a4.1.js"></script>
+	<link rel="stylesheet"  href="../../themes/default/" /> 
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-role="page" class="type-interior">
 
-	<div data-role="header" data-theme="b">
+	<div data-role="header" data-theme="f">
 		<h1>Events</h1>
 		<a href="../../index.html" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
-	
+		<div class="content-primary">
 
 		<p>jQuery Mobile offers several custom events that build upon native events to create useful hooks for development. Note that these events employ various touch, mouse, and window events, depending on event existence, so you can bind to them for use in both handheld and desktop environments. You can bind to these events like you would with other jQuery events, using <code>live()</code> or <code>bind()</code>.</p>
+		
+			<div class="ui-body ui-body-e">
+		<h4 style="margin:.5em 0">Important: Use pageCreate(), not $(document).ready()</h4>
+		The first thing you learn in jQuery is to call code inside the $(document).ready() function so everything will execute as soon as the DOM is loaded. However, in jQuery Mobile, Ajax is used to load the contents of each page into the DOM as you navigate, and the DOM ready handler only executes for the first page. To execute code whenever a new page is loaded and created, you can bind to the <code><strong>pagecreate</strong></code> event. This event is explained in detail at the bottom of this page.</div>
 		
 		<h2>Touch events</h2>
 		<dl>
@@ -32,7 +38,14 @@
 			<dd>Triggers after a held complete touch event (close to one second).</dd>
 			
 			<dt><code>swipe</code></dt>
-			<dd>Triggers when a horizontal drag of 30px or more (and less than 20px vertically) occurs within 1 second duration.</dd>
+			<dd><p>Triggers when a horizontal drag of 30px or more (and less than 20px vertically) occurs within 1 second duration but these can be configured:</p>
+			  <ul>
+			  	<li><code>scrollSupressionThreshold</code> (default: 10px) – More than this horizontal displacement, and we will suppress scrolling</li>
+			  	<li><code>durationThreshold</code> (default: 1000ms) – More time than this, and it isn’t a swipe</li>
+			  	<li><code>horizontalDistanceThreshold</code> (default: 30px) – Swipe horizontal displacement must be more than this.</li>
+			  	<li><code>verticalDistanceThreshold</code> (default: 75px) – Swipe vertical displacement must be less than this.</li>
+			  	</ul>
+			</dd>
 			
 			<dt><code>swipeleft</code></dt>
 			<dd>Triggers when a swipe event occurred moving in the left direction.</dd>
@@ -74,8 +87,7 @@
 		</dl>
 		
 		<p>Note that all four of these events expose a reference to either the next page (<code>nextPage</code>) or previous page (<code>prevPage</code>), depending on whether the page is being shown or hidden, and whether that next or previous page exists (the first ever page shown does not have a previous page to reference, but an empty jQuery object is provided just the same). You can access this reference via the second argument of a bound callback function. For example: </p>
-		<pre>
-		<code>
+<pre><code>
 $('div').live('pageshow',function(event, ui){
   alert('This page was just hidden: '+ ui.prevPage);
 });
@@ -83,8 +95,7 @@ $('div').live('pageshow',function(event, ui){
 $('div').live('pagehide',function(event, ui){
   alert('This page was just shown: '+ ui.nextPage);
 });
-		</code>
-		</pre>
+</code></pre>
 		<p>Also, for these handlers to be invoked during the initial page load, you must bind them before jQuery Mobile executes.  This can be done in the <code>mobileinit</code> handler, as described on the <a href="globalconfig.html">global config</a> page.
 		<h2>Page initialization events</h2>
 		
@@ -94,45 +105,89 @@ $('div').live('pagehide',function(event, ui){
 			
 		<dl>
 			<dt><code>pagebeforecreate</code></dt>
-			<dd>Triggered on the page being initialized, before initialization occurs.</dd>
-			<dt><code>pagecreate</code></dt>
-			<dd>Triggered on the page being initialized, after initialization occurs.</dd>
-		</dl>	
-		
-		
-				<pre>
-		<code>
+			<dd>
+				<p>Triggered on the page being initialized, before initialization occurs.</p>
+<pre><code>
 $('#aboutPage').live('pagebeforecreate',function(event){
   alert('This page was just inserted into the dom!');
 });
-
-$('#aboutPage').live('pagecreate',function(event){
-  alert('This page was just enhanced by jQuery Mobile!');
-});
-		</code>
-		</pre>
+</code></pre>
+				<p>Note that by binding to <code>pagebeforecreate</code> and returning <code>false</code>, you can prevent the page plugin from making its manipulations.</p>
 		
-		<p>Note that by binding to <code>pagebeforecreate</code> and returning <code>false</code>, you can prevent the page plugin from making its manipulations.</p>
-		
-<pre>
-		<code>
+<pre><code>
 $('#aboutPage').live('pagebeforecreate',function(event){
   //run your own enhancement scripting here...
   return false;
 });
+</code></pre>		
+			</dd>
+			
+			<dt><code>pagecreate</code></dt>
+			<dd>
+				<p>Triggered on the page being initialized, after initialization occurs. We recommend binding to this event instead of DOM ready() because this will work regardless of whether the page is loaded directly or if the content is pulled into another page as part of the Ajax navigation system.</p>
+<pre><code>
+$('#aboutPage').live('pagecreate',function(event){
+  alert('This page was just enhanced by jQuery Mobile!');
+});
+</code></pre>
+			</dd>
+		</dl>
 
-		</code>
-		</pre>		
 		
-		<div class="ui-body ui-body-e">
-			<p><strong>Note on Page IDs in Alpha 2 release (<em>no longer an issue</em>): </strong> In jQuery Mobile Alpha 2 and older, page elements utilized the <code>ID</code> attribute for storing the location from which they came. When you place an <code>ID</code> attribute on a page that is brought into jQuery Mobile's single-page environment through Ajax, jQuery Mobile wraps that page with a new "page" <code>div</code> element, preserving any CSS references to your <code>ID</code>. However, this means that your <code>ID</code> attribute is no longer on the "page" element, so you must keep this in mind when binding to page events (<code>pagebeforecreate</code>, <code>pagecreate</code>, etc). To avoid issues, try using a class if possible. </p>
-		</div>
+		
+		<h2>Virtual mouse events</h2>
+		<p>We provide a set of "virtual" click events that normalize mouse and touch events. This allows the developer to register listeners for the basic mouse events, such as mousedown, mousemove, mouseup, and click, and the plugin will take care of registering the correct listeners behind the scenes to invoke the listener at the fastest possible time for that device. This still retains the order of event firing in the traditional mouse environment, should multiple handlers be registered on the same element for different events.</p>
+		<dl>
+			<dt><code>vmouseover</code></dt>
+			<dd>Normalized event for handling touch or mouse <code>mouseover</code> events</dd>
+			
+			<dt><code>vmousedown</code></dt>
+			<dd>Normalized event for handling touch or mouse <code>mousedown</code> events</dd>
+			
+			<dt><code>vmousemove</code></dt>
+			<dd>Normalized event for handling touch or mouse <code>mousemove</code> events</dd>
+			
+			<dt><code>vmouseup</code></dt>
+			<dd>Normalized event for handling touch or mouse <code>mouseup</code> events</dd>
+			
+			<dt><code>vclick</code></dt>
+			<dd>Normalized event for handling touch or mouse <code>click</code> events</dd>
+			
+			<dt><code>vmousecancel</code></dt>
+			<dd>Normalized event for handling touch or mouse <code>mousecancel</code> events</dd>
+		</dl>
+		
 		
 		
 		<h2>Animation Events</h2>
 		<p>jQuery Mobile exposes the <code>animationComplete</code> plugin, which you can utilize after adding or removing a class that applies a CSS transition.</p>
 
-    </div><!-- /content -->
+    </div><!--/content-secondary -->		
+	
+	<div class="content-secondary">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b">
+			
+				<h3>More in this section</h3>
+				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+				
+					<li data-role="list-divider">API</li>
+					<li><a href="../../docs/api/globalconfig.html">Configuring defaults</a></li>
+					<li data-theme="a"><a href="../../docs/api/events.html">Events</a></li>
+					<li><a href="../../docs/api/methods.html">Methods &amp; Utilities</a></li>
+					<li><a href="../../docs/api/mediahelpers.html">Responsive Layout</a></li> 
+					<li><a href="../../docs/api/themes.html">Theme framework</a></li>
+	
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>&copy; 2011 The jQuery Project</p>
+</div>
 	
 </div><!-- /page -->
 

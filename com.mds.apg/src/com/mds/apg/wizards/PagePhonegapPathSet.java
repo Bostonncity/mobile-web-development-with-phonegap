@@ -70,7 +70,7 @@ public final class PagePhonegapPathSet extends WizardSection {
         
         boolean initialVal = doGetPreferenceStore().getString(PG_USE_INSTALLED) != ""; 
         mUsePackagedPgRadio = new Button(phonegapGroup, SWT.RADIO);
-        mUsePackagedPgRadio.setText("Use Built-in PhoneGap - version 0.9.5");
+        mUsePackagedPgRadio.setText("Use Built-in PhoneGap - version 1.0.0");
         mUsePackagedPgRadio.setSelection(!initialVal);
         mUsePackagedPgRadio.setToolTipText("Use the PhoneGap installation included with this Eclipse plug-in"); 
         
