@@ -37,7 +37,7 @@ public final class PagePhonegapPathSet extends WizardSection {
     /** Last user-browsed location, static so that it be remembered for the whole session */ 
     private static String sPhonegapPathCache = "";
     
-    private boolean mFromGitHub;
+    private String mGitSampleSpot;
     private String mPhonegapJs;
     private String mPhonegapJar;
     
@@ -124,8 +124,8 @@ public final class PagePhonegapPathSet extends WizardSection {
         sPhonegapPathCache = s;
     }
     
-    final boolean isfromGit() {
-        return mFromGitHub;
+    final String gitSampleSpot() {
+        return mGitSampleSpot;
     }
 
     final String getPhonegapJsName() {
@@ -182,6 +182,7 @@ public final class PagePhonegapPathSet extends WizardSection {
             boolean foundFramework = false;
             boolean foundExample = false;
             boolean foundAndroid = false;
+            boolean foundBin = false;
 
             for (String s : l) {
                 if (s.equals("example")) {
@@ -190,6 +191,8 @@ public final class PagePhonegapPathSet extends WizardSection {
                     foundFramework = true;
                 } else if (s.equals("Android")) {
                     foundAndroid = true;
+                } else if (s.equals("bin")) {    // Post PhoneGap 1.1 GitHub
+                    foundBin = true;
                 }
             }
             if (foundAndroid) {   // First the www.phonegap.com download directory structure
@@ -220,17 +223,17 @@ public final class PagePhonegapPathSet extends WizardSection {
                             " must include a Samples directory, phonegap{version}.js and phonegap{version}.jar",
                             AndroidPgProjectCreationPage.MSG_ERROR);
                 }
-                mFromGitHub = false;
+                mGitSampleSpot = null;
                 
-            } else {  // Second the github directory structure
-                if ((!foundFramework) || (!foundExample)) {
+            } else {  // Second the old or new github directory structure
+                if (((!foundFramework) || (!foundExample)) && (!foundBin)) {
                     return mWizardPage.setStatus(
                                 "Invalid phonegap-android location. If it's from github," +
                                 "it should have a framework and example subdirectory." +
                                 "If it's from www.phonegap.com Download, it should have an Android subdirectory",
                                 AndroidPgProjectCreationPage.MSG_ERROR);
                 }
-                mFromGitHub = true;
+                mGitSampleSpot = foundExample ? "/example" : "/bin/templates/project/phonegap/templates/project/assets/www";
             }
             // TODO more validation
 

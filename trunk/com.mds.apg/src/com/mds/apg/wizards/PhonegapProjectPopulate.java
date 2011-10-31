@@ -434,11 +434,11 @@ class PhonegapProjectPopulate {
         String destFileContents = StringIO.read(destFile);
 
         // Add phonegap screens, permissions and turn on debuggable
-        destFileContents = destFileContents.replace("<application android:", manifestInsert
+        destFileContents = destFileContents.replaceFirst("<application\\s+android:", manifestInsert
                 + "<application" + " android:debuggable=\"true\" android:");
 
         // Add android:configChanges="orientation|keyboardHidden" to the activity
-        destFileContents = destFileContents.replace("<activity android:",
+        destFileContents = destFileContents.replaceFirst("<activity\\s+android:",
                 "<activity android:configChanges=\"orientation|keyboardHidden\" android:");
         
         // Copy additional activities from source to destination - especially the DroidGap activity
