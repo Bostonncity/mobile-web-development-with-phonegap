@@ -365,7 +365,7 @@ class PhonegapProjectPopulate {
         // Add CDN comments for jQuery Mobile
         fileContents = fileContents.replace("</head>",  "\n\t<!-- CDN Respositories: For production, replace lines above with these uncommented minified versions -->\n" +
                 "\t<!-- <link rel=\"stylesheet\" href=\"http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.css\" />-->\n" +
-                "\t<!-- <script src=\"http://code.jquery.com/jquery-1.6.2.min.js\"></script>-->\n" +
+                "\t<!-- <script src=\"http://code.jquery.com/jquery-1.6.4.min.js\"></script>-->\n" +
                 "\t<!-- <script src=\"http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.js\"></script>-->\n\t</head>");
         
         // Write out the file
@@ -501,12 +501,18 @@ class PhonegapProjectPopulate {
             bundleCopy("/resources/phonegap/res", pageInfo.mDestinationDirectory + "/res/");  // xml directory
 
             // Copy resource drawable to all of the project drawable* directories
-            File destFile = new File(destResDir);
-            String fList[] = destFile.list();
+            File destDir = new File(destResDir);
+            String fList[] = destDir.list();
             for (String s : fList) {
                 if (s.indexOf("drawable") == 0) {
-                    InputStream sourceDrawable = bundleGetFileAsStream("/resources/phonegap/icons/mdspgicon.png");
-                    FileCopy.coreStreamCopy(sourceDrawable, new File(destResDir + s + "/ic_launcher.png"));
+                    File drawableDir = new File(destResDir + s);
+                    String fList2[] = drawableDir.list();
+                    for (String f : fList2) {
+                        if (f.endsWith(".png")) {  // SDK Tools 14 moved default image from icon.png to ic_launcher.png, so this code is now more generic
+                            InputStream sourceDrawable = bundleGetFileAsStream("/resources/phonegap/icons/mdspgicon.png");
+                            FileCopy.coreStreamCopy(sourceDrawable, new File(destResDir + s + "/" + f));
+                        }
+                     }
                 }
             }
             return;
