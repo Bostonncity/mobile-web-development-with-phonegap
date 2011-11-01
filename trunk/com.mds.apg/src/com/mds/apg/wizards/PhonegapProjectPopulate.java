@@ -616,13 +616,17 @@ class PhonegapProjectPopulate {
             fileContents = fileContents.substring(0, startIncludeIndex) + prepend
                     + fileContents.substring(fileNameIndex);
         } else { // must add a new line.  Bug if indexOf finds stuff inside comments
-            int firstJsIndex = fileContents.indexOf(suffix);
-            int insertSpot;
-            if (firstJsIndex > 0) {
-                insertSpot = fileContents.lastIndexOf('<', firstJsIndex);
-            } else {
-                insertSpot = fileContents.indexOf("</head>");
+            int insertSpot = fileContents.indexOf("</head>");
+            int firstIndex = fileContents.indexOf(suffix);
+            if (firstIndex > 0) {
+                insertSpot = fileContents.lastIndexOf('<', firstIndex);
+            } else if (suffix == ".css\"") { // no css includes in source
+                int firstJsIndex = fileContents.indexOf(".js\"");
+                if (firstJsIndex > 0) {
+                    insertSpot = fileContents.lastIndexOf('<', firstJsIndex);
+                }
             }
+
             if (insertSpot <= 0) {
                 throw new IOException("Supplied index.html in " + indexHtmlDirectory + 
                         "  is missing the </head> tag");
