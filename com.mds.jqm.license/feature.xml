@@ -2,7 +2,7 @@
 <feature
       id="com.mds.jqm.license"
       label="jQuery Mobile License"
-      version="1.2.4.qualifier"
+      version="1.2.5.qualifier"
       provider-name="MDS">
 
    <description url="http://jquerymobile.com/">
@@ -10,31 +10,29 @@
    </description>
 
    <copyright>
-      Copyright (c) 2010 John Resig, http://jquery.com/
+      © 2010 The jQuery Project
    </copyright>
 
-   <license url="https://github.com/jquery/jquery/blob/master/MIT-LICENSE.txt">
-      jQuery Mobile&apos;s MIT license
-Copyright (c) 2011 John Resig, http://jquery.com/
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-&quot;Software&quot;), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+   <license url="http://jquery.org/license/">
+      License
+You may use any jQuery project under the terms of either the
+MIT License or the GNU General Public License (GPL) Version 2.
+The MIT License is recommended for most projects. It is simple
+and easy to understand and it places almost no restrictions on
+what you can do with a jQuery project.
+If the GPL suits your project better you are also free to use
+a jQuery project under that license.
+You don’t have to do anything special to choose one license or
+the other and you don’t have to notify anyone which license you
+are using. You are free to use a jQuery project in commercial
+projects as long as the copyright header is left intact.
+Licenses
+MIT License (More Information)
+GPL (More Information)
+Sizzle
+The Sizzle selector engine (which is included inside the jQuery
+library) is held by the Dojo Foundation and is licensed under
+the MIT, GPL, and BSD licenses.
    </license>
 
 </feature>

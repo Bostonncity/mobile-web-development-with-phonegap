@@ -168,8 +168,9 @@ public class AndroidPgProjectCreationPage extends WizardPage {
                 // needs to be seeded with blanks so that there's space when it needs to appear (Issue 3)
                 withString = "                                 ";
                 if (createFromExample && !mPhonegapDialog.useFromPackaged()) {
-                    if (mPhonegapDialog.isfromGit()) {
-                        mInitContentsDialog.update(mPhonegapDialog.getValue() + "/example");
+                    String gitSampleSpot = mPhonegapDialog.gitSampleSpot();
+                    if (gitSampleSpot != null) {
+                        mInitContentsDialog.update(mPhonegapDialog.getValue() + gitSampleSpot);
                     } else {
                         mInitContentsDialog.update(mPhonegapDialog.getValue() + "/Android/Sample/assets/www");
                     }
