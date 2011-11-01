@@ -339,7 +339,7 @@ class PhonegapProjectPopulate {
         String fromJqmDir = pageInfo.mJqmDirectory;
         String version;
         if (fromJqmDir == null) {  // get from plugin installation
-            version = "-1.0rc2";  // TODO - do this programmatically
+            version = "-1.0b2";  // TODO - do this programmatically
             bundleCopy("/resources/jqm/jquery.mobile", jqmDir);
         } else {
             version = pageInfo.mJqmVersion;
@@ -359,14 +359,14 @@ class PhonegapProjectPopulate {
                 ".js\"", "\"jquery.mobile/", pageInfo.mSourceDirectory, null);
         
         // and jquery file
-        fileContents = updatePathInHtml(fileContents, "jquery-1.6.4", 
+        fileContents = updatePathInHtml(fileContents, "jquery-1.6.2", 
                 ".js\"", "\"jquery.mobile/", pageInfo.mSourceDirectory, ".min\"");
         
         // Add CDN comments for jQuery Mobile
         fileContents = fileContents.replace("</head>",  "\n\t<!-- CDN Respositories: For production, replace lines above with these uncommented minified versions -->\n" +
-                "\t<!-- <link rel=\"stylesheet\" href=\"http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.css\" />-->\n" +
-                "\t<!-- <script src=\"http://code.jquery.com/jquery-1.6.4.min.js\"></script>-->\n" +
-                "\t<!-- <script src=\"http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.js\"></script>-->\n\t</head>");
+                "\t<!-- <link rel=\"stylesheet\" href=\"http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.css\" />-->\n" +
+                "\t<!-- <script src=\"http://code.jquery.com/jquery-1.6.2.min.js\"></script>-->\n" +
+                "\t<!-- <script src=\"http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.js\"></script>-->\n\t</head>");
         
         // Write out the file
         StringIO.write(file, fileContents);
@@ -434,11 +434,11 @@ class PhonegapProjectPopulate {
         String destFileContents = StringIO.read(destFile);
 
         // Add phonegap screens, permissions and turn on debuggable
-        destFileContents = destFileContents.replaceFirst("<application\\s+android:", manifestInsert
+        destFileContents = destFileContents.replace("<application android:", manifestInsert
                 + "<application" + " android:debuggable=\"true\" android:");
 
         // Add android:configChanges="orientation|keyboardHidden" to the activity
-        destFileContents = destFileContents.replaceFirst("<activity\\s+android:",
+        destFileContents = destFileContents.replace("<activity android:",
                 "<activity android:configChanges=\"orientation|keyboardHidden\" android:");
         
         // Copy additional activities from source to destination - especially the DroidGap activity
@@ -501,18 +501,12 @@ class PhonegapProjectPopulate {
             bundleCopy("/resources/phonegap/res", pageInfo.mDestinationDirectory + "/res/");  // xml directory
 
             // Copy resource drawable to all of the project drawable* directories
-            File destDir = new File(destResDir);
-            String fList[] = destDir.list();
+            File destFile = new File(destResDir);
+            String fList[] = destFile.list();
             for (String s : fList) {
                 if (s.indexOf("drawable") == 0) {
-                    File drawableDir = new File(destResDir + s);
-                    String fList2[] = drawableDir.list();
-                    for (String f : fList2) {
-                        if (f.endsWith(".png")) {  // SDK Tools 14 moved default image from icon.png to ic_launcher.png, so this code is now more generic
-                            InputStream sourceDrawable = bundleGetFileAsStream("/resources/phonegap/icons/mdspgicon.png");
-                            FileCopy.coreStreamCopy(sourceDrawable, new File(destResDir + s + "/" + f));
-                        }
-                     }
+                    InputStream sourceDrawable = bundleGetFileAsStream("/resources/phonegap/icons/mdspgicon.png");
+                    FileCopy.coreStreamCopy(sourceDrawable, new File(destResDir + s + "/icon.png"));
                 }
             }
             return;
@@ -616,17 +610,13 @@ class PhonegapProjectPopulate {
             fileContents = fileContents.substring(0, startIncludeIndex) + prepend
                     + fileContents.substring(fileNameIndex);
         } else { // must add a new line.  Bug if indexOf finds stuff inside comments
-            int insertSpot = fileContents.indexOf("</head>");
-            int firstIndex = fileContents.indexOf(suffix);
-            if (firstIndex > 0) {
-                insertSpot = fileContents.lastIndexOf('<', firstIndex);
-            } else if (suffix == ".css\"") { // no css includes in source
-                int firstJsIndex = fileContents.indexOf(".js\"");
-                if (firstJsIndex > 0) {
-                    insertSpot = fileContents.lastIndexOf('<', firstJsIndex);
-                }
+            int firstJsIndex = fileContents.indexOf(suffix);
+            int insertSpot;
+            if (firstJsIndex > 0) {
+                insertSpot = fileContents.lastIndexOf('<', firstJsIndex);
+            } else {
+                insertSpot = fileContents.indexOf("</head>");
             }
-
             if (insertSpot <= 0) {
                 throw new IOException("Supplied index.html in " + indexHtmlDirectory + 
                         "  is missing the </head> tag");

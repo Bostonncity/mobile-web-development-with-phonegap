@@ -131,7 +131,7 @@ function fail(msg) {
 
 function show_pic() {
     navigator.camera.getPicture(dump_pic, fail, {
-        quality : 30
+        quality : 50
     });
 }
 

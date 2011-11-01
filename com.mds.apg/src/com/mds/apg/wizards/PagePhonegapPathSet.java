@@ -37,7 +37,7 @@ public final class PagePhonegapPathSet extends WizardSection {
     /** Last user-browsed location, static so that it be remembered for the whole session */ 
     private static String sPhonegapPathCache = "";
     
-    private String mGitSampleSpot;
+    private boolean mFromGitHub;
     private String mPhonegapJs;
     private String mPhonegapJar;
     
@@ -70,7 +70,7 @@ public final class PagePhonegapPathSet extends WizardSection {
         
         boolean initialVal = doGetPreferenceStore().getString(PG_USE_INSTALLED) != ""; 
         mUsePackagedPgRadio = new Button(phonegapGroup, SWT.RADIO);
-        mUsePackagedPgRadio.setText("Use Built-in PhoneGap - version 1.1.0");
+        mUsePackagedPgRadio.setText("Use Built-in PhoneGap - version 1.0.0");
         mUsePackagedPgRadio.setSelection(!initialVal);
         mUsePackagedPgRadio.setToolTipText("Use the PhoneGap installation included with this Eclipse plug-in"); 
         
@@ -124,8 +124,8 @@ public final class PagePhonegapPathSet extends WizardSection {
         sPhonegapPathCache = s;
     }
     
-    final String gitSampleSpot() {
-        return mGitSampleSpot;
+    final boolean isfromGit() {
+        return mFromGitHub;
     }
 
     final String getPhonegapJsName() {
@@ -182,7 +182,6 @@ public final class PagePhonegapPathSet extends WizardSection {
             boolean foundFramework = false;
             boolean foundExample = false;
             boolean foundAndroid = false;
-            boolean foundBin = false;
 
             for (String s : l) {
                 if (s.equals("example")) {
@@ -191,8 +190,6 @@ public final class PagePhonegapPathSet extends WizardSection {
                     foundFramework = true;
                 } else if (s.equals("Android")) {
                     foundAndroid = true;
-                } else if (s.equals("bin")) {    // Post PhoneGap 1.1 GitHub
-                    foundBin = true;
                 }
             }
             if (foundAndroid) {   // First the www.phonegap.com download directory structure
@@ -223,17 +220,17 @@ public final class PagePhonegapPathSet extends WizardSection {
                             " must include a Samples directory, phonegap{version}.js and phonegap{version}.jar",
                             AndroidPgProjectCreationPage.MSG_ERROR);
                 }
-                mGitSampleSpot = null;
+                mFromGitHub = false;
                 
-            } else {  // Second the old or new github directory structure
-                if (((!foundFramework) || (!foundExample)) && (!foundBin)) {
+            } else {  // Second the github directory structure
+                if ((!foundFramework) || (!foundExample)) {
                     return mWizardPage.setStatus(
                                 "Invalid phonegap-android location. If it's from github," +
                                 "it should have a framework and example subdirectory." +
                                 "If it's from www.phonegap.com Download, it should have an Android subdirectory",
                                 AndroidPgProjectCreationPage.MSG_ERROR);
                 }
-                mGitSampleSpot = foundExample ? "/example" : "/bin/templates/project/phonegap/templates/project/assets/www";
+                mFromGitHub = true;
             }
             // TODO more validation
 

@@ -135,7 +135,7 @@ cfg.items = [
         {
             items : [ {
                 ui : 'round',
-                text : '<a href="tel:411" style="color:black;font-size:19px;text-decoration:none;text-align:center;">Call 411</a>'
+                text : '<a href="tel://411" style="color:black;font-size:19px;text-decoration:none;text-align:center;">Call 411</a>'
             } ]
         },
         {

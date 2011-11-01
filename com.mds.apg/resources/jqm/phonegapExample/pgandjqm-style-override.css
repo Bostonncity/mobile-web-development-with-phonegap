@@ -1,18 +1,33 @@
+/* These overrides to the JQuery Mobile css file are used to
+ * allow more content in the headers and footers The original values are
+ * included in comments after each property. Attempted to change
+ * only a minimum number of values to achieve desired result.
+ */
+
 .ui-header .ui-title {
 	margin-right:20px;
 	margin-left:20px;
 }
+/* JQM: margin-left, margin-right: 90px
+ *      
+ */
 
-.ui-footer .ui-title {
+ .ui-footer .ui-title {
 	margin-right:20px;
 	margin-left:20px;
 	white-space:normal; 
  }
+/* JQM: margin-left, margin-right: 90px
+ *       white-space:nowrap
+ */
  
-.ui-content { 
-	padding-top: 5px; 
-	padding-bottom: 5px;
-} 
-
+ .ui-content { padding: 5px; }
+/* JQM: .ui-content { padding: 15px; }
+ *  Leave more space vertically for buttons etc
+ */ 
+ 
+ .ui-collapsible-contain { margin: .5em 7px; }
+ /* Collapsible bars touch sides w/out this.
+  */
 
  
