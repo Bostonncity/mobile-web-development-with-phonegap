@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Jsdoc Completion Processor</title>
+<style type="text/css">@import url("../../book.css");</style>
+<style type="text/css">@import url("../../schema.css");</style>
+</HEAD>
+<BODY>
+<H1 style="text-align:center">Jsdoc Completion Processor</H1>
+<div style="border: 1px solid #990000; padding: 5px; text-align: center; color: red;">This extension point is deprecated, use <i>org.eclipse.wst.jsdt.ui.javaCompletionProposalComputer</i> as a replacement.</div>
+<p></p>
+<h6 class="CaptionFigColumn SchemaHeader">Identifier: </h6>org.eclipse.wst.jsdt.ui.javadocCompletionProcessor<p></p>
+<h6 class="CaptionFigColumn SchemaHeader">Description: </h6>This extension point allows to add a JSdoc completion processor to e.g. offer new JSdoc tags.
+<p>
+Deprecated as of 3.2. Extenders should rather contribute to the <tt>org.eclipse.wst.jsdt.ui.javaCompletionProposalComputer</tt> extension point, which allows to provide additional proposals not only for jsdoc, but any part of a JavaScript editor.
+</p><p></p>
+<h6 class="CaptionFigColumn SchemaHeader">Configuration Markup:</h6>
+<p></p>
+<p class="code SchemaDtd">&lt;!ELEMENT <a name="e.extension">extension</a> (<a href="#e.javadocCompletionProcessor">javadocCompletionProcessor</a>+)&gt;</p>
+<p class="code SchemaDtd">&lt;!ATTLIST extension</p>
+<p class="code SchemaDtdAttlist">point&nbsp;CDATA #REQUIRED</p><p class="code SchemaDtdAttlist">id&nbsp;&nbsp;&nbsp;&nbsp;CDATA #IMPLIED</p><p class="code SchemaDtdAttlist">name&nbsp;&nbsp;CDATA #IMPLIED</p>&gt;</p>
+<p></p>
+<ul class="ConfigMarkupAttlistDesc">
+<li><b>point</b> - a fully qualified identifier of the target extension point</li>
+<li><b>id</b> - an optional identifier of the extension instance</li>
+<li><b>name</b> - an optional name of the extension instance</li>
+</ul>
+<br><p class="code SchemaDtd">&lt;!ELEMENT <a name="e.javadocCompletionProcessor">javadocCompletionProcessor</a> EMPTY&gt;</p>
+<p class="code SchemaDtd">&lt;!ATTLIST javadocCompletionProcessor</p>
+<p class="code SchemaDtdAttlist">id&nbsp;&nbsp;&nbsp;&nbsp;CDATA #REQUIRED</p><p class="code SchemaDtdAttlist">name&nbsp;&nbsp;CDATA #IMPLIED</p><p class="code SchemaDtdAttlist">class&nbsp;CDATA #IMPLIED</p>&gt;</p>
+<p></p>
+<ul class="ConfigMarkupAttlistDesc">
+<li><b>id</b> - a unique identifier for the Jsdoc completion processor</li>
+<li><b>name</b> - a localized name of the Jsdoc completion processor</li>
+<li><b>class</b> - the name of the class that implements this Jsdoc completion processor. The
+class must be public and implement
+<code>org.eclipse.wst.jsdt.ui.text.java.IJavadocCompletionProcessor</code>
+with a public 0-argument constructor.</li>
+</ul>
+<br><h6 class="CaptionFigColumn SchemaHeader">Examples: </h6>The following is an example of a Jsdoc completion processor contribution:
+
+<p>
+<pre class="Example"><span class="code SchemaTag">
+ &lt;extension point=</span><span class="code SchemaCstring">&quot;org.eclipse.wst.jsdt.ui.javadocCompletionProcessor&quot;</span><span class="code SchemaTag">&gt;
+  &lt;javadocCompletionProcessor
+   id=</span><span class="code SchemaCstring">&quot;XDocletJavadocProcessor&quot;</span><span class="code SchemaTag">
+   name=</span><span class="code SchemaCstring">&quot;XDoclet Javadoc Processor&quot;</span><span class="code SchemaTag">
+   class=</span><span class="code SchemaCstring">&quot;com.example.XDocletJavadocProcessor&quot;</span><span class="code SchemaTag">&gt;
+  &lt;/javadocCompletionProcessor&gt;
+ &lt;/extension&gt;
+</span></pre>
+</p>
+<p></p>
+
+<br>
+<p class="note SchemaCopyright">
+Copyright (c) 2007 IBM Corporation and others.<br>
+All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at <a href="http://www.eclipse.org/legal/epl-v10.html">http://www.eclipse.org/legal/epl-v10.html</a>
+
+</p>
+</BODY>
+</HTML>
