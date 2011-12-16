@@ -34,12 +34,12 @@ public final class PageInitContents extends WizardSection{
     // Set up storage for persistent initializers
 
     private final static String SOURCE_DIR = com.mds.apg.Activator.PLUGIN_ID + ".source"; 
-    private final static String USE_USERS_DIR = com.mds.apg.Activator.PLUGIN_ID + ".userdir";
+    private final static String CONTENT_SELECTION = com.mds.apg.Activator.PLUGIN_ID + ".contentselection";
     private final static String PURE_IMPORT = com.mds.apg.Activator.PLUGIN_ID + ".pureimport";
 
     /** Last user-browsed location */
     private String mLocationCache;  
-    private boolean mUseFromExample;
+    private String mContentSelection;  // example, minimal, or user
     private boolean mPureImport;
     
     // widgets
@@ -52,7 +52,8 @@ public final class PageInitContents extends WizardSection{
     PageInitContents(AndroidPgProjectCreationPage wizardPage, Composite parent) {
         super(wizardPage);
         mLocationCache = doGetPreferenceStore().getString(SOURCE_DIR);  
-        mUseFromExample = doGetPreferenceStore().getString(USE_USERS_DIR) == "" ; // returns true if unset for first time in workspace
+        mContentSelection = doGetPreferenceStore().getString(CONTENT_SELECTION); 
+        if (mContentSelection.equals("")) mContentSelection = "example";
         createGroup(parent);
     }
     
@@ -72,44 +73,53 @@ public final class PageInitContents extends WizardSection{
         group.setText("Project Contents");
         mWizardPage.mContentsSection = group; // Visibility can be adjusted by other widgets
 
-        boolean initialVal = isCreateFromExample();
         final Button createFromExampleRadio = new Button(group, SWT.RADIO);
-        createFromExampleRadio.setText("Use phonegap example source as template for project");
-        createFromExampleRadio.setSelection(initialVal);
+        createFromExampleRadio.setText("Use PhoneGap example source as template for project");
+        createFromExampleRadio.setSelection(mContentSelection.equals("example"));
         createFromExampleRadio.setToolTipText("Populate your project with the example shipped with your phonegap installation");
         
         // Label for showing the example is with JQM or Sencha
         mWithLabel = new Label(group, SWT.NONE);
         
-        Button existing_project_radio = new Button(group, SWT.RADIO);
+        final Button minimalProject = new Button(group, SWT.RADIO);
+        minimalProject.setText("Create minimal PhoneGap project");
+        minimalProject.setToolTipText("Creates a minimal PhoneGap hello world");
+        minimalProject.setSelection(mContentSelection.equals("minimal"));
+        
+        new Label(group, SWT.NONE); // dummy to force new line
+        
+        final Button existing_project_radio = new Button(group, SWT.RADIO);
         existing_project_radio.setText("Create project from specified source directory");
         existing_project_radio.setToolTipText("Specify root directory containing your sources that you wish to populate into the Android project"); 
-        existing_project_radio.setSelection(!initialVal);
+        boolean doSetLocation = mContentSelection.equals("user");
+        existing_project_radio.setSelection(doSetLocation);
         
         // Check box to do a pure import (versus adding in phonegap.js,etc. and making changes to it)
 
         final Button pureImport = new Button(group, SWT.CHECK);
         pureImport.setText("Pure Import");
-        pureImport.setSelection(doGetPreferenceStore().getString(PURE_IMPORT) != "");
+        boolean initPure = doGetPreferenceStore().getString(PURE_IMPORT) != "";
+        pureImport.setSelection(initPure);
         pureImport.setToolTipText("Disable any modifications to imported files. Use this to import an already working PhoneGap directory");
-        pureImport.setVisible(mPureImport = !initialVal);
+        pureImport.setVisible(doSetLocation);
+        mPureImport = doSetLocation && initPure;
         
         SelectionListener location_listener = new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
                 super.widgetSelected(e);
-                boolean newVal = createFromExampleRadio.getSelection();
+                mContentSelection = createFromExampleRadio.getSelection() ? "example" : minimalProject.getSelection() ? "minimal" : "user";
                 boolean pureImportVal = pureImport.getSelection();
-                mUseFromExample = newVal;
-                pureImport.setVisible(!newVal);
-                doGetPreferenceStore().setValue(USE_USERS_DIR, newVal ? "" : "true");
-                mPureImport = pureImportVal && !newVal;
+                pureImport.setVisible(mContentSelection.equals("user"));
+                doGetPreferenceStore().setValue(CONTENT_SELECTION, mContentSelection);
+                mPureImport = pureImportVal && mContentSelection.equals("user");
                 doGetPreferenceStore().setValue(PURE_IMPORT, mPureImport ? "true" : "");
                 mWizardPage.validatePageComplete();
             }
         };
 
         createFromExampleRadio.addSelectionListener(location_listener);
+        minimalProject.addSelectionListener(location_listener);
         existing_project_radio.addSelectionListener(location_listener);
         pureImport.addSelectionListener(location_listener);
         
@@ -124,7 +134,7 @@ public final class PageInitContents extends WizardSection{
         mLocationPathField = new Text(location_group, SWT.BORDER);  
         mLocationPathField.setText(getLocationSave());
         mBrowseButton = setupDirectoryBrowse(mLocationPathField, parent, location_group);
-        enableLocationWidgets(!initialVal);  
+        enableLocationWidgets(doSetLocation);  
     }
 
     // --- Internal getters & setters ------------------
@@ -152,8 +162,8 @@ public final class PageInitContents extends WizardSection{
     /** Returns the value of the "Create from Existing Sample" radio. */
     /* TODO - Simplify like senchaChecked */
     
-    protected boolean isCreateFromExample() {
-        return mUseFromExample;
+    protected String getContentSelection() {
+        return mContentSelection;
     }
     
     protected boolean isPureImport() {
@@ -179,7 +189,7 @@ public final class PageInitContents extends WizardSection{
     }
     
     protected void enableLocationWidgets() {
-        enableLocationWidgets(!mUseFromExample);
+        enableLocationWidgets(mContentSelection.equals("user"));
     }
         
     /**

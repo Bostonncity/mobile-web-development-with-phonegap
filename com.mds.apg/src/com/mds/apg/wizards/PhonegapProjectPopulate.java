@@ -229,29 +229,33 @@ class PhonegapProjectPopulate {
     static private void getWWWSources(IProgressMonitor monitor, PageInfo pageInfo) throws CoreException,
             IOException, URISyntaxException {
 
-        addDefaultDirectories(pageInfo.mAndroidProject, "assets/", new String[] {
-            "www"  }, monitor);
+        addDefaultDirectories(pageInfo.mAndroidProject, "assets/", new String[] { "www"  }, monitor);
         String wwwDir = pageInfo.mDestinationDirectory + "/assets/www/";
+        
+        String contentSelection = pageInfo.mContentSelection;
+        boolean useExample = contentSelection.equals("example");
 
         boolean doCopy = true;
         if (pageInfo.mUseJqmDemo) {
             bundleCopy("/resources/jqm/demo2", wwwDir);
             doCopy = false;
         } else if (pageInfo.mJqmChecked) {
-            if (pageInfo.mUseExample) {
+            if (useExample) {
                 bundleCopy("/resources/jqm/phonegapExample", wwwDir);
                 doCopy = false;
             }
         } else if (pageInfo.mSenchaChecked) {
-            if (pageInfo.mUseExample && !pageInfo.mSenchaKitchenSink) {
+            if (useExample && !pageInfo.mSenchaKitchenSink) {
                 bundleCopy("/resources/sencha/phonegapExample", wwwDir);
                 doCopy = false;
             }
         } 
         
         if (doCopy) {
-            if (pageInfo.mPackagedPhonegap && pageInfo.mUseExample && !pageInfo.mSenchaKitchenSink) {
+            if (pageInfo.mPackagedPhonegap && useExample && !pageInfo.mSenchaKitchenSink) {
                 bundleCopy("resources/phonegap/Sample", wwwDir);
+            } else if (contentSelection.equals("minimal")) {
+                bundleCopy("/resources/phonegap/minimal", wwwDir);
             } else {
                 FileCopy.recursiveCopy(pageInfo.mSourceDirectory, wwwDir);
             }
@@ -285,7 +289,7 @@ class PhonegapProjectPopulate {
 
         } else { // www.phonegap.com/download
             phonegapJsFileName = pageInfo.mPhonegapJs;
-            if (pageInfo.mUseExample && !pageInfo.mSenchaKitchenSink) { 
+            if (!contentSelection.equals("user") && !pageInfo.mSenchaKitchenSink) { 
                 // copy phonegap{version}.js to phonegap.js
                 if (pageInfo.mJqmChecked || pageInfo.mSenchaChecked) {  // otherwise already there
                     FileCopy.copy(pageInfo.mPhonegapDirectory + "/Android/" + pageInfo.mPhonegapJs,
@@ -350,7 +354,7 @@ class PhonegapProjectPopulate {
 
         bundleCopy("/resources/jqm/supplements", jqmDir);
 
-        if (!pageInfo.mPureImport) {
+        if (!pageInfo.mPureImport && !pageInfo.mContentSelection.equals("minimal")) {
             // Update the index.html with path to the js and css files
             
             String file = pageInfo.mDestinationDirectory + "/" + "assets/www/index.html";
@@ -401,7 +405,7 @@ class PhonegapProjectPopulate {
         FileCopy.copy(pageInfo.mSenchaDirectory + "/sencha-touch-debug.js", senchaDir);
         FileCopy.copy(pageInfo.mSenchaDirectory + "/sencha-touch-debug-w-comments.js", senchaDir);
 
-        if (!pageInfo.mPureImport) {
+        if (!pageInfo.mPureImport && !pageInfo.mContentSelection.equals("minimal")) {
             // Update the index.html with path to sencha-touch.css and sencha-touch.js
             String file = pageInfo.mDestinationDirectory + "/" + "assets/www/index.html";
             String fileContents = StringIO.read(file);

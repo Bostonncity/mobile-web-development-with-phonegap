@@ -173,7 +173,7 @@ public final class PagePhonegapPathSet extends WizardSection {
         String phonegapDirName = getValue();
         File phonegapDir = new File(phonegapDirName);
         if (!phonegapDir.exists() || !phonegapDir.isDirectory()) {
-            return mWizardPage.setStatus("A phonegap directory name must be specified.",  AndroidPgProjectCreationPage.MSG_ERROR);
+            return mWizardPage.setStatus("A PhoneGap directory name must be specified.",  AndroidPgProjectCreationPage.MSG_ERROR);
         } else {
             String[] l = phonegapDir.list();
             if (l.length == 0) {
