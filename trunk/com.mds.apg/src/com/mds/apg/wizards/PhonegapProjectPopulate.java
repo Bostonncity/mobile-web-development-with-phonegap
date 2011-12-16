@@ -257,6 +257,8 @@ class PhonegapProjectPopulate {
             }
         }
         
+        if (pageInfo.mPureImport) return; // Don't tweak anything
+        
         String phonegapJsFileName;
         
         class isPhoneGapFile implements FileFilter {
@@ -348,28 +350,30 @@ class PhonegapProjectPopulate {
 
         bundleCopy("/resources/jqm/supplements", jqmDir);
 
-        // Update the index.html with path to the js and css files
-        
-        String file = pageInfo.mDestinationDirectory + "/" + "assets/www/index.html";
-        String fileContents = FileStringReplace.replace(file, "\\{\\$jqmversion\\}", version);
-        
-        fileContents = updatePathInHtml(fileContents, "jquery.mobile" + version, 
-                ".css\"", "\"jquery.mobile/", pageInfo.mSourceDirectory, null);
-        fileContents = updatePathInHtml(fileContents, "jquery.mobile" + version, 
-                ".js\"", "\"jquery.mobile/", pageInfo.mSourceDirectory, null);
-        
-        // and jquery file
-        fileContents = updatePathInHtml(fileContents, "jquery-1.6.4", 
-                ".js\"", "\"jquery.mobile/", pageInfo.mSourceDirectory, ".min\"");
-        
-        // Add CDN comments for jQuery Mobile
-        fileContents = fileContents.replace("</head>",  "\n\t<!-- CDN Respositories: For production, replace lines above with these uncommented minified versions -->\n" +
-                "\t<!-- <link rel=\"stylesheet\" href=\"http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.css\" />-->\n" +
-                "\t<!-- <script src=\"http://code.jquery.com/jquery-1.6.4.min.js\"></script>-->\n" +
-                "\t<!-- <script src=\"http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.js\"></script>-->\n\t</head>");
-        
-        // Write out the file
-        StringIO.write(file, fileContents);
+        if (!pageInfo.mPureImport) {
+            // Update the index.html with path to the js and css files
+            
+            String file = pageInfo.mDestinationDirectory + "/" + "assets/www/index.html";
+            String fileContents = FileStringReplace.replace(file, "\\{\\$jqmversion\\}", version);
+            
+            fileContents = updatePathInHtml(fileContents, "jquery.mobile" + version, 
+                    ".css\"", "\"jquery.mobile/", pageInfo.mSourceDirectory, null);
+            fileContents = updatePathInHtml(fileContents, "jquery.mobile" + version, 
+                    ".js\"", "\"jquery.mobile/", pageInfo.mSourceDirectory, null);
+            
+            // and jquery file
+            fileContents = updatePathInHtml(fileContents, "jquery-1.6.4", 
+                    ".js\"", "\"jquery.mobile/", pageInfo.mSourceDirectory, ".min\"");
+            
+            // Add CDN comments for jQuery Mobile
+            fileContents = fileContents.replace("</head>",  "\n\t<!-- CDN Respositories: For production, replace lines above with these uncommented minified versions -->\n" +
+                    "\t<!-- <link rel=\"stylesheet\" href=\"http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.css\" />-->\n" +
+                    "\t<!-- <script src=\"http://code.jquery.com/jquery-1.6.4.min.js\"></script>-->\n" +
+                    "\t<!-- <script src=\"http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.js\"></script>-->\n\t</head>");
+            
+            // Write out the file
+            StringIO.write(file, fileContents);
+        }
     }
         
 
@@ -397,15 +401,17 @@ class PhonegapProjectPopulate {
         FileCopy.copy(pageInfo.mSenchaDirectory + "/sencha-touch-debug.js", senchaDir);
         FileCopy.copy(pageInfo.mSenchaDirectory + "/sencha-touch-debug-w-comments.js", senchaDir);
 
-        // Update the index.html with path to sencha-touch.css and sencha-touch.js
-        String file = pageInfo.mDestinationDirectory + "/" + "assets/www/index.html";
-        String fileContents = StringIO.read(file);
+        if (!pageInfo.mPureImport) {
+            // Update the index.html with path to sencha-touch.css and sencha-touch.js
+            String file = pageInfo.mDestinationDirectory + "/" + "assets/www/index.html";
+            String fileContents = StringIO.read(file);
 
-        fileContents = updatePathInHtml(fileContents, "sencha-touch", ".css\"", "\"sencha/resources/css/", pageInfo.mSourceDirectory, null);
-        fileContents = updatePathInHtml(fileContents, "sencha-touch", ".js\"", "\"sencha/", pageInfo.mSourceDirectory, null);
+            fileContents = updatePathInHtml(fileContents, "sencha-touch", ".css\"", "\"sencha/resources/css/", pageInfo.mSourceDirectory, null);
+            fileContents = updatePathInHtml(fileContents, "sencha-touch", ".js\"", "\"sencha/", pageInfo.mSourceDirectory, null);
 
-        // Write out the file
-        StringIO.write(file, fileContents);
+            // Write out the file
+            StringIO.write(file, fileContents);
+        }
     }
     
 
