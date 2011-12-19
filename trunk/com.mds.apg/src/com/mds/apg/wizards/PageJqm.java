@@ -105,7 +105,7 @@ public class PageJqm extends WizardSection {
         
         boolean initialVal = doGetPreferenceStore().getString(JQM_USE_INSTALLED) != ""; 
         mUsePackagedJqmRadio = new Button(group, SWT.RADIO);
-        mUsePackagedJqmRadio.setText("Use Built-in jQuery Mobile - version 1.0rc2");
+        mUsePackagedJqmRadio.setText("Use Built-in jQuery Mobile - version 1.0");
         mUsePackagedJqmRadio.setSelection(!initialVal);
         mUsePackagedJqmRadio.setToolTipText("Use the jQuery Mobile included with this Eclipse plug-in"); 
         
