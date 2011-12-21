@@ -229,33 +229,39 @@ class PhonegapProjectPopulate {
     static private void getWWWSources(IProgressMonitor monitor, PageInfo pageInfo) throws CoreException,
             IOException, URISyntaxException {
 
-        addDefaultDirectories(pageInfo.mAndroidProject, "assets/", new String[] {
-            "www"  }, monitor);
+        addDefaultDirectories(pageInfo.mAndroidProject, "assets/", new String[] { "www"  }, monitor);
         String wwwDir = pageInfo.mDestinationDirectory + "/assets/www/";
+        
+        String contentSelection = pageInfo.mContentSelection;
+        boolean useExample = contentSelection.equals("example");
 
         boolean doCopy = true;
         if (pageInfo.mUseJqmDemo) {
             bundleCopy("/resources/jqm/demo2", wwwDir);
             doCopy = false;
         } else if (pageInfo.mJqmChecked) {
-            if (pageInfo.mUseExample) {
+            if (useExample) {
                 bundleCopy("/resources/jqm/phonegapExample", wwwDir);
                 doCopy = false;
             }
         } else if (pageInfo.mSenchaChecked) {
-            if (pageInfo.mUseExample && !pageInfo.mSenchaKitchenSink) {
+            if (useExample && !pageInfo.mSenchaKitchenSink) {
                 bundleCopy("/resources/sencha/phonegapExample", wwwDir);
                 doCopy = false;
             }
         } 
         
         if (doCopy) {
-            if (pageInfo.mPackagedPhonegap && pageInfo.mUseExample && !pageInfo.mSenchaKitchenSink) {
+            if (pageInfo.mPackagedPhonegap && useExample && !pageInfo.mSenchaKitchenSink) {
                 bundleCopy("resources/phonegap/Sample", wwwDir);
+            } else if (contentSelection.equals("minimal")) {
+                bundleCopy("/resources/phonegap/minimal", wwwDir);
             } else {
                 FileCopy.recursiveCopy(pageInfo.mSourceDirectory, wwwDir);
             }
         }
+        
+        if (pageInfo.mPureImport) return; // Don't tweak anything
         
         String phonegapJsFileName;
         
@@ -283,9 +289,9 @@ class PhonegapProjectPopulate {
 
         } else { // www.phonegap.com/download
             phonegapJsFileName = pageInfo.mPhonegapJs;
-            if (pageInfo.mUseExample && !pageInfo.mSenchaKitchenSink) { 
+            if (!contentSelection.equals("user") && !pageInfo.mSenchaKitchenSink) { 
                 // copy phonegap{version}.js to phonegap.js
-                if (pageInfo.mJqmChecked || pageInfo.mSenchaChecked) {  // otherwise already there
+                if (contentSelection.equals("minimal") || pageInfo.mJqmChecked || pageInfo.mSenchaChecked) {  // otherwise already there
                     FileCopy.copy(pageInfo.mPhonegapDirectory + "/Android/" + pageInfo.mPhonegapJs,
                             wwwDir + pageInfo.mPhonegapJs);
                 }
@@ -339,7 +345,7 @@ class PhonegapProjectPopulate {
         String fromJqmDir = pageInfo.mJqmDirectory;
         String version;
         if (fromJqmDir == null) {  // get from plugin installation
-            version = "-1.0rc2";  // TODO - do this programmatically
+            version = "-1.0";  // TODO - do this programmatically
             bundleCopy("/resources/jqm/jquery.mobile", jqmDir);
         } else {
             version = pageInfo.mJqmVersion;
@@ -348,28 +354,30 @@ class PhonegapProjectPopulate {
 
         bundleCopy("/resources/jqm/supplements", jqmDir);
 
-        // Update the index.html with path to the js and css files
-        
-        String file = pageInfo.mDestinationDirectory + "/" + "assets/www/index.html";
-        String fileContents = FileStringReplace.replace(file, "\\{\\$jqmversion\\}", version);
-        
-        fileContents = updatePathInHtml(fileContents, "jquery.mobile" + version, 
-                ".css\"", "\"jquery.mobile/", pageInfo.mSourceDirectory, null);
-        fileContents = updatePathInHtml(fileContents, "jquery.mobile" + version, 
-                ".js\"", "\"jquery.mobile/", pageInfo.mSourceDirectory, null);
-        
-        // and jquery file
-        fileContents = updatePathInHtml(fileContents, "jquery-1.6.4", 
-                ".js\"", "\"jquery.mobile/", pageInfo.mSourceDirectory, ".min\"");
-        
-        // Add CDN comments for jQuery Mobile
-        fileContents = fileContents.replace("</head>",  "\n\t<!-- CDN Respositories: For production, replace lines above with these uncommented minified versions -->\n" +
-                "\t<!-- <link rel=\"stylesheet\" href=\"http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.css\" />-->\n" +
-                "\t<!-- <script src=\"http://code.jquery.com/jquery-1.6.4.min.js\"></script>-->\n" +
-                "\t<!-- <script src=\"http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.js\"></script>-->\n\t</head>");
-        
-        // Write out the file
-        StringIO.write(file, fileContents);
+        if (!pageInfo.mPureImport && !pageInfo.mContentSelection.equals("minimal")) {
+            // Update the index.html with path to the js and css files
+            
+            String file = pageInfo.mDestinationDirectory + "/" + "assets/www/index.html";
+            String fileContents = FileStringReplace.replace(file, "\\{\\$jqmversion\\}", version);
+            
+            fileContents = updatePathInHtml(fileContents, "jquery.mobile" + version, 
+                    ".css\"", "\"jquery.mobile/", pageInfo.mSourceDirectory, null);
+            fileContents = updatePathInHtml(fileContents, "jquery.mobile" + version, 
+                    ".js\"", "\"jquery.mobile/", pageInfo.mSourceDirectory, null);
+            
+            // and jquery file
+            fileContents = updatePathInHtml(fileContents, "jquery-1.6.4", 
+                    ".js\"", "\"jquery.mobile/", pageInfo.mSourceDirectory, ".min\"");
+            
+            // Add CDN comments for jQuery Mobile
+            fileContents = fileContents.replace("</head>",  "\n\t<!-- CDN Respositories: For production, replace lines above with these uncommented minified versions -->\n" +
+                    "\t<!-- <link rel=\"stylesheet\" href=\"http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css\" />-->\n" +
+                    "\t<!-- <script src=\"http://code.jquery.com/jquery-1.6.4.min.js\"></script>-->\n" +
+                    "\t<!-- <script src=\"http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js\"></script>-->\n\t</head>");
+            
+            // Write out the file
+            StringIO.write(file, fileContents);
+        }
     }
         
 
@@ -397,15 +405,17 @@ class PhonegapProjectPopulate {
         FileCopy.copy(pageInfo.mSenchaDirectory + "/sencha-touch-debug.js", senchaDir);
         FileCopy.copy(pageInfo.mSenchaDirectory + "/sencha-touch-debug-w-comments.js", senchaDir);
 
-        // Update the index.html with path to sencha-touch.css and sencha-touch.js
-        String file = pageInfo.mDestinationDirectory + "/" + "assets/www/index.html";
-        String fileContents = StringIO.read(file);
+        if (!pageInfo.mPureImport && !pageInfo.mContentSelection.equals("minimal")) {
+            // Update the index.html with path to sencha-touch.css and sencha-touch.js
+            String file = pageInfo.mDestinationDirectory + "/" + "assets/www/index.html";
+            String fileContents = StringIO.read(file);
 
-        fileContents = updatePathInHtml(fileContents, "sencha-touch", ".css\"", "\"sencha/resources/css/", pageInfo.mSourceDirectory, null);
-        fileContents = updatePathInHtml(fileContents, "sencha-touch", ".js\"", "\"sencha/", pageInfo.mSourceDirectory, null);
+            fileContents = updatePathInHtml(fileContents, "sencha-touch", ".css\"", "\"sencha/resources/css/", pageInfo.mSourceDirectory, null);
+            fileContents = updatePathInHtml(fileContents, "sencha-touch", ".js\"", "\"sencha/", pageInfo.mSourceDirectory, null);
 
-        // Write out the file
-        StringIO.write(file, fileContents);
+            // Write out the file
+            StringIO.write(file, fileContents);
+        }
     }
     
 
@@ -656,6 +666,7 @@ class PhonegapProjectPopulate {
         throws IOException, URISyntaxException {
         
         Bundle bundle = com.mds.apg.Activator.getDefault().getBundle();
+        @SuppressWarnings("unchecked")
         Enumeration<URL> en = bundle.findEntries(dir, "*", true);
         while (en.hasMoreElements()) {
             URL url = en.nextElement();

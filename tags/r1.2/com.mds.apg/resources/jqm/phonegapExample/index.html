@@ -4,11 +4,11 @@
     <meta name="viewport" content="width=320; user-scalable=no" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>PhoneGap Demo With JQuery Mobile</title>
-      <link rel="stylesheet" href="jquery.mobile/jquery.mobile{$jqmversion}.css" type="text/css" charset="utf-8" />
-	  <link rel="stylesheet" href="pgandjqm-style-override.css" type="text/css" charset="utf-8" />
-	  <script type="text/javascript" src="jquery.mobile/jquery-1.6.4.min"></script>
+      <link rel="stylesheet" href="jquery.mobile/jquery.mobile{$jqmversion}.css" type="text/css"/>
+	  <link rel="stylesheet" href="pgandjqm-style-override.css" type="text/css"/>
+	  <script type="text/javascript" charset="utf-8" src="jquery.mobile/jquery-1.6.4.min"></script>
 	  <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
-	  <script src="jquery.mobile/jquery.mobile{$jqmversion}.js"></script>
+	  <script type="text/javascript" charset="utf-8" src="jquery.mobile/jquery.mobile{$jqmversion}.js"></script>
 	  <script type="text/javascript" charset="utf-8" src="main.js"></script>
   </head>
   <body onload="init();">
@@ -24,17 +24,16 @@
         Width: <b><span id="width"> &nbsp;</span></b>, Ht: <b><span id="height">&nbsp;</span></b>, Color Depth: <b><span id="colorDepth"></span></b>
         </div>
      </div>
-
-    <div data-role="collapsible" data-content-theme="b" data-collapsed="true"  id="accelmenu">
-    	<h1><div>Toggle Accelerometer</div></h1>
+    <div data-role="collapsible" data-content-theme="b" data-collapsed="true" id="accelmenu">
+    	<h1>Toggle Accelerometer</h1>
 		<div class="ui-grid-b">
      	 	<div class="ui-block-a">X: <b id="x">&nbsp;</b></div>
      	 	<div class="ui-block-b">Y: <b id="y">&nbsp;</b></div> 
      	 	<div class="ui-block-c">Z: <b id="z">&nbsp;</b></div>
     	</div>
     </div>   
-    <div data-role="collapsible" data-content-theme="b" data-collapsed="true"  id="locationmenu">   
-    	<h1><div>Toggle Location</div></h1>
+    <div data-role="collapsible" data-content-theme="b" data-collapsed="true" id="locationmenu">   
+    	<h1>Toggle Location</h1>
     	<div id="loccontainer" >
     		<div id="loctext" ></div>
     		<div id="locdata" ></div>
@@ -46,6 +45,12 @@
     <div data-role="button" onclick="show_pic();">Get a Picture</div>
     <div data-role="button" onclick="get_contacts();">Get Phone's Contacts</div>
     <div data-role="button" onclick="check_network();">Check Network</div>    
+    <div data-role="collapsible" data-content-theme="b" data-collapsed="true" id="compassmenu">
+    	<h1>Toggle Compass</h1>
+		<div class="ui-grid-b">
+     	 	<div class="ui-block-a">Compass&nbsp;Heading:&nbsp;<b id="h">&nbsp;</b></div>
+    	</div>
+    </div>
     <div id="viewport" class="viewport" style="display:none;">       
       <img style="width:60px;height:60px" id="test_img" src="" />
     </div> 

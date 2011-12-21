@@ -70,7 +70,7 @@ public final class PagePhonegapPathSet extends WizardSection {
         
         boolean initialVal = doGetPreferenceStore().getString(PG_USE_INSTALLED) != ""; 
         mUsePackagedPgRadio = new Button(phonegapGroup, SWT.RADIO);
-        mUsePackagedPgRadio.setText("Use Built-in PhoneGap - version 1.1.0");
+        mUsePackagedPgRadio.setText("Use Built-in PhoneGap - version 1.3.0");
         mUsePackagedPgRadio.setSelection(!initialVal);
         mUsePackagedPgRadio.setToolTipText("Use the PhoneGap installation included with this Eclipse plug-in"); 
         
@@ -173,7 +173,7 @@ public final class PagePhonegapPathSet extends WizardSection {
         String phonegapDirName = getValue();
         File phonegapDir = new File(phonegapDirName);
         if (!phonegapDir.exists() || !phonegapDir.isDirectory()) {
-            return mWizardPage.setStatus("A phonegap directory name must be specified.",  AndroidPgProjectCreationPage.MSG_ERROR);
+            return mWizardPage.setStatus("A PhoneGap directory name must be specified.",  AndroidPgProjectCreationPage.MSG_ERROR);
         } else {
             String[] l = phonegapDir.list();
             if (l.length == 0) {
