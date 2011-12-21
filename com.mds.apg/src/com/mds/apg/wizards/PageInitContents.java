@@ -34,11 +34,13 @@ public final class PageInitContents extends WizardSection{
     // Set up storage for persistent initializers
 
     private final static String SOURCE_DIR = com.mds.apg.Activator.PLUGIN_ID + ".source"; 
-    private final static String USE_USERS_DIR = com.mds.apg.Activator.PLUGIN_ID + ".userdir";
+    private final static String CONTENT_SELECTION = com.mds.apg.Activator.PLUGIN_ID + ".contentselection";
+    private final static String PURE_IMPORT = com.mds.apg.Activator.PLUGIN_ID + ".pureimport";
 
     /** Last user-browsed location */
     private String mLocationCache;  
-    private boolean mUseFromExample;
+    private String mContentSelection;  // example, minimal, or user
+    private boolean mPureImport;
     
     // widgets
 
@@ -50,7 +52,8 @@ public final class PageInitContents extends WizardSection{
     PageInitContents(AndroidPgProjectCreationPage wizardPage, Composite parent) {
         super(wizardPage);
         mLocationCache = doGetPreferenceStore().getString(SOURCE_DIR);  
-        mUseFromExample = doGetPreferenceStore().getString(USE_USERS_DIR) == "" ; // returns true if unset for first time in workspace
+        mContentSelection = doGetPreferenceStore().getString(CONTENT_SELECTION); 
+        if (mContentSelection.equals("")) mContentSelection = "example";
         createGroup(parent);
     }
     
@@ -70,33 +73,55 @@ public final class PageInitContents extends WizardSection{
         group.setText("Project Contents");
         mWizardPage.mContentsSection = group; // Visibility can be adjusted by other widgets
 
-        boolean initialVal = isCreateFromExample();
         final Button createFromExampleRadio = new Button(group, SWT.RADIO);
-        createFromExampleRadio.setText("Use phonegap example source as template for project");
-        createFromExampleRadio.setSelection(initialVal);
+        createFromExampleRadio.setText("Use PhoneGap example source as template for project");
+        createFromExampleRadio.setSelection(mContentSelection.equals("example"));
         createFromExampleRadio.setToolTipText("Populate your project with the example shipped with your phonegap installation");
         
         // Label for showing the example is with JQM or Sencha
         mWithLabel = new Label(group, SWT.NONE);
         
-        Button existing_project_radio = new Button(group, SWT.RADIO);
+        final Button minimalProject = new Button(group, SWT.RADIO);
+        minimalProject.setText("Create minimal PhoneGap project");
+        minimalProject.setToolTipText("Creates a minimal PhoneGap hello world");
+        minimalProject.setSelection(mContentSelection.equals("minimal"));
+        
+        new Label(group, SWT.NONE); // dummy to force new line
+        
+        final Button existing_project_radio = new Button(group, SWT.RADIO);
         existing_project_radio.setText("Create project from specified source directory");
         existing_project_radio.setToolTipText("Specify root directory containing your sources that you wish to populate into the Android project"); 
-        existing_project_radio.setSelection(!initialVal);
+        boolean doSetLocation = mContentSelection.equals("user");
+        existing_project_radio.setSelection(doSetLocation);
+        
+        // Check box to do a pure import (versus adding in phonegap.js,etc. and making changes to it)
 
+        final Button pureImport = new Button(group, SWT.CHECK);
+        pureImport.setText("Pure Import");
+        boolean initPure = doGetPreferenceStore().getString(PURE_IMPORT) != "";
+        pureImport.setSelection(initPure);
+        pureImport.setToolTipText("Disable any modifications to imported files. Use this to import an already working PhoneGap directory");
+        pureImport.setVisible(doSetLocation);
+        mPureImport = doSetLocation && initPure;
+        
         SelectionListener location_listener = new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
                 super.widgetSelected(e);
-                boolean newVal = createFromExampleRadio.getSelection();
-                mUseFromExample = newVal;
-                doGetPreferenceStore().setValue(USE_USERS_DIR, newVal ? "" : "true");
+                mContentSelection = createFromExampleRadio.getSelection() ? "example" : minimalProject.getSelection() ? "minimal" : "user";
+                boolean pureImportVal = pureImport.getSelection();
+                pureImport.setVisible(mContentSelection.equals("user"));
+                doGetPreferenceStore().setValue(CONTENT_SELECTION, mContentSelection);
+                mPureImport = pureImportVal && mContentSelection.equals("user");
+                doGetPreferenceStore().setValue(PURE_IMPORT, mPureImport ? "true" : "");
                 mWizardPage.validatePageComplete();
             }
         };
 
         createFromExampleRadio.addSelectionListener(location_listener);
+        minimalProject.addSelectionListener(location_listener);
         existing_project_radio.addSelectionListener(location_listener);
+        pureImport.addSelectionListener(location_listener);
         
         Composite location_group = new Composite(parent, SWT.NONE);
         location_group.setLayout(new GridLayout(3, /* num columns */
@@ -109,7 +134,7 @@ public final class PageInitContents extends WizardSection{
         mLocationPathField = new Text(location_group, SWT.BORDER);  
         mLocationPathField.setText(getLocationSave());
         mBrowseButton = setupDirectoryBrowse(mLocationPathField, parent, location_group);
-        enableLocationWidgets(!initialVal);  
+        enableLocationWidgets(doSetLocation);  
     }
 
     // --- Internal getters & setters ------------------
@@ -137,8 +162,12 @@ public final class PageInitContents extends WizardSection{
     /** Returns the value of the "Create from Existing Sample" radio. */
     /* TODO - Simplify like senchaChecked */
     
-    protected boolean isCreateFromExample() {
-        return mUseFromExample;
+    protected String getContentSelection() {
+        return mContentSelection;
+    }
+    
+    protected boolean isPureImport() {
+        return mPureImport;
     }
     
     void locationVisibility(boolean v) {
@@ -160,7 +189,7 @@ public final class PageInitContents extends WizardSection{
     }
     
     protected void enableLocationWidgets() {
-        enableLocationWidgets(!mUseFromExample);
+        enableLocationWidgets(mContentSelection.equals("user"));
     }
         
     /**
@@ -171,7 +200,7 @@ public final class PageInitContents extends WizardSection{
     protected int validate() {
         File locationDir = new File(getValue());
         if (!locationDir.exists() || !locationDir.isDirectory()) {
-            return mWizardPage.setStatus("Location: must be a valid directory containing an index.html file", 
+            return mWizardPage.setStatus("Location: must be a valid directory", 
                 AndroidPgProjectCreationPage.MSG_ERROR);
         } else {
             String[] l = locationDir.list();
@@ -179,41 +208,43 @@ public final class PageInitContents extends WizardSection{
                 return mWizardPage.setStatus("Location: is empty. It should include the source to populate the project", 
                         AndroidPgProjectCreationPage.MSG_ERROR);
             }
-            boolean foundIndexHtml = false;
-            boolean foundSencha = false;
-            boolean foundJqm = false;
-            boolean foundPhonegapJs = false;
+            if (!mPureImport) { // assume user knows what he's doing if pureImport
+                boolean foundIndexHtml = false;
+                boolean foundSencha = false;
+                boolean foundJqm = false;
+                boolean foundPhonegapJs = false;
 
-            for (String s : l) {
-                if (s.equals("index.html")) {
-                    foundIndexHtml = true;
-                } else if (s.equals("sencha")) {
-                    foundSencha = true;
-                } else if (s.equals("jquery.mobile")) {
-                    foundJqm = true;
-                } else if (s.equals("phonegap.js")) {
-                    foundPhonegapJs = true;
+                for (String s : l) {
+                    if (s.equals("index.html")) {
+                        foundIndexHtml = true;
+                    } else if (s.equals("sencha")) {
+                        foundSencha = true;
+                    } else if (s.equals("jquery.mobile")) {
+                        foundJqm = true;
+                    } else if (s.equals("phonegap.js")) {
+                        foundPhonegapJs = true;
+                    }
                 }
-            }
-            if (!foundIndexHtml) {
-                return mWizardPage.setStatus("Location: must include an index.html file", 
-                        AndroidPgProjectCreationPage.MSG_ERROR);
-            }
-            if (foundSencha && mWizardPage.mSenchaDialog.senchaChecked()) {
-                return mWizardPage.setStatus("Location: can not include a sencha directory." +
-                        " Uncheck \"Include Sencha ...\" if the Location directory already includes Sencha Touch", 
-                        AndroidPgProjectCreationPage.MSG_ERROR);
-            }
-            if (foundJqm && mWizardPage.mJqmDialog.jqmChecked()) {
-                return mWizardPage.setStatus("Location: can not include a jquery.mobile directory." +
-                        " Uncheck \"Include JQuery Mobile ...\" if the Location directory already includes it", 
-                        AndroidPgProjectCreationPage.MSG_ERROR);
-            }
-            if (foundPhonegapJs) {
-                return mWizardPage.setStatus("Location: " + getValue() +
-                        " cannot include a phonegap.js file.  It " +
-                        "will be supplied from the phonegap-android installation",
-                        AndroidPgProjectCreationPage.ERROR);
+                if (!foundIndexHtml) {
+                    return mWizardPage.setStatus("Location: must include an index.html file", 
+                            AndroidPgProjectCreationPage.MSG_ERROR);
+                }
+                if (foundSencha && mWizardPage.mSenchaDialog.senchaChecked()) {
+                    return mWizardPage.setStatus("Location: can not include a sencha directory." +
+                            " Uncheck \"Include Sencha ...\" if the Location directory already includes Sencha Touch", 
+                            AndroidPgProjectCreationPage.MSG_ERROR);
+                }
+                if (foundJqm && mWizardPage.mJqmDialog.jqmChecked()) {
+                    return mWizardPage.setStatus("Location: can not include a jquery.mobile directory." +
+                            " Uncheck \"Include JQuery Mobile ...\" if the Location directory already includes it", 
+                            AndroidPgProjectCreationPage.MSG_ERROR);
+                }
+                if (foundPhonegapJs) {
+                    return mWizardPage.setStatus("Location: " + getValue() +
+                            " cannot include a phonegap.js file.  It " +
+                            "will be supplied from the phonegap-android installation",
+                            AndroidPgProjectCreationPage.ERROR);
+                }
             }
             // TODO more validation
             
