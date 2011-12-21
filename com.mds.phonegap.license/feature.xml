@@ -2,7 +2,7 @@
 <feature
       id="com.mds.phonegap.license"
       label="PhoneGap License"
-      version="1.2.6.qualifier"
+      version="1.2.5.qualifier"
       provider-name="MDS">
 
    <description url="http://www.phonegap.com/about/license">
@@ -10,7 +10,7 @@
    </description>
 
    <copyright url="http://www.phonegap.com/license">
-      Copyright © 2011 Adobe Systems Inc. All rights reserved 2011
+      Copyright (c) 2008-2011 Nitobi Software Inc., et. al.,
    </copyright>
 
    <license url="http://www.phonegap.com/license">

@@ -2,10 +2,10 @@
 <feature
       id="com.mds.jqm.license"
       label="jQuery Mobile License"
-      version="1.2.6.qualifier"
+      version="1.2.5.qualifier"
       provider-name="MDS">
 
-   <description url="http://jquery.org/license/">
+   <description url="http://jquerymobile.com/">
       jQuery mobile license agreement
    </description>
 

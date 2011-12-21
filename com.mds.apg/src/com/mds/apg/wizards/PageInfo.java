@@ -29,8 +29,7 @@ public class PageInfo {
     protected final boolean mPackagedPhonegap;    // Using Phonegap packaged with plugin
     protected final String mPhonegapJs;           // phonegap.js file name (non-github case)
     protected final String mPhonegapJar;          // phonegap.jar file name (non-github case)
-    protected final String mContentSelection;          // content selection 
-    protected final boolean mPureImport;          // use user's directory exactly
+    protected final boolean mUseExample;          // using example 
     protected final String mDestinationDirectory; // Place to put new files
     protected final IProject mAndroidProject;     // the new Android project
     protected final boolean mJqmChecked;          // Using jQueryMobile?
@@ -42,7 +41,7 @@ public class PageInfo {
     protected final boolean mSenchaKitchenSink;   // Do Sencha Kitchen Sink app
     
     public PageInfo(String sourceDirectory, String phonegapDirectory, boolean fromGitHub, boolean packagedPhonegap,
-            String phonegapJs, String phonegapJar, String contentSelection, boolean pureImport, String destinationDirectory, 
+            String phonegapJs, String phonegapJar, boolean useExample, String destinationDirectory, 
             IProject androidProject, boolean jqmChecked, String jqmDirectory, boolean useJqmDemo,
             String jqmVersion, 
             String senchaDirectory, boolean senchaChecked, boolean senchaKitchenSink) {
@@ -52,8 +51,7 @@ public class PageInfo {
         mPackagedPhonegap = packagedPhonegap;
         mPhonegapJs = phonegapJs;
         mPhonegapJar = phonegapJar;
-        mContentSelection = contentSelection;
-        mPureImport = pureImport;
+        mUseExample = useExample;
         mDestinationDirectory = destinationDirectory;
         mAndroidProject = androidProject;
         mJqmChecked = jqmChecked;

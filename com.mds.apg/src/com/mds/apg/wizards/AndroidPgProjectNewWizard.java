@@ -30,7 +30,6 @@ import java.util.Collections;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceStatus;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -109,16 +108,13 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
         
         // Open index.html to start
         
-        IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-        IResource file = mNewAndroidProject.getFile("/assets/www/index.html");
-        if (file.exists()) {   // may not exist on PureImport
-            try {
-                IDE.openEditor(activePage, (IFile) file);
-            } catch (PartInitException e) {
-                // Ignore exception.  Just don't open the file
-            }
-        } else {
-            file = mNewAndroidProject.getFolder("/assets/www/"); 
+        IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+                .getActivePage();
+        IFile file = mNewAndroidProject.getFile("/assets/www/index.html");
+        try {
+            IDE.openEditor(activePage, file);
+        } catch (PartInitException e) {
+            // Ignore exception.  Just don't open the file
         }
         
         // And open the project explorer
@@ -147,8 +143,7 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
                 mPhonegapPage.mPhonegapDialog.useFromPackaged(),
                 mPhonegapPage.mPhonegapDialog.getPhonegapJsName(),
                 mPhonegapPage.mPhonegapDialog.getPhonegapJarName(),
-                mPhonegapPage.mInitContentsDialog.getContentSelection(),
-                mPhonegapPage.mInitContentsDialog.isPureImport(),
+                mPhonegapPage.mInitContentsDialog.isCreateFromExample(),
                 Platform.getLocation().toString() + "/"+ mNewAndroidProject.getName() + "/",
                 mNewAndroidProject,
                 mPhonegapPage.mJqmDialog.jqmChecked(),

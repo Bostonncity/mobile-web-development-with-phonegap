@@ -230,20 +230,6 @@ cfg.items = [
                     check_network();
                 }
             } ]
-        },
-        {
-            items : [ {
-                ui : 'round',
-                text : 'Toggle Compass',
-                handler : function() {
-                    toggleCompass();
-                }
-            } ]
-        },
-        {
-            html : '<tr id="accel-data">'
-                    + '<dt><b>Compass&nbsp;Heading:&nbsp;</b></dt><td id="h">&nbsp;</td></tr>',
-            flex : 0.5
         } ];
 
 new Ext.Application({

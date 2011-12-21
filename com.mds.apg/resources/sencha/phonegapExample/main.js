@@ -163,22 +163,3 @@ var check_network = function() {
     document.getElementById("networktext").innerHTML = "<span>Connection type:<br/>"
         + states[networkState] + "</span>";
 };
-
-var compassWatch = null;
-
-function updateHeading(h) {
-    document.getElementById('h').innerHTML = h.magneticHeading;
-}
-
-function toggleCompass() {
-    if (compassWatch !== null) {
-        navigator.compass.clearWatch(compassWatch);
-        compassWatch = null;
-        updateHeading({ magneticHeading : "Off"});
-    } else {        
-        var options = { frequency: 1000 };
-        compassWatch = navigator.compass.watchHeading(updateHeading, function(e) {
-            alert('Compass Error: ' + e.code);
-        }, options);
-    }
-}

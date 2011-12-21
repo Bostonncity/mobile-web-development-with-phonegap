@@ -71,7 +71,7 @@ public class AndroidPgProjectCreationPage extends WizardPage {
         super(MAIN_PAGE_NAME);
         setPageComplete(false);
         setTitle("Create a PhoneGap for Android Project");
-        setDescription("Specify PhoneGap installation, UI frameworks, and populating sources");
+        setDescription("Set location of phonegap directory, specify UI frameworks, and populating sources");
         ImageDescriptor desc = AbstractUIPlugin.imageDescriptorFromPlugin("com.mds.apg", "icons/mds.png");
         setImageDescriptor(desc);
     }
@@ -148,26 +148,26 @@ public class AndroidPgProjectCreationPage extends WizardPage {
         // First handle cross-section logic updates that need to happen regardless of validation 
         
         boolean checkLocation = true;
-        boolean settingLocation = mInitContentsDialog.getContentSelection().equals("user");
+        boolean createFromExample = mInitContentsDialog.isCreateFromExample();
         boolean contentsVisible = !(mJqmDialog.useJqmDemo() || mSenchaDialog.useSenchaKitchenSink());
         mContentsSection.setVisible(contentsVisible); // and make sure Contents is visible
-        mInitContentsDialog.enableLocationWidgets(contentsVisible && settingLocation); // and location right state
+        mInitContentsDialog.enableLocationWidgets(contentsVisible && !createFromExample); // and location right state
         if (contentsVisible) {
             String withString;
             if (mJqmDialog.jqmChecked()) {
                 withString = "with jQuery Mobile";
-                if (!settingLocation) {
+                if (createFromExample) {
                     checkLocation = false;
                 }
             } else if (mSenchaDialog.senchaChecked()) {
                 withString = "with Sencha Touch";
-                if (!settingLocation) {
+                if (createFromExample) {
                     checkLocation = false;
                 }
             } else {
                 // needs to be seeded with blanks so that there's space when it needs to appear (Issue 3)
                 withString = "                                 ";
-                if (mInitContentsDialog.getContentSelection().equals("example") && !mPhonegapDialog.useFromPackaged()) {
+                if (createFromExample && !mPhonegapDialog.useFromPackaged()) {
                     String gitSampleSpot = mPhonegapDialog.gitSampleSpot();
                     if (gitSampleSpot != null) {
                         mInitContentsDialog.update(mPhonegapDialog.getValue() + gitSampleSpot);
@@ -193,7 +193,7 @@ public class AndroidPgProjectCreationPage extends WizardPage {
         }
 
         if (checkLocation) { 
-            if (mPhonegapDialog.useFromPackaged()) checkLocation = settingLocation;
+            if (mPhonegapDialog.useFromPackaged()) checkLocation = !createFromExample;
         }      
             
         mInitContentsDialog.locationVisibility(checkLocation);
