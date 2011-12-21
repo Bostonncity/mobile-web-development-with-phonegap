@@ -122,14 +122,14 @@ function check_network() {
 var watchID = null;
 
 function updateHeading(h) {
-    document.getElementById('h').innerHTML = roundNumber(h.magneticHeading);
+    document.getElementById('h').innerHTML = h.magneticHeading;
 }
 
 function toggleCompass() {
     if (watchID !== null) {
         navigator.compass.clearWatch(watchID);
         watchID = null;
-        updateHeading({ magneticHeading : ""});
+        updateHeading({ magneticHeading : "Off"});
     } else {        
         var options = { frequency: 1000 };
         watchID = navigator.compass.watchHeading(updateHeading, function(e) {
