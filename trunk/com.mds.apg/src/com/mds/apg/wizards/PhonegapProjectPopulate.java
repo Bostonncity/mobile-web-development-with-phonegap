@@ -291,7 +291,7 @@ class PhonegapProjectPopulate {
             phonegapJsFileName = pageInfo.mPhonegapJs;
             if (!contentSelection.equals("user") && !pageInfo.mSenchaKitchenSink) { 
                 // copy phonegap{version}.js to phonegap.js
-                if (pageInfo.mJqmChecked || pageInfo.mSenchaChecked) {  // otherwise already there
+                if (contentSelection.equals("minimal") || pageInfo.mJqmChecked || pageInfo.mSenchaChecked) {  // otherwise already there
                     FileCopy.copy(pageInfo.mPhonegapDirectory + "/Android/" + pageInfo.mPhonegapJs,
                             wwwDir + pageInfo.mPhonegapJs);
                 }
