@@ -67,7 +67,7 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
         setHelpAvailable(false); // TODO have help
         mPhonegapPage = createPhonegapPage();
         super.init(workbench, selection);
-        setWindowTitle("MDS AppLaud - PhoneGap for Android"); 
+        setWindowTitle(Messages.AndroidPgProjectNewWizard_Title);
     }
 
     @Override
@@ -94,7 +94,7 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
     @Override
     public boolean performFinish() {
         String[] preAndroidCreateDirectoryList = getWorkspaceDirectoryList();
-        if (!super.performFinish() || super.getPackageName() == "") return false;
+        if (!super.performFinish() || super.getPackageName() == "") return false; //$NON-NLS-1$
         String[] postAndroidCreateDirectoryList = getWorkspaceDirectoryList();
 
         //  should be one new file corresponding to the new Android project
@@ -110,7 +110,7 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
         // Open index.html to start
         
         IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-        IResource file = mNewAndroidProject.getFile("/assets/www/index.html");
+        IResource file = mNewAndroidProject.getFile("/assets/www/index.html"); //$NON-NLS-1$
         if (file.exists()) {   // may not exist on PureImport
             try {
                 IDE.openEditor(activePage, (IFile) file);
@@ -118,7 +118,7 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
                 // Ignore exception.  Just don't open the file
             }
         } else {
-            file = mNewAndroidProject.getFolder("/assets/www/"); 
+            file = mNewAndroidProject.getFolder("/assets/www/");  //$NON-NLS-1$
         }
         
         // And open the project explorer
@@ -149,7 +149,7 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
                 mPhonegapPage.mPhonegapDialog.getPhonegapJarName(),
                 mPhonegapPage.mInitContentsDialog.getContentSelection(),
                 mPhonegapPage.mInitContentsDialog.isPureImport(),
-                Platform.getLocation().toString() + "/"+ mNewAndroidProject.getName() + "/",
+                Platform.getLocation().toString() + "/"+ mNewAndroidProject.getName() + "/", //$NON-NLS-1$ //$NON-NLS-2$
                 mNewAndroidProject,
                 mPhonegapPage.mJqmDialog.jqmChecked(),
                 mPhonegapPage.mJqmDialog.useFromPackaged() ? null : 
@@ -193,9 +193,9 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
                 if (core.getStatus().getCode() == IResourceStatus.CASE_VARIANT_EXISTS) {
                     // The error indicates the file system is not case sensitive
                     // and there's a resource with a similar name.
-                    MessageDialog.openError(getShell(), "Error", "Error: Case Variant Exists");
+                    MessageDialog.openError(getShell(), "Error", Messages.AndroidPgProjectNewWizard_Error_Case_Variant_Exists); //$NON-NLS-1$
                 } else {
-                    ErrorDialog.openError(getShell(), "Error", core.getMessage(), core.getStatus());
+                    ErrorDialog.openError(getShell(), "Error", core.getMessage(), core.getStatus()); //$NON-NLS-1$
                 }
             } else {
                 // Some other kind of exception
@@ -208,7 +208,7 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
                 if (msg == null) {
                     msg = t.toString();
                 }
-                MessageDialog.openError(getShell(), "Error", msg);
+                MessageDialog.openError(getShell(), "Error", msg); //$NON-NLS-1$
             }
             e.printStackTrace();
         } catch (InterruptedException e) {
