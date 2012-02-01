@@ -49,7 +49,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 public class AndroidPgProjectCreationPage extends WizardPage {
 
     // constants
-    private static final String MAIN_PAGE_NAME = "newAndroidPgProjectPage"; 
+    private static final String MAIN_PAGE_NAME = "newAndroidPgProjectPage";  //$NON-NLS-1$
 
     protected final static int MSG_NONE = 0;
     protected final static int MSG_WARNING = 1;
@@ -70,9 +70,9 @@ public class AndroidPgProjectCreationPage extends WizardPage {
     public AndroidPgProjectCreationPage() {
         super(MAIN_PAGE_NAME);
         setPageComplete(false);
-        setTitle("Create a PhoneGap for Android Project");
-        setDescription("Specify PhoneGap installation, UI frameworks, and populating sources");
-        ImageDescriptor desc = AbstractUIPlugin.imageDescriptorFromPlugin("com.mds.apg", "icons/mds.png");
+        setTitle(Messages.AndroidPgProjectCreationPage_Title);
+        setDescription(Messages.AndroidPgProjectCreationPage_Description);
+        ImageDescriptor desc = AbstractUIPlugin.imageDescriptorFromPlugin("com.mds.apg", "icons/mds.png"); //$NON-NLS-1$ //$NON-NLS-2$
         setImageDescriptor(desc);
     }
 
@@ -148,31 +148,31 @@ public class AndroidPgProjectCreationPage extends WizardPage {
         // First handle cross-section logic updates that need to happen regardless of validation 
         
         boolean checkLocation = true;
-        boolean settingLocation = mInitContentsDialog.getContentSelection().equals("user");
+        boolean settingLocation = mInitContentsDialog.getContentSelection().equals("user"); //$NON-NLS-1$
         boolean contentsVisible = !(mJqmDialog.useJqmDemo() || mSenchaDialog.useSenchaKitchenSink());
         mContentsSection.setVisible(contentsVisible); // and make sure Contents is visible
         mInitContentsDialog.enableLocationWidgets(contentsVisible && settingLocation); // and location right state
         if (contentsVisible) {
             String withString;
             if (mJqmDialog.jqmChecked()) {
-                withString = "with jQuery Mobile";
+                withString = Messages.AndroidPgProjectCreationPage_with_jQueryMobile;
                 if (!settingLocation) {
                     checkLocation = false;
                 }
             } else if (mSenchaDialog.senchaChecked()) {
-                withString = "with Sencha Touch";
+                withString = Messages.AndroidPgProjectCreationPage_with_SenchaTouch;
                 if (!settingLocation) {
                     checkLocation = false;
                 }
             } else {
                 // needs to be seeded with blanks so that there's space when it needs to appear (Issue 3)
-                withString = "                                 ";
-                if (mInitContentsDialog.getContentSelection().equals("example") && !mPhonegapDialog.useFromPackaged()) {
+                withString = "                                 "; //$NON-NLS-1$
+                if (mInitContentsDialog.getContentSelection().equals("example") && !mPhonegapDialog.useFromPackaged()) { //$NON-NLS-1$
                     String gitSampleSpot = mPhonegapDialog.gitSampleSpot();
                     if (gitSampleSpot != null) {
                         mInitContentsDialog.update(mPhonegapDialog.getValue() + gitSampleSpot);
                     } else {
-                        mInitContentsDialog.update(mPhonegapDialog.getValue() + "/Android/Sample/assets/www");
+                        mInitContentsDialog.update(mPhonegapDialog.getValue() + "/Android/Sample/assets/www"); //$NON-NLS-1$
                     }
                 }
             }
@@ -189,7 +189,7 @@ public class AndroidPgProjectCreationPage extends WizardPage {
         if (mSenchaDialog.validate() != MSG_NONE) return false;
         
         if (mSenchaDialog.useSenchaKitchenSink()) {
-            mInitContentsDialog.update(mSenchaDialog.getValue() + "/examples/kitchensink");
+            mInitContentsDialog.update(mSenchaDialog.getValue() + "/examples/kitchensink"); //$NON-NLS-1$
         }
 
         if (checkLocation) { 
