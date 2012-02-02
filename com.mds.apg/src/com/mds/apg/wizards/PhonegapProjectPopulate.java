@@ -189,7 +189,7 @@ class PhonegapProjectPopulate {
         } else { // not from github
             updateClasspath(monitor, 
                     pageInfo.mAndroidProject, 
-                    pageInfo.mPhonegapDirectory + "/Android/" + pageInfo.mPhonegapJar,
+                    pageInfo.mPhonegapDirectory + pageInfo.mInstallAndroidDirectory + pageInfo.mPhonegapJar,
                     null);      
         }
     }
@@ -292,12 +292,12 @@ class PhonegapProjectPopulate {
             if (!contentSelection.equals("user") && !pageInfo.mSenchaKitchenSink) { 
                 // copy phonegap{version}.js to phonegap.js
                 if (contentSelection.equals("minimal") || pageInfo.mJqmChecked || pageInfo.mSenchaChecked) {  // otherwise already there
-                    FileCopy.copy(pageInfo.mPhonegapDirectory + "/Android/" + pageInfo.mPhonegapJs,
+                    FileCopy.copy(pageInfo.mPhonegapDirectory + pageInfo.mInstallAndroidDirectory + pageInfo.mPhonegapJs,
                             wwwDir + pageInfo.mPhonegapJs);
                 }
             } else { // otherwise keep the name, since the user controls the
                      // index.html (and don't overwrite if user supplied the phonegap.js)
-                FileCopy.copyDontOverwrite(pageInfo.mPhonegapDirectory + "/Android/"
+                FileCopy.copyDontOverwrite(pageInfo.mPhonegapDirectory + pageInfo.mInstallAndroidDirectory
                         + pageInfo.mPhonegapJs, wwwDir + pageInfo.mPhonegapJs);
             }
         }
@@ -436,7 +436,7 @@ class PhonegapProjectPopulate {
             if (pageInfo.mFromGitHub) {
                 sourceFile = pageInfo.mPhonegapDirectory + "/framework/AndroidManifest.xml";
             } else {
-                sourceFile = pageInfo.mPhonegapDirectory + "/Android/Sample/AndroidManifest.xml";
+                sourceFile = pageInfo.mPhonegapDirectory + pageInfo.mInstallExampleDirectory + "AndroidManifest.xml";
             }
             sourceFileContents = StringIO.read(sourceFile);
         }
@@ -531,7 +531,7 @@ class PhonegapProjectPopulate {
         if (pageInfo.mFromGitHub) {
             sourceResDir = pageInfo.mPhonegapDirectory + "/framework/res/";
         } else {
-            sourceResDir = pageInfo.mPhonegapDirectory + "/Android/Sample/res/";
+            sourceResDir = pageInfo.mPhonegapDirectory + pageInfo.mInstallExampleDirectory + "res/";
         }
 
         FileCopy.recursiveForceCopy(sourceResDir + "layout/", destResDir + "layout/");

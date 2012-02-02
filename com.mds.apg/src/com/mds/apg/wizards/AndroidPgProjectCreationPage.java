@@ -152,6 +152,9 @@ public class AndroidPgProjectCreationPage extends WizardPage {
         boolean contentsVisible = !(mJqmDialog.useJqmDemo() || mSenchaDialog.useSenchaKitchenSink());
         mContentsSection.setVisible(contentsVisible); // and make sure Contents is visible
         mInitContentsDialog.enableLocationWidgets(contentsVisible && settingLocation); // and location right state
+
+        if (mPhonegapDialog.validate() != MSG_NONE)  return false;  // validate may impact mPhonegapDialog.sampleSpot
+        
         if (contentsVisible) {
             String withString;
             if (mJqmDialog.jqmChecked()) {
@@ -168,18 +171,11 @@ public class AndroidPgProjectCreationPage extends WizardPage {
                 // needs to be seeded with blanks so that there's space when it needs to appear (Issue 3)
                 withString = "                                 "; //$NON-NLS-1$
                 if (mInitContentsDialog.getContentSelection().equals("example") && !mPhonegapDialog.useFromPackaged()) { //$NON-NLS-1$
-                    String gitSampleSpot = mPhonegapDialog.gitSampleSpot();
-                    if (gitSampleSpot != null) {
-                        mInitContentsDialog.update(mPhonegapDialog.getValue() + gitSampleSpot);
-                    } else {
-                        mInitContentsDialog.update(mPhonegapDialog.getValue() + "/Android/Sample/assets/www"); //$NON-NLS-1$
-                    }
+                    mInitContentsDialog.update(mPhonegapDialog.getValue() + mPhonegapDialog.sampleSpot());
                 }
             }
             mInitContentsDialog.mWithLabel.setText(withString);
         }
-
-        if (mPhonegapDialog.validate() != MSG_NONE)  return false;
         
         if (mJqmDialog.validate() != MSG_NONE) return false;
 
