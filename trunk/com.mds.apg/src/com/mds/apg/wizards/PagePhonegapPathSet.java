@@ -37,9 +37,12 @@ public final class PagePhonegapPathSet extends WizardSection {
     /** Last user-browsed location, static so that it be remembered for the whole session */ 
     private static String sPhonegapPathCache = ""; //$NON-NLS-1$
     
-    private String mGitSampleSpot;
+    private String mSampleSpot;
+    private boolean mFromGitHub;
     private String mPhonegapJs;
     private String mPhonegapJar;
+    private String mInstallAndroidDir = "";
+    private String mInstallExampleDir = "";
     
     // widgets
     Text mPhonegapPathField;
@@ -124,8 +127,16 @@ public final class PagePhonegapPathSet extends WizardSection {
         sPhonegapPathCache = s;
     }
     
-    final String gitSampleSpot() {
-        return mGitSampleSpot;
+    final String sampleSpot() {
+        return mSampleSpot;
+    }
+    
+    final String getInstallAndroidDir() {
+        return mInstallAndroidDir;
+    }
+    
+    final String getInstallExampleDir() {
+        return mInstallExampleDir;
     }
 
     final String getPhonegapJsName() {
@@ -138,6 +149,10 @@ public final class PagePhonegapPathSet extends WizardSection {
     
     final boolean useFromPackaged() {
         return mUsePackagedPgRadio.getSelection();
+    }
+    
+    final boolean fromGitHub() {
+        return mFromGitHub;
     }
     
     /**
@@ -183,21 +198,34 @@ public final class PagePhonegapPathSet extends WizardSection {
             boolean foundExample = false;
             boolean foundAndroid = false;
             boolean foundBin = false;
+            boolean foundLib = false;
+            String androidDirName = null;
+            File androidDir = null; 
 
             for (String s : l) {
                 if (s.equals("example")) { //$NON-NLS-1$
                     foundExample = true;
                 } else if (s.equals("framework")) { //$NON-NLS-1$
                     foundFramework = true;
-                } else if (s.equals("Android")) { //$NON-NLS-1$
-                    foundAndroid = true;
+                } else if (s.equals("Android")) { // pre PhoneGap 1.4 //$NON-NLS-1$
+                    foundAndroid = true;                
+                } else if (s.equals("lib")) { // post PhoneGap 1.4 //$NON-NLS-1$
+                    androidDirName = phonegapDirName + "/lib/android"; //$NON-NLS-1$
+                    androidDir = new File(androidDirName);
+                    if (androidDir.exists()) {
+                        foundAndroid = true;
+                        foundLib = true;
+                    }
                 } else if (s.equals("bin")) {    // Post PhoneGap 1.1 GitHub //$NON-NLS-1$
                     foundBin = true;
                 }
             }
-            if (foundAndroid) {   // First the www.phonegap.com download directory structure
-                String androidDirName = phonegapDirName + "/Android"; //$NON-NLS-1$
-                File androidDir = new File(androidDirName);
+            
+            if (foundAndroid) {   // Pre and post 1.4 download directory structure 
+                if (foundLib == false) {
+                    androidDirName = phonegapDirName + "/Android"; //$NON-NLS-1$
+                    androidDir = new File(androidDirName);
+                }
                 
                 String[] al = androidDir.list();
                 if (al.length == 0) {
@@ -214,7 +242,7 @@ public final class PagePhonegapPathSet extends WizardSection {
                         } else if (s.endsWith(".jar")) { //$NON-NLS-1$
                             mPhonegapJar = s;
                         }
-                    } else if (s.equals("Sample")) { //$NON-NLS-1$
+                    } else if (s.equals(foundLib ? "example" : "Sample")) { //$NON-NLS-1$
                         foundSample = true;
                     }
                 }
@@ -222,7 +250,10 @@ public final class PagePhonegapPathSet extends WizardSection {
                     return mWizardPage.setStatus(String.format(Messages.PagePhonegapPathSet_ErrorNotFoundSampleDir ,androidDirName),
                             AndroidPgProjectCreationPage.MSG_ERROR);
                 }
-                mGitSampleSpot = null;
+                mInstallAndroidDir = foundLib ? "/lib/android/" : "/Android/" ; //$NON-NLS-1$ //$NON-NLS-2$
+                mInstallExampleDir = foundLib ? "/lib/android/example/" : "/Android/Sample/" ; //$NON-NLS-1$ //$NON-NLS-2$
+                mSampleSpot = mInstallExampleDir + "assets/www"; //$NON-NLS-1$
+                mFromGitHub = false;
                 
             } else {  // Second the old or new github directory structure
                 if (((!foundFramework) || (!foundExample)) && (!foundBin)) {
@@ -230,7 +261,8 @@ public final class PagePhonegapPathSet extends WizardSection {
                                 Messages.PagePhonegapPathSet_ErrorInvalidLocation,
                                 AndroidPgProjectCreationPage.MSG_ERROR);
                 }
-                mGitSampleSpot = foundExample ? "/example" : "/bin/templates/project/phonegap/templates/project/assets/www"; //$NON-NLS-1$ //$NON-NLS-2$
+                mSampleSpot = foundExample ? "/example" : "/bin/templates/project/phonegap/templates/project/assets/www"; //$NON-NLS-1$ //$NON-NLS-2$
+                mFromGitHub = true;
             }
             // TODO more validation
 

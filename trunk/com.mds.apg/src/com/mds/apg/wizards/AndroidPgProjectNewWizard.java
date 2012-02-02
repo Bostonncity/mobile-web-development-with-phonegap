@@ -143,8 +143,10 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
         final PageInfo pageInfo = new PageInfo(
                 mPhonegapPage.mInitContentsDialog.getValue(),
                 mPhonegapPage.mPhonegapDialog.getValue(), 
-                mPhonegapPage.mPhonegapDialog.gitSampleSpot() != null,
+                mPhonegapPage.mPhonegapDialog.fromGitHub(),
                 mPhonegapPage.mPhonegapDialog.useFromPackaged(),
+                mPhonegapPage.mPhonegapDialog.getInstallAndroidDir(),
+                mPhonegapPage.mPhonegapDialog.getInstallExampleDir(),
                 mPhonegapPage.mPhonegapDialog.getPhonegapJsName(),
                 mPhonegapPage.mPhonegapDialog.getPhonegapJarName(),
                 mPhonegapPage.mInitContentsDialog.getContentSelection(),
