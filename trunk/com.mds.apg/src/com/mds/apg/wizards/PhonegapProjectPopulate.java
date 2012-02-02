@@ -400,10 +400,13 @@ class PhonegapProjectPopulate {
         // The .scss files confuse JSDT on Linux
         FileCopy.recursiveCopySkipSuffix(pageInfo.mSenchaDirectory + "/resources", senchaDir + "resources",".scss");
 
-        // Now copy the sencha-touch*.js
+        // Now copy the sencha-touch.js
         FileCopy.copy(pageInfo.mSenchaDirectory + "/sencha-touch.js", senchaDir);
-        FileCopy.copy(pageInfo.mSenchaDirectory + "/sencha-touch-debug.js", senchaDir);
-        FileCopy.copy(pageInfo.mSenchaDirectory + "/sencha-touch-debug-w-comments.js", senchaDir);
+        
+//      Don't copy the unused sencha-touch*.js. They're not used. The names change release to release. They're big. 
+//      Most users capable enough to look at them will know how to pull them from their sencha install
+//        FileCopy.copy(pageInfo.mSenchaDirectory + "/sencha-touch-debug.js", senchaDir);
+//        FileCopy.copy(pageInfo.mSenchaDirectory + "/sencha-touch-debug-w-comments.js", senchaDir);
 
         if (!pageInfo.mPureImport && !pageInfo.mContentSelection.equals("minimal")) {
             // Update the index.html with path to sencha-touch.css and sencha-touch.js

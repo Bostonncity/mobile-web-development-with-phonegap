@@ -69,7 +69,7 @@ public class PageSencha extends WizardSection {
         group.setLayout(new GridLayout());
         group.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
         group.setFont(parent.getFont());
-        group.setText("Sencha Touch"); //$NON-NLS-1$
+        group.setText("Sencha Touch 1"); //$NON-NLS-1$
         
         // Check box for choosing to include Sencha Touch
 
