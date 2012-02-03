@@ -208,41 +208,41 @@ public final class PageInitContents extends WizardSection{
                 return mWizardPage.setStatus(Messages.PageInitContents_ErrorLocationEmpty,
                         AndroidPgProjectCreationPage.MSG_ERROR);
             }
-            if (!mPureImport) { // assume user knows what he's doing if pureImport
-                boolean foundIndexHtml = false;
-                boolean foundSencha = false;
-                boolean foundJqm = false;
-                boolean foundPhonegapJs = false;
 
-                for (String s : l) {
-                    if (s.equals("index.html")) { //$NON-NLS-1$
-                        foundIndexHtml = true;
-                    } else if (s.equals("sencha")) { //$NON-NLS-1$
-                        foundSencha = true;
-                    } else if (s.equals("jquery.mobile")) { //$NON-NLS-1$
-                        foundJqm = true;
-                    } else if (s.equals("phonegap.js")) { //$NON-NLS-1$
-                        foundPhonegapJs = true;
-                    }
-                }
-                if (!foundIndexHtml) {
-                    return mWizardPage.setStatus(Messages.PageInitContents_ErrorIndexHTMLNotFound,
-                            AndroidPgProjectCreationPage.MSG_ERROR);
-                }
-                if (foundSencha && mWizardPage.mSenchaDialog.senchaChecked()) {
-                    return mWizardPage.setStatus(Messages.PageInitContents_ErrorNotFoundSenchaDir,
-                            AndroidPgProjectCreationPage.MSG_ERROR);
-                }
-                if (foundJqm && mWizardPage.mJqmDialog.jqmChecked()) {
-                    return mWizardPage.setStatus(Messages.PageInitContents_ErrorNotFoundJQMDir,
-                            AndroidPgProjectCreationPage.MSG_ERROR);
-                }
-                if (foundPhonegapJs) {
-                    return mWizardPage.setStatus(Messages.PageInitContents_Location + getValue() +
-                            Messages.PageInitContents_ErrorNotFoundPhoneGapJSFile,
-                            AndroidPgProjectCreationPage.ERROR);
+            boolean foundIndexHtml = false;
+            boolean foundSencha = false;
+            boolean foundJqm = false;
+            boolean foundPhonegapJs = false;
+
+            for (String s : l) {
+                if (s.equals("index.html")) { //$NON-NLS-1$
+                    foundIndexHtml = true;
+                } else if (s.equals("sencha")) { //$NON-NLS-1$
+                    foundSencha = true;
+                } else if (s.equals("jquery.mobile")) { //$NON-NLS-1$
+                    foundJqm = true;
+                } else if (s.equals("phonegap.js")) { //$NON-NLS-1$
+                    foundPhonegapJs = true;
                 }
             }
+            if (!foundIndexHtml && !mPureImport) {
+                return mWizardPage.setStatus(Messages.PageInitContents_ErrorIndexHTMLNotFound,
+                        AndroidPgProjectCreationPage.MSG_ERROR);
+            }
+            if (foundSencha && mWizardPage.mSenchaDialog.senchaChecked()) {
+                return mWizardPage.setStatus(Messages.PageInitContents_ErrorNotFoundSenchaDir,
+                        AndroidPgProjectCreationPage.MSG_ERROR);
+            }
+            if (foundJqm && mWizardPage.mJqmDialog.jqmChecked()) {
+                return mWizardPage.setStatus(Messages.PageInitContents_ErrorNotFoundJQMDir,
+                        AndroidPgProjectCreationPage.MSG_ERROR);
+            }
+            if (foundPhonegapJs && !mPureImport) {
+                return mWizardPage.setStatus(Messages.PageInitContents_Location + getValue() +
+                        Messages.PageInitContents_ErrorNotFoundPhoneGapJSFile,
+                        AndroidPgProjectCreationPage.ERROR);
+            }
+                
             // TODO more validation
             
             // We now have a good directory, so set example path and save value
