@@ -222,19 +222,22 @@ public class PageSencha extends WizardSection {
         // If kitchen sink box is checked, make sure kitchen sink is in examples
 
         boolean foundSenchaJs = false;
+        boolean foundSenchaDebug = false;
         boolean foundResources = false;
         boolean foundExamples = false;
 
         for (String s : l) {
             if (s.equals("sencha-touch.js")) { //$NON-NLS-1$
                 foundSenchaJs = true;
+            } else if (s.equals("sencha-touch-debug.js")) { //$NON-NLS-1$
+                foundSenchaDebug = true;
             } else if (s.equals("resources")) { //$NON-NLS-1$
                 foundResources = true;
             } else if (s.equals("examples")) { //$NON-NLS-1$
                 foundExamples = true;
             }
         }
-        if (!foundSenchaJs || !foundResources) {
+        if (!foundSenchaJs || !foundSenchaDebug || !foundResources) {
             return mWizardPage.setStatus(getValue() + Messages.PageSencha_ErrorNotFoundSenchaJS, AndroidPgProjectCreationPage.MSG_ERROR);
         }
         if (!foundExamples && useSenchaKitchenSink()) {
