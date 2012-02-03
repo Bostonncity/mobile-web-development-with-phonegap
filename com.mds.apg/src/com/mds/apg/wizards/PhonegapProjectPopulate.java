@@ -345,7 +345,7 @@ class PhonegapProjectPopulate {
         String fromJqmDir = pageInfo.mJqmDirectory;
         String version;
         if (fromJqmDir == null) {  // get from plugin installation
-            version = "-1.0";  // TODO - do this programmatically
+            version = "-1.0.1";  // TODO - do this programmatically
             bundleCopy("/resources/jqm/jquery.mobile", jqmDir);
         } else {
             version = pageInfo.mJqmVersion;
@@ -371,9 +371,9 @@ class PhonegapProjectPopulate {
             
             // Add CDN comments for jQuery Mobile
             fileContents = fileContents.replace("</head>",  "\n\t<!-- CDN Respositories: For production, replace lines above with these uncommented minified versions -->\n" +
-                    "\t<!-- <link rel=\"stylesheet\" href=\"http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css\" />-->\n" +
+                    "\t<!-- <link rel=\"stylesheet\" href=\"http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css\" />-->\n" +
                     "\t<!-- <script src=\"http://code.jquery.com/jquery-1.6.4.min.js\"></script>-->\n" +
-                    "\t<!-- <script src=\"http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js\"></script>-->\n\t</head>");
+                    "\t<!-- <script src=\"http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js\"></script>-->\n\t</head>");
             
             // Write out the file
             StringIO.write(file, fileContents);
