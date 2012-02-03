@@ -131,6 +131,15 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
                 ((ISetSelectionTarget) part).selectReveal(selection);
             }
         }
+        
+        // Don't try to do JSDT validation on huge, error-prone, slow files like jquery mobile and sencha touch sources
+        // Doesn't work. Besides the .jsdtscope file, a directory structure in .metadata needs to be set up
+//        try {
+//            PhonegapProjectPopulate.bundleCopy("/resources/settingsInit", 
+//                    Platform.getLocation().toString() + "/"+ mNewAndroidProject.getName() + "/.settings/");
+//        } catch (Exception e1) {
+//            // TODO - warning that exclusions didn't get set up
+//        }
 
         return true;
     }

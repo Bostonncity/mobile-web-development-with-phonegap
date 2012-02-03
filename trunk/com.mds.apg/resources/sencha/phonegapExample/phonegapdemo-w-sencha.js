@@ -56,6 +56,8 @@ cfg.items = [
                                             + device.version
                                             + '<br><b>UUID: </b>'
                                             + device.uuid
+                                            + '<br><b>PhoneGap Version: </b>'
+                                            + device.phonegap
                                             + '<br><b>Name: </b>'
                                             + device.name
                                             + '<br><b>Screen Width: </b>'
