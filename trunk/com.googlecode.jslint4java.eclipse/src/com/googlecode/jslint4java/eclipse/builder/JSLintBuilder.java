@@ -18,8 +18,6 @@ import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.preferences.IPreferencesService;
 
 import com.googlecode.jslint4java.Issue;
 import com.googlecode.jslint4java.JSLint;
@@ -139,7 +137,7 @@ public class JSLintBuilder extends IncrementalProjectBuilder {
 
         BufferedReader reader = null;
         try {
-            JSLint lint = lintProvider.getJsLint();
+            JSLint lint = lintProvider.getJsLint(this.getProject());
             if (checkFilter(file)) return;
             // TODO: this should react to changes in the prefs pane instead.
             reader = new BufferedReader(new InputStreamReader(file
@@ -172,11 +170,11 @@ public class JSLintBuilder extends IncrementalProjectBuilder {
 
     private boolean checkFilter(IFile file) {
         String path = file.getFullPath().toString();
-        IPreferencesService prefs = Platform.getPreferencesService();
-        String excludes = prefs.getString(JSLintPlugin.PLUGIN_ID, "Exclude", null, null);
+        String excludes = lintProvider.getOptionFromPref("Exclude");
         String[] tokens = excludes.split("[ ,]+");
         for (String s : tokens) {
-            if (path.indexOf(s) >= 0) {
+            s = s.trim();
+            if ((!s.equals("")) && path.indexOf(s) >= 0) {
                 return true;
             }
         }
