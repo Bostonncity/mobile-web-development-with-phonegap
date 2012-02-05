@@ -68,9 +68,15 @@ public class JSLintProvider {
     }
     
     public String getOptionFromPref(String opt) {
+        String ret;
         IEclipsePreferences prefStore = usePreferenceStore;
-            return prefStore.get(opt, "");
-
+        ret = prefStore.get(opt, null);
+        if (ret != null) {
+            return ret;
+        } else {
+            IPreferencesService prefService = Platform.getPreferencesService();
+            return prefService.getString(JSLintPlugin.PLUGIN_ID, opt, null, null);
+        } 
     }
 
     /** Set up the current instance of JSLint using the current preferences. */
