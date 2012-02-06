@@ -39,6 +39,7 @@ public final class PagePhonegapPathSet extends WizardSection {
     
     private String mSampleSpot;
     private boolean mFromGitHub;
+    private boolean mIsCordova;
     private String mPhonegapJs;
     private String mPhonegapJar;
     private String mInstallAndroidDir = "";
@@ -155,6 +156,10 @@ public final class PagePhonegapPathSet extends WizardSection {
         return mFromGitHub;
     }
     
+    final boolean isCordova() {
+        return mIsCordova;
+    }
+    
     /**
      * Enables or disable the PhoneGap location widgets depending on the user selection:
      * the location path is enabled/disabled based on the radio selection 
@@ -255,14 +260,25 @@ public final class PagePhonegapPathSet extends WizardSection {
                 mSampleSpot = mInstallExampleDir + "assets/www"; //$NON-NLS-1$
                 mFromGitHub = false;
                 
-            } else {  // Second the old or new github directory structure
+            } else {  // Second the old or new github directory structure. the new can be phonegap or cordova
                 if (((!foundFramework) || (!foundExample)) && (!foundBin)) {
                     return mWizardPage.setStatus(
                                 Messages.PagePhonegapPathSet_ErrorInvalidLocation,
                                 AndroidPgProjectCreationPage.MSG_ERROR);
                 }
-                mSampleSpot = foundExample ? "/example" : "/bin/templates/project/phonegap/templates/project/assets/www"; //$NON-NLS-1$ //$NON-NLS-2$
                 mFromGitHub = true;
+                mIsCordova = false;
+                if (foundExample) {
+                    mSampleSpot = "/example";   //$NON-NLS-1$
+                } else {
+                    File wwwDir = new File(phonegapDirName + "/bin/templates/project/phonegap/templates/project/assets/www");//$NON-NLS-1$
+                    if (wwwDir.exists()) {
+                        mSampleSpot = "/bin/templates/project/phonegap/templates/project/assets/www";//$NON-NLS-1$
+                    } else {
+                        mSampleSpot = "/bin/templates/project/cordova/templates/project/assets/www";//$NON-NLS-1$
+                        mIsCordova = true;
+                    }
+                }
             }
             // TODO more validation
 
