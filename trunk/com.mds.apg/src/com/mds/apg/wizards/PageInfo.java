@@ -26,6 +26,7 @@ public class PageInfo {
     protected final String mSourceDirectory;      // The populating source
     protected final String mPhonegapDirectory;    // PhoneGap install location
     protected final boolean mFromGitHub;          // PhoneGap install from GitHub?
+    protected final boolean mIsCordova;           // Is a Cordova GitHub
     protected final boolean mPackagedPhonegap;    // Using Phonegap packaged with plugin
     protected final String mInstallAndroidDirectory;    // Android directory from PhoneGap install
     protected final String mInstallExampleDirectory;    // Example (or Sample) directory from PhoneGap install
@@ -43,7 +44,7 @@ public class PageInfo {
     protected final boolean mSenchaChecked;       // Using Sencha
     protected final boolean mSenchaKitchenSink;   // Do Sencha Kitchen Sink app
     
-    public PageInfo(String sourceDirectory, String phonegapDirectory, boolean fromGitHub, boolean packagedPhonegap,
+    public PageInfo(String sourceDirectory, String phonegapDirectory, boolean fromGitHub, boolean isCordova, boolean packagedPhonegap,
             String installAndroidDirectory, String installExampleDirectory,
             String phonegapJs, String phonegapJar, String contentSelection, boolean pureImport, String destinationDirectory, 
             IProject androidProject, boolean jqmChecked, String jqmDirectory, boolean useJqmDemo,
@@ -52,6 +53,7 @@ public class PageInfo {
         mSourceDirectory = sourceDirectory;
         mPhonegapDirectory = phonegapDirectory;
         mFromGitHub = fromGitHub;
+        mIsCordova = isCordova;
         mPackagedPhonegap = packagedPhonegap;
         mInstallAndroidDirectory = installAndroidDirectory;
         mInstallExampleDirectory = installExampleDirectory;

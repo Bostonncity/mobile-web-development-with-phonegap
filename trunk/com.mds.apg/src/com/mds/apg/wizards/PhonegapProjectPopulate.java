@@ -96,7 +96,7 @@ class PhonegapProjectPopulate {
     static private void updateProjectWithPhonegap(IProgressMonitor monitor, PageInfo pageInfo)
             throws CoreException, IOException, URISyntaxException {
 
-        updateJavaMain(pageInfo.mDestinationDirectory);
+        updateJavaMain(pageInfo);
         getPhonegapJar(monitor, pageInfo);
         getWWWSources(monitor, pageInfo);
         if (pageInfo.mJqmChecked)
@@ -116,13 +116,19 @@ class PhonegapProjectPopulate {
      * 
      * @throws IOException
      */
-    static private void updateJavaMain(String destDir) throws IOException {
+    static private void updateJavaMain(PageInfo pageInfo) throws IOException {
+        String destDir = pageInfo.mDestinationDirectory;
         String javaFile = findJavaFile(destDir + "src");
         String javaFileContents = StringIO.read(javaFile);
 
         // Import com.phonegap instead of Activity
-        javaFileContents = javaFileContents.replace("import android.app.Activity;",
+        if (pageInfo.mIsCordova) {
+            javaFileContents = javaFileContents.replace("import android.app.Activity;",
+                "import org.apache.cordova.DroidGap;");
+        } else {
+            javaFileContents = javaFileContents.replace("import android.app.Activity;",
                 "import com.phonegap.*;");
+        }
 
         // Change superclass to DroidGap instead of Activity
         javaFileContents = javaFileContents.replace("extends Activity", "extends DroidGap");
@@ -304,7 +310,7 @@ class PhonegapProjectPopulate {
         
         // Make sure index.html has the right phonegap.js
         String indexHtmlContents = StringIO.read(wwwDir + "index.html");
-        indexHtmlContents = indexHtmlContents.replaceFirst("src=\"phonegap[a-zA-Z-.0-9]*js\"",
+        indexHtmlContents = indexHtmlContents.replaceFirst("src=\"(cordova|phonegap)[a-zA-Z-.0-9]*js\"",
                 "src=\"" + phonegapJsFileName + "\"");  
         if (indexHtmlContents.indexOf("src=\"phonegap") < 0) {   // no phonegap*.js in file
             int index = indexHtmlContents.lastIndexOf("</head>");
