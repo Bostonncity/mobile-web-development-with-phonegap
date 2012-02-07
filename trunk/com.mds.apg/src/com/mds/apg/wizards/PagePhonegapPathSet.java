@@ -187,6 +187,8 @@ public final class PagePhonegapPathSet extends WizardSection {
      *         MSG_NONE.
      */
     int validate() {
+        mFromGitHub = false;
+        mIsCordova = false;
         if (useFromPackaged()) {  // no validation necessary
             return AndroidPgProjectCreationPage.MSG_NONE;
         }
@@ -258,7 +260,6 @@ public final class PagePhonegapPathSet extends WizardSection {
                 mInstallAndroidDir = foundLib ? "/lib/android/" : "/Android/" ; //$NON-NLS-1$ //$NON-NLS-2$
                 mInstallExampleDir = foundLib ? "/lib/android/example/" : "/Android/Sample/" ; //$NON-NLS-1$ //$NON-NLS-2$
                 mSampleSpot = mInstallExampleDir + "assets/www"; //$NON-NLS-1$
-                mFromGitHub = false;
                 
             } else {  // Second the old or new github directory structure. the new can be phonegap or cordova
                 if (((!foundFramework) || (!foundExample)) && (!foundBin)) {
@@ -267,7 +268,6 @@ public final class PagePhonegapPathSet extends WizardSection {
                                 AndroidPgProjectCreationPage.MSG_ERROR);
                 }
                 mFromGitHub = true;
-                mIsCordova = false;
                 if (foundExample) {
                     mSampleSpot = "/example";   //$NON-NLS-1$
                 } else {
