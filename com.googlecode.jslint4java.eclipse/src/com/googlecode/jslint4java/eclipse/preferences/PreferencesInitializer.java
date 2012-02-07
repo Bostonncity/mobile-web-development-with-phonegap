@@ -56,7 +56,7 @@ public class PreferencesInitializer extends AbstractPreferenceInitializer {
     /** Create Directory Options whose type is {@link Boolean}. */
     private List<String> createExcludeDirectoryOptions() {
         List<String> dirOptions = new ArrayList<String>();
-        dirOptions.add("assets/www/phonegap-");
+        dirOptions.add("phonegap");
         dirOptions.add("/jquery.mobile/");
         dirOptions.add("/sencha/");
         return dirOptions;

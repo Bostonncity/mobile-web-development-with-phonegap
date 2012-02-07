@@ -96,7 +96,7 @@ class PhonegapProjectPopulate {
     static private void updateProjectWithPhonegap(IProgressMonitor monitor, PageInfo pageInfo)
             throws CoreException, IOException, URISyntaxException {
 
-        updateJavaMain(pageInfo);
+        updateJavaMain(pageInfo.mDestinationDirectory);
         getPhonegapJar(monitor, pageInfo);
         getWWWSources(monitor, pageInfo);
         if (pageInfo.mJqmChecked)
@@ -116,19 +116,13 @@ class PhonegapProjectPopulate {
      * 
      * @throws IOException
      */
-    static private void updateJavaMain(PageInfo pageInfo) throws IOException {
-        String destDir = pageInfo.mDestinationDirectory;
+    static private void updateJavaMain(String destDir) throws IOException {
         String javaFile = findJavaFile(destDir + "src");
         String javaFileContents = StringIO.read(javaFile);
 
         // Import com.phonegap instead of Activity
-        if (pageInfo.mIsCordova) {
-            javaFileContents = javaFileContents.replace("import android.app.Activity;",
-                "import org.apache.cordova.DroidGap;");
-        } else {
-            javaFileContents = javaFileContents.replace("import android.app.Activity;",
+        javaFileContents = javaFileContents.replace("import android.app.Activity;",
                 "import com.phonegap.*;");
-        }
 
         // Change superclass to DroidGap instead of Activity
         javaFileContents = javaFileContents.replace("extends Activity", "extends DroidGap");
@@ -195,7 +189,7 @@ class PhonegapProjectPopulate {
         } else { // not from github
             updateClasspath(monitor, 
                     pageInfo.mAndroidProject, 
-                    pageInfo.mPhonegapDirectory + pageInfo.mInstallAndroidDirectory + pageInfo.mPhonegapJar,
+                    pageInfo.mPhonegapDirectory + "/Android/" + pageInfo.mPhonegapJar,
                     null);      
         }
     }
@@ -298,19 +292,19 @@ class PhonegapProjectPopulate {
             if (!contentSelection.equals("user") && !pageInfo.mSenchaKitchenSink) { 
                 // copy phonegap{version}.js to phonegap.js
                 if (contentSelection.equals("minimal") || pageInfo.mJqmChecked || pageInfo.mSenchaChecked) {  // otherwise already there
-                    FileCopy.copy(pageInfo.mPhonegapDirectory + pageInfo.mInstallAndroidDirectory + pageInfo.mPhonegapJs,
+                    FileCopy.copy(pageInfo.mPhonegapDirectory + "/Android/" + pageInfo.mPhonegapJs,
                             wwwDir + pageInfo.mPhonegapJs);
                 }
             } else { // otherwise keep the name, since the user controls the
                      // index.html (and don't overwrite if user supplied the phonegap.js)
-                FileCopy.copyDontOverwrite(pageInfo.mPhonegapDirectory + pageInfo.mInstallAndroidDirectory
+                FileCopy.copyDontOverwrite(pageInfo.mPhonegapDirectory + "/Android/"
                         + pageInfo.mPhonegapJs, wwwDir + pageInfo.mPhonegapJs);
             }
         }
         
         // Make sure index.html has the right phonegap.js
         String indexHtmlContents = StringIO.read(wwwDir + "index.html");
-        indexHtmlContents = indexHtmlContents.replaceFirst("src=\"(cordova|phonegap)[a-zA-Z-.0-9]*js\"",
+        indexHtmlContents = indexHtmlContents.replaceFirst("src=\"phonegap[a-zA-Z-.0-9]*js\"",
                 "src=\"" + phonegapJsFileName + "\"");  
         if (indexHtmlContents.indexOf("src=\"phonegap") < 0) {   // no phonegap*.js in file
             int index = indexHtmlContents.lastIndexOf("</head>");
@@ -351,7 +345,7 @@ class PhonegapProjectPopulate {
         String fromJqmDir = pageInfo.mJqmDirectory;
         String version;
         if (fromJqmDir == null) {  // get from plugin installation
-            version = "-1.0.1";  // TODO - do this programmatically
+            version = "-1.0";  // TODO - do this programmatically
             bundleCopy("/resources/jqm/jquery.mobile", jqmDir);
         } else {
             version = pageInfo.mJqmVersion;
@@ -377,9 +371,9 @@ class PhonegapProjectPopulate {
             
             // Add CDN comments for jQuery Mobile
             fileContents = fileContents.replace("</head>",  "\n\t<!-- CDN Respositories: For production, replace lines above with these uncommented minified versions -->\n" +
-                    "\t<!-- <link rel=\"stylesheet\" href=\"http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css\" />-->\n" +
+                    "\t<!-- <link rel=\"stylesheet\" href=\"http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css\" />-->\n" +
                     "\t<!-- <script src=\"http://code.jquery.com/jquery-1.6.4.min.js\"></script>-->\n" +
-                    "\t<!-- <script src=\"http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js\"></script>-->\n\t</head>");
+                    "\t<!-- <script src=\"http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js\"></script>-->\n\t</head>");
             
             // Write out the file
             StringIO.write(file, fileContents);
@@ -409,6 +403,7 @@ class PhonegapProjectPopulate {
         // Now copy the sencha-touch*.js
         FileCopy.copy(pageInfo.mSenchaDirectory + "/sencha-touch.js", senchaDir);
         FileCopy.copy(pageInfo.mSenchaDirectory + "/sencha-touch-debug.js", senchaDir);
+        FileCopy.copy(pageInfo.mSenchaDirectory + "/sencha-touch-debug-w-comments.js", senchaDir);
 
         if (!pageInfo.mPureImport && !pageInfo.mContentSelection.equals("minimal")) {
             // Update the index.html with path to sencha-touch.css and sencha-touch.js
@@ -441,7 +436,7 @@ class PhonegapProjectPopulate {
             if (pageInfo.mFromGitHub) {
                 sourceFile = pageInfo.mPhonegapDirectory + "/framework/AndroidManifest.xml";
             } else {
-                sourceFile = pageInfo.mPhonegapDirectory + pageInfo.mInstallExampleDirectory + "AndroidManifest.xml";
+                sourceFile = pageInfo.mPhonegapDirectory + "/Android/Sample/AndroidManifest.xml";
             }
             sourceFileContents = StringIO.read(sourceFile);
         }
@@ -536,7 +531,7 @@ class PhonegapProjectPopulate {
         if (pageInfo.mFromGitHub) {
             sourceResDir = pageInfo.mPhonegapDirectory + "/framework/res/";
         } else {
-            sourceResDir = pageInfo.mPhonegapDirectory + pageInfo.mInstallExampleDirectory + "res/";
+            sourceResDir = pageInfo.mPhonegapDirectory + "/Android/Sample/res/";
         }
 
         FileCopy.recursiveForceCopy(sourceResDir + "layout/", destResDir + "layout/");

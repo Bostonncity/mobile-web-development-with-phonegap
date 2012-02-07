@@ -31,19 +31,15 @@ import java.io.File;
 public final class PagePhonegapPathSet extends WizardSection {
 
     // Set up storage for persistent initializers
-    private final static String PHONEGAP_DIR = com.mds.apg.Activator.PLUGIN_ID + ".phonegap";  //$NON-NLS-1$
-    private final static String PG_USE_INSTALLED = com.mds.apg.Activator.PLUGIN_ID + ".pguseinstalled"; //$NON-NLS-1$
+    private final static String PHONEGAP_DIR = com.mds.apg.Activator.PLUGIN_ID + ".phonegap"; 
+    private final static String PG_USE_INSTALLED = com.mds.apg.Activator.PLUGIN_ID + ".pguseinstalled";
     
     /** Last user-browsed location, static so that it be remembered for the whole session */ 
-    private static String sPhonegapPathCache = ""; //$NON-NLS-1$
+    private static String sPhonegapPathCache = "";
     
-    private String mSampleSpot;
-    private boolean mFromGitHub;
-    private boolean mIsCordova;
+    private String mGitSampleSpot;
     private String mPhonegapJs;
     private String mPhonegapJar;
-    private String mInstallAndroidDir = "";
-    private String mInstallExampleDir = "";
     
     // widgets
     Text mPhonegapPathField;
@@ -68,19 +64,19 @@ public final class PagePhonegapPathSet extends WizardSection {
         phonegapGroup.setLayout(new GridLayout());
         phonegapGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
         phonegapGroup.setFont(parent.getFont());
-        phonegapGroup.setText(Messages.PagePhonegapPathSet_Configuration);
+        phonegapGroup.setText("PhoneGap Configuration");
         
         // Choose whether to use packaged PhoneGap or installed version
         
-        boolean initialVal = doGetPreferenceStore().getString(PG_USE_INSTALLED) != ""; //$NON-NLS-1$
+        boolean initialVal = doGetPreferenceStore().getString(PG_USE_INSTALLED) != ""; 
         mUsePackagedPgRadio = new Button(phonegapGroup, SWT.RADIO);
-        mUsePackagedPgRadio.setText(Messages.PagePhonegapPathSet_BuildIn);
+        mUsePackagedPgRadio.setText("Use Built-in PhoneGap - version 1.3.0");
         mUsePackagedPgRadio.setSelection(!initialVal);
-        mUsePackagedPgRadio.setToolTipText(Messages.PagePhonegapPathSet_BuildInTooltip);
+        mUsePackagedPgRadio.setToolTipText("Use the PhoneGap installation included with this Eclipse plug-in"); 
         
         Button useInstalledPgRadio = new Button(phonegapGroup, SWT.RADIO);
-        useInstalledPgRadio.setText(Messages.PagePhonegapPathSet_EnterPhoneGapPath);
-        useInstalledPgRadio.setToolTipText(Messages.PagePhonegapPathSet_EnterPhoneGapPathTooltip);
+        useInstalledPgRadio.setText("Enter path to installed PhoneGap");
+        useInstalledPgRadio.setToolTipText("Specify directory that includes a downloaded version of PhoneGap"); 
         useInstalledPgRadio.setSelection(initialVal);
         
         SelectionListener location_listener = new SelectionAdapter() {
@@ -104,7 +100,7 @@ public final class PagePhonegapPathSet extends WizardSection {
 
         mPhonegapPathField = new Text(mPgGroup, SWT.BORDER);
         mPhonegapPathField.setText(getLocationSave());
-        mPhonegapPathField.setToolTipText(Messages.PagePhonegapPathSet_PhoneGapPath);
+        mPhonegapPathField.setToolTipText("Should be the path to the unpacked phonegap-android installation");
         setupDirectoryBrowse(mPhonegapPathField, parent, mPgGroup);
         
         enablePgWidgets(false);  // to get the visibility and initial settings
@@ -128,16 +124,8 @@ public final class PagePhonegapPathSet extends WizardSection {
         sPhonegapPathCache = s;
     }
     
-    final String sampleSpot() {
-        return mSampleSpot;
-    }
-    
-    final String getInstallAndroidDir() {
-        return mInstallAndroidDir;
-    }
-    
-    final String getInstallExampleDir() {
-        return mInstallExampleDir;
+    final String gitSampleSpot() {
+        return mGitSampleSpot;
     }
 
     final String getPhonegapJsName() {
@@ -152,14 +140,6 @@ public final class PagePhonegapPathSet extends WizardSection {
         return mUsePackagedPgRadio.getSelection();
     }
     
-    final boolean fromGitHub() {
-        return mFromGitHub;
-    }
-    
-    final boolean isCordova() {
-        return mIsCordova;
-    }
-    
     /**
      * Enables or disable the PhoneGap location widgets depending on the user selection:
      * the location path is enabled/disabled based on the radio selection 
@@ -171,7 +151,7 @@ public final class PagePhonegapPathSet extends WizardSection {
         mPgGroup.setVisible(!usePackaged);
         if (doUpdate) {  
             update(null);
-            doGetPreferenceStore().setValue(PG_USE_INSTALLED, usePackaged ? "" : "true"); //$NON-NLS-1$ //$NON-NLS-2$
+            doGetPreferenceStore().setValue(PG_USE_INSTALLED, usePackaged ? "" : "true");
         }
     }    
 
@@ -187,98 +167,73 @@ public final class PagePhonegapPathSet extends WizardSection {
      *         MSG_NONE.
      */
     int validate() {
-        mFromGitHub = false;
-        mIsCordova = false;
         if (useFromPackaged()) {  // no validation necessary
             return AndroidPgProjectCreationPage.MSG_NONE;
         }
         String phonegapDirName = getValue();
         File phonegapDir = new File(phonegapDirName);
         if (!phonegapDir.exists() || !phonegapDir.isDirectory()) {
-            return mWizardPage.setStatus(Messages.PagePhonegapPathSet_ErrorDirNameEmpty,  AndroidPgProjectCreationPage.MSG_ERROR);
+            return mWizardPage.setStatus("A PhoneGap directory name must be specified.",  AndroidPgProjectCreationPage.MSG_ERROR);
         } else {
             String[] l = phonegapDir.list();
             if (l.length == 0) {
-                return mWizardPage.setStatus(Messages.PagePhonegapPathSet_StatusDirNameEmpty, AndroidPgProjectCreationPage.MSG_ERROR);
+                return mWizardPage.setStatus("The phonegap directory is empty.", AndroidPgProjectCreationPage.MSG_ERROR);
             }
             boolean foundFramework = false;
             boolean foundExample = false;
             boolean foundAndroid = false;
             boolean foundBin = false;
-            boolean foundLib = false;
-            String androidDirName = null;
-            File androidDir = null; 
 
             for (String s : l) {
-                if (s.equals("example")) { //$NON-NLS-1$
+                if (s.equals("example")) {
                     foundExample = true;
-                } else if (s.equals("framework")) { //$NON-NLS-1$
+                } else if (s.equals("framework")) {
                     foundFramework = true;
-                } else if (s.equals("Android")) { // pre PhoneGap 1.4 //$NON-NLS-1$
-                    foundAndroid = true;                
-                } else if (s.equals("lib")) { // post PhoneGap 1.4 //$NON-NLS-1$
-                    androidDirName = phonegapDirName + "/lib/android"; //$NON-NLS-1$
-                    androidDir = new File(androidDirName);
-                    if (androidDir.exists()) {
-                        foundAndroid = true;
-                        foundLib = true;
-                    }
-                } else if (s.equals("bin")) {    // Post PhoneGap 1.1 GitHub //$NON-NLS-1$
+                } else if (s.equals("Android")) {
+                    foundAndroid = true;
+                } else if (s.equals("bin")) {    // Post PhoneGap 1.1 GitHub
                     foundBin = true;
                 }
             }
-            
-            if (foundAndroid) {   // Pre and post 1.4 download directory structure 
-                if (foundLib == false) {
-                    androidDirName = phonegapDirName + "/Android"; //$NON-NLS-1$
-                    androidDir = new File(androidDirName);
-                }
+            if (foundAndroid) {   // First the www.phonegap.com download directory structure
+                String androidDirName = phonegapDirName + "/Android";
+                File androidDir = new File(androidDirName);
                 
                 String[] al = androidDir.list();
                 if (al.length == 0) {
-                    return mWizardPage.setStatus(Messages.PagePhonegapPathSet_StatusDirEmpty, AndroidPgProjectCreationPage.MSG_ERROR);
+                    return mWizardPage.setStatus("The phonegap directory is empty.", AndroidPgProjectCreationPage.MSG_ERROR);
                 }
                 mPhonegapJs = null;
                 mPhonegapJar = null;
                 boolean foundSample = false;
 
                 for (String s : al) {
-                    if (s.indexOf("phonegap") == 0) { //$NON-NLS-1$
-                        if (s.endsWith(".js")) { //$NON-NLS-1$
+                    if (s.indexOf("phonegap") == 0) {
+                        if (s.endsWith(".js")) {
                             mPhonegapJs = s;
-                        } else if (s.endsWith(".jar")) { //$NON-NLS-1$
+                        } else if (s.endsWith(".jar")) {
                             mPhonegapJar = s;
                         }
-                    } else if (s.equals(foundLib ? "example" : "Sample")) { //$NON-NLS-1$
+                    } else if (s.equals("Sample")) {
                         foundSample = true;
                     }
                 }
                 if ((mPhonegapJs == null) || (mPhonegapJar == null) || (!foundSample)) {
-                    return mWizardPage.setStatus(String.format(Messages.PagePhonegapPathSet_ErrorNotFoundSampleDir ,androidDirName),
+                    return mWizardPage.setStatus("Invalid phonegap-android location: " + androidDirName +
+                            " must include a Samples directory, phonegap{version}.js and phonegap{version}.jar",
                             AndroidPgProjectCreationPage.MSG_ERROR);
                 }
-                mInstallAndroidDir = foundLib ? "/lib/android/" : "/Android/" ; //$NON-NLS-1$ //$NON-NLS-2$
-                mInstallExampleDir = foundLib ? "/lib/android/example/" : "/Android/Sample/" ; //$NON-NLS-1$ //$NON-NLS-2$
-                mSampleSpot = mInstallExampleDir + "assets/www"; //$NON-NLS-1$
+                mGitSampleSpot = null;
                 
-            } else {  // Second the old or new github directory structure. the new can be phonegap or cordova
+            } else {  // Second the old or new github directory structure
                 if (((!foundFramework) || (!foundExample)) && (!foundBin)) {
                     return mWizardPage.setStatus(
-                                Messages.PagePhonegapPathSet_ErrorInvalidLocation,
+                                "Invalid phonegap-android location. If it's from github," +
+                                "it should have a framework and example subdirectory." +
+                                "If it's from www.phonegap.com Download, it should have an Android subdirectory",
                                 AndroidPgProjectCreationPage.MSG_ERROR);
                 }
-                mFromGitHub = true;
-                if (foundExample) {
-                    mSampleSpot = "/example";   //$NON-NLS-1$
-                } else {
-                    File wwwDir = new File(phonegapDirName + "/bin/templates/project/phonegap/templates/project/assets/www");//$NON-NLS-1$
-                    if (wwwDir.exists()) {
-                        mSampleSpot = "/bin/templates/project/phonegap/templates/project/assets/www";//$NON-NLS-1$
-                    } else {
-                        mSampleSpot = "/bin/templates/project/cordova/templates/project/assets/www";//$NON-NLS-1$
-                        mIsCordova = true;
-                    }
-                }
+                mGitSampleSpot = foundExample ? "/example" : "/bin/templates/project/phonegap/templates/project/assets/www";
             }
             // TODO more validation
 

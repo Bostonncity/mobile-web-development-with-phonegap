@@ -121,8 +121,7 @@ function fail(msg) {
 
 function show_pic() {
     navigator.camera.getPicture(dump_pic, fail, {
-        quality : 30,
-        destinationType: Camera.DestinationType.DATA_URL 
+        quality : 30
     });
 }
 

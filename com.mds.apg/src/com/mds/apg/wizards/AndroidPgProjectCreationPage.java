@@ -49,7 +49,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 public class AndroidPgProjectCreationPage extends WizardPage {
 
     // constants
-    private static final String MAIN_PAGE_NAME = "newAndroidPgProjectPage";  //$NON-NLS-1$
+    private static final String MAIN_PAGE_NAME = "newAndroidPgProjectPage"; 
 
     protected final static int MSG_NONE = 0;
     protected final static int MSG_WARNING = 1;
@@ -70,9 +70,9 @@ public class AndroidPgProjectCreationPage extends WizardPage {
     public AndroidPgProjectCreationPage() {
         super(MAIN_PAGE_NAME);
         setPageComplete(false);
-        setTitle(Messages.AndroidPgProjectCreationPage_Title);
-        setDescription(Messages.AndroidPgProjectCreationPage_Description);
-        ImageDescriptor desc = AbstractUIPlugin.imageDescriptorFromPlugin("com.mds.apg", "icons/mds.png"); //$NON-NLS-1$ //$NON-NLS-2$
+        setTitle("Create a PhoneGap for Android Project");
+        setDescription("Specify PhoneGap installation, UI frameworks, and populating sources");
+        ImageDescriptor desc = AbstractUIPlugin.imageDescriptorFromPlugin("com.mds.apg", "icons/mds.png");
         setImageDescriptor(desc);
     }
 
@@ -148,34 +148,38 @@ public class AndroidPgProjectCreationPage extends WizardPage {
         // First handle cross-section logic updates that need to happen regardless of validation 
         
         boolean checkLocation = true;
-        boolean settingLocation = mInitContentsDialog.getContentSelection().equals("user"); //$NON-NLS-1$
+        boolean settingLocation = mInitContentsDialog.getContentSelection().equals("user");
         boolean contentsVisible = !(mJqmDialog.useJqmDemo() || mSenchaDialog.useSenchaKitchenSink());
         mContentsSection.setVisible(contentsVisible); // and make sure Contents is visible
         mInitContentsDialog.enableLocationWidgets(contentsVisible && settingLocation); // and location right state
-
-        if (mPhonegapDialog.validate() != MSG_NONE)  return false;  // validate may impact mPhonegapDialog.sampleSpot
-        
         if (contentsVisible) {
             String withString;
             if (mJqmDialog.jqmChecked()) {
-                withString = Messages.AndroidPgProjectCreationPage_with_jQueryMobile;
+                withString = "with jQuery Mobile";
                 if (!settingLocation) {
                     checkLocation = false;
                 }
             } else if (mSenchaDialog.senchaChecked()) {
-                withString = Messages.AndroidPgProjectCreationPage_with_SenchaTouch;
+                withString = "with Sencha Touch";
                 if (!settingLocation) {
                     checkLocation = false;
                 }
             } else {
                 // needs to be seeded with blanks so that there's space when it needs to appear (Issue 3)
-                withString = "                                 "; //$NON-NLS-1$
-                if (mInitContentsDialog.getContentSelection().equals("example") && !mPhonegapDialog.useFromPackaged()) { //$NON-NLS-1$
-                    mInitContentsDialog.update(mPhonegapDialog.getValue() + mPhonegapDialog.sampleSpot());
+                withString = "                                 ";
+                if (mInitContentsDialog.getContentSelection().equals("example") && !mPhonegapDialog.useFromPackaged()) {
+                    String gitSampleSpot = mPhonegapDialog.gitSampleSpot();
+                    if (gitSampleSpot != null) {
+                        mInitContentsDialog.update(mPhonegapDialog.getValue() + gitSampleSpot);
+                    } else {
+                        mInitContentsDialog.update(mPhonegapDialog.getValue() + "/Android/Sample/assets/www");
+                    }
                 }
             }
             mInitContentsDialog.mWithLabel.setText(withString);
         }
+
+        if (mPhonegapDialog.validate() != MSG_NONE)  return false;
         
         if (mJqmDialog.validate() != MSG_NONE) return false;
 
@@ -185,7 +189,7 @@ public class AndroidPgProjectCreationPage extends WizardPage {
         if (mSenchaDialog.validate() != MSG_NONE) return false;
         
         if (mSenchaDialog.useSenchaKitchenSink()) {
-            mInitContentsDialog.update(mSenchaDialog.getValue() + "/examples/kitchensink"); //$NON-NLS-1$
+            mInitContentsDialog.update(mSenchaDialog.getValue() + "/examples/kitchensink");
         }
 
         if (checkLocation) { 

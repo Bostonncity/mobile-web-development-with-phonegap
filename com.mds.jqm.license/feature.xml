@@ -2,7 +2,7 @@
 <feature
       id="com.mds.jqm.license"
       label="jQuery Mobile License"
-      version="1.2.7.qualifier"
+      version="1.2.6.qualifier"
       provider-name="MDS">
 
    <description url="http://jquery.org/license/">
@@ -14,7 +14,7 @@
    </copyright>
 
    <license url="http://jquery.org/license/">
-      jQuery License
+      License
 You may use any jQuery project under the terms of either the
 MIT License or the GNU General Public License (GPL) Version 2.
 The MIT License is recommended for most projects. It is simple

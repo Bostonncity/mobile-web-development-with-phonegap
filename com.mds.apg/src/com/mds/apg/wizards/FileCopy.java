@@ -148,9 +148,7 @@ public class FileCopy {
         FileOutputStream to = new FileOutputStream(toFile);
         try {
             to = new FileOutputStream(toFile);
-            File base = new File(fromDirName + "/" + "phonegap.js.base");
-            if (!base.exists()) base = new File(fromDirName + "/" + "cordova.js.base");
-            to = appendStream(base, to);
+            to = appendStream(new File(fromDirName + "/" + "phonegap.js.base"), to);
 
             String fList[] = fromFile.list();
             for (String s : fList) {   // append the .js files

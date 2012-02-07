@@ -67,7 +67,7 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
         setHelpAvailable(false); // TODO have help
         mPhonegapPage = createPhonegapPage();
         super.init(workbench, selection);
-        setWindowTitle(Messages.AndroidPgProjectNewWizard_Title);
+        setWindowTitle("MDS AppLaud - PhoneGap for Android"); 
     }
 
     @Override
@@ -94,7 +94,7 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
     @Override
     public boolean performFinish() {
         String[] preAndroidCreateDirectoryList = getWorkspaceDirectoryList();
-        if (!super.performFinish() || super.getPackageName() == "") return false; //$NON-NLS-1$
+        if (!super.performFinish() || super.getPackageName() == "") return false;
         String[] postAndroidCreateDirectoryList = getWorkspaceDirectoryList();
 
         //  should be one new file corresponding to the new Android project
@@ -110,7 +110,7 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
         // Open index.html to start
         
         IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-        IResource file = mNewAndroidProject.getFile("/assets/www/index.html"); //$NON-NLS-1$
+        IResource file = mNewAndroidProject.getFile("/assets/www/index.html");
         if (file.exists()) {   // may not exist on PureImport
             try {
                 IDE.openEditor(activePage, (IFile) file);
@@ -118,7 +118,7 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
                 // Ignore exception.  Just don't open the file
             }
         } else {
-            file = mNewAndroidProject.getFolder("/assets/www/");  //$NON-NLS-1$
+            file = mNewAndroidProject.getFolder("/assets/www/"); 
         }
         
         // And open the project explorer
@@ -131,15 +131,6 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
                 ((ISetSelectionTarget) part).selectReveal(selection);
             }
         }
-        
-        // Don't try to do JSDT validation on huge, error-prone, slow files like jquery mobile and sencha touch sources
-        // Doesn't work. Besides the .jsdtscope file, a directory structure in .metadata needs to be set up
-//        try {
-//            PhonegapProjectPopulate.bundleCopy("/resources/settingsInit", 
-//                    Platform.getLocation().toString() + "/"+ mNewAndroidProject.getName() + "/.settings/");
-//        } catch (Exception e1) {
-//            // TODO - warning that exclusions didn't get set up
-//        }
 
         return true;
     }
@@ -152,16 +143,13 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
         final PageInfo pageInfo = new PageInfo(
                 mPhonegapPage.mInitContentsDialog.getValue(),
                 mPhonegapPage.mPhonegapDialog.getValue(), 
-                mPhonegapPage.mPhonegapDialog.fromGitHub(),
-                mPhonegapPage.mPhonegapDialog.isCordova(),
+                mPhonegapPage.mPhonegapDialog.gitSampleSpot() != null,
                 mPhonegapPage.mPhonegapDialog.useFromPackaged(),
-                mPhonegapPage.mPhonegapDialog.getInstallAndroidDir(),
-                mPhonegapPage.mPhonegapDialog.getInstallExampleDir(),
                 mPhonegapPage.mPhonegapDialog.getPhonegapJsName(),
                 mPhonegapPage.mPhonegapDialog.getPhonegapJarName(),
                 mPhonegapPage.mInitContentsDialog.getContentSelection(),
                 mPhonegapPage.mInitContentsDialog.isPureImport(),
-                Platform.getLocation().toString() + "/"+ mNewAndroidProject.getName() + "/", //$NON-NLS-1$ //$NON-NLS-2$
+                Platform.getLocation().toString() + "/"+ mNewAndroidProject.getName() + "/",
                 mNewAndroidProject,
                 mPhonegapPage.mJqmDialog.jqmChecked(),
                 mPhonegapPage.mJqmDialog.useFromPackaged() ? null : 
@@ -205,9 +193,9 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
                 if (core.getStatus().getCode() == IResourceStatus.CASE_VARIANT_EXISTS) {
                     // The error indicates the file system is not case sensitive
                     // and there's a resource with a similar name.
-                    MessageDialog.openError(getShell(), "Error", Messages.AndroidPgProjectNewWizard_Error_Case_Variant_Exists); //$NON-NLS-1$
+                    MessageDialog.openError(getShell(), "Error", "Error: Case Variant Exists");
                 } else {
-                    ErrorDialog.openError(getShell(), "Error", core.getMessage(), core.getStatus()); //$NON-NLS-1$
+                    ErrorDialog.openError(getShell(), "Error", core.getMessage(), core.getStatus());
                 }
             } else {
                 // Some other kind of exception
@@ -220,7 +208,7 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
                 if (msg == null) {
                     msg = t.toString();
                 }
-                MessageDialog.openError(getShell(), "Error", msg); //$NON-NLS-1$
+                MessageDialog.openError(getShell(), "Error", msg);
             }
             e.printStackTrace();
         } catch (InterruptedException e) {
