@@ -38,9 +38,9 @@ import org.eclipse.swt.widgets.Text;
 public class PageJqm extends WizardSection {
 
     // Set up storage for persistent initializers
-    private final static String JQM_DIR = com.mds.apg.Activator.PLUGIN_ID + ".jqmdir";    
-    private final static String JQM_CHECK = com.mds.apg.Activator.PLUGIN_ID + ".jqmcheck";
-    private final static String JQM_USE_INSTALLED = com.mds.apg.Activator.PLUGIN_ID + ".jqmuseinstalled";
+    private final static String JQM_DIR = com.mds.apg.Activator.PLUGIN_ID + ".jqmdir";     //$NON-NLS-1$
+    private final static String JQM_CHECK = com.mds.apg.Activator.PLUGIN_ID + ".jqmcheck"; //$NON-NLS-1$
+    private final static String JQM_USE_INSTALLED = com.mds.apg.Activator.PLUGIN_ID + ".jqmuseinstalled"; //$NON-NLS-1$
 
     /** state variables */
     private String mJqmPathCache;
@@ -76,15 +76,14 @@ public class PageJqm extends WizardSection {
         group.setLayout(new GridLayout());
         group.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
         group.setFont(parent.getFont());
-        group.setText("jQuery Mobile");
+        group.setText("jQuery Mobile"); //$NON-NLS-1$
         
         // Check box for choosing to include Jqm Touch
 
         mJqmCheck = new Button(group, SWT.CHECK);
-        mJqmCheck.setText("Include jQuery Mobile libraries in project");
-        mJqmCheck.setSelection(doGetPreferenceStore().getString(JQM_CHECK) != "");
-        mJqmCheck.setToolTipText("Check to use jQuery Mobile JavaScript framework\n"
-                + "See http://jquerymobile.com/ for more details");
+        mJqmCheck.setText(Messages.PageJqm_IncludeLibrary);
+        mJqmCheck.setSelection(doGetPreferenceStore().getString(JQM_CHECK) != ""); //$NON-NLS-1$
+        mJqmCheck.setToolTipText(Messages.PageJqm_URLforJQM);
 
         SelectionListener jqmListener = new SelectionAdapter() {
             @Override
@@ -103,15 +102,15 @@ public class PageJqm extends WizardSection {
         
         // Choose whether to use packaged jqm or installed version
         
-        boolean initialVal = doGetPreferenceStore().getString(JQM_USE_INSTALLED) != ""; 
+        boolean initialVal = doGetPreferenceStore().getString(JQM_USE_INSTALLED) != "";  //$NON-NLS-1$
         mUsePackagedJqmRadio = new Button(group, SWT.RADIO);
-        mUsePackagedJqmRadio.setText("Use Built-in jQuery Mobile - version 1.0");
+        mUsePackagedJqmRadio.setText(Messages.PageJqm_UseBuiltIn);
         mUsePackagedJqmRadio.setSelection(!initialVal);
-        mUsePackagedJqmRadio.setToolTipText("Use the jQuery Mobile included with this Eclipse plug-in"); 
+        mUsePackagedJqmRadio.setToolTipText(Messages.PageJqm_UseBuiltInTooltip);
         
         mUseInstalledJqmRadio = new Button(group, SWT.RADIO);
-        mUseInstalledJqmRadio.setText("Use separately installed version of jQuery Mobile");
-        mUseInstalledJqmRadio.setToolTipText("Specify directory that includes a downloaded version of jQuery Mobile"); 
+        mUseInstalledJqmRadio.setText(Messages.PageJqm_UserSeparate);
+        mUseInstalledJqmRadio.setToolTipText(Messages.PageJqm_UseSeparateTooltip);
         mUseInstalledJqmRadio.setSelection(initialVal);
         
         SelectionListener location_listener = new SelectionAdapter() {
@@ -134,8 +133,8 @@ public class PageJqm extends WizardSection {
             mJqmGroup.setFont(parent.getFont());
             
         Label locationLabel = new Label(mJqmGroup, SWT.NONE);
-        locationLabel.setText("jQM Location:");
-        locationLabel.setToolTipText("Path where jQuery Mobile is installed. See http://jquerymobile.com/download/");
+        locationLabel.setText(Messages.PageJqm_jQMLocation);
+        locationLabel.setToolTipText(Messages.PageJqm_InstalledPath);
 
         mJqmPathField = new Text(mJqmGroup, SWT.BORDER);
         mJqmPathField.setText(getLocationSave());
@@ -146,9 +145,9 @@ public class PageJqm extends WizardSection {
         // to enable other samples
         
         mJqmDemo = new Button(group, SWT.CHECK);
-        mJqmDemo.setText("Create project with jQuery Mobile UI demo");
+        mJqmDemo.setText(Messages.PageJqm_CreateDemo);
         mJqmDemo.setSelection(false);
-        mJqmDemo.setToolTipText("Demonstrates capabilities of jQuery mobile");
+        mJqmDemo.setToolTipText(Messages.PageJqm_CreateDemoTooltip);
         
         /**
          * Enables the Contents section based on the jQuery Mobile UI demo checkbox
@@ -172,7 +171,7 @@ public class PageJqm extends WizardSection {
      */
     @Override
     String getValue() {
-        return mJqmPathField == null ? "" : mJqmPathField.getText().trim();
+        return mJqmPathField == null ? "" : mJqmPathField.getText().trim(); //$NON-NLS-1$
     }
 
     /*
@@ -229,11 +228,11 @@ public class PageJqm extends WizardSection {
         if (!jqmChecked) {
             mJqmDemo.setSelection(false);  // clear demo as well
         } 
-        doGetPreferenceStore().setValue(JQM_CHECK, jqmChecked ? "true" : "");
+        doGetPreferenceStore().setValue(JQM_CHECK, jqmChecked ? "true" : ""); //$NON-NLS-1$ //$NON-NLS-2$
 
         if (doUpdate) {  
             update(null);
-            doGetPreferenceStore().setValue(JQM_USE_INSTALLED, usePackaged ? "" : "true");
+            doGetPreferenceStore().setValue(JQM_USE_INSTALLED, usePackaged ? "" : "true"); //$NON-NLS-1$ //$NON-NLS-2$
         }
     }
 
@@ -246,8 +245,7 @@ public class PageJqm extends WizardSection {
 
         File locationDir = new File(getValue());
         if (!locationDir.exists() || !locationDir.isDirectory()) {
-            return mWizardPage.setStatus("A valid directory name that includes an uncompressed " +
-            		"jQuery Mobile installation should be specified in the 'JQM Location' field.",
+            return mWizardPage.setStatus(Messages.PageJqm_ErrorInvalidDirectory,
                     AndroidPgProjectCreationPage.MSG_ERROR);
         }
 
@@ -255,7 +253,7 @@ public class PageJqm extends WizardSection {
         String[] l = locationDir.list();
         if (l.length == 0) {
             return mWizardPage.setStatus(
-                    "The directory is empty. It should be the location of your jQuery Mobile download",
+                    Messages.PageJqm_ErrorDirectoryEmpty,
                     AndroidPgProjectCreationPage.MSG_ERROR);
         }
 
@@ -264,23 +262,23 @@ public class PageJqm extends WizardSection {
         boolean foundJqmJs = false;
         boolean foundCss = false;
         boolean foundImages = false;
-        String version = "";
+        String version = ""; //$NON-NLS-1$
         boolean versionError = false;
 
         for (String s : l) {    
-            if (s.equals("images")) {
+            if (s.equals("images")) { //$NON-NLS-1$
                 foundImages = true;
                 continue;
             }
-            final String jQm = "jquery.mobile";
+            final String jQm = "jquery.mobile"; //$NON-NLS-1$
             if (s.indexOf(jQm) == 0){
-                String[] tokens = s.split("\\.(?=[^\\.]+$)");
+                String[] tokens = s.split("\\.(?=[^\\.]+$)"); //$NON-NLS-1$
                 if (tokens.length <= 1)
                     continue;
                 String extension = tokens[1];
-                if (extension.equals("js")) {
+                if (extension.equals("js")) { //$NON-NLS-1$
                     foundJqmJs = true;
-                } else if (extension.equals("css")) {
+                } else if (extension.equals("css")) { //$NON-NLS-1$
                     foundCss = true;
                 } else {
                     continue;
@@ -289,11 +287,11 @@ public class PageJqm extends WizardSection {
                 String baseName = tokens[0];
                 // strip min
                 int endIndex = baseName.length();
-                if (baseName.substring(endIndex-4).equals(".min")) {
+                if (baseName.substring(endIndex-4).equals(".min")) { //$NON-NLS-1$
                     endIndex -= 4;
                 }
                 String tempVersion = baseName.substring(jQm.length(),endIndex);
-                if (version == "") {
+                if (version == "") { //$NON-NLS-1$
                     version = tempVersion;
                 } else if (!tempVersion.equals(version)) {
                     versionError = true; 
@@ -301,14 +299,11 @@ public class PageJqm extends WizardSection {
             }
         }
         if (!foundJqmJs || !foundCss || !foundImages) {
-            return mWizardPage.setStatus("The jQuery Mobile directory " + getValue() + 
-                    " must include a jquery.mobile*js file, a jquery.mobile*css file, and an images directory",
+            return mWizardPage.setStatus(String.format(Messages.PageJqm_ErrorNotFoundJQMFiles ,getValue()),
                     AndroidPgProjectCreationPage.MSG_ERROR);
         }
         if (versionError) {
-            return mWizardPage.setStatus("All .js and .css files in the jQuery Mobile " +
-            		"directory " + getValue() + 
-                    " must have the same version number of the form jquery.mobile.{version}.*",
+            return mWizardPage.setStatus(String.format(Messages.PageJqm_ErrorNotSameVersion ,getValue()),
                     AndroidPgProjectCreationPage.MSG_ERROR);
         }
 
