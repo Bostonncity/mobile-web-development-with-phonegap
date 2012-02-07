@@ -1,0 +1,205 @@
+Manifest-Version: 1.0
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.4
+Bundle-SymbolicName: org.eclipse.wst.jsdt.manipulation;singleton:=true
+Eclipse-LazyStart: true
+Eclipse-SourceReferences: scm:cvs:pserver:dev.eclipse.org:/cvsroot/web
+ tools:org.eclipse.jsdt/plugins/org.eclipse.wst.jsdt.manipulation;tag=
+ v201004150600
+Bundle-Activator: org.eclipse.wst.jsdt.internal.core.manipulation.Java
+ ManipulationPlugin
+Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)
+ ",org.eclipse.core.resources;bundle-version="[3.5.0,4.0.0)",org.eclip
+ se.ltk.core.refactoring;bundle-version="[3.5.0,4.0.0)",org.eclipse.ws
+ t.jsdt.core;bundle-version="[1.1.0,2.0.0)",org.eclipse.core.expressio
+ ns;bundle-version="[3.4.100,4.0.0)"
+Export-Package: org.eclipse.wst.jsdt.core.manipulation,org.eclipse.wst
+ .jsdt.core.refactoring,org.eclipse.wst.jsdt.core.refactoring.descript
+ ors,org.eclipse.wst.jsdt.internal.core.manipulation;x-internal:=true,
+ org.eclipse.wst.jsdt.internal.core.refactoring.descriptors;x-internal
+ :=true
+Bundle-Version: 1.0.200.v201004150600
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: %providerName
+Bundle-Name: %pluginName
+Bundle-ManifestVersion: 2
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/ExtractConstan
+ tDescriptor.class
+SHA1-Digest: X9MOUTlkyZbnJpf+7Abi6RKhTG0=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/IntroduceParam
+ eterDescriptor.class
+SHA1-Digest: aRDPObUjy7dSc3+3Tm68XD7h5y8=
+
+Name: org/eclipse/wst/jsdt/internal/core/refactoring/descriptors/Descr
+ iptorMessages.properties
+SHA1-Digest: +tvF7fpQ3+EtN5h+TiUWj78eVis=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/ConvertMemberT
+ ypeDescriptor.class
+SHA1-Digest: 7++CCrVRdBtTSN3z5rPNz35q3bg=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/ChangeMethodSi
+ gnatureDescriptor.class
+SHA1-Digest: DQWf+JETc0RZJlx+7jn6d/pWzhA=
+
+Name: org/eclipse/wst/jsdt/core/manipulation/JavaScriptManipulation.cl
+ ass
+SHA1-Digest: JlCYAvUbdaZW1CgrNs6klU/aHjE=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/IJavaScriptElementMapper.c
+ lass
+SHA1-Digest: EYtxA33MTts4nPUyito0gAurK1c=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/InferTypeArgum
+ entsDescriptor.class
+SHA1-Digest: a4gaMdIzQrovlXkL9YuuNA0gaPQ=
+
+Name: org/eclipse/wst/jsdt/internal/core/manipulation/IStatusConstants
+ .class
+SHA1-Digest: hRhF/5iVhkMSKjcGF6AVPCL6SbM=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/MoveDescriptor
+ .class
+SHA1-Digest: JCfKyktHk1pp3fARTVm3xCMwTco=
+
+Name: org/eclipse/wst/jsdt/internal/core/refactoring/descriptors/Descr
+ iptorMessages.class
+SHA1-Digest: R97jYAODU2LE0RSfPtChrimplQ8=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/MoveMethodDesc
+ riptor.class
+SHA1-Digest: 5JgJnVXMgCXopjGTYDsX09v3EUA=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/ConvertLocalVa
+ riableDescriptor.class
+SHA1-Digest: EBEOVq4CmQr3e6GRgNko87R8Bok=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/RenameJavaScri
+ ptElementDescriptor.class
+SHA1-Digest: /0qbJeguZr3aL9tQyb8Eu5ftcT8=
+
+Name: org/eclipse/wst/jsdt/internal/core/manipulation/JavaManipulation
+ Messages.properties
+SHA1-Digest: TTDWfKqNhNxkwg1PJViOs2nlbIY=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/JavaScriptRefa
+ ctoringDescriptor.class
+SHA1-Digest: F5anQp0H60xfJqfMzXjOrfHn20g=
+
+Name: plugin.properties
+SHA1-Digest: w+OC2UpRC8V0XRVQg8s9McnkxN8=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/InlineMethodDe
+ scriptor.class
+SHA1-Digest: d96ISsl9QUqXxL03q+6Ch2GQCGE=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/IntroduceIndir
+ ectionDescriptor.class
+SHA1-Digest: omYVDY8JpDVYmcApOrzLhspFZkw=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/PushDownDescri
+ ptor.class
+SHA1-Digest: iu+RxLMG7UV1eFB/vsTvYLV9p7o=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/InlineConstant
+ Descriptor.class
+SHA1-Digest: unymXXW8x8mBLaOtD0FywCz+ih0=
+
+Name: plugin.xml
+SHA1-Digest: SnJ5gYrYgyUp7MOME4cz6k0OKgc=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/IJavaScriptRefactorings.cl
+ ass
+SHA1-Digest: f04IX213PTgR4ETeMaKzoWPRw84=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/EncapsulateFie
+ ldDescriptor.class
+SHA1-Digest: 1y+ZbO0shS7AIomUlDTH+cmTNWQ=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/ExtractLocalDe
+ scriptor.class
+SHA1-Digest: lYRj9WDQgiIoN5EUiIpyZIAK2b4=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/IntroduceFacto
+ ryDescriptor.class
+SHA1-Digest: c7W8TP+q/pI0yTNGFWMpjW8R7I4=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/DeleteDescript
+ or.class
+SHA1-Digest: B8jBSMA++1mKc9++nE2Av/qHdws=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/RenameResource
+ Descriptor.class
+SHA1-Digest: KVXeqmdUus99ebyuF+2utYid1tM=
+
+Name: META-INF/eclipse.inf
+SHA1-Digest: KyT9FF7C7t86NoBoa2kZT3ZJBfw=
+
+Name: org/eclipse/wst/jsdt/internal/core/manipulation/JavaManipulation
+ Plugin.class
+SHA1-Digest: fK7TaQ3AObwVFYG1WlJqNxYR6NE=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/RenameLocalVar
+ iableDescriptor.class
+SHA1-Digest: asevSfrB1UAOgZ1A57SgzuvN9d4=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/UseSupertypeDe
+ scriptor.class
+SHA1-Digest: qpwSnLz+P/kdqiO/ak5vmIzJSdE=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/InlineLocalVar
+ iableDescriptor.class
+SHA1-Digest: v23mpQUCu0O4KUgvMmYqpwYzaNE=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/CopyDescriptor
+ .class
+SHA1-Digest: 4RtOp4iu8Ehf3Wi2eSTwcM01rnQ=
+
+Name: about.html
+SHA1-Digest: ejOZra0kypGLQQ2bJtGTX+LI8tU=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/JavaScriptRefa
+ ctoringContribution.class
+SHA1-Digest: tyNLZVIEY52do/7B/OeGqzY917A=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/ExtractInterfa
+ ceDescriptor.class
+SHA1-Digest: Ogzp0NuAaIDRqBpk3/1oKt+SOVY=
+
+Name: org/eclipse/wst/jsdt/internal/core/manipulation/JavaElementPrope
+ rtyTester.class
+SHA1-Digest: FmVKuMRsxVFQRuRMj7EQ6fH+6iE=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/ConvertAnonymo
+ usDescriptor.class
+SHA1-Digest: BYUrYudNbsyna9ljBEasbqqYB68=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/MoveStaticMemb
+ ersDescriptor.class
+SHA1-Digest: L2R+hh5FTefKpLgvQLZLT/FLwP0=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/RenameTypeArguments.class
+SHA1-Digest: hKBpcyRXvyjOvZPckZJ7pR4berE=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/PullUpDescript
+ or.class
+SHA1-Digest: bEX3M7Xgl5f2nT0MOaph2sqiA5s=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/ExtractSupercl
+ assDescriptor.class
+SHA1-Digest: UXqiq7/ZiovzDThxrbFEFwV0j04=
+
+Name: org/eclipse/wst/jsdt/internal/core/manipulation/JavaManipulation
+ Messages.class
+SHA1-Digest: Wb9iEJW0Qhc0GrprU7Nq2ioMeUY=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/ExtractMethodD
+ escriptor.class
+SHA1-Digest: eFQ10fetrtpOLpCws770oRykok8=
+
+Name: org/eclipse/wst/jsdt/core/refactoring/descriptors/GeneralizeType
+ Descriptor.class
+SHA1-Digest: CsSpZx9K3hN4vgzyaECgfZAOTD8=
+
