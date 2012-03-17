@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         id="jsLintBuilder"
+         name="jslint4java Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder
+            hasNature="true">
+         <run
+               class="com.googlecode.jslint4java.eclipse.builder.JSLintBuilder">
+         </run>
+      </builder>
+   </extension>
+   <extension
+         id="jsLintNature"
+         name="jslint4java Nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="com.googlecode.jslint4java.eclipse.builder.JSLintNature">
+         </run>
+      </runtime>
+      <builder
+            id="com.googlecode.jslint4java.eclipse.jsLintBuilder">
+      </builder>
+   </extension>
+   <extension
+         id="javaScriptLintProblem"
+         name="jslint4java Problem"
+         point="org.eclipse.core.resources.markers">
+      <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super>
+      <persistent
+            value="true">
+      </persistent>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="com.googlecode.jslint4java.eclipse.preferences.PreferencesInitializer">
+      </initializer>
+   </extension>
+
+</plugin>
