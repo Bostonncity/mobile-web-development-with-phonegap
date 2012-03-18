@@ -190,6 +190,7 @@ public final class PagePhonegapPathSet extends WizardSection {
         mFromGitHub = false;
         mIsCordova = false;
         if (useFromPackaged()) {  // no validation necessary
+            mIsCordova = true;
             return AndroidPgProjectCreationPage.MSG_NONE;
         }
         String phonegapDirName = getValue();
@@ -243,11 +244,14 @@ public final class PagePhonegapPathSet extends WizardSection {
                 boolean foundSample = false;
 
                 for (String s : al) {
-                    if (s.indexOf("phonegap") == 0) { //$NON-NLS-1$
+                    if ((s.indexOf("phonegap") == 0)||(s.indexOf("cordova") == 0)) { //$NON-NLS-1$
                         if (s.endsWith(".js")) { //$NON-NLS-1$
                             mPhonegapJs = s;
                         } else if (s.endsWith(".jar")) { //$NON-NLS-1$
                             mPhonegapJar = s;
+                        }
+                        if(s.indexOf("cordova")==0){
+                            mIsCordova = true;
                         }
                     } else if (s.equals(foundLib ? "example" : "Sample")) { //$NON-NLS-1$
                         foundSample = true;

@@ -182,7 +182,7 @@ class PhonegapProjectPopulate {
             bundleCopy("/resources/phonegap/jar", libsDir);
             updateClasspath(monitor,
                     pageInfo.mAndroidProject, 
-                    libsDir + "/phonegap.jar",
+                    libsDir + "/cordova-1.5.0.jar",
                     null); 
             
         } else if (pageInfo.mFromGitHub) {  // TODO - make phonegap.jar come from a separate project in user's install
@@ -274,7 +274,7 @@ class PhonegapProjectPopulate {
         class isPhoneGapFile implements FileFilter {
             public boolean accept(File f) {
                 String name = f.getName();
-                return name.indexOf("phonegap") >= 0 && name.indexOf("phonegapdemo") < 0;
+                return ((name.indexOf("phonegap") >= 0)||(name.indexOf("cordova") >= 0)) && name.indexOf("phonegapdemo") < 0;
             }
         }
         
