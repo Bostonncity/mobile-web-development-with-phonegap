@@ -290,7 +290,7 @@ public class PageJqm extends WizardSection {
                 if (baseName.substring(endIndex-4).equals(".min")) { //$NON-NLS-1$
                     endIndex -= 4;
                 }
-                String tempVersion = baseName.substring(jQm.length(),endIndex);
+                String tempVersion = baseName.substring(baseName.indexOf('-'), endIndex);
                 if (version == "") { //$NON-NLS-1$
                     version = tempVersion;
                 } else if (!tempVersion.equals(version)) {
