@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta content="Copyright (c) 2010 IBM Corporation and others. All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html. Contributors: IBM Corporation - initial API and implementation" name="copyright">
+<link href="../book.css" rel="STYLESHEET" CHARSET="ISO-8859-1"	TYPE="text/css">
+<link rel="stylesheet" type="text/css" href="../content/PLUGINS_ROOT/PRODUCT_PLUGIN/book.css">
+<title>Configuring Source Folders</title>
+</head>
+	<body>
+		<h1>Configuring Source Folders</h1>
+		<p>
+			In order to limit the source files in the global scope of a JavaScript project, the JSDT supports specifying project source folders. 
+			By default the project root is a source folder, so for most instances no source folder configuration is necessary.
+		</p>
+		<p>
+			Depending on the kind of project, source is added to the global scope differently:
+			<ul>
+				<li>For a JavaScript project, source files (and sub folders) from a the default source folder are all added to the global scope by default</li>
+				<li>For an HTML project there are is no default source folder. In this case, HTML files have their own global scope that is a combination of libraries from the project and any source files included through HTML using the <code>&lt;script src='...'&gt;</code> tag.</li>
+			</ul>
+		</p>
+		<p>
+			Source folders can be easily configured on the <strong>JavaScript > Include Path</strong> properties page on the <strong>Source</strong> tab. 
+		</p>
+		<p>
+			<img src="../images/include-path-source-tab.png" alt="The JavaScript > Include Path properties page showing the Source tab">
+		</p>
+	</body>
+</html>
