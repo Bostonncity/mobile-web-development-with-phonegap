@@ -34,7 +34,7 @@ var onDeviceReady = function() {
     // api-device
     // ***IMPORTANT: access device object only AFTER "deviceready" event    
     document.getElementById("name").innerHTML = device.name;
-    document.getElementById("pgversion").innerHTML = device.phonegap;
+    document.getElementById("pgversion").innerHTML = device.cordova ? device.cordova : device.phonegap;
     document.getElementById("platform").innerHTML = device.platform;
     document.getElementById("uuid").innerHTML = device.uuid;
     document.getElementById("version").innerHTML = device.version;
