@@ -57,7 +57,7 @@ cfg.items = [
                                             + '<br><b>UUID: </b>'
                                             + device.uuid
                                             + '<br><b>PhoneGap Version: </b>'
-                                            + device.phonegap
+                                            + (device.cordova ? device.cordova : device.phonegap)
                                             + '<br><b>Name: </b>'
                                             + device.name
                                             + '<br><b>Screen Width: </b>'
