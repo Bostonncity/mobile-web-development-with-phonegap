@@ -312,7 +312,7 @@ class PhonegapProjectPopulate {
         String indexHtmlContents = StringIO.read(wwwDir + "index.html");
         indexHtmlContents = indexHtmlContents.replaceFirst("src=\"(cordova|phonegap)[a-zA-Z-.0-9]*js\"",
                 "src=\"" + phonegapJsFileName + "\"");  
-        if (indexHtmlContents.indexOf("src=\"phonegap") < 0) {   // no phonegap*.js in file
+        if (indexHtmlContents.indexOf("src=\"phonegap") < 0 && indexHtmlContents.indexOf("src=\"cordova") < 0) {   // no phonegap*.js in file
             int index = indexHtmlContents.lastIndexOf("</head>");
             if (index > 0) {
                 index = indexHtmlContents.lastIndexOf("</script>", index);
@@ -355,7 +355,15 @@ class PhonegapProjectPopulate {
             bundleCopy("/resources/jqm/jquery.mobile", jqmDir);
         } else {
             version = pageInfo.mJqmVersion;
-            FileCopy.recursiveCopy(fromJqmDir, jqmDir);
+            String fileName = "/jquery.mobile" + version + ".js";
+            FileCopy.copy(fromJqmDir + fileName, jqmDir + fileName);
+            fileName = "/jquery.mobile" + version + ".css";  
+            FileCopy.copy(fromJqmDir + fileName, jqmDir + fileName);
+            fileName = "/jquery.mobile" + version + ".min.js";  
+            FileCopy.copy(fromJqmDir + fileName, jqmDir + fileName);
+            fileName = "/jquery.mobile" + version + ".min.css";  
+            FileCopy.copy(fromJqmDir + fileName, jqmDir + fileName);
+            FileCopy.recursiveCopy(fromJqmDir + "/images", jqmDir + "/images");
         }
 
         bundleCopy("/resources/jqm/supplements", jqmDir);
