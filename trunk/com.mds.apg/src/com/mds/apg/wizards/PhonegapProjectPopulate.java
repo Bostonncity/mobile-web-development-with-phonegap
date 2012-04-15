@@ -175,9 +175,11 @@ class PhonegapProjectPopulate {
     static private void getPhonegapJar(IProgressMonitor monitor, PageInfo pageInfo) throws CoreException,
             IOException, URISyntaxException {
         
+        addDefaultDirectories(pageInfo.mAndroidProject, "", new String[] { "libs"  }, monitor);
+        String libsDir = pageInfo.mDestinationDirectory + "libs/"; 
+        
         if (pageInfo.mPackagedPhonegap) {
-            addDefaultDirectories(pageInfo.mAndroidProject, "", new String[] { "libs"  }, monitor);
-            String libsDir = pageInfo.mDestinationDirectory + "libs/";            
+            addDefaultDirectories(pageInfo.mAndroidProject, "", new String[] { "libs"  }, monitor);         
             String v = pageInfo.mPhonegapVersion;
             String phonegapJarFileName = (pageInfo.mIsCordova ? "cordova-" : "phonegap-") + v + ".jar";
             InputStream stream = bundleGetFileAsStream("/resources/phonegap/" + v + "/" + phonegapJarFileName);
@@ -187,17 +189,21 @@ class PhonegapProjectPopulate {
                     libsDir + phonegapJarFileName,
                     null); 
             
-        } else if (pageInfo.mFromGitHub) {  // TODO - make phonegap.jar come from a separate project in user's install
+        } else if (pageInfo.mFromGitHub) { 
             String toDir = pageInfo.mDestinationDirectory + "/src";
             FileCopy.recursiveCopy(pageInfo.mPhonegapDirectory + "/framework/src", toDir);
+            String destJar =  libsDir + "commons-codec-1.3.jar";
+            FileCopy.copy(pageInfo.mPhonegapDirectory + pageInfo.mInstallAndroidDirectory + "/framework/libs/commons-codec-1.3.jar", destJar);
             updateClasspath(monitor,
                     pageInfo.mAndroidProject, 
-                    pageInfo.mPhonegapDirectory + "/framework/libs/commons-codec-1.3.jar",
+                    destJar,
                     new Path(toDir));        
         } else { // not from github
+            String destJar =  libsDir + pageInfo.mPhonegapJar;
+            FileCopy.copy(pageInfo.mPhonegapDirectory + pageInfo.mInstallAndroidDirectory + pageInfo.mPhonegapJar, destJar);
             updateClasspath(monitor, 
                     pageInfo.mAndroidProject, 
-                    pageInfo.mPhonegapDirectory + pageInfo.mInstallAndroidDirectory + pageInfo.mPhonegapJar,
+                    destJar,
                     null);      
         }
     }
