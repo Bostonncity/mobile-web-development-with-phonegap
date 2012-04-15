@@ -159,6 +159,7 @@ public class AndroidPgProjectNewWizard extends NewProjectWizard implements INewW
                 mPhonegapPage.mPhonegapDialog.getInstallExampleDir(),
                 mPhonegapPage.mPhonegapDialog.getPhonegapJsName(),
                 mPhonegapPage.mPhonegapDialog.getPhonegapJarName(),
+                mPhonegapPage.mPhonegapDialog.getPhonegapVersion(),
                 mPhonegapPage.mInitContentsDialog.getContentSelection(),
                 mPhonegapPage.mInitContentsDialog.isPureImport(),
                 Platform.getLocation().toString() + "/"+ mNewAndroidProject.getName() + "/", //$NON-NLS-1$ //$NON-NLS-2$

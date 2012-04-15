@@ -23,7 +23,6 @@
 package com.mds.apg.wizards;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -178,11 +177,14 @@ class PhonegapProjectPopulate {
         
         if (pageInfo.mPackagedPhonegap) {
             addDefaultDirectories(pageInfo.mAndroidProject, "", new String[] { "libs"  }, monitor);
-            String libsDir = pageInfo.mDestinationDirectory + "/libs/";
-            bundleCopy("/resources/phonegap/jar", libsDir);
+            String libsDir = pageInfo.mDestinationDirectory + "libs/";            
+            String v = pageInfo.mPhonegapVersion;
+            String phonegapJarFileName = (pageInfo.mIsCordova ? "cordova-" : "phonegap-") + v + ".jar";
+            InputStream stream = bundleGetFileAsStream("/resources/phonegap/" + v + "/" + phonegapJarFileName);
+            FileCopy.coreStreamCopy(stream, new File(libsDir + phonegapJarFileName));
             updateClasspath(monitor,
                     pageInfo.mAndroidProject, 
-                    libsDir + "/cordova-1.5.0.jar",
+                    libsDir + phonegapJarFileName,
                     null); 
             
         } else if (pageInfo.mFromGitHub) {  // TODO - make phonegap.jar come from a separate project in user's install
@@ -203,6 +205,9 @@ class PhonegapProjectPopulate {
     /**
      * Update the classpath with thanks to Larry Isaacs in  
      * http://dev.eclipse.org/newslists/news.eclipse.webtools/msg10002.html
+     * 
+     * With ADT r17 classpath is no longer needed. The Android tools include anything in libs
+     * 
      * @throws CoreException 
      * 
      * @throws URISyntaxException
@@ -271,16 +276,11 @@ class PhonegapProjectPopulate {
         
         String phonegapJsFileName;
         
-        class isPhoneGapFile implements FileFilter {
-            public boolean accept(File f) {
-                String name = f.getName();
-                return ((name.indexOf("phonegap") >= 0)||(name.indexOf("cordova") >= 0)) && name.indexOf("phonegapdemo") < 0;
-            }
-        }
-        
         if (pageInfo.mPackagedPhonegap) {
-            bundleCopy("resources/phonegap/js", wwwDir);
-            phonegapJsFileName = (new File(wwwDir)).listFiles(new isPhoneGapFile())[0].getName();
+            String v = pageInfo.mPhonegapVersion;
+            phonegapJsFileName = (pageInfo.mIsCordova ? "cordova-" : "phonegap-") + v + ".js";
+            InputStream stream = bundleGetFileAsStream("/resources/phonegap/" + v + "/" + phonegapJsFileName);
+            FileCopy.coreStreamCopy(stream, new File(wwwDir + phonegapJsFileName));
             
         } else if (pageInfo.mFromGitHub) {
 
@@ -521,7 +521,7 @@ class PhonegapProjectPopulate {
 
         if (pageInfo.mPackagedPhonegap) {
             bundleCopy("/resources/phonegap/layout", pageInfo.mDestinationDirectory + "/res/layout/");
-            bundleCopy("/resources/phonegap/res", pageInfo.mDestinationDirectory + "/res/");  // xml directory
+            bundleCopy("/resources/phonegap/" + pageInfo.mPhonegapVersion + "/res", pageInfo.mDestinationDirectory + "/res/");  // xml directory
 
             // Copy resource drawable to all of the project drawable* directories
             File destDir = new File(destResDir);

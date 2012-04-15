@@ -23,8 +23,10 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import java.io.File;
 
@@ -33,6 +35,7 @@ public final class PagePhonegapPathSet extends WizardSection {
     // Set up storage for persistent initializers
     private final static String PHONEGAP_DIR = com.mds.apg.Activator.PLUGIN_ID + ".phonegap";  //$NON-NLS-1$
     private final static String PG_USE_INSTALLED = com.mds.apg.Activator.PLUGIN_ID + ".pguseinstalled"; //$NON-NLS-1$
+    private final static String PG_VERSION = com.mds.apg.Activator.PLUGIN_ID + ".pgversion"; //$NON-NLS-1$
     
     /** Last user-browsed location, static so that it be remembered for the whole session */ 
     private static String sPhonegapPathCache = ""; //$NON-NLS-1$
@@ -49,6 +52,8 @@ public final class PagePhonegapPathSet extends WizardSection {
     Text mPhonegapPathField;
     private Button mUsePackagedPgRadio;
     private Composite mPgGroup;
+    private Composite mVersionGroup;
+    private Combo mVersion;
     
     PagePhonegapPathSet(AndroidPgProjectCreationPage wizardPage, Composite parent) {
         super(wizardPage);
@@ -78,6 +83,31 @@ public final class PagePhonegapPathSet extends WizardSection {
         mUsePackagedPgRadio.setSelection(!initialVal);
         mUsePackagedPgRadio.setToolTipText(Messages.PagePhonegapPathSet_BuildInTooltip);
         
+        mVersionGroup = new Composite(phonegapGroup, SWT.NONE);
+        mVersionGroup.setLayout(new GridLayout(2, /* num columns */
+                false /* columns of not equal size */));
+        mVersionGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+        mVersionGroup.setFont(parent.getFont());
+            
+        Label locationLabel = new Label(mVersionGroup, SWT.NONE);
+        locationLabel.setText(Messages.PagePhonegapPathSet_Version);
+        locationLabel.setToolTipText(Messages.PagePhonegapPathSet_VersionTooltip);
+        
+        mVersion = new Combo(mVersionGroup, SWT.VERTICAL |
+                SWT.DROP_DOWN | SWT.BORDER | SWT.READ_ONLY);
+        
+        mVersion.add("1.4.1"); //$NON-NLS-1$
+        mVersion.add("1.5.0"); //$NON-NLS-1$
+        mVersion.add("1.6.1"); //$NON-NLS-1$
+        String cacheVersion = doGetPreferenceStore().getString(PG_VERSION);
+        if (cacheVersion == "") {
+            mVersion.setText("1.4.1");
+        } else {
+            mVersion.setText(cacheVersion);
+        }
+        // version.select(0);    // make 1.4.1 the default
+        mVersion.setToolTipText(Messages.PagePhonegapPathSet_VersionTooltip);
+        
         Button useInstalledPgRadio = new Button(phonegapGroup, SWT.RADIO);
         useInstalledPgRadio.setText(Messages.PagePhonegapPathSet_EnterPhoneGapPath);
         useInstalledPgRadio.setToolTipText(Messages.PagePhonegapPathSet_EnterPhoneGapPathTooltip);
@@ -93,6 +123,7 @@ public final class PagePhonegapPathSet extends WizardSection {
         };
         mUsePackagedPgRadio.addSelectionListener(location_listener);
         useInstalledPgRadio.addSelectionListener(location_listener);
+        mVersion.addSelectionListener(location_listener);
         
         // Hideable directory chooser for local PhoneGap installation
 
@@ -152,6 +183,10 @@ public final class PagePhonegapPathSet extends WizardSection {
         return mUsePackagedPgRadio.getSelection();
     }
     
+    final String getPhonegapVersion() {
+        return mVersion.getItem(mVersion.getSelectionIndex());
+    }
+    
     final boolean fromGitHub() {
         return mFromGitHub;
     }
@@ -169,6 +204,7 @@ public final class PagePhonegapPathSet extends WizardSection {
         boolean usePackaged = useFromPackaged();
         
         mPgGroup.setVisible(!usePackaged);
+        mVersionGroup.setVisible(usePackaged);
         if (doUpdate) {  
             update(null);
             doGetPreferenceStore().setValue(PG_USE_INSTALLED, usePackaged ? "" : "true"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -190,7 +226,9 @@ public final class PagePhonegapPathSet extends WizardSection {
         mFromGitHub = false;
         mIsCordova = false;
         if (useFromPackaged()) {  // no validation necessary
-            mIsCordova = true;
+            String version = getPhonegapVersion();
+            mIsCordova = !version.equals("1.4.1");
+            doGetPreferenceStore().setValue(PG_VERSION, version);
             return AndroidPgProjectCreationPage.MSG_NONE;
         }
         String phonegapDirName = getValue();
