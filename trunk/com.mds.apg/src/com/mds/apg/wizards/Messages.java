@@ -37,6 +37,8 @@ public class Messages extends NLS {
 	public static String PageJqm_jQMLocation;
 	public static String PageJqm_URLforJQM;
 	public static String PageJqm_UseBuiltIn;
+	public static String PagePhonegapPathSet_Version;
+	public static String PagePhonegapPathSet_VersionTooltip;
 	public static String PageJqm_UseBuiltInTooltip;
 	public static String PageJqm_UserSeparate;
 	public static String PageJqm_UseSeparateTooltip;
