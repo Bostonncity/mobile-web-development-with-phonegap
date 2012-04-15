@@ -21,7 +21,7 @@ $(document).ready(function() {
     $('.api-div').hide();
     $('.api-div#api-intro').show();
     
-    $('#intro').click(function(event) {
+    $('#intro').click(function() {
         $('.api-div').hide();
         $('.api-div#api-intro').show();
         $.mobile.silentScroll(0);            
@@ -29,20 +29,22 @@ $(document).ready(function() {
     
     $('div ul li a').click(function(event) {
         event.preventDefault();
-        //alert('clicked : ' + $(this).attr('href'));
-        var attrhref = $(this).attr('href');
+        //alert('clicked : ' + $(this).attr('id'));
+        var attrId = $(this).attr('id');
 
-        if (attrhref.indexOf("#api-") !== 0) {
+        if (attrId.indexOf("click") !== 0) {
             return;
         }
         
+        var api = '#api' + attrId.substring(attrId.indexOf('-'));
+        
         // hide all div's, show only this one
         $('.api-div').hide();
-        $(attrhref).show();
+        $(api).show();
 
         // if small screen and portrait - close after tap
         var disp = $('ul #listdivider').css("display");
-        //alert(disp + ' : ' + attrhref);
+        //alert(disp + ' : ' + api);
         if (disp === 'none') {
             $('div.ui-collapsible').trigger("collapse");
         } else {
@@ -50,7 +52,7 @@ $(document).ready(function() {
         }
     }); 
     
-    $('#listdivider').click(function() {
+    $('#listdivider').click(function(event) {
         event.preventDefault();
         $('.api-div').hide();
         $('.api-div#api-intro').show();
