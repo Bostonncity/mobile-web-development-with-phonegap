@@ -17,7 +17,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-$(document).ready(function() {   
+$('#page-home').live('pageinit', function(event){  
     $('.api-div').hide();
     $('.api-div#api-intro').show();
     
