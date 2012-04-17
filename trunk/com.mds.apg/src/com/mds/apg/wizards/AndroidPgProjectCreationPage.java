@@ -169,7 +169,7 @@ public class AndroidPgProjectCreationPage extends WizardPage {
                 }
             } else {
                 // needs to be seeded with blanks so that there's space when it needs to appear (Issue 3)
-                withString = "                                 "; //$NON-NLS-1$
+                withString = "                                   "; //$NON-NLS-1$
                 if (mInitContentsDialog.getContentSelection().equals("example") && !mPhonegapDialog.useFromPackaged()) { //$NON-NLS-1$
                     mInitContentsDialog.update(mPhonegapDialog.getValue() + mPhonegapDialog.sampleSpot());
                 }
