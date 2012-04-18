@@ -193,7 +193,7 @@ class PhonegapProjectPopulate {
             String toDir = pageInfo.mDestinationDirectory + "/src";
             FileCopy.recursiveCopy(pageInfo.mPhonegapDirectory + "/framework/src", toDir);
             String destJar =  libsDir + "commons-codec-1.3.jar";
-            FileCopy.copy(pageInfo.mPhonegapDirectory + pageInfo.mInstallAndroidDirectory + "/framework/libs/commons-codec-1.3.jar", destJar);
+            FileCopy.copy(pageInfo.mPhonegapDirectory + "/framework/libs/commons-codec-1.3.jar", destJar);
             updateClasspath(monitor,
                     pageInfo.mAndroidProject, 
                     destJar,
