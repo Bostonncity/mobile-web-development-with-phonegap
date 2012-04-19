@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+    Copyright (c) 2005, 2010 IBM Corporation and others.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+   
+    Contributors:
+        IBM Corporation - initial API and implementation
+ -->
+
+<contexts>
+   <context id="standard_breakpoint_editor" title="Standard Breakpoint Editor">
+      <description>This editor allows you to change standard attributes on a given breakpoint, such as the hit count and suspend policy</description>
+   </context>
+   <context id="breakpoint_property_page" title="Breakpoint Properties">
+      <description>The breakpoint property pages allow you to change the settings for each different kind of breakpoint.</description>
+   </context>
+   <context id="connect_tab" title="Connect Tab">
+      <description>This tab allows you to specify the way you want to connect to a remote server to debug JavaScript.</description>
+   </context>
+   <context id="editor_toggle_breakpoint_action_context" title="Editor Toggle Breakpoint">
+      <description>This action allows you to quickly toggle a breakpoint at the selected location in the editor</description>
+   </context>
+   <context id="breakpoint_properties_popup_menu_context" title="Breakpoint Properties Action">
+      <description>This action alllows quick access to the properties for the selected breakpoint</description>
+   </context>
+   <context id="hit_count_action_context" title="Breakpoint Hit Count Action">
+      <description>This action allows you to quickly add or change the hit count of the selected breakpoint (if it supports having a hit count)</description>
+   </context>
+   <context id="breakpoint_suspend_policy_toggle_action_context" title="Suspend Policy Action">
+      <description>This action allows a quick way to toggle the suspend policy for the selected breakpoint</description>
+   </context>
+   <context id="toggle_function_bp_outline" title="Toggle Function Breakpoint">
+      <description>This action allows a quick way to toggle a function breakpoint from a selected function in the Outline View</description>
+   </context>
+   <context id="exit_toggle_action_context" title="Function Exit Action">
+      <description>This action allows a quick way to toggle if the selected function breakpoint will suspend when the function exits</description>
+   </context>
+   <context id="entry_toggle_action_contex" title="Function Entry Action">
+      <description>This action allows a quick way to toggle if the selected function breakpoint will suspend when a function is entered</description>
+   </context>
+   <context id="add_script_load_breakpoint_action" title="Add Script Load Breakpoint">
+      <description>This action allows you to create a new script load breakpoint</description>
+   </context>
+   <context id="suspend_for_all_loads_action_context" title="Suspend For All Script Loads">
+      <description>This action allows you to toggle if the debugger should suspend for all script loads or not</description>
+   </context>
+   <context id="javasript_lanch_shortcut" title="JavaScript Launch Shortcut">
+      <description>This launch shortcut allows quick access to the most recently launched JavaScript configuration</description>
+   </context>
+   <context id="breakpoint_properties_editor_ruler_context">
+      <description>This action allows quick access to the properties of the breakpoint without having to open the Breakpoints View</description>
+   </context>
+   <context id="toggle_breakpoint_anablement_ruler_context">
+      <description>This action allows quick access to enabling or disabling a breakpoint without having to open the Breakpoints View</description>
+   </context>
+   <context id="script_open_source_context">
+      <description>This action allows you to quickly open (or repoen) the source for a loaded script without having to find it in your workspace.</description>
+   </context>
+</contexts>

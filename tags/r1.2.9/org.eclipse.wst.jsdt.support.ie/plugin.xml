@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension point="org.eclipse.wst.jsdt.ui.JsGlobalScopeContainerPage">
+  	  <JsGlobalScopeContainerPage
+            name="%JsGlobalScopeContainerPage.name.0"
+            class="org.eclipse.wst.jsdt.internal.ui.wizards.buildpaths.InternetExplorerLibraryWizardPage"
+            id="org.eclipse.wst.jsdt.support.ie">
+      </JsGlobalScopeContainerPage>
+   </extension>
+   <extension
+      point="org.eclipse.wst.jsdt.core.JsGlobalScopeContainerInitializer">
+      <JsGlobalScopeContainerInitializer
+            class="org.eclipse.wst.jsdt.core.compiler.libraries.InternetExplorerLibInitializer"
+            id="org.eclipse.wst.jsdt.launching.InternetExplorer">
+      </JsGlobalScopeContainerInitializer>
+	</extension>
+	   <extension point="org.eclipse.wst.jsdt.ui.JsGlobalScopeUIInitializer">
+     <JsGlobalScopeUIInitializer
+     	id="org.eclipse.wst.jsdt.launching.InternetExplorer"
+     	class="org.eclipse.wst.jsdt.core.compiler.libraries.InternetExplorerUILibInitializer">
+     </JsGlobalScopeUIInitializer>
+   </extension>
+	
+</plugin>

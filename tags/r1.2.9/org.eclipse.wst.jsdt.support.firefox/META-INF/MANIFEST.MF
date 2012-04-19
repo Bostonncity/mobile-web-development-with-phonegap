@@ -1,0 +1,63 @@
+Manifest-Version: 1.0
+Bundle-Vendor: %Bundle-Vendor
+Bundle-ActivationPolicy: lazy
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.4
+Bundle-Name: %Bundle-Name
+Bundle-SymbolicName: org.eclipse.wst.jsdt.support.firefox;singleton:=t
+ rue
+Eclipse-SourceReferences: scm:cvs:pserver:dev.eclipse.org:/cvsroot/web
+ tools:org.eclipse.jsdt/plugins/org.eclipse.wst.jsdt.support.firefox;t
+ ag=v201004150600
+Require-Bundle: org.eclipse.wst.jsdt.core;bundle-version="[1.1.0,2.0.0
+ )",org.eclipse.wst.jsdt.ui;bundle-version="[1.1.0,2.0.0)",org.eclipse
+ .core.runtime;bundle-version="[3.5.0,4.0.0)",org.eclipse.swt;bundle-v
+ ersion="[3.5.0,4.0.0)",org.eclipse.ui;bundle-version="[3.5.0,4.0.0)",
+ org.eclipse.core.resources;bundle-version="[3.5.0,4.0.0)"
+Bundle-Version: 1.0.300.v201004150600
+Bundle-ManifestVersion: 2
+
+Name: org/eclipse/wst/jsdt/core/compiler/libraries/FireFoxUiInitialize
+ r.class
+SHA1-Digest: 8R08ydwJWp1sLafFN+ud35n/85I=
+
+Name: META-INF/eclipse.inf
+SHA1-Digest: KyT9FF7C7t86NoBoa2kZT3ZJBfw=
+
+Name: org/eclipse/wst/jsdt/core/compiler/libraries/FireFoxSmall.gif
+SHA1-Digest: 0RS9OcIjuI2UxMPl6motss5nxjQ=
+
+Name: about.html
+SHA1-Digest: ejOZra0kypGLQQ2bJtGTX+LI8tU=
+
+Name: plugin.properties
+SHA1-Digest: UXuGPAeJ+eUPTBUFw9sh9+v/xZg=
+
+Name: libraries/XMLHttpRequest.js
+SHA1-Digest: UMQZmtYmTK9YxGUqUeZu1X86lZM=
+
+Name: org/eclipse/wst/jsdt/internal/ui/wizards/FirefoxMessages.class
+SHA1-Digest: vad4UhSkGTG/cT3nQiWMFwF3m34=
+
+Name: org/eclipse/wst/jsdt/internal/ui/wizards/FirefoxMessages.propert
+ ies
+SHA1-Digest: SSuV9uAv8ASjfiJXy7DAF35s7U8=
+
+Name: org/eclipse/wst/jsdt/internal/ui/wizards/buildpaths/FireFoxLibra
+ ryWizardPage.class
+SHA1-Digest: p/a0xfgi/oxo8Zw2NloGTxKML8Q=
+
+Name: org/eclipse/wst/jsdt/core/compiler/libraries/FireFoxLibInitializ
+ er$FireFoxLibLocation.class
+SHA1-Digest: BQS/I5HBizb738J6VCBZRc8HjSc=
+
+Name: plugin.xml
+SHA1-Digest: 3zSLDalZh5lPaLnvpyIN6H+IlNI=
+
+Name: org/eclipse/wst/jsdt/core/compiler/libraries/FireFoxLibInitializ
+ er.class
+SHA1-Digest: asadSBv1AXi5XknozmI/+2dUW3A=
+
+Name: libraries/FireFox2.0.0.3.js
+SHA1-Digest: Ovg5GO3A7CgZ2+6I5HAOfIHXcbo=
+

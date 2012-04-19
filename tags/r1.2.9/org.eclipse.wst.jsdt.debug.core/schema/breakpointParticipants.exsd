@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="org.eclipse.wst.jsdt.debug.core" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appinfo>
+         <meta.schema plugin="org.eclipse.wst.jsdt.debug.core" id="breakpointParticipants" name="Breakpoint Participants"/>
+      </appinfo>
+      <documentation>
+         This extension point allows consumers to provide a breakpoint participant that will be consulted during the decision to suspend the kind of breakpoint the participant applies to.
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <annotation>
+         <appinfo>
+            <meta.element />
+         </appinfo>
+      </annotation>
+      <complexType>
+         <sequence minOccurs="1" maxOccurs="unbounded">
+            <element ref="participant"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute translatable="true"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="participant">
+      <annotation>
+         <documentation>
+            The breakpoint participant
+         </documentation>
+      </annotation>
+      <complexType>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The class attribute is required and must implement &lt;code&gt;org.eclipse.wst.jsdt.debug.core.breakpoints.IJavaScriptBreakpointParticipant&lt;/code&gt;
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.wst.jsdt.debug.core.breakpoints.IJavaScriptBreakpointParticipant"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="kind" use="required">
+            <annotation>
+               <documentation>
+                  This attribute specifies the kind of breakpoint this participant should apply to the value &lt;em&gt;*&lt;/em&gt; means it applies to all breakpoint kinds. The value must be one of &lt;em&gt;function&lt;/em&gt;, &lt;em&gt;line&lt;/em&gt;, &lt;em&gt;script&lt;/em&gt; or &lt;em&gt;*&lt;/em&gt;.
+               </documentation>
+            </annotation>
+            <simpleType>
+               <restriction base="string">
+                  <enumeration value="function">
+                  </enumeration>
+                  <enumeration value="line">
+                  </enumeration>
+                  <enumeration value="script">
+                  </enumeration>
+                  <enumeration value="*">
+                  </enumeration>
+               </restriction>
+            </simpleType>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="since"/>
+      </appinfo>
+      <documentation>
+         1.0
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="examples"/>
+      </appinfo>
+      <documentation>
+         The following example is the real life definition of the Mozilla Rhino participant for line breakpoints.
+&lt;pre&gt;
+&lt;extension point=&quot;org.eclipse.wst.jsdt.debug.core.breakpointParticipants&quot;&gt;
+  &lt;participant
+     class=&quot;org.eclipse.wst.jsdt.debug.internal.rhino.breakpoints.RhinoBreakpointParticipant&quot;
+     kind=&quot;*&quot;&gt;
+  &lt;/participant&gt;
+&lt;/extension&gt;
+&lt;/pre&gt;
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="apiinfo"/>
+      </appinfo>
+      <documentation>
+         The class attribute is required and must implement &lt;code&gt;org.eclipse.wst.jsdt.debug.core.breakpoints.IJavaScriptBreakpointParticipant&lt;/code&gt;
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="implementation"/>
+      </appinfo>
+      <documentation>
+         [Enter information about supplied implementation of this extension point.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="copyright"/>
+      </appinfo>
+      <documentation>
+         Copyright (c) 2010 IBM Corporation and others.&lt;br&gt;
+All rights reserved. This program and the accompanying materials are made 
+available under the terms of the Eclipse Public License v1.0 which 
+accompanies this distribution, and is available at 
+&lt;a href=&quot;http://www.eclipse.org/legal/epl-v10.html&quot;&gt;http://www.eclipse.org/legal/epl-v10.html&lt;/a&gt;
+      </documentation>
+   </annotation>
+
+</schema>
