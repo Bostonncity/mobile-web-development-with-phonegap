@@ -367,7 +367,9 @@ public class Compiler implements ITypeRequestor, ProblemSeverities {
 			throw e; // rethrow
 		} catch (RuntimeException e) {
 			this.handleInternalException(e, unit, null);
-			throw e; // rethrow
+			// Hack so that JSDT doesn't crap out on jquery.mobile 
+			// bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=376809
+//			throw e; // rethrow
 		} finally {
 			this.reset();
 		}

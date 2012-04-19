@@ -2,7 +2,7 @@
 <feature
       id="com.mds.jqm.license"
       label="jQuery Mobile License"
-      version="1.2.7.qualifier"
+      version="1.2.9.qualifier"
       provider-name="MDS">
 
    <description url="http://jquery.org/license/">
@@ -10,7 +10,7 @@
    </description>
 
    <copyright>
-      © 2010 The jQuery Project
+      © 2012 The jQuery Foundation
    </copyright>
 
    <license url="http://jquery.org/license/">
