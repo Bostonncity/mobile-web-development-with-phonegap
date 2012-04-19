@@ -149,7 +149,12 @@ public class FileCopy {
         try {
             to = new FileOutputStream(toFile);
             File base = new File(fromDirName + "/" + "phonegap.js.base");
-            if (!base.exists()) base = new File(fromDirName + "/" + "cordova.js.base");
+            if (!base.exists()) { 
+                // with cordova, the file is a fully constructed cordova.android.js
+                base = new File(fromDirName + "/" + "cordova.android.js");
+                to = appendStream(base, to);
+                return;
+            }
             to = appendStream(base, to);
 
             String fList[] = fromFile.list();

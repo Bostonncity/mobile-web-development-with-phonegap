@@ -23,7 +23,6 @@
 package com.mds.apg.wizards;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -176,26 +175,35 @@ class PhonegapProjectPopulate {
     static private void getPhonegapJar(IProgressMonitor monitor, PageInfo pageInfo) throws CoreException,
             IOException, URISyntaxException {
         
+        addDefaultDirectories(pageInfo.mAndroidProject, "", new String[] { "libs"  }, monitor);
+        String libsDir = pageInfo.mDestinationDirectory + "libs/"; 
+        
         if (pageInfo.mPackagedPhonegap) {
-            addDefaultDirectories(pageInfo.mAndroidProject, "", new String[] { "libs"  }, monitor);
-            String libsDir = pageInfo.mDestinationDirectory + "/libs/";
-            bundleCopy("/resources/phonegap/jar", libsDir);
+            addDefaultDirectories(pageInfo.mAndroidProject, "", new String[] { "libs"  }, monitor);         
+            String v = pageInfo.mPhonegapVersion;
+            String phonegapJarFileName = (pageInfo.mIsCordova ? "cordova-" : "phonegap-") + v + ".jar";
+            InputStream stream = bundleGetFileAsStream("/resources/phonegap/" + v + "/" + phonegapJarFileName);
+            FileCopy.coreStreamCopy(stream, new File(libsDir + phonegapJarFileName));
             updateClasspath(monitor,
                     pageInfo.mAndroidProject, 
-                    libsDir + "/phonegap.jar",
+                    libsDir + phonegapJarFileName,
                     null); 
             
-        } else if (pageInfo.mFromGitHub) {  // TODO - make phonegap.jar come from a separate project in user's install
+        } else if (pageInfo.mFromGitHub) { 
             String toDir = pageInfo.mDestinationDirectory + "/src";
             FileCopy.recursiveCopy(pageInfo.mPhonegapDirectory + "/framework/src", toDir);
+            String destJar =  libsDir + "commons-codec-1.3.jar";
+            FileCopy.copy(pageInfo.mPhonegapDirectory + "/framework/libs/commons-codec-1.3.jar", destJar);
             updateClasspath(monitor,
                     pageInfo.mAndroidProject, 
-                    pageInfo.mPhonegapDirectory + "/framework/libs/commons-codec-1.3.jar",
+                    destJar,
                     new Path(toDir));        
         } else { // not from github
+            String destJar =  libsDir + pageInfo.mPhonegapJar;
+            FileCopy.copy(pageInfo.mPhonegapDirectory + pageInfo.mInstallAndroidDirectory + pageInfo.mPhonegapJar, destJar);
             updateClasspath(monitor, 
                     pageInfo.mAndroidProject, 
-                    pageInfo.mPhonegapDirectory + pageInfo.mInstallAndroidDirectory + pageInfo.mPhonegapJar,
+                    destJar,
                     null);      
         }
     }
@@ -203,6 +211,9 @@ class PhonegapProjectPopulate {
     /**
      * Update the classpath with thanks to Larry Isaacs in  
      * http://dev.eclipse.org/newslists/news.eclipse.webtools/msg10002.html
+     * 
+     * With ADT r17 classpath is no longer needed. The Android tools include anything in libs
+     * 
      * @throws CoreException 
      * 
      * @throws URISyntaxException
@@ -271,16 +282,11 @@ class PhonegapProjectPopulate {
         
         String phonegapJsFileName;
         
-        class isPhoneGapFile implements FileFilter {
-            public boolean accept(File f) {
-                String name = f.getName();
-                return name.indexOf("phonegap") >= 0 && name.indexOf("phonegapdemo") < 0;
-            }
-        }
-        
         if (pageInfo.mPackagedPhonegap) {
-            bundleCopy("resources/phonegap/js", wwwDir);
-            phonegapJsFileName = (new File(wwwDir)).listFiles(new isPhoneGapFile())[0].getName();
+            String v = pageInfo.mPhonegapVersion;
+            phonegapJsFileName = (pageInfo.mIsCordova ? "cordova-" : "phonegap-") + v + ".js";
+            InputStream stream = bundleGetFileAsStream("/resources/phonegap/" + v + "/" + phonegapJsFileName);
+            FileCopy.coreStreamCopy(stream, new File(wwwDir + phonegapJsFileName));
             
         } else if (pageInfo.mFromGitHub) {
 
@@ -312,7 +318,7 @@ class PhonegapProjectPopulate {
         String indexHtmlContents = StringIO.read(wwwDir + "index.html");
         indexHtmlContents = indexHtmlContents.replaceFirst("src=\"(cordova|phonegap)[a-zA-Z-.0-9]*js\"",
                 "src=\"" + phonegapJsFileName + "\"");  
-        if (indexHtmlContents.indexOf("src=\"phonegap") < 0) {   // no phonegap*.js in file
+        if (indexHtmlContents.indexOf("src=\"phonegap") < 0 && indexHtmlContents.indexOf("src=\"cordova") < 0) {   // no phonegap*.js in file
             int index = indexHtmlContents.lastIndexOf("</head>");
             if (index > 0) {
                 index = indexHtmlContents.lastIndexOf("</script>", index);
@@ -351,11 +357,19 @@ class PhonegapProjectPopulate {
         String fromJqmDir = pageInfo.mJqmDirectory;
         String version;
         if (fromJqmDir == null) {  // get from plugin installation
-            version = "-1.0.1";  // TODO - do this programmatically
+            version = "-1.1.0";  // TODO - do this programmatically
             bundleCopy("/resources/jqm/jquery.mobile", jqmDir);
         } else {
             version = pageInfo.mJqmVersion;
-            FileCopy.recursiveCopy(fromJqmDir, jqmDir);
+            String fileName = "/jquery.mobile" + version + ".js";
+            FileCopy.copy(fromJqmDir + fileName, jqmDir + fileName);
+            fileName = "/jquery.mobile" + version + ".css";  
+            FileCopy.copy(fromJqmDir + fileName, jqmDir + fileName);
+            fileName = "/jquery.mobile" + version + ".min.js";  
+            FileCopy.copy(fromJqmDir + fileName, jqmDir + fileName);
+            fileName = "/jquery.mobile" + version + ".min.css";  
+            FileCopy.copy(fromJqmDir + fileName, jqmDir + fileName);
+            FileCopy.recursiveCopy(fromJqmDir + "/images", jqmDir + "/images");
         }
 
         bundleCopy("/resources/jqm/supplements", jqmDir);
@@ -372,14 +386,14 @@ class PhonegapProjectPopulate {
                     ".js\"", "\"jquery.mobile/", pageInfo.mSourceDirectory, null);
             
             // and jquery file
-            fileContents = updatePathInHtml(fileContents, "jquery-1.6.4", 
+            fileContents = updatePathInHtml(fileContents, "jquery-1.7.2", 
                     ".js\"", "\"jquery.mobile/", pageInfo.mSourceDirectory, ".min\"");
             
             // Add CDN comments for jQuery Mobile
             fileContents = fileContents.replace("</head>",  "\n\t<!-- CDN Respositories: For production, replace lines above with these uncommented minified versions -->\n" +
-                    "\t<!-- <link rel=\"stylesheet\" href=\"http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css\" />-->\n" +
-                    "\t<!-- <script src=\"http://code.jquery.com/jquery-1.6.4.min.js\"></script>-->\n" +
-                    "\t<!-- <script src=\"http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js\"></script>-->\n\t</head>");
+                    "\t<!-- <link rel=\"stylesheet\" href=\"http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css\" />-->\n" +
+                    "\t<!-- <script src=\"http://code.jquery.com/jquery-1.7.2.min.js\"></script>-->\n" +
+                    "\t<!-- <script src=\"http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js\"></script>-->\n\t</head>");
             
             // Write out the file
             StringIO.write(file, fileContents);
@@ -513,7 +527,7 @@ class PhonegapProjectPopulate {
 
         if (pageInfo.mPackagedPhonegap) {
             bundleCopy("/resources/phonegap/layout", pageInfo.mDestinationDirectory + "/res/layout/");
-            bundleCopy("/resources/phonegap/res", pageInfo.mDestinationDirectory + "/res/");  // xml directory
+            bundleCopy("/resources/phonegap/" + pageInfo.mPhonegapVersion + "/res", pageInfo.mDestinationDirectory + "/res/");  // xml directory
 
             // Copy resource drawable to all of the project drawable* directories
             File destDir = new File(destResDir);

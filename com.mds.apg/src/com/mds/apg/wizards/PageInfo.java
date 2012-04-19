@@ -32,6 +32,7 @@ public class PageInfo {
     protected final String mInstallExampleDirectory;    // Example (or Sample) directory from PhoneGap install
     protected final String mPhonegapJs;           // phonegap.js file name (non-github case)
     protected final String mPhonegapJar;          // phonegap.jar file name (non-github case)
+    protected final String mPhonegapVersion;      // PhoneGap version
     protected final String mContentSelection;          // content selection 
     protected final boolean mPureImport;          // use user's directory exactly
     protected final String mDestinationDirectory; // Place to put new files
@@ -46,7 +47,7 @@ public class PageInfo {
     
     public PageInfo(String sourceDirectory, String phonegapDirectory, boolean fromGitHub, boolean isCordova, boolean packagedPhonegap,
             String installAndroidDirectory, String installExampleDirectory,
-            String phonegapJs, String phonegapJar, String contentSelection, boolean pureImport, String destinationDirectory, 
+            String phonegapJs, String phonegapJar, String phonegapVersion, String contentSelection, boolean pureImport, String destinationDirectory, 
             IProject androidProject, boolean jqmChecked, String jqmDirectory, boolean useJqmDemo,
             String jqmVersion, 
             String senchaDirectory, boolean senchaChecked, boolean senchaKitchenSink) {
@@ -59,6 +60,7 @@ public class PageInfo {
         mInstallExampleDirectory = installExampleDirectory;
         mPhonegapJs = phonegapJs;
         mPhonegapJar = phonegapJar;
+        mPhonegapVersion = phonegapVersion;
         mContentSelection = contentSelection;
         mPureImport = pureImport;
         mDestinationDirectory = destinationDirectory;
