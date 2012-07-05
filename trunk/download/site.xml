@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/com.googlecode.jslint4java.eclipse_1.0.1.201204181638.jar" id="com.googlecode.jslint4java.eclipse" version="1.0.1.201204181638">
+   <feature url="features/com.googlecode.jslint4java.eclipse_1.0.1.201207042009.jar" id="com.googlecode.jslint4java.eclipse" version="1.0.1.201207042009">
       <category name="PhoneGap for Android with JSLint"/>
    </feature>
-   <feature url="features/com.mds.jqm.license_1.2.9.201204181638.jar" id="com.mds.jqm.license" version="1.2.9.201204181638">
+   <feature url="features/com.mds.jqm.license_1.2.9.201207042009.jar" id="com.mds.jqm.license" version="1.2.9.201207042009">
       <category name="PhoneGap for Android with JSLint"/>
    </feature>
-   <feature url="features/com.mds.phonegap.license_1.2.9.201204181638.jar" id="com.mds.phonegap.license" version="1.2.9.201204181638">
+   <feature url="features/com.mds.phonegap.license_1.2.91.201207042009.jar" id="com.mds.phonegap.license" version="1.2.91.201207042009">
       <category name="PhoneGap for Android with JSLint"/>
    </feature>
-   <feature url="features/com.mds.phonegapForAndroid_1.2.9.201204181638.jar" id="com.mds.phonegapForAndroid" version="1.2.9.201204181638">
+   <feature url="features/com.mds.phonegapForAndroid_1.2.91.201207042009.jar" id="com.mds.phonegapForAndroid" version="1.2.91.201207042009">
       <category name="PhoneGap for Android with JSLint"/>
    </feature>
    <feature url="features/org.eclipse.wst.jsdt.feature_1.2.4.vqualifier.jar" id="org.eclipse.wst.jsdt.feature" version="1.2.4.vqualifier">
