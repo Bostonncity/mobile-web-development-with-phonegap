@@ -117,25 +117,58 @@ class PhonegapProjectPopulate {
      */
     static private void updateJavaMain(PageInfo pageInfo) throws IOException {
         String destDir = pageInfo.mDestinationDirectory;
-        String javaFile = findJavaFile(destDir + "src");
-        String javaFileContents = StringIO.read(javaFile);
-
-        // Import com.phonegap instead of Activity
-        if (pageInfo.mIsCordova) {
-            javaFileContents = javaFileContents.replace("import android.app.Activity;",
-                "import org.apache.cordova.DroidGap;");
-        } else {
-            javaFileContents = javaFileContents.replace("import android.app.Activity;",
-                "import com.phonegap.*;");
+        String srcDir = destDir + "src";
+        String javaFile = findJavaFile(srcDir);
+        String javaFileContents;
+        if (javaFile == null) {   // ADT 20 - Need to create Java file from scratch
+            String dir = srcDir;
+            String packageName = "";
+            do {
+                File f = new File(dir);
+                if (!f.isDirectory()) {
+                    throw new IOException("Unexpected android src directory structure");
+                }
+                String fList[] = f.list();
+                if (fList.length > 0) {
+                    packageName = packageName.equals("") ? fList[0] : packageName + '.' + fList[0];
+                    dir = dir + '/' + fList[0];
+                } else {
+                    break;
+                }
+            } while(true);
+            
+            javaFileContents = "package " + packageName + ";\n\n";
+            javaFileContents += "import " + (pageInfo.mIsCordova ? "org.apache.cordova.DroidGap;\n" : "import com.phonegap.*;\n");
+            javaFileContents += "import android.os.Bundle;\n\n";
+            javaFileContents += "public class MyPhoneGapActivity extends DroidGap {\n";
+            javaFileContents += "\t@Override\n";
+            javaFileContents += "\tpublic void onCreate(Bundle savedInstanceState) {\n";
+            javaFileContents += "\t\tsuper.onCreate(savedInstanceState);\n";
+            javaFileContents += "\t\tsuper.loadUrl(\"file:///android_asset/www/index.html\");\n";
+            javaFileContents += "\t}\n";
+            javaFileContents += "}\n";
+            javaFile = dir + "/" + "MyPhoneGapActivity.java";
+           
+        } else {                    // pre-ADT 20
+            javaFileContents = StringIO.read(javaFile);
+    
+            // Import com.phonegap instead of Activity
+            if (pageInfo.mIsCordova) {
+                javaFileContents = javaFileContents.replace("import android.app.Activity;",
+                    "import org.apache.cordova.DroidGap;");
+            } else {
+                javaFileContents = javaFileContents.replace("import android.app.Activity;",
+                    "import com.phonegap.*;");
+            }
+    
+            // Change superclass to DroidGap instead of Activity
+            javaFileContents = javaFileContents.replace("extends Activity", "extends DroidGap");
+    
+            // Change to start with index.html
+            javaFileContents = javaFileContents.replace("setContentView(R.layout.main);",
+                    "super.loadUrl(\"file:///android_asset/www/index.html\");");
+    
         }
-
-        // Change superclass to DroidGap instead of Activity
-        javaFileContents = javaFileContents.replace("extends Activity", "extends DroidGap");
-
-        // Change to start with index.html
-        javaFileContents = javaFileContents.replace("setContentView(R.layout.main);",
-                "super.loadUrl(\"file:///android_asset/www/index.html\");");
-
         // Write out the file
         StringIO.write(javaFile, javaFileContents);
     }
@@ -461,30 +494,47 @@ class PhonegapProjectPopulate {
         }
         String manifestInsert = getManifestScreensAndPermissions(sourceFileContents);
         String destFileContents = StringIO.read(destFile);
-
-        // Add phonegap screens, permissions and turn on debuggable
-        destFileContents = destFileContents.replaceFirst("<application\\s+android:", manifestInsert
-                + "<application" + " android:debuggable=\"true\" android:");
-
-        // Add android:configChanges="orientation|keyboardHidden" to the activity
-        destFileContents = destFileContents.replaceFirst("<activity\\s+android:",
-                "<activity android:configChanges=\"orientation|keyboardHidden\" android:");
         
-        // Copy additional activities from source to destination - especially the DroidGap activity
-        int activityIndex = sourceFileContents.indexOf("<activity");
-        int secondActivityIndex = sourceFileContents.indexOf("<activity", activityIndex + 1);
-        if (secondActivityIndex > 0) {
-            int endIndex = sourceFileContents.lastIndexOf("</activity>");
-            destFileContents = destFileContents.replace("</activity>", "</activity>\n\t\t" + 
-                    sourceFileContents.substring(secondActivityIndex, endIndex + 11));
-        }
-
-        if (destFileContents.indexOf("<uses-sdk") < 0) {
-            // User did not set min SDK, so use the phonegap template manifest version
-            int startIndex = sourceFileContents.indexOf("<uses-sdk");
-            int endIndex = sourceFileContents.indexOf("<", startIndex + 1);
-            destFileContents = destFileContents.replace("</manifest>",
-                    sourceFileContents.substring(startIndex, endIndex) + "</manifest>");
+        // Add phonegap screens, permissions
+        destFileContents = destFileContents.replaceFirst("<application\\s+android:", manifestInsert
+                + "<application" + " android:");
+        
+        if (destFileContents.indexOf("<activity") < 0) {   // This is ADT 20
+            String newActivity = "    <activity\n";
+            newActivity += "            android:name=\".MyPhoneGapActivity\"\n";
+            newActivity += "            android:label=\"@string/app_name\" >\n";
+            newActivity += "            <intent-filter>\n";
+            newActivity += "                <action android:name=\"android.intent.action.MAIN\" />\n";
+            newActivity += "                <category android:name=\"android.intent.category.LAUNCHER\" />\n";
+            newActivity += "            </intent-filter>\n";
+            newActivity += "        </activity>\n";
+            destFileContents = destFileContents.replace("</application>", newActivity + "    </application>");
+            
+            // Add android:configChanges="orientation|keyboardHidden" to the activity
+            destFileContents = destFileContents.replaceFirst("<activity\\s+android:",
+                    "<activity android:configChanges=\"orientation|keyboardHidden\"\n            android:");
+            
+        } else { // pre ADT 20
+            // Add android:configChanges="orientation|keyboardHidden" to the activity
+            destFileContents = destFileContents.replaceFirst("<activity\\s+android:",
+                    "<activity android:configChanges=\"orientation|keyboardHidden\" android:");
+            
+            // Copy additional activities from source to destination - especially the DroidGap activity
+            int activityIndex = sourceFileContents.indexOf("<activity");
+            int secondActivityIndex = sourceFileContents.indexOf("<activity", activityIndex + 1);
+            if (secondActivityIndex > 0) {
+                int endIndex = sourceFileContents.lastIndexOf("</activity>");
+                destFileContents = destFileContents.replace("</activity>", "</activity>\n\t\t" + 
+                        sourceFileContents.substring(secondActivityIndex, endIndex + 11));
+            }
+    
+            if (destFileContents.indexOf("<uses-sdk") < 0) {
+                // User did not set min SDK, so use the phonegap template manifest version
+                int startIndex = sourceFileContents.indexOf("<uses-sdk");
+                int endIndex = sourceFileContents.indexOf("<", startIndex + 1);
+                destFileContents = destFileContents.replace("</manifest>",
+                        sourceFileContents.substring(startIndex, endIndex) + "</manifest>");
+            }
         }
         // Write out the file
         StringIO.write(destFile, destFileContents);
