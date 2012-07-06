@@ -99,6 +99,7 @@ public final class PagePhonegapPathSet extends WizardSection {
         mVersion.add("1.4.1"); //$NON-NLS-1$
         mVersion.add("1.5.0"); //$NON-NLS-1$
         mVersion.add("1.6.1"); //$NON-NLS-1$
+        mVersion.add("1.9.0"); //$NON-NLS-1$
         String cacheVersion = doGetPreferenceStore().getString(PG_VERSION);
         if (cacheVersion == "") {
             mVersion.setText("1.4.1");
