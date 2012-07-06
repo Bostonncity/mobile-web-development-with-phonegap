@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %Bundle-Name
+Bundle-SymbolicName: org.eclipse.wst.jsdt.doc;singleton:=true
+Bundle-Version: 1.0.301.v201007150153
+Bundle-ClassPath: org.eclipse.wst.jsdt.doc_1.0.301.v201007150153.jar
+Bundle-Vendor: %Bundle-Vendor
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.help;bundle-version="[3.2.0,4.0.0)"
+Eclipse-SourceReferences: scm:cvs:pserver:dev.eclipse.org:/cvsroot/webtools:org.eclipse.jsdt/docs/org.eclipse.wst.jsdt.doc;tag=v201007150153
